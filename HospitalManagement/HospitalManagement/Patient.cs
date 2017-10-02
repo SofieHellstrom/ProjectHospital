@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement
 {
-<<<<<<< HEAD
-    class Class1
-    {
-=======
+
     public class Patient
     {
         //Properties that correspond to information about patients in the patient table.
@@ -44,6 +41,6 @@ namespace HospitalManagement
             this.Email = eMail;
             this.BloodType = blood;
         }
->>>>>>> 07ff6d29b49c4e1aef68e52b703f98e0c18a55b4
+
     }
 }
