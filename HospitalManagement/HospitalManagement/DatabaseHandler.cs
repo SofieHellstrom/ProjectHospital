@@ -8,9 +8,90 @@ using NpgsqlTypes;
 
 namespace HospitalManagement
 {
-    class DatabaseHandler
+    public  class DatabaseHandler
     {
         private string ConnectionString = "Host=localhost;Username=postgres;Password=projekt;Database=Hospital";
+
+        public bool PatientExists(Patient patientToSearchFor)
+        {
+            using (var conn = new NpgsqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT COUNT(person_id_nr) FROM patient WHERE person_id_nr = :id";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = patientToSearchFor.Personnummer;
+
+                    int result = cmd.ExecuteNonQuery();
+                    return Convert.ToBoolean(result);
+                }
+
+            }
+
+        }
+
+        public List<Patient> LoadAllPatients()
+        {
+            //Returns a new instance of a specific person based on the value of person_id_nr 
+            //in the patient table of the database.
+            List<Patient> resultList = new List<Patient>();
+            string postOrt;
+            using (var conn = new NpgsqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM patient";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        string personNr;
+                        string firstName;
+                        string lastName;
+                        string adress;
+                        int postNr;
+                        string telefonNr;
+                        string eMail;
+                        string blodTyp;
+                        
+                        while (reader.Read())
+                        {
+                            personNr = reader.GetString(0);
+                            firstName = reader.GetString(1);
+                            lastName = reader.GetString(2);
+                            adress = reader.GetString(3);
+                            postNr = reader.GetInt32(4);
+                            telefonNr = reader.GetString(5);
+                            eMail = reader.GetString(6);
+                            blodTyp = reader.GetString(7);
+
+                            postOrt = loadPostort(postNr);
+
+                            Patient patientToAdd = new Patient(personNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, blodTyp);
+                            resultList.Add(patientToAdd);
+                        }
+                        return resultList;
+                        
+                    }
+                }
+                
+            }
+            
+
+
+        }
 
         public Patient LoadPatient(string personnr)
         {
