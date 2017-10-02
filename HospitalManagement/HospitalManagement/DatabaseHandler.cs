@@ -14,6 +14,8 @@ namespace HospitalManagement
 
         public Patient LoadPatient(string personnr)
         {
+            //Returns a new instance of a specific person based on the value of person_id_nr 
+            //in the patient table of the database.
             Patient returnPatient;
             string personNr;
             string firstName;
@@ -54,7 +56,7 @@ namespace HospitalManagement
 
                 postOrt = loadPostort(postNr);
                 returnPatient = new Patient(personNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, blodTyp);
-                
+                return returnPatient;
             }
         }
 
