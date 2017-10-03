@@ -158,7 +158,7 @@ namespace HospitalManagement
                     cmd.Parameters.Add(new NpgsqlParameter("firstname", NpgsqlDbType.Varchar));
                     cmd.Parameters.Add(new NpgsqlParameter("lastname", NpgsqlDbType.Varchar));
                     cmd.Parameters.Add(new NpgsqlParameter("address", NpgsqlDbType.Varchar));
-                    cmd.Parameters.Add(new NpgsqlParameter("postcode", NpgsqlDbType.Varchar));
+                    cmd.Parameters.Add(new NpgsqlParameter("postcode", NpgsqlDbType.Integer));
                     cmd.Parameters.Add(new NpgsqlParameter("phone", NpgsqlDbType.Varchar));
                     cmd.Parameters.Add(new NpgsqlParameter("email", NpgsqlDbType.Varchar));
                     cmd.Parameters.Add(new NpgsqlParameter("blood", NpgsqlDbType.Varchar));
@@ -175,8 +175,8 @@ namespace HospitalManagement
                     cmd.Parameters[7].Value = patientToAdd.BloodType;
 
                     int recordsAffected = cmd.ExecuteNonQuery();
-                    return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
-
+                    //return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
+                    return true;
                 }
 
             }

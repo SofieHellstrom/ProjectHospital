@@ -12,10 +12,25 @@ namespace HospitalManagement
 {
     public partial class MainWindow : Form
     {
+        Patient testPatient;
         public MainWindow()
         {
             InitializeComponent();
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DatabaseHandler db = new DatabaseHandler();
+            Patient patientToAdd = new Patient("720524-5033", "Johannes", "Svensson", "Temperaturgatan 51", 41841, "Göteborg", "0768-406023", "none@YourBusiness.com", "B-negativ");
+            db.AddPatient(patientToAdd);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DatabaseHandler db = new DatabaseHandler();
+            testPatient = db.LoadPatient("720524-5033");
+            textBox1.Text = testPatient.FirstName;
         }
     }
 }
