@@ -12,7 +12,7 @@ namespace HospitalManagement
     {
         private string connectionString = "Host=localhost;Username=postgres;Password=projekt;Database=Hospital";
 
-        public bool PatientExists(Patient patientToSearchFor)
+        public bool PatientExists(string patientToSearchFor)
         {
             using (var conn = new NpgsqlConnection(connectionString))
             {
@@ -26,17 +26,23 @@ namespace HospitalManagement
 
                     cmd.Prepare();
 
-                    cmd.Parameters[0].Value = patientToSearchFor.Personnummer;
+                    cmd.Parameters[0].Value = patientToSearchFor;
 
-                    int result = cmd.ExecuteNonQuery();
-                    if (result > 1)
+                    int result = 0;
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        result = reader.GetInt32(0);
+                    }
+                    return Convert.ToBoolean(result);
+                    /*if (result > 0)
                     {
                         return true;
                     }
                     else
                     {
                         return false;
-                    }
+                    }*/
                 }
 
             }
@@ -113,39 +119,49 @@ namespace HospitalManagement
             string blodTyp = "";
             string postOrt = "";
 
-            using (var conn = new NpgsqlConnection(connectionString))
+            try
             {
-                conn.Open();
-                using (var cmd = new NpgsqlCommand())
+                using (var conn = new NpgsqlConnection(connectionString))
                 {
-                    cmd.Connection = conn;
-                    cmd.CommandText = "SELECT * FROM patient WHERE person_id_nr = :id";
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT * FROM patient WHERE person_id_nr = :id";
 
-                    cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+                        cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
 
-                    cmd.Prepare();
+                        cmd.Prepare();
 
-                    cmd.Parameters[0].Value = personnr;
+                        cmd.Parameters[0].Value = personnr;
 
-                    using (var reader = cmd.ExecuteReader())
-                        while (reader.Read())
-                        {
+                        using (var reader = cmd.ExecuteReader())
+                            while (reader.Read())
                             {
-                                personNr = reader.GetString(0);
-                                firstName = reader.GetString(1);
-                                lastName = reader.GetString(2);
-                                adress = reader.GetString(3);
-                                postNr = reader.GetInt32(4);
-                                eMail = reader.GetString(5);
-                                blodTyp = reader.GetString(6);
-                                telefonNr = reader.GetString(5);
+                                {
+                                    personNr = reader.GetString(0);
+                                    firstName = reader.GetString(1);
+                                    lastName = reader.GetString(2);
+                                    adress = reader.GetString(3);
+                                    postNr = reader.GetInt32(4);
+                                    eMail = reader.GetString(5);
+                                    blodTyp = reader.GetString(6);
+                                    telefonNr = reader.GetString(5);
 
+                                }
                             }
-                        }
-                    
+
+                    }
+
                 }
 
+
             }
+            catch (PostgresException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            
             postOrt = loadPostort(postNr);
             returnPatient = new Patient(personNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, blodTyp);
             return returnPatient;
@@ -153,7 +169,7 @@ namespace HospitalManagement
 
         public bool AddPatient (Patient patientToAdd)
         {
-            if (!PatientExists(patientToAdd))
+            if (!PatientExists(patientToAdd.Personnummer))
             {
                 using (var conn = new NpgsqlConnection(connectionString))
                 {

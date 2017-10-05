@@ -34,16 +34,6 @@ namespace HospitalManagement
             textBox1.Text = testPatient.FirstName;
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            DatabaseHandler db = new DatabaseHandler();
-
-            //testList = db.LoadAllPatients();
-            //testPatient = testList.ElementAt(0);
-            testPatient = db.LoadPatient("550505-3255");
-            textBox1.Text = testPatient.FirstName;
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             DatabaseHandler db = new DatabaseHandler();
@@ -55,6 +45,19 @@ namespace HospitalManagement
             DatabaseHandler db = new DatabaseHandler();
             Patient patientToUpdate = new Patient("720524-5033", "Anders", "Svensson", "Temperaturgatan 51", 41841, "Göteborg", "0768-406023", "none@YourBusiness.com", "B-negativ");
             db.UpdatePatient(patientToUpdate);
+        }
+
+        private void newPatientBtn_Click(object sender, EventArgs e)
+        {
+            Form patReg = new PatientRegistryForm();
+            patReg.Show();
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            DatabaseHandler db = new DatabaseHandler();
+            string answer = db.PatientExists("720524-5033").ToString();
+            textBox1.Text = answer;
         }
     }
 }
