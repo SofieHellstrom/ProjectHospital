@@ -160,8 +160,8 @@ namespace HospitalManagement
                     conn.Open();
                     using (var cmd = new NpgsqlCommand())
                     {
-                        //try
-                        //{
+                        try
+                        {
                             cmd.Connection = conn;
                             cmd.CommandText = $"INSERT INTO patient (person_id_nr, first_name, last_name, address, postal_code, phone, email, bloodtype) VALUES ('{patientToAdd.Personnummer}', '{patientToAdd.FirstName}', '{patientToAdd.LastName}', '{patientToAdd.Address}', {patientToAdd.PostalCode},'{patientToAdd.PhoneNr}', '{patientToAdd.Email}', '{patientToAdd.BloodType}')";
 
@@ -187,12 +187,12 @@ namespace HospitalManagement
 
                             int recordsAffected = cmd.ExecuteNonQuery();
                             return Convert.ToBoolean(recordsAffected);
-                        //}
-                        //catch (NpgsqlPostgresException e}
-                        //{
-
-
-                        //}
+                        }
+                        catch (PostgresException e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            return false;
+                        }
 
                     }
                 }
