@@ -29,7 +29,14 @@ namespace HospitalManagement
                     cmd.Parameters[0].Value = patientToSearchFor.Personnummer;
 
                     int result = cmd.ExecuteNonQuery();
-                    return Convert.ToBoolean(result);
+                    if (result > 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
 
             }
@@ -129,9 +136,10 @@ namespace HospitalManagement
                                 lastName = reader.GetString(2);
                                 adress = reader.GetString(3);
                                 postNr = reader.GetInt32(4);
-                                //telefonNr = reader.GetString(5) ?? "No Number";
-                                eMail = reader.GetString(6);
-                                blodTyp = reader.GetString(7);
+                                eMail = reader.GetString(5);
+                                blodTyp = reader.GetString(6);
+                                telefonNr = reader.GetString(5);
+
                             }
                         }
                     
@@ -145,37 +153,56 @@ namespace HospitalManagement
 
         public bool AddPatient (Patient patientToAdd)
         {
-            using (var conn = new NpgsqlConnection(connectionString))
+            if (!PatientExists(patientToAdd))
             {
-                conn.Open();
-                using (var cmd = new NpgsqlCommand("INSERT INTO patient (person_id_nr, first_name, last_name, address, postal_code, email, bloodtype) VALUES (:id, :firstname, :lastname, :address, :postcode, :email, :blood )", conn))
+                using (var conn = new NpgsqlConnection(connectionString))
                 {
-                    cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
-                    cmd.Parameters.Add(new NpgsqlParameter("firstname", NpgsqlDbType.Varchar));
-                    cmd.Parameters.Add(new NpgsqlParameter("lastname", NpgsqlDbType.Varchar));
-                    cmd.Parameters.Add(new NpgsqlParameter("address", NpgsqlDbType.Varchar));
-                    cmd.Parameters.Add(new NpgsqlParameter("postcode", NpgsqlDbType.Integer));
-                    //cmd.Parameters.Add(new NpgsqlParameter("phone", NpgsqlDbType.Varchar));
-                    cmd.Parameters.Add(new NpgsqlParameter("email", NpgsqlDbType.Varchar));
-                    cmd.Parameters.Add(new NpgsqlParameter("blood", NpgsqlDbType.Varchar));
-                    
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        //try
+                        //{
+                            cmd.Connection = conn;
+                            cmd.CommandText = $"INSERT INTO patient (person_id_nr, first_name, last_name, address, postal_code, phone, email, bloodtype) VALUES ('{patientToAdd.Personnummer}', '{patientToAdd.FirstName}', '{patientToAdd.LastName}', '{patientToAdd.Address}', {patientToAdd.PostalCode},'{patientToAdd.PhoneNr}', '{patientToAdd.Email}', '{patientToAdd.BloodType}')";
 
-                    cmd.Prepare();
+                            //cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+                            //cmd.Parameters.Add(new NpgsqlParameter("firstname", NpgsqlDbType.Varchar));
+                            //cmd.Parameters.Add(new NpgsqlParameter("lastname", NpgsqlDbType.Varchar));
+                            //cmd.Parameters.Add(new NpgsqlParameter("address", NpgsqlDbType.Varchar));
+                            //cmd.Parameters.Add(new NpgsqlParameter("postcode", NpgsqlDbType.Integer));
+                            //cmd.Parameters.Add(new NpgsqlParameter("phone", NpgsqlDbType.Varchar));
+                            //cmd.Parameters.Add(new NpgsqlParameter("email", NpgsqlDbType.Varchar));
+                            //cmd.Parameters.Add(new NpgsqlParameter("blood", NpgsqlDbType.Varchar));
 
-                    cmd.Parameters[0].Value = patientToAdd.Personnummer;
-                    cmd.Parameters[1].Value = patientToAdd.FirstName;
-                    cmd.Parameters[2].Value = patientToAdd.LastName;
-                    cmd.Parameters[3].Value = patientToAdd.Address;
-                    cmd.Parameters[4].Value = patientToAdd.PostalCode;
-                    //cmd.Parameters[5].Value = patientToAdd.PhoneNr;
-                    cmd.Parameters[5].Value = patientToAdd.Email;
-                    cmd.Parameters[6].Value = patientToAdd.BloodType;
-                    
+                            //cmd.Prepare();
 
-                    int recordsAffected = cmd.ExecuteNonQuery();
-                    return Convert.ToBoolean(recordsAffected);
+                            //cmd.Parameters[0].Value = patientToAdd.Personnummer;
+                            //cmd.Parameters[1].Value = patientToAdd.FirstName;
+                            //cmd.Parameters[2].Value = patientToAdd.LastName;
+                            //cmd.Parameters[3].Value = patientToAdd.Address;
+                            //cmd.Parameters[4].Value = patientToAdd.PostalCode;
+                            //cmd.Parameters[5].Value = patientToAdd.PhoneNr;
+                            //cmd.Parameters[5].Value = patientToAdd.Email;
+                            //cmd.Parameters[6].Value = patientToAdd.BloodType;
+
+                            int recordsAffected = cmd.ExecuteNonQuery();
+                            return Convert.ToBoolean(recordsAffected);
+                        //}
+                        //catch (NpgsqlPostgresException e}
+                        //{
+
+
+                        //}
+
+                    }
                 }
+
             }
+            else
+            {
+                return false;
+            }
+
         }
 
 

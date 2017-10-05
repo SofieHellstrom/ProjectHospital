@@ -38,6 +38,7 @@ namespace HospitalManagement
             this.Address = address;
             this.PostalCode = postCode;
             this.PostalArea = postArea;
+            this.PhoneNr = phoneNr;
             this.Email = eMail;
             this.BloodType = blood;
         }
