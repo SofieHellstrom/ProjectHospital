@@ -186,31 +186,11 @@ namespace HospitalManagement
             using (var conn = new NpgsqlConnection(connectionString))
             {
                 conn.Open();
-                using (var cmd = new NpgsqlCommand("UPDATE patient SET first_name = @firstname, last_name = @lastname, address = @address, postal_code = @postcode, email = @email, bloodtype = @bloodtype WHERE person_id_nr = @id", conn))
+                using (var cmd = new NpgsqlCommand())
                 {
-                    //cmd.Connection = conn;
-                    //cmd.CommandText = "UPDATE patient SET first_name = :firstname, last_name = :lastname, address = :adress, postal_code = :postcode, email = :email, bloodtype = :bloodtype WHERE person_id_nr = :id";
-
-                    cmd.Parameters.AddWithValue("@firstname", patientToUpdate.Personnummer);
-                    cmd.Parameters.AddWithValue("@lastname", patientToUpdate.FirstName);
-                    cmd.Parameters.AddWithValue("@address", patientToUpdate.Address);
-                    cmd.Parameters.AddWithValue("@postcode", Convert.ToInt32(patientToUpdate.PostalCode));
-                    //cmd.Parameters.AddWithValue("@phone", patientToUpdate.PhoneNr);
-                    cmd.Parameters.AddWithValue("@email", patientToUpdate.Email);
-                    cmd.Parameters.AddWithValue("@blood", patientToUpdate.BloodType);
-                    cmd.Parameters.AddWithValue("@id", patientToUpdate.Personnummer);
-
-                    //cmd.Prepare();
-
-                    /*cmd.Parameters[0].Value = patientToUpdate.Personnummer;
-                    cmd.Parameters[1].Value = patientToUpdate.FirstName;
-                    cmd.Parameters[2].Value = patientToUpdate.LastName;
-                    cmd.Parameters[3].Value = patientToUpdate.Address;
-                    cmd.Parameters[4].Value = patientToUpdate.PostalCode;
-                    cmd.Parameters[5].Value = patientToUpdate.PhoneNr;
-                    cmd.Parameters[5].Value = patientToUpdate.Email;
-                    cmd.Parameters[6].Value = patientToUpdate.BloodType;*/
-
+                    cmd.Connection = conn;
+                    cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}' WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
+                    
                     int recordsAffected = cmd.ExecuteNonQuery();
                     return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
 
