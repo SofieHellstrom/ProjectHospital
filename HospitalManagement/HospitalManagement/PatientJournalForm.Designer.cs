@@ -62,6 +62,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -72,6 +73,7 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.button3);
             this.mainPanel.Controls.Add(this.groupBox5);
             this.mainPanel.Controls.Add(this.groupBox4);
             this.mainPanel.Controls.Add(this.groupBox3);
@@ -382,6 +384,15 @@
             this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 5;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(651, 574);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(169, 23);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "Ny Journal-anteckning";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // PatientJournalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -439,5 +450,6 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button3;
     }
 }
