@@ -29,9 +29,19 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.journalPostListView = new System.Windows.Forms.ListView();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.inskrivningsStatusLbl = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.prescriptionListView = new System.Windows.Forms.ListView();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.testReultListView = new System.Windows.Forms.ListView();
             this.bloodTypeTxt = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -49,25 +59,112 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.mainPanel.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.groupBox5);
+            this.mainPanel.Controls.Add(this.groupBox4);
+            this.mainPanel.Controls.Add(this.groupBox3);
             this.mainPanel.Controls.Add(this.button2);
             this.mainPanel.Controls.Add(this.button1);
             this.mainPanel.Controls.Add(this.groupBox2);
             this.mainPanel.Controls.Add(this.groupBox1);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(578, 411);
+            this.mainPanel.Size = new System.Drawing.Size(919, 610);
             this.mainPanel.TabIndex = 0;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.journalPostListView);
+            this.groupBox5.Location = new System.Drawing.Point(565, 16);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(343, 552);
+            this.groupBox5.TabIndex = 6;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Journal-anteckningar";
+            // 
+            // journalPostListView
+            // 
+            this.journalPostListView.Location = new System.Drawing.Point(7, 16);
+            this.journalPostListView.Name = "journalPostListView";
+            this.journalPostListView.Size = new System.Drawing.Size(330, 530);
+            this.journalPostListView.TabIndex = 0;
+            this.journalPostListView.UseCompatibleStateImageBehavior = false;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.textBox3);
+            this.groupBox4.Controls.Add(this.textBox2);
+            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.label10);
+            this.groupBox4.Controls.Add(this.label11);
+            this.groupBox4.Controls.Add(this.inskrivningsStatusLbl);
+            this.groupBox4.Location = new System.Drawing.Point(19, 231);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(246, 156);
+            this.groupBox4.TabIndex = 5;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Inskrivnings-uppgifter";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(12, 83);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Rum";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(9, 56);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(54, 13);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Avdelning";
+            // 
+            // inskrivningsStatusLbl
+            // 
+            this.inskrivningsStatusLbl.AutoSize = true;
+            this.inskrivningsStatusLbl.Location = new System.Drawing.Point(9, 29);
+            this.inskrivningsStatusLbl.Name = "inskrivningsStatusLbl";
+            this.inskrivningsStatusLbl.Size = new System.Drawing.Size(37, 13);
+            this.inskrivningsStatusLbl.TabIndex = 0;
+            this.inskrivningsStatusLbl.Text = "Status";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.prescriptionListView);
+            this.groupBox3.Location = new System.Drawing.Point(19, 393);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(540, 175);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Recept";
+            // 
+            // prescriptionListView
+            // 
+            this.prescriptionListView.Location = new System.Drawing.Point(6, 19);
+            this.prescriptionListView.Name = "prescriptionListView";
+            this.prescriptionListView.Size = new System.Drawing.Size(528, 150);
+            this.prescriptionListView.TabIndex = 0;
+            this.prescriptionListView.UseCompatibleStateImageBehavior = false;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(179, 362);
+            this.button2.Location = new System.Drawing.Point(170, 574);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(113, 23);
             this.button2.TabIndex = 3;
@@ -76,7 +173,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(28, 362);
+            this.button1.Location = new System.Drawing.Point(19, 574);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(131, 23);
             this.button1.TabIndex = 2;
@@ -85,14 +182,33 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.testReultListView);
             this.groupBox2.Controls.Add(this.bloodTypeTxt);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Location = new System.Drawing.Point(271, 16);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(295, 115);
+            this.groupBox2.Size = new System.Drawing.Size(288, 371);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Medicinsk Information";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 56);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(68, 13);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "ProvResultat";
+            // 
+            // testReultListView
+            // 
+            this.testReultListView.Location = new System.Drawing.Point(6, 72);
+            this.testReultListView.Name = "testReultListView";
+            this.testReultListView.Size = new System.Drawing.Size(276, 293);
+            this.testReultListView.TabIndex = 2;
+            this.testReultListView.UseCompatibleStateImageBehavior = false;
             // 
             // bloodTypeTxt
             // 
@@ -104,7 +220,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 25);
+            this.label8.Location = new System.Drawing.Point(6, 25);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(55, 13);
             this.label8.TabIndex = 0;
@@ -146,14 +262,14 @@
             // 
             this.eMailTxt.Location = new System.Drawing.Point(90, 178);
             this.eMailTxt.Name = "eMailTxt";
-            this.eMailTxt.Size = new System.Drawing.Size(100, 20);
+            this.eMailTxt.Size = new System.Drawing.Size(143, 20);
             this.eMailTxt.TabIndex = 16;
             // 
             // phoneTxt
             // 
             this.phoneTxt.Location = new System.Drawing.Point(90, 152);
             this.phoneTxt.Name = "phoneTxt";
-            this.phoneTxt.Size = new System.Drawing.Size(100, 20);
+            this.phoneTxt.Size = new System.Drawing.Size(143, 20);
             this.phoneTxt.TabIndex = 15;
             // 
             // label6
@@ -169,7 +285,7 @@
             // 
             this.postalAreaTxt.Location = new System.Drawing.Point(90, 125);
             this.postalAreaTxt.Name = "postalAreaTxt";
-            this.postalAreaTxt.Size = new System.Drawing.Size(100, 20);
+            this.postalAreaTxt.Size = new System.Drawing.Size(143, 20);
             this.postalAreaTxt.TabIndex = 13;
             // 
             // postalCodeTxt
@@ -183,7 +299,7 @@
             // 
             this.addressTxt.Location = new System.Drawing.Point(90, 72);
             this.addressTxt.Name = "addressTxt";
-            this.addressTxt.Size = new System.Drawing.Size(100, 20);
+            this.addressTxt.Size = new System.Drawing.Size(143, 20);
             this.addressTxt.TabIndex = 11;
             // 
             // namnTxt
@@ -245,15 +361,40 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Personnummer";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(90, 26);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(143, 20);
+            this.textBox1.TabIndex = 3;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(90, 53);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(143, 20);
+            this.textBox2.TabIndex = 4;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(90, 80);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 5;
+            // 
             // PatientJournalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 411);
+            this.ClientSize = new System.Drawing.Size(920, 609);
             this.Controls.Add(this.mainPanel);
             this.Name = "PatientJournalForm";
             this.Text = "PatientJournalForm";
             this.mainPanel.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -285,5 +426,18 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox bloodTypeTxt;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ListView testReultListView;
+        private System.Windows.Forms.ListView prescriptionListView;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ListView journalPostListView;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label inskrivningsStatusLbl;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

@@ -183,7 +183,7 @@
             this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.tableLayoutPane);
             this.Name = "MainWindow";
-            this.Text = "Form1";
+            this.Text = "HospitalManagement";
             this.tableLayoutPane.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
