@@ -35,14 +35,6 @@ namespace HospitalManagement
                         result = reader.GetInt32(0);
                     }
                     return Convert.ToBoolean(result);
-                    /*if (result > 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }*/
                 }
 
             }
@@ -88,7 +80,7 @@ namespace HospitalManagement
                             eMail = reader.GetString(6);
                             blodTyp = reader.GetString(7);
 
-                            postOrt = loadPostort(postNr);
+                            postOrt = LoadPostort(postNr);
 
                             Patient patientToAdd = new Patient(personNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, blodTyp);
                             resultList.Add(patientToAdd);
@@ -162,7 +154,7 @@ namespace HospitalManagement
                 Console.WriteLine(e.ToString());
             }
             
-            postOrt = loadPostort(postNr);
+            postOrt = LoadPostort(postNr);
             returnPatient = new Patient(personNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, blodTyp);
             return returnPatient;
         }
@@ -266,7 +258,7 @@ namespace HospitalManagement
             }
         }
 
-        public string loadPostort(int postkod)
+        public string LoadPostort(int postkod)
         {
             string returnPostOrt = "None";
             using (var conn = new NpgsqlConnection(connectionString))

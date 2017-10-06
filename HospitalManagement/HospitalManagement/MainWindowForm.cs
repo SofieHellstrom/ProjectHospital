@@ -13,7 +13,7 @@ namespace HospitalManagement
     public partial class MainWindow : Form
     {
         Patient testPatient;
-        List<Patient> testList;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -58,6 +58,14 @@ namespace HospitalManagement
             DatabaseHandler db = new DatabaseHandler();
             string answer = db.PatientExists("720524-5033").ToString();
             textBox1.Text = answer;
+        }
+
+        private void testPatientJournalBtn_Click(object sender, EventArgs e)
+        {
+            DatabaseHandler db = new DatabaseHandler();
+            testPatient = db.LoadPatient("555555-5555");
+            Form patientJournal = new PatientJournalForm(testPatient);
+            patientJournal.Show();
         }
     }
 }

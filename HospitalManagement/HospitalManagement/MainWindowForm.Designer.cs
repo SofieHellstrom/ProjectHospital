@@ -34,12 +34,13 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.newPatientBtn = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.testPatientJournalBtn = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.tableLayoutPane.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -96,6 +97,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.testPatientJournalBtn);
             this.panel4.Controls.Add(this.button6);
             this.panel4.Controls.Add(this.button5);
             this.panel4.Controls.Add(this.button4);
@@ -106,6 +108,26 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(667, 417);
             this.panel4.TabIndex = 3;
+            // 
+            // testPatientJournalBtn
+            // 
+            this.testPatientJournalBtn.Location = new System.Drawing.Point(18, 186);
+            this.testPatientJournalBtn.Name = "testPatientJournalBtn";
+            this.testPatientJournalBtn.Size = new System.Drawing.Size(139, 23);
+            this.testPatientJournalBtn.TabIndex = 7;
+            this.testPatientJournalBtn.Text = "Testa PatientJournal";
+            this.testPatientJournalBtn.UseVisualStyleBackColor = true;
+            this.testPatientJournalBtn.Click += new System.EventHandler(this.testPatientJournalBtn_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(288, 102);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(97, 23);
+            this.button6.TabIndex = 6;
+            this.button6.Text = "PersonExists";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
             // 
             // button5
             // 
@@ -154,16 +176,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(288, 102);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(97, 23);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "PersonExists";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click_1);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,6 +206,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button newPatientBtn;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button testPatientJournalBtn;
     }
 }
 

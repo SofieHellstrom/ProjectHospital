@@ -29,7 +29,7 @@ namespace HospitalManagement
             string nBloodType = bloodtypeComboBox.Text;
 
             DatabaseHandler db = new DatabaseHandler();
-            string nPostArea = db.loadPostort(nPostCode);
+            string nPostArea = db.LoadPostort(nPostCode);
             
             Patient patientToAdd = new Patient(nPersonId, nFirstName, nLastName, nAddress, nPostCode, nPostArea, nPhoneNr, nEmail, nBloodType);
             db.AddPatient(patientToAdd);
