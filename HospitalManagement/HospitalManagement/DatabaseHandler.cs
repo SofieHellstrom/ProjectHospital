@@ -136,9 +136,10 @@ namespace HospitalManagement
                                     lastName = reader.GetString(2);
                                     adress = reader.GetString(3);
                                     postNr = reader.GetInt32(4);
-                                    eMail = reader.GetString(5);
-                                    blodTyp = reader.GetString(6);
                                     telefonNr = reader.GetString(5);
+                                    eMail = reader.GetString(6);
+                                    blodTyp = reader.GetString(7);
+                                    
 
                                 }
                             }
