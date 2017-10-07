@@ -56,6 +56,7 @@
             this.personIdTxt.Name = "personIdTxt";
             this.personIdTxt.Size = new System.Drawing.Size(100, 20);
             this.personIdTxt.TabIndex = 0;
+            this.personIdTxt.Validating += new System.ComponentModel.CancelEventHandler(this.personIdTxt_Validating);
             // 
             // personIdLbl
             // 
@@ -130,6 +131,7 @@
             this.postCodeTxt.Name = "postCodeTxt";
             this.postCodeTxt.Size = new System.Drawing.Size(73, 20);
             this.postCodeTxt.TabIndex = 4;
+            this.postCodeTxt.Validating += new System.ComponentModel.CancelEventHandler(this.postCodeTxt_Validating);
             // 
             // areaLbl
             // 
