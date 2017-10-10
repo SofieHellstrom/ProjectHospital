@@ -91,6 +91,7 @@
             this.firstNameTxt.Name = "firstNameTxt";
             this.firstNameTxt.Size = new System.Drawing.Size(100, 20);
             this.firstNameTxt.TabIndex = 1;
+            this.firstNameTxt.Validated += new System.EventHandler(this.firstNameTxt_Validated);
             // 
             // lastNameTxt
             // 
@@ -98,6 +99,7 @@
             this.lastNameTxt.Name = "lastNameTxt";
             this.lastNameTxt.Size = new System.Drawing.Size(100, 20);
             this.lastNameTxt.TabIndex = 2;
+            this.lastNameTxt.Validated += new System.EventHandler(this.lastNameTxt_Validated);
             // 
             // addressLbl
             // 
@@ -114,6 +116,7 @@
             this.addressTxt.Name = "addressTxt";
             this.addressTxt.Size = new System.Drawing.Size(275, 20);
             this.addressTxt.TabIndex = 3;
+            this.addressTxt.Validated += new System.EventHandler(this.addressTxt_Validated);
             // 
             // postCodeLbl
             // 
@@ -176,9 +179,11 @@
             this.bloodtypeComboBox.Name = "bloodtypeComboBox";
             this.bloodtypeComboBox.Size = new System.Drawing.Size(121, 21);
             this.bloodtypeComboBox.TabIndex = 7;
+            this.bloodtypeComboBox.SelectionChangeCommitted += new System.EventHandler(this.bloodtypeComboBox_SelectionChangeCommitted);
             // 
             // savePatientBtn
             // 
+            this.savePatientBtn.Enabled = false;
             this.savePatientBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.savePatientBtn.Location = new System.Drawing.Point(230, 240);
             this.savePatientBtn.Name = "savePatientBtn";
@@ -212,6 +217,7 @@
             this.phoneTxt.Name = "phoneTxt";
             this.phoneTxt.Size = new System.Drawing.Size(126, 20);
             this.phoneTxt.TabIndex = 5;
+            this.phoneTxt.Validated += new System.EventHandler(this.phoneTxt_Validated);
             // 
             // eMailTxt
             // 
@@ -219,6 +225,7 @@
             this.eMailTxt.Name = "eMailTxt";
             this.eMailTxt.Size = new System.Drawing.Size(275, 20);
             this.eMailTxt.TabIndex = 6;
+            this.eMailTxt.Validated += new System.EventHandler(this.eMailTxt_Validated);
             // 
             // PatientRegistryForm
             // 
@@ -245,7 +252,7 @@
             this.Controls.Add(this.personIdLbl);
             this.Controls.Add(this.personIdTxt);
             this.Name = "PatientRegistryForm";
-            this.Text = "PatientRegistryForm";
+            this.Text = "Registrera Patient";
             this.ResumeLayout(false);
             this.PerformLayout();
 

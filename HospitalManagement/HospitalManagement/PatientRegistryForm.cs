@@ -18,6 +18,25 @@ namespace HospitalManagement
             InitializeComponent();
         }
 
+        private void DataValidityCheck()
+        {
+            //Goes through all the textboxes in the from and makes sure that they have some sort of content. 
+            bool dataValid = true;
+            foreach (Control control in this.Controls)
+            {
+                if (control is TextBox)
+                {
+                    TextBox textbox = control as TextBox;
+                    dataValid &= !string.IsNullOrWhiteSpace(textbox.Text);
+                }
+                if (string.IsNullOrWhiteSpace(bloodtypeComboBox.Text))
+                {
+                    dataValid = false;
+                }
+                savePatientBtn.Enabled = dataValid;
+            }
+        }
+
         private void savePatientBtn_Click(object sender, EventArgs e)
         {
             //Gathers all the information from the different textboxes and saves a new patient.
@@ -30,6 +49,8 @@ namespace HospitalManagement
             string nEmail = eMailTxt.Text;            
             string nBloodType = bloodtypeComboBox.Text;
 
+            
+
             DatabaseHandler db = new DatabaseHandler();
             string nPostArea = db.LoadPostort(nPostCode);
             
@@ -40,10 +61,15 @@ namespace HospitalManagement
 
         private void personIdTxt_Validating(object sender, CancelEventArgs e)
         {
-            //Checks if person
+            //Checks if person id matches the pattern of a swedish Personal ID number. 
             if(!Regex.IsMatch(personIdTxt.Text, @"^\d{2}[01]\d[0-3]\d[-]\d{4}$"))
             {
                 MessageBox.Show("Personnummer måste skrivas enligt ÅÅMMDD-XXXX.");
+                personIdTxt.Focus();
+            }
+            else
+            {
+                DataValidityCheck();
             }
         }
 
@@ -60,8 +86,39 @@ namespace HospitalManagement
                 DatabaseHandler db = new DatabaseHandler();
                 string postOrt = db.LoadPostort(Convert.ToInt32(postCodeTxt.Text));
                 postalAreatxt.Text = postOrt;
+                DataValidityCheck();
             }
 
+        }
+
+        private void firstNameTxt_Validated(object sender, EventArgs e)
+        {
+            DataValidityCheck();
+        }
+
+        private void lastNameTxt_Validated(object sender, EventArgs e)
+        {
+            DataValidityCheck();
+        }
+
+        private void addressTxt_Validated(object sender, EventArgs e)
+        {
+            DataValidityCheck();
+        }
+
+        private void phoneTxt_Validated(object sender, EventArgs e)
+        {
+            DataValidityCheck();
+        }
+
+        private void eMailTxt_Validated(object sender, EventArgs e)
+        {
+            DataValidityCheck();
+        }
+
+        private void bloodtypeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            DataValidityCheck();
         }
     }
 }
