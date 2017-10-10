@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,6 +27,26 @@ namespace HospitalManagement
         {
             Form patReg = new PatientRegistryForm();
             patReg.Show();
+        }
+
+        private void searchPatientBtn_Click(object sender, EventArgs e)
+        {
+            DatabaseHandler dbHandler = new DatabaseHandler();
+            var personalNumber = searchPatientBox.Text.ToString();
+
+            if (!Regex.IsMatch(personalNumber, @"^\d{2}[01]\d[0-3]\d[-]\d{4}$"))
+            {
+                MessageBox.Show("Personnummer måste skrivas enligt ÅÅMMDD-XXXX.");
+            }
+            else if (!dbHandler.PatientExists(personalNumber))
+            {
+                MessageBox.Show("Patienten finns inte i patientregistret.");
+            }
+            else
+            {
+                Form journal = new PatientJournalForm(dbHandler.LoadPatient(personalNumber));
+                journal.Show();
+            }
         }
     }
 }

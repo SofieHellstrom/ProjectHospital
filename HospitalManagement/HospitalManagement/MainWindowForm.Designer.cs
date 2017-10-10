@@ -36,9 +36,12 @@
             this.newPatientBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.searchPatientBtn = new System.Windows.Forms.Button();
+            this.searchPatientBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPane.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPane
@@ -112,6 +115,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.searchPatientBtn);
+            this.tabPage1.Controls.Add(this.searchPatientBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -119,6 +124,23 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Patienter";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // searchPatientBtn
+            // 
+            this.searchPatientBtn.Location = new System.Drawing.Point(150, 10);
+            this.searchPatientBtn.Name = "searchPatientBtn";
+            this.searchPatientBtn.Size = new System.Drawing.Size(107, 23);
+            this.searchPatientBtn.TabIndex = 1;
+            this.searchPatientBtn.Text = "Sök Personnummer";
+            this.searchPatientBtn.UseVisualStyleBackColor = true;
+            this.searchPatientBtn.Click += new System.EventHandler(this.searchPatientBtn_Click);
+            // 
+            // searchPatientBox
+            // 
+            this.searchPatientBox.Location = new System.Drawing.Point(20, 10);
+            this.searchPatientBox.Name = "searchPatientBox";
+            this.searchPatientBox.Size = new System.Drawing.Size(100, 20);
+            this.searchPatientBox.TabIndex = 0;
             // 
             // MainWindow
             // 
@@ -131,6 +153,8 @@
             this.tableLayoutPane.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -145,6 +169,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button searchPatientBtn;
+        private System.Windows.Forms.TextBox searchPatientBox;
     }
 }
 
