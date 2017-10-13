@@ -330,5 +330,83 @@ namespace HospitalManagement
             }
             return returnPostOrt;
         }
+
+        public Employee LoadEmployee(string EmployeeID)
+        {
+            //Returns a new instance of a specific person based on the value of person_id_nr 
+            //in the patient table of the database.
+
+            //Prepares variables used in creating the patient.
+            Employee returnEmployee;
+            string anstNr = "";
+            string firstName = "";
+            string lastName = "";
+            string adress = "";
+            int postNr = 0;
+            string telefonNr = "";
+            string eMail = "";
+            string personnummer = "";
+            string position = "";
+            string postOrt = "";
+            string departmentNr = "";
+            string specialtyNr = "";
+
+            try
+            {
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    //Opens the connection.
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        //Configures the connection and SQL-query for the command and prepares it.
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT * FROM staff WHERE employee_id = :id";
+
+                        cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+
+                        cmd.Prepare();
+
+                        cmd.Parameters[0].Value = anstNr;
+
+                        using (var reader = cmd.ExecuteReader())
+                            //Reads values from the database into the temporary variables.
+                            while (reader.Read())
+                            {
+                                {
+                                    anstNr = reader.GetString(0);
+                                    firstName = reader.GetString(1);
+                                    lastName = reader.GetString(2);
+                                    adress = reader.GetString(3);
+                                    postNr = reader.GetInt32(4);
+                                    telefonNr = reader.GetString(5);
+                                    eMail = reader.GetString(6);
+                                    personnummer = reader.GetString(7);
+                                    departmentNr = reader.GetString(8);
+                                    position = reader.GetString(9);
+                                    specialtyNr = reader.GetString(10);
+                                }
+                            }
+
+                    }
+
+                }
+
+
+            }
+            catch (PostgresException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            //Loads the Postort connected to the Postal Code. 
+            postOrt = LoadPostort(postNr);
+
+            //Creates and returns the Employee instance.
+            returnEmployee = new Employee(anstNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, personnummer, position, departmentNr, specialtyNr );
+            return returnEmployee;
+
+        }
+
     }
 }

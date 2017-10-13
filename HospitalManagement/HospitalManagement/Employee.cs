@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement
 {
-    class Employee
+    public class Employee
     {
-        //Properties that correspond to information about patients in the patient table.
-        //I've only given PostalArea a getter, because you should only have to set that value in the constructor.
-        //You could argue the same with Personnummer, except in rare cases when people change their Personnummer.
-
+        //Properties that correspond to information about employee in the staff table
         public string EmployeeID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -21,6 +18,11 @@ namespace HospitalManagement
         public string PhoneNr { get; set; }
         public string Email { get; set; }
         public string PersonNummer { get; set; }
+        public string Position { get; set; }
+        public string Department { get; set; }
+        public string Specialty { get; set; }
+
+        
 
         //Properties below commented out until the classes they refer to have been created.
         //There are most likely more, these are just examples.
@@ -30,7 +32,7 @@ namespace HospitalManagement
         //that has a property linking to a specialty, since only doctors have that, or if we
         //should just let all staff have a link to a specialty, but keep it null if there isn't one.
 
-        public Employee(string empId, string firstName, string lastName, string address, int postCode, string postArea, string phoneNr, string eMail, string persNr)
+        public Employee(string empId, string firstName, string lastName, string address, int postCode, string postArea, string phoneNr, string eMail, string persNr, string position, string avdelning, string specialisering)
         {
             //Constructor with all the basic information about the employee. Will be called from a class/method
             //that loads the information from the database and creates the patient object.
@@ -42,6 +44,9 @@ namespace HospitalManagement
             this.PostalArea = postArea;
             this.Email = eMail;
             this.PersonNummer = persNr;
+            this.Position = position;
+            this.Department = avdelning;
+            this.Specialty = specialisering;
         }
 
     }
