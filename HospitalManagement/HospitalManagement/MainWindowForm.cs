@@ -13,7 +13,6 @@ namespace HospitalManagement
 {
     public partial class MainWindow : Form
     {
-        Patient testPatient;
 
         public MainWindow()
         {

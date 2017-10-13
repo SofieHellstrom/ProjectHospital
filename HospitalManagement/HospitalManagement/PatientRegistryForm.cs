@@ -116,7 +116,7 @@ namespace HospitalManagement
             DataValidityCheck();
         }
 
-        private void bloodtypeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        private void bloodtypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataValidityCheck();
         }

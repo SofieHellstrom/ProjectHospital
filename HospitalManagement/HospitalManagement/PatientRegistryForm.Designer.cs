@@ -179,7 +179,7 @@
             this.bloodtypeComboBox.Name = "bloodtypeComboBox";
             this.bloodtypeComboBox.Size = new System.Drawing.Size(121, 21);
             this.bloodtypeComboBox.TabIndex = 7;
-            this.bloodtypeComboBox.SelectionChangeCommitted += new System.EventHandler(this.bloodtypeComboBox_SelectionChangeCommitted);
+            this.bloodtypeComboBox.SelectedIndexChanged += new System.EventHandler(this.bloodtypeComboBox_SelectedIndexChanged);
             // 
             // savePatientBtn
             // 
