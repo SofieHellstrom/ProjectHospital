@@ -49,14 +49,32 @@ namespace HospitalManagement
             string nEmail = eMailTxt.Text;            
             string nBloodType = bloodtypeComboBox.Text;
 
-            
-
             DatabaseHandler db = new DatabaseHandler();
-            string nPostArea = db.LoadPostort(nPostCode);
-            
-            Patient patientToAdd = new Patient(nPersonId, nFirstName, nLastName, nAddress, nPostCode, nPostArea, nPhoneNr, nEmail, nBloodType);
-            db.AddPatient(patientToAdd);
-            this.Close();
+
+            if (!db.PatientExists(nPersonId))
+            {
+
+                string nPostArea = db.LoadPostort(nPostCode);
+
+                Patient patientToAdd = new Patient(nPersonId, nFirstName, nLastName, nAddress, nPostCode, nPostArea, nPhoneNr, nEmail, nBloodType);
+
+
+
+                bool success = db.AddPatient(patientToAdd);
+                if (success)
+                {
+                    MessageBox.Show("Ny patient tillagd i Databasen");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Patient kunde inte läggas till i databasen. \nVar god kontrollera uppgifterna.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("En patient med detta personnummer finns redan i databasen.");
+            }
         }
 
         private void personIdTxt_Validating(object sender, CancelEventArgs e)
