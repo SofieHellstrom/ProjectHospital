@@ -333,12 +333,12 @@ namespace HospitalManagement
 
         public Employee LoadEmployee(string EmployeeID)
         {
-            //Returns a new instance of a specific person based on the value of person_id_nr 
-            //in the patient table of the database.
+            //Returns a new instance of a specific person based on the value of employee_id 
+            //in the staff table of the database.
 
-            //Prepares variables used in creating the patient.
+            //Prepares variables used in creating the Employee.
             Employee returnEmployee;
-            string anstNr = "";
+            string anstNr = "Test";
             string firstName = "";
             string lastName = "";
             string adress = "";
@@ -367,7 +367,7 @@ namespace HospitalManagement
 
                         cmd.Prepare();
 
-                        cmd.Parameters[0].Value = anstNr;
+                        cmd.Parameters[0].Value = EmployeeID;
 
                         using (var reader = cmd.ExecuteReader())
                             //Reads values from the database into the temporary variables.
@@ -396,7 +396,9 @@ namespace HospitalManagement
             }
             catch (PostgresException e)
             {
+               
                 Console.WriteLine(e.ToString());
+                System.Diagnostics.Debug.WriteLine(e.ToString());
             }
 
             //Loads the Postort connected to the Postal Code. 
@@ -405,6 +407,58 @@ namespace HospitalManagement
             //Creates and returns the Employee instance.
             returnEmployee = new Employee(anstNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, personnummer, position, departmentNr, specialtyNr );
             return returnEmployee;
+
+        }
+
+        public bool AddJournalEntry (string patient, string user, string entryType, string content, bool important)
+        {
+            //This method is for saving entries in a patients journal. The variables passed to the method are the following:
+            // patient = personal_id_nr of patient
+            // user = employee_id of person causing the entry to be created.
+            // entryType = the type of entry (registration, labresult, booking, etc)
+            // content = the main text of any journal Note, results of labtest, etc
+            // important = set to true if this is vital information about the patient that deserves to be highlighted in any informational displays.
+
+            DateTime registryDate = DateTime.Today;
+            TimeSpan registryTime = DateTime.Now.TimeOfDay;
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds connection and SQL-string to the command and executes it.
+                    try
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = $"INSERT INTO journalpost (date, time, staff, patient, type, text, important) VALUES ({registryDate}, {registryTime}, '{patient}', '{user}', '{entryType}','{content}', {important})";
+
+                        //Not sure how DateTime translates in a string like that. Might be better to use parameterloading. 
+
+                        //cmd.Parameters.Add(new NpgsqlParameter("registryDate", NpgsqlDbType.Date));
+                        //cmd.Paramaeter.Add(new NpgsqlParameter("registryTime", NpgsqlDbType.Time)); 
+                        
+                        //cmd.Prepare();
+
+                        //cmd.Parameters[0].Value = registryDate;
+                        //cmd.Parameters[1].Value = registryTime;
+                        
+
+                        int recordsAffected = cmd.ExecuteNonQuery();
+
+                        //Returns a boolean which is True if any rows have been affected. 
+                        return Convert.ToBoolean(recordsAffected);
+                    }
+                    catch (PostgresException e)
+                    {
+                        //Writes Exception error to Console and returns false, if a
+                        //PostgresException occurs.
+                        Console.WriteLine(e.ToString());
+                        return false;
+                    }
+
+                }
+            }
 
         }
 

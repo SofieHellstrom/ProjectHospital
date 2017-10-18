@@ -13,11 +13,14 @@ namespace HospitalManagement
 {
     public partial class MainWindow : Form
     {
+        MainWindowData data;
 
         public MainWindow()
         {
             InitializeComponent();
-            
+            data = new MainWindowData();
+            userIdentityLbl.Text = $"Inloggad som: {data.MyUser.LastName}, {data.MyUser.FirstName} - ({data.MyUser.EmployeeID})";
+
         }
 
        

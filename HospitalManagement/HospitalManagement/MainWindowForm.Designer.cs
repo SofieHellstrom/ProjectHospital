@@ -31,6 +31,7 @@
             this.tableLayoutPane = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.userIdentityLbl = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.newPatientBtn = new System.Windows.Forms.Button();
@@ -39,6 +40,7 @@
             this.searchPatientBtn = new System.Windows.Forms.Button();
             this.searchPatientBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPane.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -71,10 +73,21 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.userIdentityLbl);
             this.panel2.Location = new System.Drawing.Point(114, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(667, 33);
             this.panel2.TabIndex = 1;
+            // 
+            // userIdentityLbl
+            // 
+            this.userIdentityLbl.AutoSize = true;
+            this.userIdentityLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userIdentityLbl.Location = new System.Drawing.Point(426, 5);
+            this.userIdentityLbl.Name = "userIdentityLbl";
+            this.userIdentityLbl.Size = new System.Drawing.Size(232, 13);
+            this.userIdentityLbl.TabIndex = 0;
+            this.userIdentityLbl.Text = "User: Efternamn, Förnamn (Anställningsnummer)";
             // 
             // panel3
             // 
@@ -151,6 +164,8 @@
             this.Name = "MainWindow";
             this.Text = "HospitalManagement";
             this.tableLayoutPane.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -171,6 +186,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button searchPatientBtn;
         private System.Windows.Forms.TextBox searchPatientBox;
+        private System.Windows.Forms.Label userIdentityLbl;
     }
 }
 
