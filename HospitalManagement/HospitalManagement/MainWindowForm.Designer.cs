@@ -81,9 +81,10 @@
             // 
             // userIdentityLbl
             // 
+            this.userIdentityLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.userIdentityLbl.AutoSize = true;
-            this.userIdentityLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userIdentityLbl.Location = new System.Drawing.Point(426, 5);
+            this.userIdentityLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userIdentityLbl.Location = new System.Drawing.Point(435, 10);
             this.userIdentityLbl.Name = "userIdentityLbl";
             this.userIdentityLbl.Size = new System.Drawing.Size(232, 13);
             this.userIdentityLbl.TabIndex = 0;

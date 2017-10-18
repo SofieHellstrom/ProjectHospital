@@ -347,10 +347,11 @@ namespace HospitalManagement
             string eMail = "";
             string personnummer = "";
             string position = "";
-            string postOrt = "";
             string departmentNr = "";
             string specialtyNr = "";
-
+            string postOrt = "";
+            string department = "";
+            string specialty = "N/A";
             try
             {
                 using (var conn = new NpgsqlConnection(connectionString))
@@ -403,11 +404,31 @@ namespace HospitalManagement
 
             //Loads the Postort connected to the Postal Code. 
             postOrt = LoadPostort(postNr);
+            department = LoadDepartment(departmentNr);
+            if (specialtyNr != "")
+            {
+                specialty = LoadSpecialty(specialtyNr);
+            }
 
             //Creates and returns the Employee instance.
-            returnEmployee = new Employee(anstNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, personnummer, position, departmentNr, specialtyNr );
+            returnEmployee = new Employee(anstNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, personnummer, position, department, specialty );
             return returnEmployee;
 
+        }
+
+        public void AddEmployee()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateEmployee()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEmployee()
+        {
+            throw new NotImplementedException();
         }
 
         public bool AddJournalEntry (string patient, string user, string entryType, string content, bool important)
@@ -419,7 +440,6 @@ namespace HospitalManagement
             // content = the main text of any journal Note, results of labtest, etc
             // important = set to true if this is vital information about the patient that deserves to be highlighted in any informational displays.
 
-            DateTime registryDate = DateTime.Today;
             TimeSpan registryTime = DateTime.Now.TimeOfDay;
             using (var conn = new NpgsqlConnection(connectionString))
             {
@@ -431,7 +451,7 @@ namespace HospitalManagement
                     try
                     {
                         cmd.Connection = conn;
-                        cmd.CommandText = $"INSERT INTO journalpost (date, time, staff, patient, type, text, important) VALUES ({registryDate}, {registryTime}, '{patient}', '{user}', '{entryType}','{content}', {important})";
+                        cmd.CommandText = $"INSERT INTO journalpost (timestamp, staff, patient, type, text, important) VALUES ({registryTime}, '{patient}', '{user}', '{entryType}','{content}', {important})";
 
                         //Not sure how DateTime translates in a string like that. Might be better to use parameterloading. 
 
@@ -442,7 +462,6 @@ namespace HospitalManagement
 
                         //cmd.Parameters[0].Value = registryDate;
                         //cmd.Parameters[1].Value = registryTime;
-                        
 
                         int recordsAffected = cmd.ExecuteNonQuery();
 
@@ -460,6 +479,80 @@ namespace HospitalManagement
                 }
             }
 
+        }
+
+        public void DeleteJournalEntry()
+        {
+            //Placeholder for method to delete journalentries should we need it. Only admins should be allowed to do this.
+            throw new NotImplementedException();
+        }
+
+        public string LoadDepartment(string departmentID)
+        {
+            //Gets the Department corresponding to a department from the database. 
+            string returnDepartment = "Finns ej i databasen.";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds the connection and SQL-string to the Command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT name FROM department WHERE department_id = :code";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("code", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = departmentID;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Reads the value from the database.
+                        while (reader.Read())
+                        {
+                            returnDepartment = reader.GetString(0);
+                        }
+                    }
+                }
+            }
+            return returnDepartment;
+
+        }
+
+        public string LoadSpecialty(string specID)
+        {
+            //Gets the Specialty corresponding to a spec_id in specialty from the database. 
+            string returnSpecialty = "Finns ej i databasen.";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds the connection and SQL-string to the Command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT specialty FROM specialty WHERE spec_id = :code";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("code", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = specID;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Reads the value from the database.
+                        while (reader.Read())
+                        {
+                            returnSpecialty = reader.GetString(0);
+                        }
+                    }
+                }
+
+            }
+            return returnSpecialty;
         }
 
     }
