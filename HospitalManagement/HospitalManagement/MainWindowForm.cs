@@ -17,10 +17,10 @@ namespace HospitalManagement
         public MainWindow()
         {
             InitializeComponent();
-            
+
         }
 
-       
+
 
         private void newPatientBtn_Click(object sender, EventArgs e)
         {
@@ -31,21 +31,34 @@ namespace HospitalManagement
         private void searchPatientBtn_Click(object sender, EventArgs e)
         {
             DatabaseHandler dbHandler = new DatabaseHandler();
-            var personalNumber = searchPatientBox.Text.ToString();
+            var searchTerm = searchPatientBox.Text.ToString();
 
-            if (!Regex.IsMatch(personalNumber, @"^\d{2}[01]\d[0-3]\d[-]\d{4}$"))
+            if (searchTerm.Any(char.IsDigit))
             {
-                MessageBox.Show("Personnummer måste skrivas enligt ÅÅMMDD-XXXX.");
+                if (!Regex.IsMatch(searchTerm, @"^\d{2}[01]\d[0-3]\d[-]\d{4}$"))
+                {
+                    MessageBox.Show("Personnummer måste skrivas enligt ÅÅMMDD-XXXX.");
+                }
             }
-            else if (!dbHandler.PatientExists(personalNumber))
+
+            else if (!dbHandler.PatientExists(searchTerm))
             {
                 MessageBox.Show("Patienten finns inte i patientregistret.");
             }
-            else
-            {
-                Form journal = new PatientJournalForm(dbHandler.LoadPatient(personalNumber));
+
+
+            
+            
+                Form journal = new PatientJournalForm(dbHandler.LoadPatient(searchTerm));
                 journal.Show();
-            }
+            
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'hospitalDataSet.patient' table. You can move, or remove it, as needed.
+            this.patientTableAdapter.Fill(this.hospitalDataSet.patient);
+
         }
     }
 }

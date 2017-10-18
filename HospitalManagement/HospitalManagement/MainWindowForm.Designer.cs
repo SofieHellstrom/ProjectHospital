@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPane = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -36,12 +37,24 @@
             this.newPatientBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.personidnrDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.hospitalDataSet = new HospitalManagement.HospitalDataSet();
             this.searchPatientBtn = new System.Windows.Forms.Button();
             this.searchPatientBox = new System.Windows.Forms.TextBox();
+            this.patientTableAdapter = new HospitalManagement.HospitalDataSetTableAdapters.patientTableAdapter();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPane.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.patientBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPane
@@ -115,6 +128,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Controls.Add(this.searchPatientBtn);
             this.tabPage1.Controls.Add(this.searchPatientBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -124,6 +139,55 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Patienter";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.personidnrDataGridViewTextBoxColumn,
+            this.firstnameDataGridViewTextBoxColumn,
+            this.lastnameDataGridViewTextBoxColumn,
+            this.roomDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.patientBindingSource;
+            this.dataGridView1.Location = new System.Drawing.Point(20, 78);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(538, 58);
+            this.dataGridView1.TabIndex = 2;
+            // 
+            // personidnrDataGridViewTextBoxColumn
+            // 
+            this.personidnrDataGridViewTextBoxColumn.DataPropertyName = "person_id_nr";
+            this.personidnrDataGridViewTextBoxColumn.HeaderText = "Personnummer";
+            this.personidnrDataGridViewTextBoxColumn.Name = "personidnrDataGridViewTextBoxColumn";
+            // 
+            // firstnameDataGridViewTextBoxColumn
+            // 
+            this.firstnameDataGridViewTextBoxColumn.DataPropertyName = "first_name";
+            this.firstnameDataGridViewTextBoxColumn.HeaderText = "Förnamn";
+            this.firstnameDataGridViewTextBoxColumn.Name = "firstnameDataGridViewTextBoxColumn";
+            // 
+            // lastnameDataGridViewTextBoxColumn
+            // 
+            this.lastnameDataGridViewTextBoxColumn.DataPropertyName = "last_name";
+            this.lastnameDataGridViewTextBoxColumn.HeaderText = "Efternamn";
+            this.lastnameDataGridViewTextBoxColumn.Name = "lastnameDataGridViewTextBoxColumn";
+            // 
+            // roomDataGridViewTextBoxColumn
+            // 
+            this.roomDataGridViewTextBoxColumn.DataPropertyName = "room";
+            this.roomDataGridViewTextBoxColumn.HeaderText = "Rum";
+            this.roomDataGridViewTextBoxColumn.Name = "roomDataGridViewTextBoxColumn";
+            // 
+            // patientBindingSource
+            // 
+            this.patientBindingSource.DataMember = "patient";
+            this.patientBindingSource.DataSource = this.hospitalDataSet;
+            // 
+            // hospitalDataSet
+            // 
+            this.hospitalDataSet.DataSetName = "HospitalDataSet";
+            this.hospitalDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // searchPatientBtn
             // 
@@ -142,6 +206,19 @@
             this.searchPatientBox.Size = new System.Drawing.Size(100, 20);
             this.searchPatientBox.TabIndex = 0;
             // 
+            // patientTableAdapter
+            // 
+            this.patientTableAdapter.ClearBeforeFill = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(467, 98);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -150,11 +227,15 @@
             this.Controls.Add(this.tableLayoutPane);
             this.Name = "MainWindow";
             this.Text = "HospitalManagement";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.tableLayoutPane.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.patientBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -171,6 +252,15 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button searchPatientBtn;
         private System.Windows.Forms.TextBox searchPatientBox;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private HospitalDataSet hospitalDataSet;
+        private System.Windows.Forms.BindingSource patientBindingSource;
+        private HospitalDataSetTableAdapters.patientTableAdapter patientTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn personidnrDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn firstnameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastnameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn roomDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button button1;
     }
 }
 
