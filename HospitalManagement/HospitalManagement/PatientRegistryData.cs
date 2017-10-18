@@ -8,9 +8,13 @@ namespace HospitalManagement
 {
     public class PatientRegistryData
     {
-        //Not sure we need this because the code for new patient was fairly straightforward and didn't 
-        //need to store any significant data. Keeping it around in case the adding of validation later makes
-        //it useful. 
+        //Class to store data related to PatientRegistryForm
+        public string UserID { get; set; }
+
+        public PatientRegistryData(string user)
+        {
+            UserID = user;
+        }
 
     }
 }

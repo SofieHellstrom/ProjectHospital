@@ -27,7 +27,7 @@ namespace HospitalManagement
 
         private void newPatientBtn_Click(object sender, EventArgs e)
         {
-            Form patReg = new PatientRegistryForm();
+            Form patReg = new PatientRegistryForm(data.MyUser.EmployeeID);
             patReg.Show();
         }
 

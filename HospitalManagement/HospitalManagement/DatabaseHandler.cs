@@ -431,7 +431,7 @@ namespace HospitalManagement
             throw new NotImplementedException();
         }
 
-        public bool AddJournalEntry (string patient, string user, string entryType, string content, bool important)
+        public bool AddJournalEntry (string patient, string user, string entryType, string content, bool imp)
         {
             //This method is for saving entries in a patients journal. The variables passed to the method are the following:
             // patient = personal_id_nr of patient
@@ -440,7 +440,7 @@ namespace HospitalManagement
             // content = the main text of any journal Note, results of labtest, etc
             // important = set to true if this is vital information about the patient that deserves to be highlighted in any informational displays.
 
-            TimeSpan registryTime = DateTime.Now.TimeOfDay;
+            DateTime registryTime = DateTime.Now;
             using (var conn = new NpgsqlConnection(connectionString))
             {
                 //Opens connection.
@@ -451,17 +451,26 @@ namespace HospitalManagement
                     try
                     {
                         cmd.Connection = conn;
-                        cmd.CommandText = $"INSERT INTO journalpost (timestamp, staff, patient, type, text, important) VALUES ({registryTime}, '{patient}', '{user}', '{entryType}','{content}', {important})";
-
-                        //Not sure how DateTime translates in a string like that. Might be better to use parameterloading. 
-
-                        //cmd.Parameters.Add(new NpgsqlParameter("registryDate", NpgsqlDbType.Date));
-                        //cmd.Paramaeter.Add(new NpgsqlParameter("registryTime", NpgsqlDbType.Time)); 
+                        cmd.CommandText = $"INSERT INTO journalpost (timestamp, staff, patient, type, text, important) VALUES ({registryTime}, '{user}', '{patient}', '{entryType}','{content}', {imp})";
+                        //cmd.CommandText = "Insert INTO journalpost (timestamp, staff, patient, type, text, important) VALUES (:time, :p, :userid, :type, :info, :important)";
                         
+
+                        //cmd.Parameters.Add(new NpgsqlParameter("time", NpgsqlDbType.Timestamp));
+                        //cmd.Parameters.Add(new NpgsqlParameter("úserid", NpgsqlDbType.Varchar));
+                        //cmd.Parameters.Add(new NpgsqlParameter("pat", NpgsqlDbType.Varchar));
+                        //cmd.Parameters.Add(new NpgsqlParameter("type", NpgsqlDbType.Varchar));
+                        //cmd.Parameters.Add(new NpgsqlParameter("info", NpgsqlDbType.Text));
+                        //cmd.Parameters.Add(new NpgsqlParameter("important", NpgsqlDbType.Boolean));
+
                         //cmd.Prepare();
 
-                        //cmd.Parameters[0].Value = registryDate;
-                        //cmd.Parameters[1].Value = registryTime;
+                        //cmd.Parameters[0].Value = registryTime;
+                        //cmd.Parameters[0].Value = user;
+                        //cmd.Parameters[0].Value = patient;
+                        //cmd.Parameters[0].Value = entryType;
+                        //cmd.Parameters[0].Value = content;
+                        //cmd.Parameters[0].Value = imp;
+
 
                         int recordsAffected = cmd.ExecuteNonQuery();
 
