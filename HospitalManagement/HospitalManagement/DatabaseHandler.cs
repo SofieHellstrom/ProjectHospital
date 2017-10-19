@@ -431,7 +431,7 @@ namespace HospitalManagement
             throw new NotImplementedException();
         }
 
-        public bool AddJournalEntry (string patient, string user, string entryType, string content, bool imp)
+        public bool AddJournalEntry (string user, string patient, string entryType, string content, bool imp)
         {
             //This method is for saving entries in a patients journal. The variables passed to the method are the following:
             // patient = personal_id_nr of patient
@@ -440,7 +440,7 @@ namespace HospitalManagement
             // content = the main text of any journal Note, results of labtest, etc
             // important = set to true if this is vital information about the patient that deserves to be highlighted in any informational displays.
 
-            DateTime registryTime = DateTime.Now;
+            //DateTime registryTime = DateTime.Now;
             using (var conn = new NpgsqlConnection(connectionString))
             {
                 //Opens connection.
@@ -451,25 +451,25 @@ namespace HospitalManagement
                     try
                     {
                         cmd.Connection = conn;
-                        cmd.CommandText = $"INSERT INTO journalpost (timestamp, staff, patient, type, text, important) VALUES ({registryTime}, '{user}', '{patient}', '{entryType}','{content}', {imp})";
-                        //cmd.CommandText = "Insert INTO journalpost (timestamp, staff, patient, type, text, important) VALUES (:time, :p, :userid, :type, :info, :important)";
-                        
+                        //cmd.CommandText = $"INSERT INTO journalpost (timestamp, staff, patient, type, text, important) VALUES (now, '{user}', '{patient}', '{entryType}','{content}', {imp})";
+                        cmd.CommandText = "Insert INTO journalpost (timestamp, staff, patient, type, text, important) VALUES (:time, :userid, :pat, :type, :info, :important)";
+                        //cmd.CommandText = $"INSERT INTO journalpost (timestamp, staff, patient, type, text, important) VALUES ('{user}', '{patient}', '{entryType}', '{content}', {imp})"; 
 
-                        //cmd.Parameters.Add(new NpgsqlParameter("time", NpgsqlDbType.Timestamp));
-                        //cmd.Parameters.Add(new NpgsqlParameter("úserid", NpgsqlDbType.Varchar));
-                        //cmd.Parameters.Add(new NpgsqlParameter("pat", NpgsqlDbType.Varchar));
-                        //cmd.Parameters.Add(new NpgsqlParameter("type", NpgsqlDbType.Varchar));
-                        //cmd.Parameters.Add(new NpgsqlParameter("info", NpgsqlDbType.Text));
-                        //cmd.Parameters.Add(new NpgsqlParameter("important", NpgsqlDbType.Boolean));
+                        cmd.Parameters.Add(new NpgsqlParameter("time", NpgsqlDbType.Timestamp));
+                        cmd.Parameters.Add(new NpgsqlParameter("userid", NpgsqlDbType.Varchar));
+                        cmd.Parameters.Add(new NpgsqlParameter("pat", NpgsqlDbType.Varchar));
+                        cmd.Parameters.Add(new NpgsqlParameter("type", NpgsqlDbType.Varchar));
+                        cmd.Parameters.Add(new NpgsqlParameter("info", NpgsqlDbType.Text));
+                        cmd.Parameters.Add(new NpgsqlParameter("important", NpgsqlDbType.Boolean));
 
                         //cmd.Prepare();
 
-                        //cmd.Parameters[0].Value = registryTime;
-                        //cmd.Parameters[0].Value = user;
-                        //cmd.Parameters[0].Value = patient;
-                        //cmd.Parameters[0].Value = entryType;
-                        //cmd.Parameters[0].Value = content;
-                        //cmd.Parameters[0].Value = imp;
+                        cmd.Parameters[0].Value = DateTime.Now;
+                        cmd.Parameters[1].Value = user;
+                        cmd.Parameters[2].Value = patient;
+                        cmd.Parameters[3].Value = entryType;
+                        cmd.Parameters[4].Value = content;
+                        cmd.Parameters[5].Value = imp;
 
 
                         int recordsAffected = cmd.ExecuteNonQuery();

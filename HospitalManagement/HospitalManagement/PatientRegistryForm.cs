@@ -64,7 +64,7 @@ namespace HospitalManagement
                 bool success = db.AddPatient(patientToAdd);
                 if (success)
                 {
-                    db.AddJournalEntry(nPersonId, data.UserID, "System", "Patient Registered to Database", false);
+                    db.AddJournalEntry(data.UserID, nPersonId, "System", "Patient skapad i databas", false);
                     MessageBox.Show("Ny patient tillagd i Databasen");
                     this.Close();
                 }
