@@ -440,20 +440,20 @@ namespace HospitalManagement
             // content = the main text of any journal Note, results of labtest, etc
             // important = set to true if this is vital information about the patient that deserves to be highlighted in any informational displays.
 
-            //DateTime registryTime = DateTime.Now;
+ 
             using (var conn = new NpgsqlConnection(connectionString))
             {
                 //Opens connection.
                 conn.Open();
                 using (var cmd = new NpgsqlCommand())
                 {
-                    // Adds connection and SQL-string to the command and executes it.
+                    // Adds connection and SQL-parameters to the command and executes it.
                     try
                     {
                         cmd.Connection = conn;
-                        //cmd.CommandText = $"INSERT INTO journalpost (timestamp, staff, patient, type, text, important) VALUES (now, '{user}', '{patient}', '{entryType}','{content}', {imp})";
+                        
                         cmd.CommandText = "Insert INTO journalpost (timestamp, staff, patient, type, text, important) VALUES (:time, :userid, :pat, :type, :info, :important)";
-                        //cmd.CommandText = $"INSERT INTO journalpost (timestamp, staff, patient, type, text, important) VALUES ('{user}', '{patient}', '{entryType}', '{content}', {imp})"; 
+                        //cmd.CommandText = $"INSERT INTO journalpost (timestamp, staff, patient, type, text, important) VALUES (DateTime.Now, '{user}', '{patient}', '{entryType}', '{content}', {imp})"; 
 
                         cmd.Parameters.Add(new NpgsqlParameter("time", NpgsqlDbType.Timestamp));
                         cmd.Parameters.Add(new NpgsqlParameter("userid", NpgsqlDbType.Varchar));
@@ -462,7 +462,7 @@ namespace HospitalManagement
                         cmd.Parameters.Add(new NpgsqlParameter("info", NpgsqlDbType.Text));
                         cmd.Parameters.Add(new NpgsqlParameter("important", NpgsqlDbType.Boolean));
 
-                        //cmd.Prepare();
+                        cmd.Prepare();
 
                         cmd.Parameters[0].Value = DateTime.Now;
                         cmd.Parameters[1].Value = user;
