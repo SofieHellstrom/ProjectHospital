@@ -850,31 +850,6 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("last_name", "last_name");
             tableMapping.ColumnMappings.Add("room", "room");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.InsertCommand = new global::Npgsql.NpgsqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO \"Hospital\".\"public\".\"patient\" (\"person_id_nr\", \"first_name\", \"last_na" +
-                "me\", \"room\") VALUES (@person_id_nr, @first_name, @last_name, @room)";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            global::Npgsql.NpgsqlParameter param = new global::Npgsql.NpgsqlParameter();
-            param.ParameterName = "@person_id_nr";
-            param.IsNullable = true;
-            param.SourceColumn = "person_id_nr";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::Npgsql.NpgsqlParameter();
-            param.ParameterName = "@first_name";
-            param.IsNullable = true;
-            param.SourceColumn = "first_name";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::Npgsql.NpgsqlParameter();
-            param.ParameterName = "@last_name";
-            param.IsNullable = true;
-            param.SourceColumn = "last_name";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::Npgsql.NpgsqlParameter();
-            param.ParameterName = "@room";
-            param.IsNullable = true;
-            param.SourceColumn = "room";
-            this._adapter.InsertCommand.Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -887,11 +862,23 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::Npgsql.NpgsqlCommand[1];
+            this._commandCollection = new global::Npgsql.NpgsqlCommand[2];
             this._commandCollection[0] = new global::Npgsql.NpgsqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT \"person_id_nr\", \"first_name\", \"last_name\", \"room\" FROM \"public\".\"patient\"";
+            this._commandCollection[0].CommandText = "SELECT top 0 0;";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::Npgsql.NpgsqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT        first_name, last_name, person_id_nr, room\r\nFROM            patient\r" +
+                "\nWHERE        (last_name = @Param1) OR\r\n                         (person_id_nr =" +
+                " @Param1)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            global::Npgsql.NpgsqlParameter param = new global::Npgsql.NpgsqlParameter();
+            param.ParameterName = "Param1";
+            param.Size = 30;
+            param.IsNullable = true;
+            param.SourceColumn = "last_name";
+            this._commandCollection[1].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -921,75 +908,37 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(HospitalDataSet.patientDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillBySearchTerm(HospitalDataSet.patientDataTable dataTable, object Param1) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((Param1 == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((object)(Param1));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(HospitalDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "patient");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(object @person_id_nr, object @first_name, object @last_name, object @room) {
-            if ((@person_id_nr == null)) {
-                throw new global::System.ArgumentNullException("@person_id_nr");
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual HospitalDataSet.patientDataTable GetDataBySearchTerm(object Param1) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((Param1 == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((object)(@person_id_nr));
+                this.Adapter.SelectCommand.Parameters[0].Value = ((object)(Param1));
             }
-            if ((@first_name == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((object)(@first_name));
-            }
-            if ((@last_name == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((object)(@last_name));
-            }
-            if ((@room == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((object)(@room));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
+            HospitalDataSet.patientDataTable dataTable = new HospitalDataSet.patientDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
         }
     }
     
@@ -1005,8 +954,6 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
         
         private UpdateOrderOption _updateOrder;
         
-        private patientTableAdapter _patientTableAdapter;
-        
         private bool _backupDataSetBeforeUpdate;
         
         private global::System.Data.IDbConnection _connection;
@@ -1019,20 +966,6 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
             }
             set {
                 this._updateOrder = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
-            "a", "System.Drawing.Design.UITypeEditor")]
-        public patientTableAdapter patientTableAdapter {
-            get {
-                return this._patientTableAdapter;
-            }
-            set {
-                this._patientTableAdapter = value;
             }
         }
         
@@ -1055,10 +988,6 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
                 if ((this._connection != null)) {
                     return this._connection;
                 }
-                if (((this._patientTableAdapter != null) 
-                            && (this._patientTableAdapter.Connection != null))) {
-                    return this._patientTableAdapter.Connection;
-                }
                 return null;
             }
             set {
@@ -1072,9 +1001,6 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._patientTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 return count;
             }
         }
@@ -1086,15 +1012,6 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateUpdatedRows(HospitalDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._patientTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.patient.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._patientTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             return result;
         }
         
@@ -1105,14 +1022,6 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateInsertedRows(HospitalDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._patientTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.patient.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._patientTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             return result;
         }
         
@@ -1123,14 +1032,6 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateDeletedRows(HospitalDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._patientTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.patient.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._patientTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             return result;
         }
         
@@ -1170,11 +1071,6 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._patientTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._patientTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
                 throw new global::System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana" +
@@ -1207,15 +1103,6 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._patientTableAdapter != null)) {
-                    revertConnections.Add(this._patientTableAdapter, this._patientTableAdapter.Connection);
-                    this._patientTableAdapter.Connection = ((global::Npgsql.NpgsqlConnection)(workConnection));
-                    this._patientTableAdapter.Transaction = ((global::Npgsql.NpgsqlTransaction)(workTransaction));
-                    if (this._patientTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._patientTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._patientTableAdapter.Adapter);
-                    }
-                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -1273,10 +1160,6 @@ namespace HospitalManagement.HospitalDataSetTableAdapters {
             finally {
                 if (workConnOpened) {
                     workConnection.Close();
-                }
-                if ((this._patientTableAdapter != null)) {
-                    this._patientTableAdapter.Connection = ((global::Npgsql.NpgsqlConnection)(revertConnections[this._patientTableAdapter]));
-                    this._patientTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

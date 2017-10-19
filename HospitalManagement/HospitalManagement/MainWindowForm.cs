@@ -18,6 +18,8 @@ namespace HospitalManagement
         {
             InitializeComponent();
 
+            //sets searchbutton to accept enterkey input
+            this.AcceptButton = searchPatientBtn;
         }
 
 
@@ -31,7 +33,11 @@ namespace HospitalManagement
         private void searchPatientBtn_Click(object sender, EventArgs e)
         {
             DatabaseHandler dbHandler = new DatabaseHandler();
+            HospitalDataSetTableAdapters.patientTableAdapter patientTableAdapter = new HospitalDataSetTableAdapters.patientTableAdapter();
+            HospitalDataSet hospitalDataSet = new HospitalDataSet();
+            
             var searchTerm = searchPatientBox.Text.ToString();
+
 
             if (searchTerm.Any(char.IsDigit))
             {
@@ -40,24 +46,29 @@ namespace HospitalManagement
                     MessageBox.Show("Personnummer måste skrivas enligt ÅÅMMDD-XXXX.");
                 }
             }
-
+            /*
             else if (!dbHandler.PatientExists(searchTerm))
             {
                 MessageBox.Show("Patienten finns inte i patientregistret.");
-            }
+            }*/
+            //patientTableAdapter.Fill(patientTableAdapter.GetDataBySearchTerm(searchTerm));
 
+            dataGridView1.DataSource = patientTableAdapter.GetDataBySearchTerm(searchTerm);
 
-            
-            
-                Form journal = new PatientJournalForm(dbHandler.LoadPatient(searchTerm));
-                journal.Show();
-            
+           // Form journal = new PatientJournalForm(dbHandler.LoadPatient(searchTerm));
+           //journal.Show();
+
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'hospitalDataSet.patient' table. You can move, or remove it, as needed.
             this.patientTableAdapter.Fill(this.hospitalDataSet.patient);
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

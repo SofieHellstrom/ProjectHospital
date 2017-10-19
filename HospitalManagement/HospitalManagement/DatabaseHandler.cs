@@ -111,7 +111,7 @@ namespace HospitalManagement
 
         public Patient LoadPatient(string searchPhrase)
         {
-            //Returns a new instance of a specific person based on the value of person_id_nr 
+            //Returns a new instance of a specific person based on the value of person_id_nr =>OBS (changed to searchPhrase so other values can be used)  
             //in the patient table of the database.
 
             //Prepares variables used in creating the patient.
@@ -137,15 +137,15 @@ namespace HospitalManagement
                         //Configures the connection and SQL-query for the command and prepares it.
                         cmd.Connection = conn;
                         cmd.CommandText = "SELECT * FROM patient WHERE person_id_nr = :searchPhrase OR last_name = :searchPhrase";
-                        //cmd.CommandText = "SELECT * FROM patient WHERE last_name = :lastname";
+                       
 
                         cmd.Parameters.Add(new NpgsqlParameter("searchPhrase", NpgsqlDbType.Varchar));
-                        //cmd.Parameters.Add(new NpgsqlParameter("lastname", NpgsqlDbType.Varchar));
+                        
 
                         cmd.Prepare();
 
                         cmd.Parameters[0].Value = searchPhrase;
-                       // cmd.Parameters[1].Value = lastname;
+                       
 
                         using (var reader = cmd.ExecuteReader())
                             //Reads values from the database into the temporary variables.

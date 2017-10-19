@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseHandler.cs" />
+    <Compile Include="HospitalDataSet.cs">
+      <DependentUpon>HospitalDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="HospitalDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

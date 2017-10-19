@@ -47,7 +47,6 @@
             this.searchPatientBtn = new System.Windows.Forms.Button();
             this.searchPatientBox = new System.Windows.Forms.TextBox();
             this.patientTableAdapter = new HospitalManagement.HospitalDataSetTableAdapters.patientTableAdapter();
-            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPane.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -128,7 +127,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Controls.Add(this.searchPatientBtn);
             this.tabPage1.Controls.Add(this.searchPatientBox);
@@ -152,8 +150,9 @@
             this.dataGridView1.DataSource = this.patientBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(20, 78);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(538, 58);
+            this.dataGridView1.Size = new System.Drawing.Size(538, 239);
             this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // personidnrDataGridViewTextBoxColumn
             // 
@@ -193,9 +192,9 @@
             // 
             this.searchPatientBtn.Location = new System.Drawing.Point(150, 10);
             this.searchPatientBtn.Name = "searchPatientBtn";
-            this.searchPatientBtn.Size = new System.Drawing.Size(107, 23);
+            this.searchPatientBtn.Size = new System.Drawing.Size(101, 23);
             this.searchPatientBtn.TabIndex = 1;
-            this.searchPatientBtn.Text = "Sök Personnummer";
+            this.searchPatientBtn.Text = "Sök Patient";
             this.searchPatientBtn.UseVisualStyleBackColor = true;
             this.searchPatientBtn.Click += new System.EventHandler(this.searchPatientBtn_Click);
             // 
@@ -209,15 +208,6 @@
             // patientTableAdapter
             // 
             this.patientTableAdapter.ClearBeforeFill = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(467, 98);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
@@ -260,7 +250,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn firstnameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastnameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn roomDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button button1;
     }
 }
 
