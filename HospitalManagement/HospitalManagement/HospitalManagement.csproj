@@ -48,10 +48,11 @@
     <Compile Include="HospitalDataSet.cs">
       <DependentUpon>HospitalDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="HospitalDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HospitalDataSet.xsd</DependentUpon>
+	  <Compile Include="HospitalDataSet.Designer.cs">
+		  <AutoGen>True</AutoGen>
+		  <DesignTime>True</DesignTime>
+		  <DependentUpon>HospitalDataSet.xsd</DependentUpon>
+	  </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
