@@ -13,9 +13,12 @@ namespace HospitalManagement
 {
     public partial class PatientRegistryForm : Form
     {
-        public PatientRegistryForm()
+        PatientRegistryData data;
+
+        public PatientRegistryForm(string userID)
         {
             InitializeComponent();
+            data = new PatientRegistryData(userID);
         }
 
         private void DataValidityCheck()
@@ -58,11 +61,10 @@ namespace HospitalManagement
 
                 Patient patientToAdd = new Patient(nPersonId, nFirstName, nLastName, nAddress, nPostCode, nPostArea, nPhoneNr, nEmail, nBloodType);
 
-
-
                 bool success = db.AddPatient(patientToAdd);
                 if (success)
                 {
+                    db.AddJournalEntry(data.UserID, nPersonId, "System", "Patient skapad i databas", false);
                     MessageBox.Show("Ny patient tillagd i Databasen");
                     this.Close();
                 }

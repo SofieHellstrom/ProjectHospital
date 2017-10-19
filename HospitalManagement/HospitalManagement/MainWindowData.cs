@@ -9,6 +9,15 @@ namespace HospitalManagement
     public class MainWindowData
     {
         //Holds the data and logic for MainWindowForm
+        public Employee MyUser { get; set; }
+        DatabaseHandler db = new DatabaseHandler();
 
+        public MainWindowData()
+        {
+
+            MyUser = db.LoadEmployee("LÄK11001");
+
+        }
+        
     }
 }

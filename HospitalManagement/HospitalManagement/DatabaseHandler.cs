@@ -333,5 +333,239 @@ namespace HospitalManagement
             }
             return returnPostOrt;
         }
+
+        public Employee LoadEmployee(string EmployeeID)
+        {
+            //Returns a new instance of a specific person based on the value of employee_id 
+            //in the staff table of the database.
+
+            //Prepares variables used in creating the Employee.
+            Employee returnEmployee;
+            string anstNr = "Test";
+            string firstName = "";
+            string lastName = "";
+            string adress = "";
+            int postNr = 0;
+            string telefonNr = "";
+            string eMail = "";
+            string personnummer = "";
+            string position = "";
+            string departmentNr = "";
+            string specialtyNr = "";
+            string postOrt = "";
+            string department = "";
+            string specialty = "N/A";
+            try
+            {
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    //Opens the connection.
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        //Configures the connection and SQL-query for the command and prepares it.
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT * FROM staff WHERE employee_id = :id";
+
+                        cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+
+                        cmd.Prepare();
+
+                        cmd.Parameters[0].Value = EmployeeID;
+
+                        using (var reader = cmd.ExecuteReader())
+                            //Reads values from the database into the temporary variables.
+                            while (reader.Read())
+                            {
+                                {
+                                    anstNr = reader.GetString(0);
+                                    firstName = reader.GetString(1);
+                                    lastName = reader.GetString(2);
+                                    adress = reader.GetString(3);
+                                    postNr = reader.GetInt32(4);
+                                    telefonNr = reader.GetString(5);
+                                    eMail = reader.GetString(6);
+                                    personnummer = reader.GetString(7);
+                                    departmentNr = reader.GetString(8);
+                                    position = reader.GetString(9);
+                                    specialtyNr = reader.GetString(10);
+                                }
+                            }
+
+                    }
+
+                }
+
+
+            }
+            catch (PostgresException e)
+            {
+               
+                Console.WriteLine(e.ToString());
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
+
+            //Loads the Postort connected to the Postal Code. 
+            postOrt = LoadPostort(postNr);
+            department = LoadDepartment(departmentNr);
+            if (specialtyNr != "")
+            {
+                specialty = LoadSpecialty(specialtyNr);
+            }
+
+            //Creates and returns the Employee instance.
+            returnEmployee = new Employee(anstNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, personnummer, position, department, specialty );
+            return returnEmployee;
+
+        }
+
+        public void AddEmployee()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateEmployee()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEmployee()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddJournalEntry (string user, string patient, string entryType, string content, bool imp)
+        {
+            //This method is for saving entries in a patients journal. The variables passed to the method are the following:
+            // patient = personal_id_nr of patient
+            // user = employee_id of person causing the entry to be created.
+            // entryType = the type of entry (registration, labresult, booking, etc)
+            // content = the main text of any journal Note, results of labtest, etc
+            // important = set to true if this is vital information about the patient that deserves to be highlighted in any informational displays.
+
+ 
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds connection and SQL-parameters to the command and executes it.
+                    try
+                    {
+                        cmd.Connection = conn;
+                        
+                        cmd.CommandText = "Insert INTO journalpost (timestamp, staff, patient, type, text, important) VALUES (:time, :userid, :pat, :type, :info, :important)";
+                        //cmd.CommandText = $"INSERT INTO journalpost (timestamp, staff, patient, type, text, important) VALUES (DateTime.Now, '{user}', '{patient}', '{entryType}', '{content}', {imp})"; 
+
+                        cmd.Parameters.Add(new NpgsqlParameter("time", NpgsqlDbType.Timestamp));
+                        cmd.Parameters.Add(new NpgsqlParameter("userid", NpgsqlDbType.Varchar));
+                        cmd.Parameters.Add(new NpgsqlParameter("pat", NpgsqlDbType.Varchar));
+                        cmd.Parameters.Add(new NpgsqlParameter("type", NpgsqlDbType.Varchar));
+                        cmd.Parameters.Add(new NpgsqlParameter("info", NpgsqlDbType.Text));
+                        cmd.Parameters.Add(new NpgsqlParameter("important", NpgsqlDbType.Boolean));
+
+                        cmd.Prepare();
+
+                        cmd.Parameters[0].Value = DateTime.Now;
+                        cmd.Parameters[1].Value = user;
+                        cmd.Parameters[2].Value = patient;
+                        cmd.Parameters[3].Value = entryType;
+                        cmd.Parameters[4].Value = content;
+                        cmd.Parameters[5].Value = imp;
+
+
+                        int recordsAffected = cmd.ExecuteNonQuery();
+
+                        //Returns a boolean which is True if any rows have been affected. 
+                        return Convert.ToBoolean(recordsAffected);
+                    }
+                    catch (PostgresException e)
+                    {
+                        //Writes Exception error to Console and returns false, if a
+                        //PostgresException occurs.
+                        Console.WriteLine(e.ToString());
+                        return false;
+                    }
+
+                }
+            }
+
+        }
+
+        public void DeleteJournalEntry()
+        {
+            //Placeholder for method to delete journalentries should we need it. Only admins should be allowed to do this.
+            throw new NotImplementedException();
+        }
+
+        public string LoadDepartment(string departmentID)
+        {
+            //Gets the Department corresponding to a department from the database. 
+            string returnDepartment = "Finns ej i databasen.";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds the connection and SQL-string to the Command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT name FROM department WHERE department_id = :code";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("code", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = departmentID;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Reads the value from the database.
+                        while (reader.Read())
+                        {
+                            returnDepartment = reader.GetString(0);
+                        }
+                    }
+                }
+            }
+            return returnDepartment;
+
+        }
+
+        public string LoadSpecialty(string specID)
+        {
+            //Gets the Specialty corresponding to a spec_id in specialty from the database. 
+            string returnSpecialty = "Finns ej i databasen.";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds the connection and SQL-string to the Command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT specialty FROM specialty WHERE spec_id = :code";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("code", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = specID;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Reads the value from the database.
+                        while (reader.Read())
+                        {
+                            returnSpecialty = reader.GetString(0);
+                        }
+                    }
+                }
+
+            }
+            return returnSpecialty;
+        }
+
     }
 }

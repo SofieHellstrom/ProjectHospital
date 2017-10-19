@@ -13,6 +13,7 @@ namespace HospitalManagement
 {
     public partial class MainWindow : Form
     {
+        MainWindowData data;
 
         public MainWindow()
         {
@@ -20,13 +21,16 @@ namespace HospitalManagement
 
             //sets searchbutton to accept enterkey input
             this.AcceptButton = searchPatientBtn;
+            data = new MainWindowData();
+            userIdentityLbl.Text = $"Inloggad som: {data.MyUser.LastName}, {data.MyUser.FirstName} - ({data.MyUser.EmployeeID})";
+
         }
 
 
 
         private void newPatientBtn_Click(object sender, EventArgs e)
         {
-            Form patReg = new PatientRegistryForm();
+            Form patReg = new PatientRegistryForm(data.MyUser.EmployeeID);
             patReg.Show();
         }
 
