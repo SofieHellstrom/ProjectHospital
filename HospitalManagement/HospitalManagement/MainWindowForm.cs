@@ -40,7 +40,7 @@ namespace HospitalManagement
             HospitalDataSetTableAdapters.patientTableAdapter patientTableAdapter = new HospitalDataSetTableAdapters.patientTableAdapter();
             HospitalDataSet hospitalDataSet = new HospitalDataSet();
             
-            var searchTerm = searchPatientBox.Text.ToString();
+            var searchTerm = searchPatientBox.Text;
 
 
             if (searchTerm.Any(char.IsDigit))
@@ -67,7 +67,7 @@ namespace HospitalManagement
         private void MainWindow_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'hospitalDataSet.patient' table. You can move, or remove it, as needed.
-            this.patientTableAdapter.Fill(this.hospitalDataSet.patient);
+        //    this.patientTableAdapter.Fill(this.hospitalDataSet.patient);
 
         }
 
