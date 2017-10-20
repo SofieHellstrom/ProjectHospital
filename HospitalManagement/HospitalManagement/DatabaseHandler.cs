@@ -12,6 +12,7 @@ namespace HospitalManagement
     {
         private string connectionString = "Host=localhost;Username=postgres;Password=projekt;Database=Hospital";
 
+        //Methods relating to Patients and the patient table. 
         public bool PatientExists(string patientToSearchFor)
         {
             // Checks if a patient with a specific personal_id_nr exists in the database.
@@ -334,6 +335,7 @@ namespace HospitalManagement
             return returnPostOrt;
         }
 
+        //Methods related to Employees and interacting with the staff table
         public Employee LoadEmployee(string EmployeeID)
         {
             //Returns a new instance of a specific person based on the value of employee_id 
@@ -565,6 +567,136 @@ namespace HospitalManagement
 
             }
             return returnSpecialty;
+        }
+
+        //Methods related to usernames and passwords from the user table.
+
+        public Boolean UserExists (string username, bool isPatient)
+        {
+            // Checks if a user with with a specific username exists in the database.
+            // Returns True if it does and False if it doesn't.
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Adds the connection and SQL-query to the command and prepares it.
+                    cmd.Connection = conn;
+
+                    if (isPatient)
+                    {
+                        cmd.CommandText = "SELECT COUNT(patient) FROM user WHERE user_id = :id";
+                    }
+                    else
+                    {
+                        cmd.CommandText = "SELECT COUNT(staff) FROM user WHERE user_id = :id";
+                    }
+                    
+
+                    cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = username;
+
+                    // Gets and stores the result of the query (the number of times the personal_id_nr
+                    // appears in the database, which should be zero or none, since it has a unique
+                    // constraint.
+                    // That value is then converted to a boolean and returned.
+                    int result = 0;
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        result = reader.GetInt32(0);
+                    }
+                    return Convert.ToBoolean(result);
+                }
+            }
+
+        }
+
+        public UserInfo GetUser(string username, Boolean isPatient)
+        {
+            //This method gets the info from the user table and creates a userinfo object 
+            //that can be used by the login. 
+            UserInfo returnUserInfo;
+            
+            //Prepares variables used in creating the Employee.
+            string identifier = "None";
+            string usename = "";
+            string password = "";
+            string patientid = "";
+            string staffid = "";
+            
+            try
+            {
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    //Opens the connection.
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        //Configures the connection and SQL-query for the command and prepares it.
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT * FROM user WHERE user_id = :id";
+
+                        cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+
+                        cmd.Prepare();
+
+                        cmd.Parameters[0].Value = EmployeeID;
+
+                        using (var reader = cmd.ExecuteReader())
+                            //Reads values from the database into the temporary variables.
+                            while (reader.Read())
+                            {
+                                {
+                                    usename = reader.GetString(0);
+                                    password = reader.GetString(1);
+                                    patientid = reader.GetString(2);
+                                    staffid = reader.GetString(3);
+                                }
+                            }
+
+                        if (isPatient)
+                        {
+                            identifier = patientid;
+                        }
+                        else
+                        {
+                            identifier = staffid;
+                        }
+                        returnUserInfo = new UserInfo(identifier, usename, password);
+
+                        return returnUserInfo;
+
+                    }
+
+                }
+
+
+            }
+            catch (PostgresException e)
+            {
+
+                Console.WriteLine(e.ToString());
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
+
+            //Loads the Postort connected to the Postal Code. 
+            postOrt = LoadPostort(postNr);
+            department = LoadDepartment(departmentNr);
+            if (specialtyNr != "")
+            {
+                specialty = LoadSpecialty(specialtyNr);
+            }
+
+            //Creates and returns the Employee instance.
+            returnUserInfo = new UserInfo(identifier, usename, password);
+            return returnUserInfo;
+
+
         }
 
     }
