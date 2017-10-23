@@ -573,6 +573,8 @@ namespace HospitalManagement
 
         public Boolean UserExists (string username, bool isPatient)
         {
+
+            //Currently not working.
             // Checks if a user with with a specific username exists in the database.
             // Returns True if it does and False if it doesn't.
             using (var conn = new NpgsqlConnection(connectionString))
@@ -582,16 +584,20 @@ namespace HospitalManagement
                 using (var cmd = new NpgsqlCommand())
                 {
                     //Adds the connection and SQL-query to the command and prepares it.
+                    string commandString = "";
+
                     cmd.Connection = conn;
 
                     if (isPatient)
                     {
-                        cmd.CommandText = "SELECT COUNT(patient) FROM user WHERE user_id = :id";
+                         commandString = "SELECT COUNT ('id') FROM userinfo WHERE 'id' = :id";
                     }
                     else
                     {
-                        cmd.CommandText = "SELECT COUNT(staff) FROM user WHERE user_id = :id";
+                        commandString = "SELECT COUNT ('id') FROM user WHERE 'id' = :id";
                     }
+
+                    cmd.CommandText = commandString;
                     
 
                     cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
@@ -608,21 +614,29 @@ namespace HospitalManagement
                     NpgsqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
-                        result = reader.GetInt32(0);
+                        result = reader.GetInt16(0);
                     }
-                    return Convert.ToBoolean(result);
+                    //return Convert.ToBoolean(result);
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
 
         }
 
-        public UserInfo GetUser(string username, Boolean isPatient)
+        public UserInfo LoadUser(string username, Boolean isPatient)
         {
             //This method gets the info from the user table and creates a userinfo object 
             //that can be used by the login. 
             UserInfo returnUserInfo;
             
-            //Prepares variables used in creating the Employee.
+            //Prepares variables used in creating the Userinfo instance.
             string identifier = "None";
             string usename = "";
             string password = "";
@@ -639,13 +653,14 @@ namespace HospitalManagement
                     {
                         //Configures the connection and SQL-query for the command and prepares it.
                         cmd.Connection = conn;
-                        cmd.CommandText = "SELECT * FROM user WHERE user_id = :id";
+                        //cmd.CommandText = $"SELECT * FROM user WHERE 'user_id' = '{username}'";
+                        cmd.CommandText = "SELECT * FROM userinfo WHERE id = :id";
 
                         cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
 
                         cmd.Prepare();
 
-                        cmd.Parameters[0].Value = EmployeeID;
+                        cmd.Parameters[0].Value = username;
 
                         using (var reader = cmd.ExecuteReader())
                             //Reads values from the database into the temporary variables.
@@ -654,8 +669,15 @@ namespace HospitalManagement
                                 {
                                     usename = reader.GetString(0);
                                     password = reader.GetString(1);
-                                    patientid = reader.GetString(2);
-                                    staffid = reader.GetString(3);
+                                    if (!reader.IsDBNull(2))
+                                    {
+                                        patientid = reader.GetString(2);
+                                    }
+                                    if (!reader.IsDBNull(3))
+                                    {
+                                        staffid = reader.GetString(3);
+                                    }
+                                    
                                 }
                             }
 
@@ -684,15 +706,7 @@ namespace HospitalManagement
                 System.Diagnostics.Debug.WriteLine(e.ToString());
             }
 
-            //Loads the Postort connected to the Postal Code. 
-            postOrt = LoadPostort(postNr);
-            department = LoadDepartment(departmentNr);
-            if (specialtyNr != "")
-            {
-                specialty = LoadSpecialty(specialtyNr);
-            }
-
-            //Creates and returns the Employee instance.
+            //Creates and returns the UserInfo instance.
             returnUserInfo = new UserInfo(identifier, usename, password);
             return returnUserInfo;
 

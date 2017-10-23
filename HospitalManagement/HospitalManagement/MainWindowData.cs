@@ -12,10 +12,10 @@ namespace HospitalManagement
         public Employee MyUser { get; set; }
         DatabaseHandler db = new DatabaseHandler();
 
-        public MainWindowData()
+        public MainWindowData(Employee user)
         {
 
-            MyUser = db.LoadEmployee("LÄK11001");
+            this.MyUser = user;
 
         }
         

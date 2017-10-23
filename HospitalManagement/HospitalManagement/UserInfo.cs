@@ -23,7 +23,7 @@ namespace HospitalManagement
 
         public Boolean PasswordIsCorrect (string passwordAttempt)
         {
-            if (passwordAttempt == password)
+            if (passwordAttempt.Equals(this.password))
             {
                 return true;
             }
