@@ -50,30 +50,46 @@ namespace HospitalManagement
                     MessageBox.Show("Personnummer måste skrivas enligt ÅÅMMDD-XXXX.");
                 }
             }
-            /*
-            else if (!dbHandler.PatientExists(searchTerm))
-            {
-                MessageBox.Show("Patienten finns inte i patientregistret.");
-            }*/
+            //if (!dbHandler.PatientExists(searchTerm))
+            //{
+              //  MessageBox.Show("Patienten finns inte i patientregistret.");
+           // }
             //patientTableAdapter.Fill(patientTableAdapter.GetDataBySearchTerm(searchTerm));
 
             dataGridView1.DataSource = patientTableAdapter.GetDataBySearchTerm(searchTerm);
+            this.dataGridView1.SelectionMode =  DataGridViewSelectionMode.FullRowSelect;
 
-           // Form journal = new PatientJournalForm(dbHandler.LoadPatient(searchTerm));
-           //journal.Show();
+            // Form journal = new PatientJournalForm(dbHandler.LoadPatient(searchTerm));
+            //journal.Show();
 
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'hospitalDataSet.patient' table. You can move, or remove it, as needed.
-        //    this.patientTableAdapter.Fill(this.hospitalDataSet.patient);
+            this.patientTableAdapter.Fill(this.hospitalDataSet.patient);
 
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            foreach (DataGridViewCell cell in this.dataGridView1.SelectedCells)
+            {
+                DataRowView dataRowView = this.dataGridView1.Rows[cell.RowIndex].DataBoundItem as DataRowView;
+                var dataRow = dataRowView.Row as DataRow;
+                string personNumber = dataRow["person_id_nr"].ToString();
+                //var test2 = test[0] as Patient;
+                if (dataRowView != null)
+                {
+                    DatabaseHandler dbHandler = new DatabaseHandler();
+                    HospitalDataSetTableAdapters.patientTableAdapter patientTableAdapter = new HospitalDataSetTableAdapters.patientTableAdapter();
+                    Form journal = new PatientJournalForm(dbHandler.LoadPatient(personNumber));
+                    journal.Show();
+                }
+            }
+            //Patient test = ((DataGridView)sender).DataSource as Patient;
+            //Form journal = new PatientJournalForm();
+            //journal.Show();
         }
     }
 }
