@@ -76,6 +76,15 @@ namespace HospitalManagement
             }
 
         }
+
+        private void snabbloginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DatabaseHandler db = new DatabaseHandler();
+            Employee defaultUser = db.LoadEmployee("LÄK11001");
+            Form main = new MainWindow(defaultUser);
+            main.Show();
+            this.Hide();
+        }
     }
 }
    

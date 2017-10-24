@@ -33,6 +33,7 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.journalPostListView = new System.Windows.Forms.ListView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -63,7 +64,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
+            this.savePersonInfoChange = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -84,12 +85,12 @@
             this.mainPanel.Controls.Add(this.groupBox1);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(919, 610);
+            this.mainPanel.Size = new System.Drawing.Size(919, 655);
             this.mainPanel.TabIndex = 0;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(651, 574);
+            this.button3.Location = new System.Drawing.Point(657, 617);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(169, 23);
             this.button3.TabIndex = 7;
@@ -123,12 +124,21 @@
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label11);
             this.groupBox4.Controls.Add(this.inskrivningsStatusLbl);
-            this.groupBox4.Location = new System.Drawing.Point(19, 231);
+            this.groupBox4.Location = new System.Drawing.Point(19, 274);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(246, 156);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Inskrivnings-uppgifter";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(66, 115);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(124, 23);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "Inskrivning/Utskrivning";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // textBox3
             // 
@@ -181,7 +191,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.prescriptionListView);
-            this.groupBox3.Location = new System.Drawing.Point(19, 393);
+            this.groupBox3.Location = new System.Drawing.Point(19, 436);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(540, 175);
             this.groupBox3.TabIndex = 4;
@@ -198,7 +208,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(170, 574);
+            this.button2.Location = new System.Drawing.Point(170, 617);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(113, 23);
             this.button2.TabIndex = 3;
@@ -207,7 +217,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(19, 574);
+            this.button1.Location = new System.Drawing.Point(19, 617);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(131, 23);
             this.button1.TabIndex = 2;
@@ -262,6 +272,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.savePersonInfoChange);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.eMailTxt);
             this.groupBox1.Controls.Add(this.phoneTxt);
@@ -278,7 +289,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(19, 16);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(246, 209);
+            this.groupBox1.Size = new System.Drawing.Size(246, 252);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Personuppgifter";
@@ -395,20 +406,20 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Personnummer";
             // 
-            // button4
+            // savePersonInfoChange
             // 
-            this.button4.Location = new System.Drawing.Point(66, 115);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(124, 23);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Inskrivning/Utskrivning";
-            this.button4.UseVisualStyleBackColor = true;
+            this.savePersonInfoChange.Location = new System.Drawing.Point(66, 214);
+            this.savePersonInfoChange.Name = "savePersonInfoChange";
+            this.savePersonInfoChange.Size = new System.Drawing.Size(124, 23);
+            this.savePersonInfoChange.TabIndex = 18;
+            this.savePersonInfoChange.Text = "Spara Ändring";
+            this.savePersonInfoChange.UseVisualStyleBackColor = true;
             // 
             // PatientJournalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(920, 609);
+            this.ClientSize = new System.Drawing.Size(920, 652);
             this.Controls.Add(this.mainPanel);
             this.Name = "PatientJournalForm";
             this.Text = "PatientJournalForm";
@@ -463,5 +474,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button savePersonInfoChange;
     }
 }

@@ -28,12 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
             this.usernameTxtBox = new System.Windows.Forms.TextBox();
             this.passwordTxtBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.loginBtn = new System.Windows.Forms.Button();
             this.warningLbl = new System.Windows.Forms.Label();
+            this.skipLoginCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.snabbloginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.skipLoginCMS.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -61,6 +65,7 @@
             this.passwordTxtBox.Name = "passwordTxtBox";
             this.passwordTxtBox.Size = new System.Drawing.Size(152, 22);
             this.passwordTxtBox.TabIndex = 3;
+            this.passwordTxtBox.UseSystemPasswordChar = true;
             // 
             // label3
             // 
@@ -95,19 +100,36 @@
             this.warningLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.warningLbl.Visible = false;
             // 
+            // skipLoginCMS
+            // 
+            this.skipLoginCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.snabbloginToolStripMenuItem});
+            this.skipLoginCMS.Name = "skipLoginCMS";
+            this.skipLoginCMS.Size = new System.Drawing.Size(153, 48);
+            // 
+            // snabbloginToolStripMenuItem
+            // 
+            this.snabbloginToolStripMenuItem.Name = "snabbloginToolStripMenuItem";
+            this.snabbloginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.snabbloginToolStripMenuItem.Text = "Snabblogin";
+            this.snabbloginToolStripMenuItem.Click += new System.EventHandler(this.snabbloginToolStripMenuItem_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(375, 209);
+            this.ContextMenuStrip = this.skipLoginCMS;
             this.Controls.Add(this.warningLbl);
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.passwordTxtBox);
             this.Controls.Add(this.usernameTxtBox);
             this.Controls.Add(this.label2);
+            this.KeyPreview = true;
             this.Name = "LoginForm";
             this.Text = "Inloggning";
+            this.skipLoginCMS.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,5 +142,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button loginBtn;
         private System.Windows.Forms.Label warningLbl;
+        private System.Windows.Forms.ContextMenuStrip skipLoginCMS;
+        private System.Windows.Forms.ToolStripMenuItem snabbloginToolStripMenuItem;
     }
 }

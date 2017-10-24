@@ -162,7 +162,6 @@ namespace HospitalManagement
                                     eMail = reader.GetString(6);
                                     blodTyp = reader.GetString(7);
 
-
                                 }
                             }
 
@@ -390,12 +389,13 @@ namespace HospitalManagement
                                     personnummer = reader.GetString(7);
                                     departmentNr = reader.GetString(8);
                                     position = reader.GetString(9);
-                                    specialtyNr = reader.GetString(10);
+                                    if (!reader.IsDBNull(10))
+                                    {
+                                        specialtyNr = reader.GetString(10);
+                                    }
                                 }
                             }
-
                     }
-
                 }
 
 
