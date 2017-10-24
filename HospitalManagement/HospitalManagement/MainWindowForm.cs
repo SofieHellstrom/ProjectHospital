@@ -15,13 +15,13 @@ namespace HospitalManagement
     {
         MainWindowData data;
 
-        public MainWindow()
+        public MainWindow(Employee user)
         {
             InitializeComponent();
 
             //sets searchbutton to accept enterkey input
             this.AcceptButton = searchPatientBtn;
-            data = new MainWindowData();
+            data = new MainWindowData(user);
             userIdentityLbl.Text = $"Inloggad som: {data.MyUser.LastName}, {data.MyUser.FirstName} - ({data.MyUser.EmployeeID})";
 
         }
@@ -90,6 +90,11 @@ namespace HospitalManagement
             //Patient test = ((DataGridView)sender).DataSource as Patient;
             //Form journal = new PatientJournalForm();
             //journal.Show();
+        }
+
+        private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.ShutEverythingDown();
         }
     }
 }

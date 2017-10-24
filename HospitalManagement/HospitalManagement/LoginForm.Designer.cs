@@ -28,88 +28,121 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.usernameTxtBox = new System.Windows.Forms.TextBox();
+            this.passwordTxtBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.loginBtn = new System.Windows.Forms.Button();
+            this.warningLbl = new System.Windows.Forms.Label();
+            this.skipLoginCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.snabbloginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.skipLoginCMS.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(59, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Logga in som:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(68, 92);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(41, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(102, 16);
             this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
+            this.label2.Text = "Användarnamn:";
             // 
-            // textBox1
+            // usernameTxtBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(138, 89);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 2;
+            this.usernameTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameTxtBox.Location = new System.Drawing.Point(149, 38);
+            this.usernameTxtBox.Name = "usernameTxtBox";
+            this.usernameTxtBox.Size = new System.Drawing.Size(152, 22);
+            this.usernameTxtBox.TabIndex = 2;
             // 
-            // textBox2
+            // passwordTxtBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(138, 123);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 3;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(138, 45);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 4;
+            this.passwordTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordTxtBox.Location = new System.Drawing.Point(149, 72);
+            this.passwordTxtBox.Name = "passwordTxtBox";
+            this.passwordTxtBox.Size = new System.Drawing.Size(152, 22);
+            this.passwordTxtBox.TabIndex = 3;
+            this.passwordTxtBox.UseSystemPasswordChar = true;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(68, 126);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(75, 75);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.Size = new System.Drawing.Size(68, 16);
             this.label3.TabIndex = 5;
-            this.label3.Text = "label3";
+            this.label3.Text = "Lösenord:";
+            // 
+            // loginBtn
+            // 
+            this.loginBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginBtn.Location = new System.Drawing.Point(149, 138);
+            this.loginBtn.Name = "loginBtn";
+            this.loginBtn.Size = new System.Drawing.Size(75, 27);
+            this.loginBtn.TabIndex = 6;
+            this.loginBtn.Text = "Logga in";
+            this.loginBtn.UseVisualStyleBackColor = true;
+            this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
+            // 
+            // warningLbl
+            // 
+            this.warningLbl.AutoSize = true;
+            this.warningLbl.ForeColor = System.Drawing.Color.Red;
+            this.warningLbl.Location = new System.Drawing.Point(164, 106);
+            this.warningLbl.Name = "warningLbl";
+            this.warningLbl.Size = new System.Drawing.Size(47, 13);
+            this.warningLbl.TabIndex = 7;
+            this.warningLbl.Text = "Warning";
+            this.warningLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.warningLbl.Visible = false;
+            // 
+            // skipLoginCMS
+            // 
+            this.skipLoginCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.snabbloginToolStripMenuItem});
+            this.skipLoginCMS.Name = "skipLoginCMS";
+            this.skipLoginCMS.Size = new System.Drawing.Size(153, 48);
+            // 
+            // snabbloginToolStripMenuItem
+            // 
+            this.snabbloginToolStripMenuItem.Name = "snabbloginToolStripMenuItem";
+            this.snabbloginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.snabbloginToolStripMenuItem.Text = "Snabblogin";
+            this.snabbloginToolStripMenuItem.Click += new System.EventHandler(this.snabbloginToolStripMenuItem_Click);
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(471, 261);
+            this.ClientSize = new System.Drawing.Size(375, 209);
+            this.ContextMenuStrip = this.skipLoginCMS;
+            this.Controls.Add(this.warningLbl);
+            this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.passwordTxtBox);
+            this.Controls.Add(this.usernameTxtBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.KeyPreview = true;
             this.Name = "LoginForm";
-            this.Text = "LoginForm";
+            this.Text = "Inloggning";
+            this.skipLoginCMS.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox usernameTxtBox;
+        private System.Windows.Forms.TextBox passwordTxtBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button loginBtn;
+        private System.Windows.Forms.Label warningLbl;
+        private System.Windows.Forms.ContextMenuStrip skipLoginCMS;
+        private System.Windows.Forms.ToolStripMenuItem snabbloginToolStripMenuItem;
     }
 }
