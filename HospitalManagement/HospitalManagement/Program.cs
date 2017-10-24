@@ -8,7 +8,7 @@ namespace HospitalManagement
 {
     static class Program
     {
-        public static Employee emp; 
+        static LoginForm login;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -19,7 +19,13 @@ namespace HospitalManagement
             Application.SetCompatibleTextRenderingDefault(false);
             //DatabaseHandler db = new DatabaseHandler();
             //Employee user = db.LoadEmployee("LÄK11001");
-            Application.Run(new LoginForm());
+            login = new LoginForm();
+            Application.Run(login);
+        }
+
+        public static void ShutEverythingDown()
+        {
+            login.Close();
         }
 
     }
