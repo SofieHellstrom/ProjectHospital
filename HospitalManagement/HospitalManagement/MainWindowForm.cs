@@ -73,9 +73,9 @@ namespace HospitalManagement
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            foreach (DataGridViewCell cell in this.dataGridView1.SelectedCells)
+            foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
             {
-                DataRowView dataRowView = this.dataGridView1.Rows[cell.RowIndex].DataBoundItem as DataRowView;
+                DataRowView dataRowView = this.dataGridView1.Rows[row.Index].DataBoundItem as DataRowView;
                 var dataRow = dataRowView.Row as DataRow;
                 string personNumber = dataRow["person_id_nr"].ToString();
                 //var test2 = test[0] as Patient;
