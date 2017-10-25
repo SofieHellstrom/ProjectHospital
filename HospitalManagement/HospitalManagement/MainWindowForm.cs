@@ -14,6 +14,7 @@ namespace HospitalManagement
     public partial class MainWindow : Form
     {
         MainWindowData data;
+        DatabaseHandler db = new DatabaseHandler();
 
         public MainWindow(Employee user)
         {
@@ -79,6 +80,13 @@ namespace HospitalManagement
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.ShutEverythingDown();
+        }
+
+        private void patientJournalBtn_Click(object sender, EventArgs e)
+        {
+            Patient patientToOpen = db.LoadPatient(searchPatientBox.Text);
+            Form patjourn = new PatientJournalForm(patientToOpen);
+            patjourn.Show();
         }
     }
 }

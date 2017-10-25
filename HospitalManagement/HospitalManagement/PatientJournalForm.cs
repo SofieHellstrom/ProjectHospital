@@ -21,6 +21,13 @@ namespace HospitalManagement
         {
             data = new PatientJournalData(patient);
             InitializeComponent();
+            UpdateWindow();
+
+
+        }
+
+        public void UpdateWindow()
+        {
             string patientName = data.ThePatient.LastName + ", " + data.ThePatient.FirstName;
             string windowTitle = patientName + " " + data.ThePatient.Personnummer;
             this.Text = windowTitle;
@@ -32,9 +39,12 @@ namespace HospitalManagement
             phoneTxt.Text = data.ThePatient.PhoneNr;
             eMailTxt.Text = data.ThePatient.Email;
             bloodTypeTxt.Text = data.ThePatient.BloodType;
-
-
         }
 
+        private void savePersonInfoChange_Click(object sender, EventArgs e)
+        {
+            
+            UpdateWindow();
+        }
     }
 }

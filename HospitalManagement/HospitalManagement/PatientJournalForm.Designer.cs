@@ -414,6 +414,7 @@
             this.savePersonInfoChange.TabIndex = 18;
             this.savePersonInfoChange.Text = "Spara Ändring";
             this.savePersonInfoChange.UseVisualStyleBackColor = true;
+            this.savePersonInfoChange.Click += new System.EventHandler(this.savePersonInfoChange_Click);
             // 
             // PatientJournalForm
             // 
