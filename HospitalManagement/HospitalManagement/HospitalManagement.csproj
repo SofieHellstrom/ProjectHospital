@@ -67,6 +67,12 @@
     <Compile Include="MainWindowForm.Designer.cs">
       <DependentUpon>MainWindowForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PatientInfoUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientInfoUpdateForm.Designer.cs">
+      <DependentUpon>PatientInfoUpdateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PatientJournalData.cs" />
     <Compile Include="PatientJournalForm.cs">
       <SubType>Form</SubType>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindowForm.resx">
       <DependentUpon>MainWindowForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientInfoUpdateForm.resx">
+      <DependentUpon>PatientInfoUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PatientJournalForm.resx">
       <DependentUpon>PatientJournalForm.cs</DependentUpon>

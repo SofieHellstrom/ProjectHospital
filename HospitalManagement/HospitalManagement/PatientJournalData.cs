@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement
 {
-    class PatientJournalData
+    public class PatientJournalData
     {
         DatabaseHandler db;
         public Patient ThePatient { get; set; } 

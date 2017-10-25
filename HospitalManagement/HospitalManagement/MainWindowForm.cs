@@ -65,12 +65,7 @@ namespace HospitalManagement
 
         }
 
-        private void MainWindow_Load(object sender, EventArgs e)
-        {
-            // TODO: This line of code loads data into the 'hospitalDataSet.patient' table. You can move, or remove it, as needed.
-            this.patientTableAdapter.Fill(this.hospitalDataSet.patient);
-
-        }
+ 
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -100,9 +95,14 @@ namespace HospitalManagement
 
         private void patientJournalBtn_Click(object sender, EventArgs e)
         {
-            Patient patientToOpen = db.LoadPatient(searchPatientBox.Text);
-            Form patjourn = new PatientJournalForm(patientToOpen);
-            patjourn.Show();
+            if (dataGridView1.CurrentRow != null)
+            {
+                string personid = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                Patient patientToOpen = db.LoadPatient(personid);
+                Form patjourn = new PatientJournalForm(patientToOpen);
+                patjourn.Show();
+            }
+            
         }
     }
 }

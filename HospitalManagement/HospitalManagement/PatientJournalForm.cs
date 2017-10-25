@@ -14,6 +14,7 @@ namespace HospitalManagement
     {
         // Form for displaying the Patientjournal of the Patient. 
         PatientJournalData data;
+        DatabaseHandler db = new DatabaseHandler();
 
 
 
@@ -43,7 +44,12 @@ namespace HospitalManagement
 
         private void savePersonInfoChange_Click(object sender, EventArgs e)
         {
-            
+            Form updateForm = new PatientInfoUpdateForm(data);
+            updateForm.Show();
+        }
+
+        private void PatientJournalForm_Activated(object sender, EventArgs e)
+        {
             UpdateWindow();
         }
     }

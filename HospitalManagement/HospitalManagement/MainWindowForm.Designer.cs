@@ -241,7 +241,6 @@
             this.Name = "MainWindow";
             this.Text = "HospitalManagement";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
-            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.tableLayoutPane.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
