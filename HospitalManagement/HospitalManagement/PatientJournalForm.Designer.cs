@@ -41,7 +41,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.inskrivningsStatusLbl = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.prescriptionListView = new System.Windows.Forms.ListView();
             this.createReceiptBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -65,6 +64,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.prescriptionListBox = new System.Windows.Forms.ListBox();
             this.mainPanel.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -190,21 +190,13 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.prescriptionListView);
+            this.groupBox3.Controls.Add(this.prescriptionListBox);
             this.groupBox3.Location = new System.Drawing.Point(19, 436);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(540, 175);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Recept";
-            // 
-            // prescriptionListView
-            // 
-            this.prescriptionListView.Location = new System.Drawing.Point(6, 19);
-            this.prescriptionListView.Name = "prescriptionListView";
-            this.prescriptionListView.Size = new System.Drawing.Size(528, 150);
-            this.prescriptionListView.TabIndex = 0;
-            this.prescriptionListView.UseCompatibleStateImageBehavior = false;
             // 
             // createReceiptBtn
             // 
@@ -425,6 +417,14 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Personnummer";
             // 
+            // prescriptionListBox
+            // 
+            this.prescriptionListBox.FormattingEnabled = true;
+            this.prescriptionListBox.Location = new System.Drawing.Point(6, 19);
+            this.prescriptionListBox.Name = "prescriptionListBox";
+            this.prescriptionListBox.Size = new System.Drawing.Size(528, 147);
+            this.prescriptionListBox.TabIndex = 0;
+            // 
             // PatientJournalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -474,7 +474,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ListView testReultListView;
-        private System.Windows.Forms.ListView prescriptionListView;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ListView journalPostListView;
         private System.Windows.Forms.Label label10;
@@ -486,5 +485,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button savePersonInfoChange;
+        private System.Windows.Forms.ListBox prescriptionListBox;
     }
 }

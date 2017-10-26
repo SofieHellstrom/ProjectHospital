@@ -27,6 +27,8 @@ namespace HospitalManagement
 
         public void UpdateWindow()
         {
+            data.Update();
+
             string patientName = data.ThePatient.LastName + ", " + data.ThePatient.FirstName;
             string windowTitle = patientName + " " + data.ThePatient.Personnummer;
             this.Text = windowTitle;
@@ -38,6 +40,8 @@ namespace HospitalManagement
             phoneTxt.Text = data.ThePatient.PhoneNr;
             eMailTxt.Text = data.ThePatient.Email;
             bloodTypeTxt.Text = data.ThePatient.BloodType;
+
+            prescriptionListBox.DataSource = data.PrescriptionList; 
         }
 
         private void savePersonInfoChange_Click(object sender, EventArgs e)

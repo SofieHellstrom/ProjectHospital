@@ -8,16 +8,21 @@ namespace HospitalManagement
 {
     public class PatientJournalData
     {
-        DatabaseHandler db;
+        DatabaseHandler db = new DatabaseHandler();
         public Patient ThePatient { get; set; } 
         public Employee MyUser { get; set; }
+        public List<Prescription> PrescriptionList { get; set; }
 
         public PatientJournalData(Patient patient, Employee user)
         {
-            this.db = new DatabaseHandler();
             this.ThePatient = patient;
             this.MyUser = user;
+            this.PrescriptionList = db.LoadPatientPrescriptions(this.ThePatient.Personnummer);
+        }
 
+        public void Update()
+        {
+            PrescriptionList = db.LoadPatientPrescriptions(ThePatient.Personnummer);
         }
     }
 }

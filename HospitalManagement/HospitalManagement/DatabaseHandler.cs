@@ -797,9 +797,61 @@ namespace HospitalManagement
             return returnMedication;
         }
 
-        public List<Prescription> LoadPatientPrescriptions(string Personnummer)
+        public List<Prescription> LoadPatientPrescriptions(string personnummer)
         {
-            throw new NotImplementedException();
+            //Returns a list of instance of the prescription class based on the values 
+            //in the database related to a specific patient.
+            List<Prescription> resultList = new List<Prescription>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM prescription WHERE patient = :patient";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("patient", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = personnummer ;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        DateTime date;
+                        string doctor;
+                        string patient;
+                        string medicine;
+                        string instructions;
+                        int nr;
+                        string medicineName;
+
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            date = reader.GetDateTime(0);
+                            doctor = reader.GetString(1);
+                            patient = reader.GetString(2);
+                            medicine = reader.GetString(3);
+                            instructions = reader.GetString(4);
+                            nr = reader.GetInt32(5);
+                            medicineName = LoadMedicationName(medicine);
+
+                            //Creates prescription instance and adds it to the list of medications using the temporary variables.
+                            Prescription prescriptionToAdd = new Prescription(date, doctor, patient, medicine, instructions, nr, medicineName );
+                            resultList.Add(prescriptionToAdd);
+                        }
+                        return resultList;
+
+                    }
+                }
+
+            }
         }
 
         public Boolean AddPrescription(Prescription prescription)
