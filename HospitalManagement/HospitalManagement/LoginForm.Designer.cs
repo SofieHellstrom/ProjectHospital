@@ -92,7 +92,7 @@
             // 
             this.warningLbl.AutoSize = true;
             this.warningLbl.ForeColor = System.Drawing.Color.Red;
-            this.warningLbl.Location = new System.Drawing.Point(164, 106);
+            this.warningLbl.Location = new System.Drawing.Point(156, 110);
             this.warningLbl.Name = "warningLbl";
             this.warningLbl.Size = new System.Drawing.Size(47, 13);
             this.warningLbl.TabIndex = 7;
@@ -105,12 +105,12 @@
             this.skipLoginCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.snabbloginToolStripMenuItem});
             this.skipLoginCMS.Name = "skipLoginCMS";
-            this.skipLoginCMS.Size = new System.Drawing.Size(153, 48);
+            this.skipLoginCMS.Size = new System.Drawing.Size(135, 26);
             // 
             // snabbloginToolStripMenuItem
             // 
             this.snabbloginToolStripMenuItem.Name = "snabbloginToolStripMenuItem";
-            this.snabbloginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.snabbloginToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.snabbloginToolStripMenuItem.Text = "Snabblogin";
             this.snabbloginToolStripMenuItem.Click += new System.EventHandler(this.snabbloginToolStripMenuItem_Click);
             // 
