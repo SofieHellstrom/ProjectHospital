@@ -713,5 +713,136 @@ namespace HospitalManagement
 
         }
 
+        //Methods related to getting info about medication and prescriptions from the database
+
+        public List<Medication> LoadAllMedications()
+        {
+            //Returns a list of instance of the Medication class based on the values 
+            //in the patient table of the database.
+            List<Medication> resultList = new List<Medication>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM medication";
+
+                    cmd.Prepare();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        string medID;
+                        string medName;
+                        decimal price;
+                        decimal wholesale;
+                        
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            medID = reader.GetString(0);
+                            medName = reader.GetString(1);
+                            price = reader.GetDecimal(2);
+                            wholesale = reader.GetDecimal(3);
+
+                            //Creates medication and adds it to the list of medications using the temporary variables.
+                            Medication drugToAdd = new Medication(medID, medName, price, wholesale);
+                            resultList.Add(drugToAdd);
+                        }
+                        return resultList;
+
+                    }
+                }
+
+            }
+
+        }
+
+        public String LoadMedicationName(string medicalID)
+        {
+            //Gets the Postal Area corresponding to a Postal Code from the database. 
+            string returnMedication = "Finns ej i databasen.";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds the connection and SQL-string to the Command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT name FROM medication WHERE medication_id = :id";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = medicalID;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Reads the value from the database.
+                        while (reader.Read())
+                        {
+                            returnMedication = reader.GetString(0);
+                        }
+                    }
+                }
+
+            }
+            return returnMedication;
+        }
+
+        public List<Prescription> LoadPatientPrescriptions(string Personnummer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean AddPrescription(Prescription prescription)
+        {
+            //Adds a new prescription to the database. 
+            Prescription prescriptionToAdd = prescription;
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds relevant data to temporary variables. Mostly for debugging purposes.
+                    DateTime dateToRegister = prescriptionToAdd.PrescribedAt;
+                    string prescribingDoctor = prescriptionToAdd.PrescribedBy;
+                    string receivingPatient = prescriptionToAdd.PrescribedTo;
+                    string medCode = prescriptionToAdd.MedicineIDCode;
+                    string instructions = prescriptionToAdd.Instructions;
+                    int uttag = prescriptionToAdd.NrOfTimes;
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    try
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = $"INSERT INTO prescription (date, doctor, patient, medicine, instructions, nr_of_times) VALUES ('{prescriptionToAdd.PrescribedAt}', '{prescriptionToAdd.PrescribedBy}', '{prescriptionToAdd.PrescribedTo}', '{prescriptionToAdd.MedicineIDCode}', '{prescriptionToAdd.Instructions}','{prescriptionToAdd.NrOfTimes}')";
+
+                        int recordsAffected = cmd.ExecuteNonQuery();
+
+                        //Returns a boolean which is True if any rows have been affected. 
+                        return Convert.ToBoolean(recordsAffected);
+                    }
+                    catch (PostgresException e)
+                    {
+                        //Writes Exception error to DebugWindow and returns false, if a
+                        //PostgresException occurs.
+                        System.Diagnostics.Debug.WriteLine(e.ToString());
+                        return false;
+                    }
+
+                }
+            }
+        }
+
     }
 }

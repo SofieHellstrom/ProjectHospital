@@ -60,12 +60,19 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindowData.cs" />
+    <Compile Include="Medication.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="MainWindowForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainWindowForm.Designer.cs">
       <DependentUpon>MainWindowForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientInfoUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientInfoUpdateForm.Designer.cs">
+      <DependentUpon>PatientInfoUpdateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PatientJournalData.cs" />
     <Compile Include="PatientJournalForm.cs">
@@ -81,6 +88,14 @@
     <Compile Include="PatientRegistryForm.Designer.cs">
       <DependentUpon>PatientRegistryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Prescription.cs" />
+    <Compile Include="PrescriptionData.cs" />
+    <Compile Include="PrescriptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrescriptionForm.Designer.cs">
+      <DependentUpon>PrescriptionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Employee.cs" />
@@ -91,11 +106,17 @@
     <EmbeddedResource Include="MainWindowForm.resx">
       <DependentUpon>MainWindowForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PatientInfoUpdateForm.resx">
+      <DependentUpon>PatientInfoUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PatientJournalForm.resx">
       <DependentUpon>PatientJournalForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PatientRegistryForm.resx">
       <DependentUpon>PatientRegistryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrescriptionForm.resx">
+      <DependentUpon>PrescriptionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

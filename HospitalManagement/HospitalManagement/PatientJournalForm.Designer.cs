@@ -42,7 +42,7 @@
             this.inskrivningsStatusLbl = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.prescriptionListView = new System.Windows.Forms.ListView();
-            this.button2 = new System.Windows.Forms.Button();
+            this.createReceiptBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -50,6 +50,7 @@
             this.bloodTypeTxt = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.savePersonInfoChange = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.eMailTxt = new System.Windows.Forms.TextBox();
             this.phoneTxt = new System.Windows.Forms.TextBox();
@@ -64,7 +65,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.savePersonInfoChange = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -79,7 +79,7 @@
             this.mainPanel.Controls.Add(this.groupBox5);
             this.mainPanel.Controls.Add(this.groupBox4);
             this.mainPanel.Controls.Add(this.groupBox3);
-            this.mainPanel.Controls.Add(this.button2);
+            this.mainPanel.Controls.Add(this.createReceiptBtn);
             this.mainPanel.Controls.Add(this.button1);
             this.mainPanel.Controls.Add(this.groupBox2);
             this.mainPanel.Controls.Add(this.groupBox1);
@@ -206,14 +206,15 @@
             this.prescriptionListView.TabIndex = 0;
             this.prescriptionListView.UseCompatibleStateImageBehavior = false;
             // 
-            // button2
+            // createReceiptBtn
             // 
-            this.button2.Location = new System.Drawing.Point(170, 617);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(113, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Skriv Recept";
-            this.button2.UseVisualStyleBackColor = true;
+            this.createReceiptBtn.Location = new System.Drawing.Point(170, 617);
+            this.createReceiptBtn.Name = "createReceiptBtn";
+            this.createReceiptBtn.Size = new System.Drawing.Size(113, 23);
+            this.createReceiptBtn.TabIndex = 3;
+            this.createReceiptBtn.Text = "Skriv Recept";
+            this.createReceiptBtn.UseVisualStyleBackColor = true;
+            this.createReceiptBtn.Click += new System.EventHandler(this.createReceiptBtn_Click);
             // 
             // button1
             // 
@@ -256,6 +257,7 @@
             // 
             // bloodTypeTxt
             // 
+            this.bloodTypeTxt.Enabled = false;
             this.bloodTypeTxt.Location = new System.Drawing.Point(79, 22);
             this.bloodTypeTxt.Name = "bloodTypeTxt";
             this.bloodTypeTxt.Size = new System.Drawing.Size(121, 20);
@@ -294,6 +296,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Personuppgifter";
             // 
+            // savePersonInfoChange
+            // 
+            this.savePersonInfoChange.Location = new System.Drawing.Point(66, 214);
+            this.savePersonInfoChange.Name = "savePersonInfoChange";
+            this.savePersonInfoChange.Size = new System.Drawing.Size(124, 23);
+            this.savePersonInfoChange.TabIndex = 18;
+            this.savePersonInfoChange.Text = "Ändra Personuppgifter";
+            this.savePersonInfoChange.UseVisualStyleBackColor = true;
+            this.savePersonInfoChange.Click += new System.EventHandler(this.savePersonInfoChange_Click);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -305,6 +317,7 @@
             // 
             // eMailTxt
             // 
+            this.eMailTxt.Enabled = false;
             this.eMailTxt.Location = new System.Drawing.Point(90, 178);
             this.eMailTxt.Name = "eMailTxt";
             this.eMailTxt.Size = new System.Drawing.Size(143, 20);
@@ -312,6 +325,7 @@
             // 
             // phoneTxt
             // 
+            this.phoneTxt.Enabled = false;
             this.phoneTxt.Location = new System.Drawing.Point(90, 152);
             this.phoneTxt.Name = "phoneTxt";
             this.phoneTxt.Size = new System.Drawing.Size(143, 20);
@@ -328,6 +342,7 @@
             // 
             // postalAreaTxt
             // 
+            this.postalAreaTxt.Enabled = false;
             this.postalAreaTxt.Location = new System.Drawing.Point(90, 125);
             this.postalAreaTxt.Name = "postalAreaTxt";
             this.postalAreaTxt.Size = new System.Drawing.Size(143, 20);
@@ -335,6 +350,7 @@
             // 
             // postalCodeTxt
             // 
+            this.postalCodeTxt.Enabled = false;
             this.postalCodeTxt.Location = new System.Drawing.Point(90, 99);
             this.postalCodeTxt.Name = "postalCodeTxt";
             this.postalCodeTxt.Size = new System.Drawing.Size(100, 20);
@@ -342,6 +358,7 @@
             // 
             // addressTxt
             // 
+            this.addressTxt.Enabled = false;
             this.addressTxt.Location = new System.Drawing.Point(90, 72);
             this.addressTxt.Name = "addressTxt";
             this.addressTxt.Size = new System.Drawing.Size(143, 20);
@@ -349,6 +366,7 @@
             // 
             // namnTxt
             // 
+            this.namnTxt.Enabled = false;
             this.namnTxt.Location = new System.Drawing.Point(90, 43);
             this.namnTxt.Name = "namnTxt";
             this.namnTxt.Size = new System.Drawing.Size(143, 20);
@@ -356,6 +374,7 @@
             // 
             // personNrTxt
             // 
+            this.personNrTxt.Enabled = false;
             this.personNrTxt.Location = new System.Drawing.Point(90, 16);
             this.personNrTxt.Name = "personNrTxt";
             this.personNrTxt.Size = new System.Drawing.Size(143, 20);
@@ -406,15 +425,6 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Personnummer";
             // 
-            // savePersonInfoChange
-            // 
-            this.savePersonInfoChange.Location = new System.Drawing.Point(66, 214);
-            this.savePersonInfoChange.Name = "savePersonInfoChange";
-            this.savePersonInfoChange.Size = new System.Drawing.Size(124, 23);
-            this.savePersonInfoChange.TabIndex = 18;
-            this.savePersonInfoChange.Text = "Spara Ändring";
-            this.savePersonInfoChange.UseVisualStyleBackColor = true;
-            // 
             // PatientJournalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -423,6 +433,7 @@
             this.Controls.Add(this.mainPanel);
             this.Name = "PatientJournalForm";
             this.Text = "PatientJournalForm";
+            this.Activated += new System.EventHandler(this.PatientJournalForm_Activated);
             this.mainPanel.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -454,7 +465,7 @@
         private System.Windows.Forms.TextBox phoneTxt;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button createReceiptBtn;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox bloodTypeTxt;

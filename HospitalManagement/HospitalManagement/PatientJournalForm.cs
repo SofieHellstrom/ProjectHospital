@@ -14,13 +14,19 @@ namespace HospitalManagement
     {
         // Form for displaying the Patientjournal of the Patient. 
         PatientJournalData data;
+        DatabaseHandler db = new DatabaseHandler();
 
 
 
-        public PatientJournalForm(Patient patient)
+        public PatientJournalForm(Patient patient, Employee myUser)
         {
-            data = new PatientJournalData(patient);
+            data = new PatientJournalData(patient, myUser);
             InitializeComponent();
+            UpdateWindow();
+        }
+
+        public void UpdateWindow()
+        {
             string patientName = data.ThePatient.LastName + ", " + data.ThePatient.FirstName;
             string windowTitle = patientName + " " + data.ThePatient.Personnummer;
             this.Text = windowTitle;
@@ -32,9 +38,24 @@ namespace HospitalManagement
             phoneTxt.Text = data.ThePatient.PhoneNr;
             eMailTxt.Text = data.ThePatient.Email;
             bloodTypeTxt.Text = data.ThePatient.BloodType;
-
-
         }
 
+        private void savePersonInfoChange_Click(object sender, EventArgs e)
+        {
+            Form updateForm = new PatientInfoUpdateForm(data);
+            updateForm.Show();
+        }
+
+        private void PatientJournalForm_Activated(object sender, EventArgs e)
+        {
+            UpdateWindow();
+        }
+
+        private void createReceiptBtn_Click(object sender, EventArgs e)
+        {
+            Employee showUser = data.MyUser; // ONly here for debugging purposes
+            Form prescribeForm = new PrescriptionForm(data.ThePatient, data.MyUser);
+            prescribeForm.Show();
+        }
     }
 }

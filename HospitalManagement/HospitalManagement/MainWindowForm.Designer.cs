@@ -34,7 +34,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.userIdentityLbl = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.patientJournalBtn = new System.Windows.Forms.Button();
             this.newPatientBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -114,21 +114,22 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.button3);
+            this.panel3.Controls.Add(this.patientJournalBtn);
             this.panel3.Controls.Add(this.newPatientBtn);
             this.panel3.Location = new System.Drawing.Point(3, 42);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(105, 417);
             this.panel3.TabIndex = 2;
             // 
-            // button3
+            // patientJournalBtn
             // 
-            this.button3.Location = new System.Drawing.Point(3, 32);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(99, 23);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "PatientJournal";
-            this.button3.UseVisualStyleBackColor = true;
+            this.patientJournalBtn.Location = new System.Drawing.Point(3, 32);
+            this.patientJournalBtn.Name = "patientJournalBtn";
+            this.patientJournalBtn.Size = new System.Drawing.Size(99, 23);
+            this.patientJournalBtn.TabIndex = 1;
+            this.patientJournalBtn.Text = "PatientJournal";
+            this.patientJournalBtn.UseVisualStyleBackColor = true;
+            this.patientJournalBtn.Click += new System.EventHandler(this.patientJournalBtn_Click);
             // 
             // newPatientBtn
             // 
@@ -299,7 +300,6 @@
             this.Name = "MainWindow";
             this.Text = "HospitalManagement";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
-            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.tableLayoutPane.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -326,7 +326,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button newPatientBtn;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button patientJournalBtn;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button searchPatientBtn;

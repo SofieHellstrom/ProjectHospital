@@ -14,6 +14,7 @@ namespace HospitalManagement
     public partial class MainWindow : Form
     {
         MainWindowData data;
+        DatabaseHandler db = new DatabaseHandler();
 
         public MainWindow(Employee user)
         {
@@ -83,7 +84,7 @@ namespace HospitalManagement
                 {
                     DatabaseHandler dbHandler = new DatabaseHandler();
                     HospitalDataSetTableAdapters.patientTableAdapter patientTableAdapter = new HospitalDataSetTableAdapters.patientTableAdapter();
-                    Form journal = new PatientJournalForm(dbHandler.LoadPatient(personNumber));
+                    Form journal = new PatientJournalForm(dbHandler.LoadPatient(personNumber), data.MyUser);
                     journal.Show();
                 }
             }
@@ -103,5 +104,17 @@ namespace HospitalManagement
         }
 
         
+        private void patientJournalBtn_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                string personid = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                Patient patientToOpen = db.LoadPatient(personid);
+                Employee user = data.MyUser;
+                Form patjourn = new PatientJournalForm(patientToOpen, user);
+                patjourn.Show();
+            }
+            
+        }
     }
 }

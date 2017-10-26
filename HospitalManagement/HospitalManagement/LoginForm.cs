@@ -53,7 +53,7 @@ namespace HospitalManagement
 
             if (!user.PasswordIsCorrect(password))
             {
-                warningLbl.Text = "Felaktigt Lösenord";
+                warningLbl.Text = "Felaktigt Användarnamn/Lösenord";
                 warningLbl.Visible = true;
                 return;
             }
