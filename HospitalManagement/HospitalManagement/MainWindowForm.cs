@@ -67,7 +67,7 @@ namespace HospitalManagement
         private void MainWindow_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'hospitalDataSet.patient' table. You can move, or remove it, as needed.
-            this.patientTableAdapter.Fill(this.hospitalDataSet.patient);
+          //  this.patientTableAdapter.Fill(this.hospitalDataSet.patient);
 
         }
 
@@ -92,9 +92,16 @@ namespace HospitalManagement
             //journal.Show();
         }
 
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.ShutEverythingDown();
         }
+
+        
     }
 }
