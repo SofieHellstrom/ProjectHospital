@@ -52,5 +52,11 @@ namespace HospitalManagement
         {
             UpdateWindow();
         }
+
+        private void createReceiptBtn_Click(object sender, EventArgs e)
+        {
+            Form prescribeForm = new PrescriptionForm(data.ThePatient);
+            prescribeForm.Show();
+        }
     }
 }

@@ -713,5 +713,55 @@ namespace HospitalManagement
 
         }
 
+        //Methods related to getting info about medication and prescriptions from the database
+
+        public List<Medication> LoadAllMedications()
+        {
+            //Returns a list of instance of the Medication class based on the values 
+            //in the patient table of the database.
+            List<Medication> resultList = new List<Medication>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM medication";
+
+                    cmd.Prepare();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        string medID;
+                        string medName;
+                        decimal price;
+                        decimal wholesale;
+                        
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            medID = reader.GetString(0);
+                            medName = reader.GetString(1);
+                            price = reader.GetDecimal(2);
+                            wholesale = reader.GetDecimal(3);
+
+                            //Creates patient and adds it to the list of patients using the temporary variables.
+                            Medication drugToAdd = new Medication(medID, medName, price, wholesale);
+                            resultList.Add(drugToAdd);
+                        }
+                        return resultList;
+
+                    }
+                }
+
+            }
+
+        }
+
     }
 }

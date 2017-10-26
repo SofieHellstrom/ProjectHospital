@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.prescriptionMedTxtBox = new System.Windows.Forms.TextBox();
             this.medicationListBox = new System.Windows.Forms.ListBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.uttagLbl = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.nrOfTimesTxtBox = new System.Windows.Forms.TextBox();
             this.instructionLbl = new System.Windows.Forms.Label();
             this.registerPrescriptionBtn = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.filterTxtBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.receptLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox2
+            // prescriptionMedTxtBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(391, 33);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(192, 20);
-            this.textBox2.TabIndex = 1;
+            this.prescriptionMedTxtBox.Location = new System.Drawing.Point(391, 33);
+            this.prescriptionMedTxtBox.Name = "prescriptionMedTxtBox";
+            this.prescriptionMedTxtBox.Size = new System.Drawing.Size(246, 20);
+            this.prescriptionMedTxtBox.TabIndex = 1;
             // 
             // medicationListBox
             // 
@@ -54,35 +54,36 @@
             this.medicationListBox.Name = "medicationListBox";
             this.medicationListBox.Size = new System.Drawing.Size(363, 251);
             this.medicationListBox.TabIndex = 2;
+            this.medicationListBox.SelectedIndexChanged += new System.EventHandler(this.medicationListBox_SelectedIndexChanged);
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(391, 102);
+            this.textBox3.Location = new System.Drawing.Point(391, 72);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(211, 156);
+            this.textBox3.Size = new System.Drawing.Size(306, 186);
             this.textBox3.TabIndex = 3;
             // 
             // uttagLbl
             // 
             this.uttagLbl.AutoSize = true;
-            this.uttagLbl.Location = new System.Drawing.Point(388, 62);
+            this.uttagLbl.Location = new System.Drawing.Point(645, 15);
             this.uttagLbl.Name = "uttagLbl";
-            this.uttagLbl.Size = new System.Drawing.Size(60, 13);
+            this.uttagLbl.Size = new System.Drawing.Size(33, 13);
             this.uttagLbl.TabIndex = 4;
-            this.uttagLbl.Text = "Antal Uttag";
+            this.uttagLbl.Text = "Uttag";
             // 
-            // textBox4
+            // nrOfTimesTxtBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(534, 59);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(49, 20);
-            this.textBox4.TabIndex = 5;
+            this.nrOfTimesTxtBox.Location = new System.Drawing.Point(648, 34);
+            this.nrOfTimesTxtBox.Name = "nrOfTimesTxtBox";
+            this.nrOfTimesTxtBox.Size = new System.Drawing.Size(49, 20);
+            this.nrOfTimesTxtBox.TabIndex = 5;
             // 
             // instructionLbl
             // 
             this.instructionLbl.AutoSize = true;
-            this.instructionLbl.Location = new System.Drawing.Point(388, 86);
+            this.instructionLbl.Location = new System.Drawing.Point(388, 56);
             this.instructionLbl.Name = "instructionLbl";
             this.instructionLbl.Size = new System.Drawing.Size(113, 13);
             this.instructionLbl.TabIndex = 6;
@@ -90,19 +91,20 @@
             // 
             // registerPrescriptionBtn
             // 
-            this.registerPrescriptionBtn.Location = new System.Drawing.Point(441, 265);
+            this.registerPrescriptionBtn.Location = new System.Drawing.Point(577, 265);
             this.registerPrescriptionBtn.Name = "registerPrescriptionBtn";
             this.registerPrescriptionBtn.Size = new System.Drawing.Size(120, 23);
             this.registerPrescriptionBtn.TabIndex = 7;
             this.registerPrescriptionBtn.Text = "Skriv Recept";
             this.registerPrescriptionBtn.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // filterTxtBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(50, 8);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(169, 20);
-            this.textBox1.TabIndex = 8;
+            this.filterTxtBox.Location = new System.Drawing.Point(50, 8);
+            this.filterTxtBox.Name = "filterTxtBox";
+            this.filterTxtBox.Size = new System.Drawing.Size(169, 20);
+            this.filterTxtBox.TabIndex = 8;
+            this.filterTxtBox.TextChanged += new System.EventHandler(this.filterTxtBox_TextChanged);
             // 
             // label1
             // 
@@ -116,7 +118,7 @@
             // receptLbl
             // 
             this.receptLbl.AutoSize = true;
-            this.receptLbl.Location = new System.Drawing.Point(449, 15);
+            this.receptLbl.Location = new System.Drawing.Point(388, 15);
             this.receptLbl.Name = "receptLbl";
             this.receptLbl.Size = new System.Drawing.Size(76, 13);
             this.receptLbl.TabIndex = 10;
@@ -126,17 +128,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(614, 300);
+            this.ClientSize = new System.Drawing.Size(709, 300);
             this.Controls.Add(this.receptLbl);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.filterTxtBox);
             this.Controls.Add(this.registerPrescriptionBtn);
             this.Controls.Add(this.instructionLbl);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.nrOfTimesTxtBox);
             this.Controls.Add(this.uttagLbl);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.medicationListBox);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.prescriptionMedTxtBox);
             this.Name = "PrescriptionForm";
             this.Text = "Receptskrivning";
             this.ResumeLayout(false);
@@ -146,14 +148,14 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox prescriptionMedTxtBox;
         private System.Windows.Forms.ListBox medicationListBox;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label uttagLbl;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox nrOfTimesTxtBox;
         private System.Windows.Forms.Label instructionLbl;
         private System.Windows.Forms.Button registerPrescriptionBtn;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox filterTxtBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label receptLbl;
     }
