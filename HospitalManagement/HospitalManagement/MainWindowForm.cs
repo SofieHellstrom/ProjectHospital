@@ -79,7 +79,7 @@ namespace HospitalManagement
                 {
                     DatabaseHandler dbHandler = new DatabaseHandler();
                     HospitalDataSetTableAdapters.patientTableAdapter patientTableAdapter = new HospitalDataSetTableAdapters.patientTableAdapter();
-                    Form journal = new PatientJournalForm(dbHandler.LoadPatient(personNumber));
+                    Form journal = new PatientJournalForm(dbHandler.LoadPatient(personNumber), data.MyUser);
                     journal.Show();
                 }
             }
@@ -99,7 +99,8 @@ namespace HospitalManagement
             {
                 string personid = dataGridView1.CurrentRow.Cells[0].Value.ToString();
                 Patient patientToOpen = db.LoadPatient(personid);
-                Form patjourn = new PatientJournalForm(patientToOpen);
+                Employee user = data.MyUser;
+                Form patjourn = new PatientJournalForm(patientToOpen, user);
                 patjourn.Show();
             }
             

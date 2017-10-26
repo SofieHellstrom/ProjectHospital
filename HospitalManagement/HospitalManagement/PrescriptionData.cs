@@ -11,10 +11,12 @@ namespace HospitalManagement
         DatabaseHandler db = new DatabaseHandler();
         public List<Medication> MedicationList {get; set;}
         public Patient ThePatient { get; set; }
+        public Employee MyUser { get; set; }
 
-        public PrescriptionData(Patient patient)
+        public PrescriptionData(Patient patient, Employee user)
         {
             this.ThePatient = patient;
+            this.MyUser = user;
             this.MedicationList = db.LoadAllMedications();
         }
     }

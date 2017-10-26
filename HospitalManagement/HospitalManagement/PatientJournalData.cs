@@ -10,11 +10,13 @@ namespace HospitalManagement
     {
         DatabaseHandler db;
         public Patient ThePatient { get; set; } 
+        public Employee MyUser { get; set; }
 
-        public PatientJournalData(Patient patient)
+        public PatientJournalData(Patient patient, Employee user)
         {
             this.db = new DatabaseHandler();
             this.ThePatient = patient;
+            this.MyUser = user;
 
         }
     }

@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.prescriptionMedTxtBox = new System.Windows.Forms.TextBox();
             this.medicationListBox = new System.Windows.Forms.ListBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.instructionTxtBox = new System.Windows.Forms.TextBox();
             this.uttagLbl = new System.Windows.Forms.Label();
             this.nrOfTimesTxtBox = new System.Windows.Forms.TextBox();
             this.instructionLbl = new System.Windows.Forms.Label();
@@ -38,6 +39,8 @@
             this.filterTxtBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.receptLbl = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // prescriptionMedTxtBox
@@ -56,18 +59,18 @@
             this.medicationListBox.TabIndex = 2;
             this.medicationListBox.SelectedIndexChanged += new System.EventHandler(this.medicationListBox_SelectedIndexChanged);
             // 
-            // textBox3
+            // instructionTxtBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(391, 72);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(306, 186);
-            this.textBox3.TabIndex = 3;
+            this.instructionTxtBox.Location = new System.Drawing.Point(391, 72);
+            this.instructionTxtBox.Multiline = true;
+            this.instructionTxtBox.Name = "instructionTxtBox";
+            this.instructionTxtBox.Size = new System.Drawing.Size(306, 186);
+            this.instructionTxtBox.TabIndex = 3;
             // 
             // uttagLbl
             // 
             this.uttagLbl.AutoSize = true;
-            this.uttagLbl.Location = new System.Drawing.Point(645, 15);
+            this.uttagLbl.Location = new System.Drawing.Point(652, 15);
             this.uttagLbl.Name = "uttagLbl";
             this.uttagLbl.Size = new System.Drawing.Size(33, 13);
             this.uttagLbl.TabIndex = 4;
@@ -75,10 +78,11 @@
             // 
             // nrOfTimesTxtBox
             // 
-            this.nrOfTimesTxtBox.Location = new System.Drawing.Point(648, 34);
+            this.nrOfTimesTxtBox.Location = new System.Drawing.Point(648, 33);
             this.nrOfTimesTxtBox.Name = "nrOfTimesTxtBox";
             this.nrOfTimesTxtBox.Size = new System.Drawing.Size(49, 20);
             this.nrOfTimesTxtBox.TabIndex = 5;
+            this.nrOfTimesTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.nrOfTimesTxtBox_Validating);
             // 
             // instructionLbl
             // 
@@ -97,6 +101,7 @@
             this.registerPrescriptionBtn.TabIndex = 7;
             this.registerPrescriptionBtn.Text = "Skriv Recept";
             this.registerPrescriptionBtn.UseVisualStyleBackColor = true;
+            this.registerPrescriptionBtn.Click += new System.EventHandler(this.registerPrescriptionBtn_Click);
             // 
             // filterTxtBox
             // 
@@ -124,11 +129,15 @@
             this.receptLbl.TabIndex = 10;
             this.receptLbl.Text = "Receptdetaljer";
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // PrescriptionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(709, 300);
+            this.ClientSize = new System.Drawing.Size(725, 300);
             this.Controls.Add(this.receptLbl);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.filterTxtBox);
@@ -136,11 +145,12 @@
             this.Controls.Add(this.instructionLbl);
             this.Controls.Add(this.nrOfTimesTxtBox);
             this.Controls.Add(this.uttagLbl);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.instructionTxtBox);
             this.Controls.Add(this.medicationListBox);
             this.Controls.Add(this.prescriptionMedTxtBox);
             this.Name = "PrescriptionForm";
             this.Text = "Receptskrivning";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,7 +160,7 @@
 
         private System.Windows.Forms.TextBox prescriptionMedTxtBox;
         private System.Windows.Forms.ListBox medicationListBox;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox instructionTxtBox;
         private System.Windows.Forms.Label uttagLbl;
         private System.Windows.Forms.TextBox nrOfTimesTxtBox;
         private System.Windows.Forms.Label instructionLbl;
@@ -158,5 +168,6 @@
         private System.Windows.Forms.TextBox filterTxtBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label receptLbl;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
