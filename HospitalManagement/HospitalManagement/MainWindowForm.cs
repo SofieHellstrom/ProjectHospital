@@ -116,5 +116,12 @@ namespace HospitalManagement
             }
             
         }
+
+        private void MainWindow_Load_1(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'hospitalDataSet1.staff' table. You can move, or remove it, as needed.
+            this.staffTableAdapter.Fill(this.hospitalDataSet1.staff);
+
+        }
     }
 }
