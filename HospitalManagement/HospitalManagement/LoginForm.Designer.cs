@@ -37,7 +37,9 @@
             this.warningLbl = new System.Windows.Forms.Label();
             this.skipLoginCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.snabbloginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.skipLoginCMS.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -114,6 +116,11 @@
             this.snabbloginToolStripMenuItem.Text = "Snabblogin";
             this.snabbloginToolStripMenuItem.Click += new System.EventHandler(this.snabbloginToolStripMenuItem_Click);
             // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -130,6 +137,7 @@
             this.Name = "LoginForm";
             this.Text = "Inloggning";
             this.skipLoginCMS.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,5 +152,6 @@
         private System.Windows.Forms.Label warningLbl;
         private System.Windows.Forms.ContextMenuStrip skipLoginCMS;
         private System.Windows.Forms.ToolStripMenuItem snabbloginToolStripMenuItem;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

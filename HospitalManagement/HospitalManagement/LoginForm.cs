@@ -42,12 +42,14 @@ namespace HospitalManagement
 
             if (!db.UserExists(username))
             {
-                warningLbl.Text = "Användare finns ej.";
-                warningLbl.Visible = true;
+                errorProvider.SetError(usernameTxtBox, "Användarnamn finns ej");
+                //warningLbl.Text = "Användare finns ej.";
+                //warningLbl.Visible = true;
                 return;
             }
             else
             {
+                errorProvider.SetError(usernameTxtBox, "");
                 user = db.LoadUser(username, isPatient);
                 warningLbl.Text = "";
                 warningLbl.Visible = false;
@@ -56,8 +58,9 @@ namespace HospitalManagement
 
             if (!user.PasswordIsCorrect(password))
             {
-                warningLbl.Text = "Felaktigt Användarnamn/Lösenord";
-                warningLbl.Visible = true;
+                errorProvider.SetError(passwordTxtBox, "Lösenord och Användarnamn matchar ej!");
+                //warningLbl.Text = "Felaktigt Användarnamn/Lösenord";
+                //warningLbl.Visible = true;
                 return;
             }
             else
@@ -71,6 +74,7 @@ namespace HospitalManagement
                 }
                 else
                 {
+                    errorProvider.SetError(passwordTxtBox, "");
                     Employee userEmployee = db.LoadEmployee(user.Identifier);
                     Form main = new MainWindow(userEmployee);
                     main.Show();
