@@ -571,7 +571,7 @@ namespace HospitalManagement
 
         //Methods related to usernames and passwords from the user table.
 
-        public Boolean UserExists (string username, bool isPatient)
+        public Boolean UserExists (string username)
         {
 
             //Currently not working.
@@ -588,23 +588,17 @@ namespace HospitalManagement
 
                     cmd.Connection = conn;
 
-                    if (isPatient)
-                    {
-                         commandString = "SELECT COUNT ('id') FROM userinfo WHERE 'id' = :id";
-                    }
-                    else
-                    {
-                        commandString = "SELECT COUNT ('id') FROM user WHERE 'id' = :id";
-                    }
+                    commandString = $"SELECT COUNT (*) FROM userinfo WHERE id = '{username}'";
+                    //commandString = "SELECT COUNT (*) FROM userinfo WHERE 'id' = :id";
 
                     cmd.CommandText = commandString;
                     
 
-                    cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+                    //cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
 
-                    cmd.Prepare();
+                    //cmd.Prepare();
 
-                    cmd.Parameters[0].Value = username;
+                    //cmd.Parameters[0].Value = username;
 
                     // Gets and stores the result of the query (the number of times the personal_id_nr
                     // appears in the database, which should be zero or none, since it has a unique
