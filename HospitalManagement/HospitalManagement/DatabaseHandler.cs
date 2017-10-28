@@ -436,6 +436,63 @@ namespace HospitalManagement
             throw new NotImplementedException();
         }
 
+        //Methods concerned with loading or changing data related to JournalNotes in the Database
+
+        public List<JournalPost> LoadPatientNotes(string personnummer)
+        {
+            //Returns a list of instance of the prescription class based on the values 
+            //in the database related to a specific patient.
+            List<JournalPost> resultList = new List<JournalPost>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM journalpost WHERE patient = :patient";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("patient", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = personnummer;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        DateTime date;
+                        string doctor;
+                        string patient;
+                        string noteType;
+                        string noteText;
+                        bool important;
+
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            date = reader.GetDateTime(0);
+                            doctor = reader.GetString(1);
+                            patient = reader.GetString(2);
+                            noteType = reader.GetString(3);
+                            noteText = reader.GetString(4);
+                            important = reader.GetBoolean(5);
+
+                            //Creates prescription instance and adds it to the list of medications using the temporary variables.
+                            JournalPost journalpostToAdd = new JournalPost(date, doctor, patient, noteType, noteText, important);
+                            resultList.Add(journalpostToAdd);
+                        }
+                        return resultList;
+
+                    }
+                }
+
+            }
+        }
+
         public bool AddJournalEntry (string user, string patient, string entryType, string content, bool imp)
         {
             //This method is for saving entries in a patients journal. The variables passed to the method are the following:

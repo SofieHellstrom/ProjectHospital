@@ -41,7 +41,14 @@ namespace HospitalManagement
             eMailTxt.Text = data.ThePatient.Email;
             bloodTypeTxt.Text = data.ThePatient.BloodType;
 
-            prescriptionListBox.DataSource = data.PrescriptionList; 
+            prescriptionListBox.DataSource = data.PrescriptionList;
+            allergyListBox.DataSource = data.AllergyList;
+            journalPostListBox.DataSource = data.NotesList;
+            if(journalPostListBox.Items.Count > 0)
+            {
+                journalpostPreviewTxtBox.Text = (journalPostListBox.SelectedValue as JournalPost).Content;
+            }
+                
         }
 
         private void savePersonInfoChange_Click(object sender, EventArgs e)
@@ -60,6 +67,22 @@ namespace HospitalManagement
             Employee showUser = data.MyUser; // ONly here for debugging purposes
             Form prescribeForm = new PrescriptionForm(data.ThePatient, data.MyUser);
             prescribeForm.Show();
+        }
+
+        private void newNotesBtn_Click(object sender, EventArgs e)
+        {
+            Form newNote = new NoteForm(data.ThePatient, data.MyUser);
+            newNote.Show();
+        }
+
+        private void journalPostListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            journalpostPreviewTxtBox.Text = (journalPostListBox.SelectedValue as JournalPost).Content;
+        }
+
+        private void journalpostPreviewTxtBox_Enter(object sender, EventArgs e)
+        {
+            journalPostListBox.Focus();
         }
     }
 }

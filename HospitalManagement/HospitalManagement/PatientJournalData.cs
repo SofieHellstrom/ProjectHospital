@@ -12,17 +12,44 @@ namespace HospitalManagement
         public Patient ThePatient { get; set; } 
         public Employee MyUser { get; set; }
         public List<Prescription> PrescriptionList { get; set; }
+        public List<JournalPost> JournalPostList { get; set; }
+        public List<JournalPost> AllergyList { get; set; }
+        public List<JournalPost> NotesList { get; set; }
 
         public PatientJournalData(Patient patient, Employee user)
         {
             this.ThePatient = patient;
             this.MyUser = user;
             this.PrescriptionList = db.LoadPatientPrescriptions(this.ThePatient.Personnummer);
+            this.JournalPostList = db.LoadPatientNotes(this.ThePatient.Personnummer);
+            SetAllergies();
+            SetNotes();
+        }
+
+        private void SetAllergies()
+        {
+            List<JournalPost> filteredList = (from myPost in JournalPostList
+                               where myPost.NoteType.Equals("Allergi")
+                               select myPost).ToList();
+
+            AllergyList = filteredList;
+        }
+
+        private void SetNotes()
+        {
+            List<JournalPost> filteredList = (from myPost in JournalPostList
+                                              where myPost.NoteType.Equals("Diagnos") || myPost.NoteType.Equals("Standard") || myPost.NoteType.Equals("Utlåtande")
+                                              select myPost).ToList();
+
+            NotesList = filteredList;
         }
 
         public void Update()
         {
             PrescriptionList = db.LoadPatientPrescriptions(ThePatient.Personnummer);
+            JournalPostList = db.LoadPatientNotes(ThePatient.Personnummer);
+            SetAllergies();
+            SetNotes();
         }
     }
 }

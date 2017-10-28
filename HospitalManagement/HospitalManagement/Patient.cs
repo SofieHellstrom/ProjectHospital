@@ -43,5 +43,10 @@ namespace HospitalManagement
             this.BloodType = blood;
         }
 
+        public override string ToString()
+        {
+            return $"{LastName}, {FirstName} ({Personnummer})";
+        }
+
     }
 }
