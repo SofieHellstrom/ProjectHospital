@@ -84,5 +84,11 @@ namespace HospitalManagement
         {
             journalPostListBox.Focus();
         }
+
+        private void signInBtn_Click(object sender, EventArgs e)
+        {
+            Form signIn = new SignInForm(data);
+            signIn.Show();
+        }
     }
 }

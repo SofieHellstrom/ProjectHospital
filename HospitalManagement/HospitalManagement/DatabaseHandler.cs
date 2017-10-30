@@ -77,9 +77,10 @@ namespace HospitalManagement
                         string lastName;
                         string adress;
                         int postNr;
-                        string telefonNr;
-                        string eMail;
+                        string telefonNr = "";
+                        string eMail = "";
                         string blodTyp;
+                        string room = "";
                         
                         //Reads values from the database into the temporary variables.
                         while (reader.Read())
@@ -92,11 +93,15 @@ namespace HospitalManagement
                             telefonNr = reader.GetString(5);
                             eMail = reader.GetString(6);
                             blodTyp = reader.GetString(7);
+                            if (!reader.IsDBNull(8))
+                            {
+                                room = reader.GetString(8);
+                            }
 
                             postOrt = LoadPostort(postNr); // Gets the Postort corresponding to the Postnr from the database
 
                             //Creates patient and adds it to the list of patients using the temporary variables.
-                            Patient patientToAdd = new Patient(personNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, blodTyp);
+                            Patient patientToAdd = new Patient(personNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, blodTyp, room);
                             resultList.Add(patientToAdd);
                         }
                         return resultList;
@@ -125,7 +130,9 @@ namespace HospitalManagement
             string telefonNr = "";
             string eMail = "";
             string blodTyp = "";
+            string room = "";
             string postOrt = "";
+            
 
             try
             {
@@ -161,6 +168,10 @@ namespace HospitalManagement
                                     telefonNr = reader.GetString(5);
                                     eMail = reader.GetString(6);
                                     blodTyp = reader.GetString(7);
+                                    if (!reader.IsDBNull(8))
+                                    {
+                                        room = reader.GetString(8);
+                                    }
 
                                 }
                             }
@@ -180,7 +191,7 @@ namespace HospitalManagement
             postOrt = LoadPostort(postNr);
 
             //Creates and returns the Patient instance.
-            returnPatient = new Patient(personNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, blodTyp);
+            returnPatient = new Patient(personNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, blodTyp, room);
             return returnPatient;
         }
 
@@ -262,7 +273,14 @@ namespace HospitalManagement
                 {
                     // Adds connection and SQL-string to the command and executes it.
                     cmd.Connection = conn;
-                    cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}' WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
+                    if (patientToUpdate.Room.Equals("No Change"))
+                    {
+                        cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}' WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
+                    }
+                    else
+                    {
+                        cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}', room = '{patientToUpdate.Room}' WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
+                    }
                     
                     int recordsAffected = cmd.ExecuteNonQuery();
                     return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
@@ -944,6 +962,148 @@ namespace HospitalManagement
                     }
 
                 }
+            }
+        }
+
+        //Methods for loading info about departments
+
+        public List<Department> LoadAllDepartments()
+        {
+            //Returns a list of all Departments 
+            List<Department> resultList = new List<Department>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM department";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        string depName;
+                        string depID;
+                        TimeSpan openTime = TimeSpan.Zero;
+                        TimeSpan closeTime = TimeSpan.Zero;
+
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            depID = reader.GetString(0);
+                            depName = reader.GetString(1);
+                            if (!reader.IsDBNull(2))
+                            {
+                                openTime = reader.GetTimeSpan(2);
+                            }
+                            if (!reader.IsDBNull(3))
+                            {
+                                closeTime = reader.GetTimeSpan(3);
+                            }
+
+                            //Creates an instance of Department and adds it to the List.
+                            Department tempDep = new Department(depID, depName, openTime, closeTime);
+                            resultList.Add(tempDep);
+                        }
+                        return resultList;
+                    }
+                }
+
+            }
+
+        }
+
+        //Methods for loading info about Rooms or related to Rooms
+
+        public int LoadRoomNrOfOccupants(string roomID)
+        {
+            // Returns the number of signed in Patients that are assigned to a certain room.
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Adds the connection and SQL-query to the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT COUNT(person_id_nr) FROM patient WHERE room = :id";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = roomID;
+
+                    // Gets and stores the result of the query (the number of times the personal_id_nr
+                    // appears in the database, which should be zero or none, since it has a unique
+                    // constraint.
+                    // That value is then converted to a boolean and returned.
+                    int result = 0;
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        result = reader.GetInt32(0);
+                    }
+                    return result;
+                }
+
+            }
+        }
+
+        public List<Room> LoadDepartmentRooms(string departmentID)
+        {
+            //Returns a list of all the Rooms in a spcific Department 
+            //in the database related to a specific patient.
+            List<Room> resultList = new List<Room>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM room WHERE department = :dep";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("dep", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = departmentID;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        string roomID;
+                        string function;
+                        int capacity;
+                        int maxCapacity;
+                        string depID;
+
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            roomID = reader.GetString(0);
+                            function = reader.GetString(1);
+                            capacity = reader.GetInt16(2);
+                            maxCapacity = reader.GetInt16(3);
+                            depID = reader.GetString(4);
+
+                            //Creates room instance and adds it to the list of rooms using the temporary variables.
+                            Room roomToAdd = new Room(roomID, function, capacity, maxCapacity, depID);
+                            resultList.Add(roomToAdd);
+                        }
+                        return resultList;
+
+                    }
+                }
+
             }
         }
 

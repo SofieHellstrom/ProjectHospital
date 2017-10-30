@@ -59,7 +59,7 @@ namespace HospitalManagement
 
                 string nPostArea = db.LoadPostort(nPostCode);
 
-                Patient patientToAdd = new Patient(nPersonId, nFirstName, nLastName, nAddress, nPostCode, nPostArea, nPhoneNr, nEmail, nBloodType);
+                Patient patientToAdd = new Patient(nPersonId, nFirstName, nLastName, nAddress, nPostCode, nPostArea, nPhoneNr, nEmail, nBloodType, "");
 
                 bool success = db.AddPatient(patientToAdd);
                 if (success)

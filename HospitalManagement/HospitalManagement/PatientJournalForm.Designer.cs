@@ -31,8 +31,10 @@
             this.mainPanel = new System.Windows.Forms.Panel();
             this.newNotesBtn = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.journalpostPreviewTxtBox = new System.Windows.Forms.TextBox();
+            this.journalPostListBox = new System.Windows.Forms.ListBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.signInBtn = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -44,6 +46,9 @@
             this.createReceiptBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.allergyLbl = new System.Windows.Forms.Label();
+            this.allergyListBox = new System.Windows.Forms.ListBox();
+            this.testResultListBox = new System.Windows.Forms.ListBox();
             this.testResultLbl = new System.Windows.Forms.Label();
             this.bloodTypeTxt = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -63,11 +68,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.journalPostListBox = new System.Windows.Forms.ListBox();
-            this.journalpostPreviewTxtBox = new System.Windows.Forms.TextBox();
-            this.testResultListBox = new System.Windows.Forms.ListBox();
-            this.allergyListBox = new System.Windows.Forms.ListBox();
-            this.allergyLbl = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -112,9 +112,27 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Journal-anteckningar";
             // 
+            // journalpostPreviewTxtBox
+            // 
+            this.journalpostPreviewTxtBox.Location = new System.Drawing.Point(6, 316);
+            this.journalpostPreviewTxtBox.Multiline = true;
+            this.journalpostPreviewTxtBox.Name = "journalpostPreviewTxtBox";
+            this.journalpostPreviewTxtBox.Size = new System.Drawing.Size(331, 230);
+            this.journalpostPreviewTxtBox.TabIndex = 1;
+            this.journalpostPreviewTxtBox.Enter += new System.EventHandler(this.journalpostPreviewTxtBox_Enter);
+            // 
+            // journalPostListBox
+            // 
+            this.journalPostListBox.FormattingEnabled = true;
+            this.journalPostListBox.Location = new System.Drawing.Point(6, 20);
+            this.journalPostListBox.Name = "journalPostListBox";
+            this.journalPostListBox.Size = new System.Drawing.Size(331, 290);
+            this.journalPostListBox.TabIndex = 0;
+            this.journalPostListBox.SelectedIndexChanged += new System.EventHandler(this.journalPostListBox_SelectedIndexChanged);
+            // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button4);
+            this.groupBox4.Controls.Add(this.signInBtn);
             this.groupBox4.Controls.Add(this.textBox3);
             this.groupBox4.Controls.Add(this.textBox2);
             this.groupBox4.Controls.Add(this.textBox1);
@@ -128,14 +146,15 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Inskrivnings-uppgifter";
             // 
-            // button4
+            // signInBtn
             // 
-            this.button4.Location = new System.Drawing.Point(66, 115);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(124, 23);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Inskrivning/Utskrivning";
-            this.button4.UseVisualStyleBackColor = true;
+            this.signInBtn.Location = new System.Drawing.Point(12, 115);
+            this.signInBtn.Name = "signInBtn";
+            this.signInBtn.Size = new System.Drawing.Size(88, 23);
+            this.signInBtn.TabIndex = 8;
+            this.signInBtn.Text = "Skriv in";
+            this.signInBtn.UseVisualStyleBackColor = true;
+            this.signInBtn.Click += new System.EventHandler(this.signInBtn_Click);
             // 
             // textBox3
             // 
@@ -161,7 +180,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 83);
+            this.label10.Location = new System.Drawing.Point(9, 80);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(29, 13);
             this.label10.TabIndex = 2;
@@ -236,6 +255,31 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Medicinsk Information";
+            // 
+            // allergyLbl
+            // 
+            this.allergyLbl.AutoSize = true;
+            this.allergyLbl.Location = new System.Drawing.Point(9, 49);
+            this.allergyLbl.Name = "allergyLbl";
+            this.allergyLbl.Size = new System.Drawing.Size(47, 13);
+            this.allergyLbl.TabIndex = 6;
+            this.allergyLbl.Text = "Allergier:";
+            // 
+            // allergyListBox
+            // 
+            this.allergyListBox.FormattingEnabled = true;
+            this.allergyListBox.Location = new System.Drawing.Point(9, 65);
+            this.allergyListBox.Name = "allergyListBox";
+            this.allergyListBox.Size = new System.Drawing.Size(273, 121);
+            this.allergyListBox.TabIndex = 5;
+            // 
+            // testResultListBox
+            // 
+            this.testResultListBox.FormattingEnabled = true;
+            this.testResultListBox.Location = new System.Drawing.Point(9, 208);
+            this.testResultListBox.Name = "testResultListBox";
+            this.testResultListBox.Size = new System.Drawing.Size(273, 199);
+            this.testResultListBox.TabIndex = 4;
             // 
             // testResultLbl
             // 
@@ -416,49 +460,6 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Personnummer";
             // 
-            // journalPostListBox
-            // 
-            this.journalPostListBox.FormattingEnabled = true;
-            this.journalPostListBox.Location = new System.Drawing.Point(6, 20);
-            this.journalPostListBox.Name = "journalPostListBox";
-            this.journalPostListBox.Size = new System.Drawing.Size(331, 290);
-            this.journalPostListBox.TabIndex = 0;
-            this.journalPostListBox.SelectedIndexChanged += new System.EventHandler(this.journalPostListBox_SelectedIndexChanged);
-            // 
-            // journalpostPreviewTxtBox
-            // 
-            this.journalpostPreviewTxtBox.Location = new System.Drawing.Point(6, 316);
-            this.journalpostPreviewTxtBox.Multiline = true;
-            this.journalpostPreviewTxtBox.Name = "journalpostPreviewTxtBox";
-            this.journalpostPreviewTxtBox.Size = new System.Drawing.Size(331, 230);
-            this.journalpostPreviewTxtBox.TabIndex = 1;
-            this.journalpostPreviewTxtBox.Enter += new System.EventHandler(this.journalpostPreviewTxtBox_Enter);
-            // 
-            // testResultListBox
-            // 
-            this.testResultListBox.FormattingEnabled = true;
-            this.testResultListBox.Location = new System.Drawing.Point(9, 208);
-            this.testResultListBox.Name = "testResultListBox";
-            this.testResultListBox.Size = new System.Drawing.Size(273, 199);
-            this.testResultListBox.TabIndex = 4;
-            // 
-            // allergyListBox
-            // 
-            this.allergyListBox.FormattingEnabled = true;
-            this.allergyListBox.Location = new System.Drawing.Point(9, 65);
-            this.allergyListBox.Name = "allergyListBox";
-            this.allergyListBox.Size = new System.Drawing.Size(273, 121);
-            this.allergyListBox.TabIndex = 5;
-            // 
-            // allergyLbl
-            // 
-            this.allergyLbl.AutoSize = true;
-            this.allergyLbl.Location = new System.Drawing.Point(9, 49);
-            this.allergyLbl.Name = "allergyLbl";
-            this.allergyLbl.Size = new System.Drawing.Size(47, 13);
-            this.allergyLbl.TabIndex = 6;
-            this.allergyLbl.Text = "Allergier:";
-            // 
             // PatientJournalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -516,7 +517,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button newNotesBtn;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button signInBtn;
         private System.Windows.Forms.Button savePersonInfoChange;
         private System.Windows.Forms.ListBox prescriptionListBox;
         private System.Windows.Forms.TextBox journalpostPreviewTxtBox;
