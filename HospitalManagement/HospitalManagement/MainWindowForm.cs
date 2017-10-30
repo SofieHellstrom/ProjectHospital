@@ -59,7 +59,6 @@ namespace HospitalManagement
 
             dataGridView1.DataSource = patientTableAdapter.GetDataBySearchTerm(searchTerm);
             this.dataGridView1.SelectionMode =  DataGridViewSelectionMode.FullRowSelect;
-
             // Form journal = new PatientJournalForm(dbHandler.LoadPatient(searchTerm));
             //journal.Show();
 

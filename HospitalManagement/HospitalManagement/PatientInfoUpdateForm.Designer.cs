@@ -149,6 +149,7 @@
             this.postCodeTxt.Size = new System.Drawing.Size(73, 20);
             this.postCodeTxt.TabIndex = 24;
             this.postCodeTxt.TextChanged += new System.EventHandler(this.postCodeTxt_TextChanged);
+            this.postCodeTxt.Validating += new System.ComponentModel.CancelEventHandler(this.postalAreatxt_Validating);
             // 
             // postCodeLbl
             // 

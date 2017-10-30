@@ -9,7 +9,7 @@
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="patientTableAdapter" GeneratorDataComponentClassName="patientTableAdapter" Name="patient" UserDataComponentName="patientTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="HospitalConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="false" Modifier="Public" Name="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="HospitalConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT top 0 0;</CommandText>
@@ -48,7 +48,7 @@ WHERE        (last_name = @Param1) OR
   <xs:element name="HospitalDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="HospitalDataSet" msprop:Generator_UserDSName="HospitalDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="patient" msprop:Generator_TableClassName="patientDataTable" msprop:Generator_TableVarName="tablepatient" msprop:Generator_TablePropName="patient" msprop:Generator_RowDeletingName="patientRowDeleting" msprop:Generator_RowChangingName="patientRowChanging" msprop:Generator_RowEvHandlerName="patientRowChangeEventHandler" msprop:Generator_RowDeletedName="patientRowDeleted" msprop:Generator_UserTableName="patient" msprop:Generator_RowChangedName="patientRowChanged" msprop:Generator_RowEvArgName="patientRowChangeEvent" msprop:Generator_RowClassName="patientRow">
+        <xs:element name="patient" msprop:Generator_TableClassName="patientDataTable" msprop:Generator_TableVarName="tablepatient" msprop:Generator_RowChangedName="patientRowChanged" msprop:Generator_TablePropName="patient" msprop:Generator_RowDeletingName="patientRowDeleting" msprop:Generator_RowChangingName="patientRowChanging" msprop:Generator_RowEvHandlerName="patientRowChangeEventHandler" msprop:Generator_RowDeletedName="patientRowDeleted" msprop:Generator_RowClassName="patientRow" msprop:Generator_UserTableName="patient" msprop:Generator_RowEvArgName="patientRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="person_id_nr" msprop:Generator_ColumnVarNameInTable="columnperson_id_nr" msprop:Generator_ColumnPropNameInRow="person_id_nr" msprop:Generator_ColumnPropNameInTable="person_id_nrColumn" msprop:Generator_UserColumnName="person_id_nr">

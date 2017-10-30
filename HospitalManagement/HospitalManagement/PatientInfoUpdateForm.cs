@@ -68,32 +68,31 @@ namespace HospitalManagement
             foreach (string i in textBoxContent)
             {
                 string n = currentInfo.ElementAt(textBoxContent.IndexOf(i));
-                if (!i.Equals(currentInfo.ElementAt(textBoxContent.IndexOf(i))))
+                if (!i.Equals(n))
                 {
                     return true;
                 }
-                else
-                {
-                    string btb = bloodtypeComboBox.Text;
-                    string btp = data.ThePatient.BloodType;
-                    if (bloodtypeComboBox.Text.Equals(data.ThePatient.BloodType))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
             }
-            System.Diagnostics.Debug.WriteLine("Error: No controls detected during DatachangedCheck in PatientInfoUpdateForm.");
+            string btb = bloodtypeComboBox.Text;
+            string btp = data.ThePatient.BloodType;
+            if (!bloodtypeComboBox.Text.Equals(data.ThePatient.BloodType))
+            {
+                return true;
+            }
+
             return false;
         }
 
         private void postalAreatxt_Validating(object sender, CancelEventArgs e)
         {
-            
-           
+            if (!Regex.IsMatch(postCodeTxt.Text, @"^\d{5}$"))
+            {
+                MessageBox.Show("Postnummer måste bestå av 5 siffror utan mellanslag.");
+            }
+            else
+            {
+                PopulatePostalArea();
+            }
         }
 
         private void PopulatePostalArea()
@@ -109,7 +108,7 @@ namespace HospitalManagement
             if (DataValidityCheck())
             {
                 DatabaseHandler db = new DatabaseHandler();
-                Patient updatePatient = new Patient(personIdTxt.Text, firstNameTxt.Text, lastNameTxt.Text, addressTxt.Text, Int32.Parse(postCodeTxt.Text), postalAreatxt.Text, phoneTxt.Text, eMailTxt.Text, bloodtypeComboBox.Text);
+                Patient updatePatient = new Patient(personIdTxt.Text, firstNameTxt.Text, lastNameTxt.Text, addressTxt.Text, Int32.Parse(postCodeTxt.Text), postalAreatxt.Text, phoneTxt.Text, eMailTxt.Text, bloodtypeComboBox.Text, "No Change");
                 db.UpdatePatient(updatePatient);
                 data.ThePatient = updatePatient;
                 this.Close();
@@ -174,14 +173,6 @@ namespace HospitalManagement
 
         private void postCodeTxt_TextChanged(object sender, EventArgs e)
         {
-            if (!Regex.IsMatch(postCodeTxt.Text, @"^\d{5}$"))
-            {
-                MessageBox.Show("Postnummer måste bestå av 5 siffror utan mellanslag.");
-            }
-            else
-            {
-                PopulatePostalArea();
-            }
             SetSaveChangeButtonStatus();
         }
     }

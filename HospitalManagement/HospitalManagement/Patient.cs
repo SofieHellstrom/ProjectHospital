@@ -20,15 +20,9 @@ namespace HospitalManagement
         public string PhoneNr { get; set; }
         public string Email { get; set; }
         public string BloodType { get; set; }
-        
-        //Properties below commented out until the classes they refer to have been created.
-        //There are most likely more, these are just examples.
-        //public Room CurrentRoom { get; set; }
-        //public list<JournalPost> myEntries { get; set; } 
-        //public list<Prescription> myPrescriptions { get; set; }
-        //public list<Booking> myBookings { get; set; }
+        public string Room { get; set; }
 
-        public Patient (string persNr, string firstName, string lastName, string address, int postCode, string postArea, string phoneNr, string eMail, string blood)
+        public Patient(string persNr, string firstName, string lastName, string address, int postCode, string postArea, string phoneNr, string eMail, string blood)
         {
             //Constructor with all the basic information about the patient. Will be called from a class/method
             //that loads the information from the database and creates the patient object.
@@ -41,6 +35,28 @@ namespace HospitalManagement
             this.PhoneNr = phoneNr;
             this.Email = eMail;
             this.BloodType = blood;
+        }
+
+        public Patient (string persNr, string firstName, string lastName, string address, int postCode, string postArea, string phoneNr, string eMail, string blood, string room)
+        {
+            //Constructor with all the basic information about the patient. Will be called from a class/method
+            //that loads the information from the database and creates the patient object.
+            this.Personnummer = persNr;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Address = address;
+            this.PostalCode = postCode;
+            this.PostalArea = postArea;
+            this.PhoneNr = phoneNr;
+            this.Email = eMail;
+            this.BloodType = blood;
+            this.Room = room;
+        }
+
+        public void UpdateSelf()
+        {
+            DatabaseHandler db = new DatabaseHandler();
+            db.UpdatePatient(this);
         }
 
         public override string ToString()

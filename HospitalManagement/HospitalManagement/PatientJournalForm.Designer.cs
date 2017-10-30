@@ -34,7 +34,7 @@
             this.journalpostPreviewTxtBox = new System.Windows.Forms.TextBox();
             this.journalPostListBox = new System.Windows.Forms.ListBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.signInBtn = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -136,7 +136,7 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button4);
+            this.groupBox4.Controls.Add(this.signInBtn);
             this.groupBox4.Controls.Add(this.textBox3);
             this.groupBox4.Controls.Add(this.textBox2);
             this.groupBox4.Controls.Add(this.textBox1);
@@ -150,14 +150,15 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Inskrivnings-uppgifter";
             // 
-            // button4
+            // signInBtn
             // 
-            this.button4.Location = new System.Drawing.Point(66, 115);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(124, 23);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Inskrivning/Utskrivning";
-            this.button4.UseVisualStyleBackColor = true;
+            this.signInBtn.Location = new System.Drawing.Point(12, 115);
+            this.signInBtn.Name = "signInBtn";
+            this.signInBtn.Size = new System.Drawing.Size(88, 23);
+            this.signInBtn.TabIndex = 8;
+            this.signInBtn.Text = "Skriv in";
+            this.signInBtn.UseVisualStyleBackColor = true;
+            this.signInBtn.Click += new System.EventHandler(this.signInBtn_Click);
             // 
             // textBox3
             // 
@@ -183,7 +184,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 83);
+            this.label10.Location = new System.Drawing.Point(9, 80);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(29, 13);
             this.label10.TabIndex = 2;
@@ -540,7 +541,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button newNotesBtn;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button signInBtn;
         private System.Windows.Forms.Button savePersonInfoChange;
         private System.Windows.Forms.ListBox prescriptionListBox;
         private System.Windows.Forms.TextBox journalpostPreviewTxtBox;

@@ -90,6 +90,10 @@ namespace HospitalManagement
         {
             Form booking = new BookingForm(data.ThePatient, data.MyUser);
             booking.Show();
+        private void signInBtn_Click(object sender, EventArgs e)
+        {
+            Form signIn = new SignInForm(data);
+            signIn.Show();
         }
     }
 }
