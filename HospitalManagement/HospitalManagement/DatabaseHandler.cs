@@ -436,6 +436,63 @@ namespace HospitalManagement
             throw new NotImplementedException();
         }
 
+        //Methods concerned with loading or changing data related to JournalNotes in the Database
+
+        public List<JournalPost> LoadPatientNotes(string personnummer)
+        {
+            //Returns a list of instance of the prescription class based on the values 
+            //in the database related to a specific patient.
+            List<JournalPost> resultList = new List<JournalPost>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM journalpost WHERE patient = :patient";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("patient", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = personnummer;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        DateTime date;
+                        string doctor;
+                        string patient;
+                        string noteType;
+                        string noteText;
+                        bool important;
+
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            date = reader.GetDateTime(0);
+                            doctor = reader.GetString(1);
+                            patient = reader.GetString(2);
+                            noteType = reader.GetString(3);
+                            noteText = reader.GetString(4);
+                            important = reader.GetBoolean(5);
+
+                            //Creates prescription instance and adds it to the list of medications using the temporary variables.
+                            JournalPost journalpostToAdd = new JournalPost(date, doctor, patient, noteType, noteText, important);
+                            resultList.Add(journalpostToAdd);
+                        }
+                        return resultList;
+
+                    }
+                }
+
+            }
+        }
+
         public bool AddJournalEntry (string user, string patient, string entryType, string content, bool imp)
         {
             //This method is for saving entries in a patients journal. The variables passed to the method are the following:
@@ -571,7 +628,7 @@ namespace HospitalManagement
 
         //Methods related to usernames and passwords from the user table.
 
-        public Boolean UserExists (string username, bool isPatient)
+        public Boolean UserExists (string username)
         {
 
             //Currently not working.
@@ -588,23 +645,17 @@ namespace HospitalManagement
 
                     cmd.Connection = conn;
 
-                    if (isPatient)
-                    {
-                         commandString = "SELECT COUNT ('id') FROM userinfo WHERE 'id' = :id";
-                    }
-                    else
-                    {
-                        commandString = "SELECT COUNT ('id') FROM user WHERE 'id' = :id";
-                    }
+                    commandString = $"SELECT COUNT (*) FROM userinfo WHERE id = '{username}'";
+                    //commandString = "SELECT COUNT (*) FROM userinfo WHERE 'id' = :id";
 
                     cmd.CommandText = commandString;
                     
 
-                    cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+                    //cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
 
-                    cmd.Prepare();
+                    //cmd.Prepare();
 
-                    cmd.Parameters[0].Value = username;
+                    //cmd.Parameters[0].Value = username;
 
                     // Gets and stores the result of the query (the number of times the personal_id_nr
                     // appears in the database, which should be zero or none, since it has a unique
@@ -896,5 +947,105 @@ namespace HospitalManagement
             }
         }
 
+        public List<Booking> LoadPatientBookings(string personnummer)
+        {
+            //Returns a list of instance of the booking class based on the values 
+            //in the database related to a specific patient.
+            List<Booking> resultList = new List<Booking>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM booking WHERE patient = :patient";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("patient", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = personnummer;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        int booking_id;
+                        string purpose;
+                        DateTime start_time;
+                        DateTime end_time;
+                        string staff;
+                        string patient;
+                        string room;
+                        
+
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            booking_id = reader.GetInt32(0);
+                            purpose = reader.GetString(1);
+                            start_time = reader.GetDateTime(2);
+                            end_time = reader.GetDateTime(3);
+                            staff = reader.GetString(4);
+                            patient = reader.GetString(5);
+                            room = reader.GetString(6);
+
+                            //Creates booking instance and adds it to the list of bookings using the temporary variables.
+                            Booking bookingToAdd = new Booking(booking_id, purpose, start_time, end_time, staff, patient, room);
+                            resultList.Add(bookingToAdd);
+                        }
+                        return resultList;
+
+                    }
+                }
+
+            }
+        }
+
+        public Boolean AddBooking(Booking booking)
+        {
+            //Adds a new booking to the database. 
+            Booking bookingToAdd = booking;
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds relevant data to temporary variables. Mostly for debugging purposes.
+                    int id = bookingToAdd.BookingID;
+                    string purpose = bookingToAdd.BookingPurpose;
+                    DateTime start  = bookingToAdd.BookingStart;
+                    DateTime end = bookingToAdd.BookingEnd;
+                    string staff = bookingToAdd.StaffName;
+                    string patient = bookingToAdd.PatientName;
+                    string room = bookingToAdd.RoomNr;
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    try
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = $"INSERT INTO booking (id, purpose, start, end, staff, patient, room) VALUES ('{bookingToAdd.BookingID}', '{bookingToAdd.BookingPurpose}', '{bookingToAdd.BookingStart}', '{bookingToAdd.BookingEnd}', '{bookingToAdd.StaffName}','{bookingToAdd.PatientName}','{bookingToAdd.RoomNr}')";
+
+                        int recordsAffected = cmd.ExecuteNonQuery();
+
+                        //Returns a boolean which is True if any rows have been affected. 
+                        return Convert.ToBoolean(recordsAffected);
+                    }
+                    catch (PostgresException e)
+                    {
+                        //Writes Exception error to DebugWindow and returns false, if a
+                        //PostgresException occurs.
+                        System.Diagnostics.Debug.WriteLine(e.ToString());
+                        return false;
+                    }
+
+                }
+            }
+        }
     }
 }

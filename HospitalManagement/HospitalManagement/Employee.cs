@@ -22,12 +22,6 @@ namespace HospitalManagement
         public string Department { get; set; }
         public string Specialty { get; set; }
 
-        
-
-        //Properties below commented out until the classes they refer to have been created.
-        //There are most likely more, these are just examples.
-        //public Department MyDepartment { get; set; }
-        //
         //Not sure right now if we should have a doctor class that inherits from this class
         //that has a property linking to a specialty, since only doctors have that, or if we
         //should just let all staff have a link to a specialty, but keep it null if there isn't one.
@@ -49,6 +43,10 @@ namespace HospitalManagement
             this.Specialty = specialisering;
         }
 
+        public override string ToString()
+        {
+            return $"{LastName}, {FirstName}.";
+        }
     }
 }
 

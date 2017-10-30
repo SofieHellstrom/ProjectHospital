@@ -15,6 +15,7 @@ namespace HospitalManagement
     {
 
         private Boolean isPatient = false;
+        private UserInfo user;
 
         public LoginForm()
         {
@@ -24,37 +25,42 @@ namespace HospitalManagement
         private void loginBtn_Click(object sender, EventArgs e)
         {
             DatabaseHandler db = new DatabaseHandler();
-            UserInfo user;
+
             string username = usernameTxtBox.Text;
             string password = passwordTxtBox.Text;
 
             if (Regex.IsMatch(username, @"^\d{2}[01]\d[0-3]\d[-]\d{4}$"))
             {
                 isPatient = true;
+                System.Diagnostics.Debug.WriteLine("isPatient = true");
             }
             else
             {
                 isPatient = false;
+                System.Diagnostics.Debug.WriteLine("isPatient = false");
             }
 
-            //if (!db.UserExists(username, isPatient))
-            //{
-            //    warningLbl.Text = "Användare finns ej.";
-            //    warningLbl.Visible = true;
-            //    return;
-            //}
-            //else
-            //{
+            if (!db.UserExists(username))
+            {
+                errorProvider.SetError(usernameTxtBox, "Användarnamn finns ej");
+                //warningLbl.Text = "Användare finns ej.";
+                //warningLbl.Visible = true;
+                return;
+            }
+            else
+            {
+                errorProvider.SetError(usernameTxtBox, "");
                 user = db.LoadUser(username, isPatient);
                 warningLbl.Text = "";
                 warningLbl.Visible = false;
-            //}
+            }
             
 
             if (!user.PasswordIsCorrect(password))
             {
-                warningLbl.Text = "Felaktigt Användarnamn/Lösenord";
-                warningLbl.Visible = true;
+                errorProvider.SetError(passwordTxtBox, "Lösenord och Användarnamn matchar ej!");
+                //warningLbl.Text = "Felaktigt Användarnamn/Lösenord";
+                //warningLbl.Visible = true;
                 return;
             }
             else
@@ -68,6 +74,7 @@ namespace HospitalManagement
                 }
                 else
                 {
+                    errorProvider.SetError(passwordTxtBox, "");
                     Employee userEmployee = db.LoadEmployee(user.Identifier);
                     Form main = new MainWindow(userEmployee);
                     main.Show();

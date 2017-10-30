@@ -72,7 +72,7 @@ namespace HospitalManagement
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
             {
@@ -121,6 +121,11 @@ namespace HospitalManagement
         {
             // TODO: This line of code loads data into the 'hospitalDataSet1.staff' table. You can move, or remove it, as needed.
             this.staffTableAdapter.Fill(this.hospitalDataSet1.staff);
+
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

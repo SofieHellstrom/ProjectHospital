@@ -49,6 +49,7 @@
             this.prescriptionMedTxtBox.Name = "prescriptionMedTxtBox";
             this.prescriptionMedTxtBox.Size = new System.Drawing.Size(246, 20);
             this.prescriptionMedTxtBox.TabIndex = 1;
+            this.prescriptionMedTxtBox.TabStop = false;
             // 
             // medicationListBox
             // 
@@ -81,7 +82,7 @@
             this.nrOfTimesTxtBox.Location = new System.Drawing.Point(648, 33);
             this.nrOfTimesTxtBox.Name = "nrOfTimesTxtBox";
             this.nrOfTimesTxtBox.Size = new System.Drawing.Size(49, 20);
-            this.nrOfTimesTxtBox.TabIndex = 5;
+            this.nrOfTimesTxtBox.TabIndex = 2;
             this.nrOfTimesTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.nrOfTimesTxtBox_Validating);
             // 
             // instructionLbl
@@ -108,7 +109,7 @@
             this.filterTxtBox.Location = new System.Drawing.Point(50, 8);
             this.filterTxtBox.Name = "filterTxtBox";
             this.filterTxtBox.Size = new System.Drawing.Size(169, 20);
-            this.filterTxtBox.TabIndex = 8;
+            this.filterTxtBox.TabIndex = 1;
             this.filterTxtBox.TextChanged += new System.EventHandler(this.filterTxtBox_TextChanged);
             // 
             // label1
@@ -131,6 +132,7 @@
             // 
             // errorProvider
             // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
             // PrescriptionForm

@@ -23,7 +23,7 @@ namespace HospitalManagement
 
         private void DataValidityCheck()
         {
-            //Goes through all the textboxes in the from and makes sure that they have some sort of content. 
+            //Goes through all the textboxes in the form and makes sure that they have some sort of content. 
             bool dataValid = true;
             foreach (Control control in this.Controls)
             {
@@ -84,11 +84,13 @@ namespace HospitalManagement
             //Checks if person id matches the pattern of a swedish Personal ID number. 
             if(!Regex.IsMatch(personIdTxt.Text, @"^\d{2}[01]\d[0-3]\d[-]\d{4}$"))
             {
-                MessageBox.Show("Personnummer måste skrivas enligt ÅÅMMDD-XXXX.");
+                errorProvider.SetError(personIdTxt, "Personnummer måste skrivas enligt: ÅÅMMDD-XXXX");
+                //MessageBox.Show("Personnummer måste skrivas enligt ÅÅMMDD-XXXX.");
                 personIdTxt.Focus();
             }
             else
             {
+                errorProvider.SetError(personIdTxt, "");
                 DataValidityCheck();
             }
         }
@@ -96,12 +98,15 @@ namespace HospitalManagement
         private void postCodeTxt_Validating(object sender, CancelEventArgs e)
         {
             //Checks if the content of postCodeTxt is 5 digits exactly, and shows errormessage if it isn't.
+            postCodeTxt.Text = postCodeTxt.Text.Replace(" ", String.Empty);
             if (!Regex.IsMatch(postCodeTxt.Text, @"^\d{5}$"))
             {
-                MessageBox.Show("Postnummer måste bestå av 5 siffror utan mellanslag.");
+                errorProvider.SetError(postCodeTxt, "Postkod måste anges med 5 siffror.");
+                //MessageBox.Show("Postnummer måste bestå av 5 siffror utan mellanslag.");
             }
             else
             {
+                errorProvider.SetError(postCodeTxt, "");
                 //Gets the name of the Postort from the database and displays it in the postalAreaTxt box.
                 DatabaseHandler db = new DatabaseHandler();
                 string postOrt = db.LoadPostort(Convert.ToInt32(postCodeTxt.Text));

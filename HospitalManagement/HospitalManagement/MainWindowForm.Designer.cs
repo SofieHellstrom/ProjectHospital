@@ -49,18 +49,18 @@
             this.searchPatientBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.searchDoctorBtn = new System.Windows.Forms.Button();
-            this.searchDoctorBox = new System.Windows.Forms.TextBox();
-            this.patientTableAdapter = new HospitalManagement.HospitalDataSetTableAdapters.patientTableAdapter();
-            this.hospitalDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.hospitalDataSet1 = new HospitalManagement.HospitalDataSet1();
-            this.staffBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.staffTableAdapter = new HospitalManagement.HospitalDataSet1TableAdapters.staffTableAdapter();
             this.firstnameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastnameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.positionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.specialtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.staffBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.hospitalDataSet1 = new HospitalManagement.HospitalDataSet1();
+            this.searchDoctorBtn = new System.Windows.Forms.Button();
+            this.searchDoctorBox = new System.Windows.Forms.TextBox();
+            this.patientTableAdapter = new HospitalManagement.HospitalDataSetTableAdapters.patientTableAdapter();
+            this.hospitalDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.staffTableAdapter = new HospitalManagement.HospitalDataSet1TableAdapters.staffTableAdapter();
             this.tableLayoutPane.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -71,9 +71,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSet)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.staffBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPane
@@ -191,7 +191,8 @@
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridView1.Size = new System.Drawing.Size(621, 239);
             this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+           // this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
+            this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             // 
             // personidnrDataGridViewTextBoxColumn
             // 
@@ -275,45 +276,6 @@
             this.dataGridView2.TabIndex = 2;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
-            // searchDoctorBtn
-            // 
-            this.searchDoctorBtn.Location = new System.Drawing.Point(159, 14);
-            this.searchDoctorBtn.Name = "searchDoctorBtn";
-            this.searchDoctorBtn.Size = new System.Drawing.Size(75, 23);
-            this.searchDoctorBtn.TabIndex = 1;
-            this.searchDoctorBtn.Text = "Sök ";
-            this.searchDoctorBtn.UseVisualStyleBackColor = true;
-            // 
-            // searchDoctorBox
-            // 
-            this.searchDoctorBox.Location = new System.Drawing.Point(26, 16);
-            this.searchDoctorBox.Name = "searchDoctorBox";
-            this.searchDoctorBox.Size = new System.Drawing.Size(100, 20);
-            this.searchDoctorBox.TabIndex = 0;
-            // 
-            // patientTableAdapter
-            // 
-            this.patientTableAdapter.ClearBeforeFill = true;
-            // 
-            // hospitalDataSetBindingSource
-            // 
-            this.hospitalDataSetBindingSource.DataSource = this.hospitalDataSet;
-            this.hospitalDataSetBindingSource.Position = 0;
-            // 
-            // hospitalDataSet1
-            // 
-            this.hospitalDataSet1.DataSetName = "HospitalDataSet1";
-            this.hospitalDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // staffBindingSource
-            // 
-            this.staffBindingSource.DataMember = "staff";
-            this.staffBindingSource.DataSource = this.hospitalDataSet1;
-            // 
-            // staffTableAdapter
-            // 
-            this.staffTableAdapter.ClearBeforeFill = true;
-            // 
             // firstnameDataGridViewTextBoxColumn1
             // 
             this.firstnameDataGridViewTextBoxColumn1.DataPropertyName = "first_name";
@@ -344,6 +306,45 @@
             this.specialtyDataGridViewTextBoxColumn.HeaderText = "specialty";
             this.specialtyDataGridViewTextBoxColumn.Name = "specialtyDataGridViewTextBoxColumn";
             // 
+            // staffBindingSource
+            // 
+            this.staffBindingSource.DataMember = "staff";
+            this.staffBindingSource.DataSource = this.hospitalDataSet1;
+            // 
+            // hospitalDataSet1
+            // 
+            this.hospitalDataSet1.DataSetName = "HospitalDataSet1";
+            this.hospitalDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // searchDoctorBtn
+            // 
+            this.searchDoctorBtn.Location = new System.Drawing.Point(159, 14);
+            this.searchDoctorBtn.Name = "searchDoctorBtn";
+            this.searchDoctorBtn.Size = new System.Drawing.Size(75, 23);
+            this.searchDoctorBtn.TabIndex = 1;
+            this.searchDoctorBtn.Text = "Sök ";
+            this.searchDoctorBtn.UseVisualStyleBackColor = true;
+            // 
+            // searchDoctorBox
+            // 
+            this.searchDoctorBox.Location = new System.Drawing.Point(26, 16);
+            this.searchDoctorBox.Name = "searchDoctorBox";
+            this.searchDoctorBox.Size = new System.Drawing.Size(100, 20);
+            this.searchDoctorBox.TabIndex = 0;
+            // 
+            // patientTableAdapter
+            // 
+            this.patientTableAdapter.ClearBeforeFill = true;
+            // 
+            // hospitalDataSetBindingSource
+            // 
+            this.hospitalDataSetBindingSource.DataSource = this.hospitalDataSet;
+            this.hospitalDataSetBindingSource.Position = 0;
+            // 
+            // staffTableAdapter
+            // 
+            this.staffTableAdapter.ClearBeforeFill = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -367,9 +368,9 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.staffBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

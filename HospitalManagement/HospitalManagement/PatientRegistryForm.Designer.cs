@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.personIdTxt = new System.Windows.Forms.TextBox();
             this.personIdLbl = new System.Windows.Forms.Label();
             this.fNameLbl = new System.Windows.Forms.Label();
@@ -47,6 +48,8 @@
             this.mailLbl = new System.Windows.Forms.Label();
             this.phoneTxt = new System.Windows.Forms.TextBox();
             this.eMailTxt = new System.Windows.Forms.TextBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // personIdTxt
@@ -130,7 +133,7 @@
             // postCodeTxt
             // 
             this.postCodeTxt.Location = new System.Drawing.Point(99, 114);
-            this.postCodeTxt.MaxLength = 5;
+            this.postCodeTxt.MaxLength = 6;
             this.postCodeTxt.Name = "postCodeTxt";
             this.postCodeTxt.Size = new System.Drawing.Size(73, 20);
             this.postCodeTxt.TabIndex = 4;
@@ -227,6 +230,11 @@
             this.eMailTxt.TabIndex = 6;
             this.eMailTxt.Validated += new System.EventHandler(this.eMailTxt_Validated);
             // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
             // PatientRegistryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -253,6 +261,7 @@
             this.Controls.Add(this.personIdTxt);
             this.Name = "PatientRegistryForm";
             this.Text = "Registrera Patient";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -279,5 +288,6 @@
         private System.Windows.Forms.Label mailLbl;
         private System.Windows.Forms.TextBox phoneTxt;
         private System.Windows.Forms.TextBox eMailTxt;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
