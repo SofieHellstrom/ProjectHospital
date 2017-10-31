@@ -1212,5 +1212,67 @@ namespace HospitalManagement
                 }
             }
         }
+
+        public List<Employee> LoadDoctors(string personnummer)
+        {
+            //Returns a list of instance of the employee class based on the values 
+            //in the database 
+            List<Employee> resultList = new List<Employee>();
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM staff WHERE specialty = :specialty AND specialty IS NOT NULL" ;
+
+                    cmd.Parameters.Add(new NpgsqlParameter("specialty", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = personnummer;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        string empId;
+                        string firstName;
+                        string lastName;
+                        string address;
+                        int postCode;
+                        string postArea;
+                        string phoneNr;
+                        string eMail;
+                        string persNr;
+                        string position;
+                        string avdelning;
+                        string specialisering;
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            empId = reader.GetString(0);
+                            firstName = reader.GetString(1);
+                            lastName = reader.GetString(2);
+                            address = reader.GetString(3);
+                            postCode = reader.GetInt32(4);
+                            postArea = reader.GetString(5);
+                            phoneNr = reader.GetString(6);
+                            eMail = reader.GetString(7);
+                            persNr = reader.GetString(8);
+                            position = reader.GetString(9);
+                            avdelning = reader.GetString(10);
+                            specialisering = reader.GetString(11);
+
+                            //Creates doctor instance and adds it to the list of doctors using the temporary variables.
+                            Employee doctorToAdd = new Employee(empId, firstName, lastName, address, postCode, postArea, phoneNr, eMail, persNr, position, avdelning, specialisering);
+                            resultList.Add(doctorToAdd);
+                        }
+                        return resultList;
+                    }
+                }
+            }
+        }
     }
 }
