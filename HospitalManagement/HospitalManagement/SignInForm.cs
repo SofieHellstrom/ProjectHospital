@@ -32,7 +32,12 @@ namespace HospitalManagement
         private void departmentComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             RoomList = db.LoadDepartmentRooms((departmentComboBox.SelectedValue as Department).DepartmentID);
+            roomComboBox.SelectedIndex = -1;
             roomComboBox.DataSource = RoomList;
+            
+
+
+            //roomComboBox.SelectedIndex = -1;           
         }
 
         private void registerBtn_Click(object sender, EventArgs e)
