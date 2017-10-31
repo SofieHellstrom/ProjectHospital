@@ -35,7 +35,7 @@ namespace HospitalManagement
             this.LastName = lastName;
             this.Address = address;
             this.PostalCode = postCode;
-            this.PostalArea = postArea;
+            this.PostalArea = postArea; 
             this.Email = eMail;
             this.PersonNummer = persNr;
             this.Position = position;
@@ -45,7 +45,7 @@ namespace HospitalManagement
 
         public override string ToString()
         {
-            return $"{LastName}, {FirstName}.";
+            return $"{LastName}, {FirstName}.| {Specialty}"; //Will figure how to separate specialty if needed
         }
     }
 }

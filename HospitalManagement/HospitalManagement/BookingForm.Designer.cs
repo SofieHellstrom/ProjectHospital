@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.bookingPersonNrBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,10 +40,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.startTime = new System.Windows.Forms.TextBox();
-            this.endTime = new System.Windows.Forms.TextBox();
             this.purposeBox = new System.Windows.Forms.TextBox();
             this.bokaBtn = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.startTime2 = new System.Windows.Forms.DateTimePicker();
+            this.endTime2 = new System.Windows.Forms.DateTimePicker();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -83,6 +86,7 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(143, 20);
             this.dateTimePicker1.TabIndex = 4;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label3
             // 
@@ -137,20 +141,6 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "Till:";
             // 
-            // startTime
-            // 
-            this.startTime.Location = new System.Drawing.Point(380, 89);
-            this.startTime.Name = "startTime";
-            this.startTime.Size = new System.Drawing.Size(61, 20);
-            this.startTime.TabIndex = 11;
-            // 
-            // endTime
-            // 
-            this.endTime.Location = new System.Drawing.Point(476, 89);
-            this.endTime.Name = "endTime";
-            this.endTime.Size = new System.Drawing.Size(61, 20);
-            this.endTime.TabIndex = 12;
-            // 
             // purposeBox
             // 
             this.purposeBox.Location = new System.Drawing.Point(104, 170);
@@ -168,15 +158,42 @@
             this.bokaBtn.UseVisualStyleBackColor = true;
             this.bokaBtn.Click += new System.EventHandler(this.bokaBtn_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // startTime2
+            // 
+            this.startTime2.CustomFormat = "HH:mm";
+            this.startTime2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.startTime2.Location = new System.Drawing.Point(380, 86);
+            this.startTime2.Name = "startTime2";
+            this.startTime2.ShowUpDown = true;
+            this.startTime2.Size = new System.Drawing.Size(51, 20);
+            this.startTime2.TabIndex = 15;
+            this.startTime2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
+            // 
+            // endTime2
+            // 
+            this.endTime2.CustomFormat = "HH:mm";
+            this.endTime2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.endTime2.Location = new System.Drawing.Point(476, 86);
+            this.endTime2.Name = "endTime2";
+            this.endTime2.ShowUpDown = true;
+            this.endTime2.Size = new System.Drawing.Size(51, 20);
+            this.endTime2.TabIndex = 16;
+            this.endTime2.ValueChanged += new System.EventHandler(this.endTime2_ValueChanged);
+            // 
             // BookingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(591, 443);
+            this.Controls.Add(this.endTime2);
+            this.Controls.Add(this.startTime2);
             this.Controls.Add(this.bokaBtn);
             this.Controls.Add(this.purposeBox);
-            this.Controls.Add(this.endTime);
-            this.Controls.Add(this.startTime);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -190,6 +207,7 @@
             this.Controls.Add(this.label1);
             this.Name = "BookingForm";
             this.Text = "BookingForm";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,9 +226,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox startTime;
-        private System.Windows.Forms.TextBox endTime;
         private System.Windows.Forms.TextBox purposeBox;
         private System.Windows.Forms.Button bokaBtn;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.DateTimePicker startTime2;
+        private System.Windows.Forms.DateTimePicker endTime2;
     }
 }

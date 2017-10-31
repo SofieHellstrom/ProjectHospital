@@ -36,34 +36,34 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.patientJournalBtn = new System.Windows.Forms.Button();
             this.newPatientBtn = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.personidnrDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patientBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.hospitalDataSet = new HospitalManagement.HospitalDataSet();
+            this.searchPatientBtn = new System.Windows.Forms.Button();
+            this.searchPatientBox = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.staffBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.hospitalDataSet1 = new HospitalManagement.HospitalDataSet1();
             this.patientTableAdapter = new HospitalManagement.HospitalDataSetTableAdapters.patientTableAdapter();
             this.hospitalDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.staffTableAdapter = new HospitalManagement.HospitalDataSet1TableAdapters.staffTableAdapter();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.searchPatientBox = new System.Windows.Forms.TextBox();
-            this.searchPatientBtn = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.roomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.personidnrDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tableLayoutPane.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.patientBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.staffBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSetBindingSource)).BeginInit();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPane
@@ -109,6 +109,7 @@
             this.userIdentityLbl.Size = new System.Drawing.Size(232, 13);
             this.userIdentityLbl.TabIndex = 0;
             this.userIdentityLbl.Text = "User: Efternamn, Förnamn (Anställningsnummer)";
+            this.userIdentityLbl.Click += new System.EventHandler(this.userIdentityLbl_Click);
             // 
             // panel3
             // 
@@ -139,6 +140,74 @@
             this.newPatientBtn.UseVisualStyleBackColor = true;
             this.newPatientBtn.Click += new System.EventHandler(this.newPatientBtn_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(114, 42);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(667, 417);
+            this.tabControl1.TabIndex = 3;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Controls.Add(this.searchPatientBtn);
+            this.tabPage1.Controls.Add(this.searchPatientBox);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(659, 391);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Patienter";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.personidnrDataGridViewTextBoxColumn,
+            this.firstnameDataGridViewTextBoxColumn,
+            this.lastnameDataGridViewTextBoxColumn,
+            this.roomDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.patientBindingSource;
+            this.dataGridView1.Location = new System.Drawing.Point(20, 78);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.dataGridView1.Size = new System.Drawing.Size(621, 239);
+            this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
+            // 
+            // personidnrDataGridViewTextBoxColumn
+            // 
+            this.personidnrDataGridViewTextBoxColumn.DataPropertyName = "person_id_nr";
+            this.personidnrDataGridViewTextBoxColumn.HeaderText = "Personnummer";
+            this.personidnrDataGridViewTextBoxColumn.Name = "personidnrDataGridViewTextBoxColumn";
+            // 
+            // firstnameDataGridViewTextBoxColumn
+            // 
+            this.firstnameDataGridViewTextBoxColumn.DataPropertyName = "first_name";
+            this.firstnameDataGridViewTextBoxColumn.HeaderText = "Förnamn";
+            this.firstnameDataGridViewTextBoxColumn.Name = "firstnameDataGridViewTextBoxColumn";
+            // 
+            // lastnameDataGridViewTextBoxColumn
+            // 
+            this.lastnameDataGridViewTextBoxColumn.DataPropertyName = "last_name";
+            this.lastnameDataGridViewTextBoxColumn.HeaderText = "Efternamn";
+            this.lastnameDataGridViewTextBoxColumn.Name = "lastnameDataGridViewTextBoxColumn";
+            // 
+            // roomDataGridViewTextBoxColumn
+            // 
+            this.roomDataGridViewTextBoxColumn.DataPropertyName = "room";
+            this.roomDataGridViewTextBoxColumn.HeaderText = "Rum";
+            this.roomDataGridViewTextBoxColumn.Name = "roomDataGridViewTextBoxColumn";
+            // 
             // patientBindingSource
             // 
             this.patientBindingSource.DataMember = "patient";
@@ -148,6 +217,33 @@
             // 
             this.hospitalDataSet.DataSetName = "HospitalDataSet";
             this.hospitalDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // searchPatientBtn
+            // 
+            this.searchPatientBtn.Location = new System.Drawing.Point(150, 10);
+            this.searchPatientBtn.Name = "searchPatientBtn";
+            this.searchPatientBtn.Size = new System.Drawing.Size(101, 23);
+            this.searchPatientBtn.TabIndex = 1;
+            this.searchPatientBtn.Text = "Sök Patient";
+            this.searchPatientBtn.UseVisualStyleBackColor = true;
+            this.searchPatientBtn.Click += new System.EventHandler(this.searchPatientBtn_Click);
+            // 
+            // searchPatientBox
+            // 
+            this.searchPatientBox.Location = new System.Drawing.Point(20, 10);
+            this.searchPatientBox.Name = "searchPatientBox";
+            this.searchPatientBox.Size = new System.Drawing.Size(100, 20);
+            this.searchPatientBox.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(659, 391);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Läkare";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // staffBindingSource
             // 
@@ -172,101 +268,6 @@
             // 
             this.staffTableAdapter.ClearBeforeFill = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(659, 391);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Läkare";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Controls.Add(this.searchPatientBtn);
-            this.tabPage1.Controls.Add(this.searchPatientBox);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(659, 391);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Patienter";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // searchPatientBox
-            // 
-            this.searchPatientBox.Location = new System.Drawing.Point(20, 10);
-            this.searchPatientBox.Name = "searchPatientBox";
-            this.searchPatientBox.Size = new System.Drawing.Size(100, 20);
-            this.searchPatientBox.TabIndex = 0;
-            // 
-            // searchPatientBtn
-            // 
-            this.searchPatientBtn.Location = new System.Drawing.Point(150, 10);
-            this.searchPatientBtn.Name = "searchPatientBtn";
-            this.searchPatientBtn.Size = new System.Drawing.Size(101, 23);
-            this.searchPatientBtn.TabIndex = 1;
-            this.searchPatientBtn.Text = "Sök Patient";
-            this.searchPatientBtn.UseVisualStyleBackColor = true;
-            this.searchPatientBtn.Click += new System.EventHandler(this.searchPatientBtn_Click);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.personidnrDataGridViewTextBoxColumn,
-            this.firstnameDataGridViewTextBoxColumn,
-            this.lastnameDataGridViewTextBoxColumn,
-            this.roomDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.patientBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(20, 78);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dataGridView1.Size = new System.Drawing.Size(621, 239);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
-            // 
-            // roomDataGridViewTextBoxColumn
-            // 
-            this.roomDataGridViewTextBoxColumn.DataPropertyName = "room";
-            this.roomDataGridViewTextBoxColumn.HeaderText = "Rum";
-            this.roomDataGridViewTextBoxColumn.Name = "roomDataGridViewTextBoxColumn";
-            // 
-            // lastnameDataGridViewTextBoxColumn
-            // 
-            this.lastnameDataGridViewTextBoxColumn.DataPropertyName = "last_name";
-            this.lastnameDataGridViewTextBoxColumn.HeaderText = "Efternamn";
-            this.lastnameDataGridViewTextBoxColumn.Name = "lastnameDataGridViewTextBoxColumn";
-            // 
-            // firstnameDataGridViewTextBoxColumn
-            // 
-            this.firstnameDataGridViewTextBoxColumn.DataPropertyName = "first_name";
-            this.firstnameDataGridViewTextBoxColumn.HeaderText = "Förnamn";
-            this.firstnameDataGridViewTextBoxColumn.Name = "firstnameDataGridViewTextBoxColumn";
-            // 
-            // personidnrDataGridViewTextBoxColumn
-            // 
-            this.personidnrDataGridViewTextBoxColumn.DataPropertyName = "person_id_nr";
-            this.personidnrDataGridViewTextBoxColumn.HeaderText = "Personnummer";
-            this.personidnrDataGridViewTextBoxColumn.Name = "personidnrDataGridViewTextBoxColumn";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(114, 42);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(667, 417);
-            this.tabControl1.TabIndex = 3;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -281,15 +282,15 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.patientBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.staffBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hospitalDataSetBindingSource)).EndInit();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

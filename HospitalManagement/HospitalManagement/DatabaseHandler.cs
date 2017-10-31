@@ -1068,7 +1068,7 @@ namespace HospitalManagement
 
             }
         }
-    
+
 
 
 
@@ -1213,7 +1213,7 @@ namespace HospitalManagement
             }
         }
 
-        public List<Employee> LoadDoctors(string personnummer)
+        public List<Employee> LoadDoctors(string specialty)
         {
             //Returns a list of instance of the employee class based on the values 
             //in the database 
@@ -1227,13 +1227,21 @@ namespace HospitalManagement
                 {
                     //Configures the connection and SQL-query for the command and prepares it.
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT * FROM staff WHERE specialty = :specialty AND specialty IS NOT NULL" ;
+                   if (specialty == null)
+                    {
+                        specialty = "";
+                        cmd.CommandText = "SELECT * FROM staff WHERE specialty IS NOT NULL";
+                    }
+                    else
+                    {
+                        cmd.CommandText = "SELECT * FROM staff WHERE specialty = :specialty";
+                    }
 
                     cmd.Parameters.Add(new NpgsqlParameter("specialty", NpgsqlDbType.Varchar));
 
                     cmd.Prepare();
 
-                    cmd.Parameters[0].Value = personnummer;
+                    cmd.Parameters[0].Value = specialty;
                     using (var reader = cmd.ExecuteReader())
                     {
                         //Defines temporary variables.
@@ -1263,7 +1271,7 @@ namespace HospitalManagement
                             persNr = reader.GetString(8);
                             position = reader.GetString(9);
                             avdelning = reader.GetString(10);
-                            specialisering = reader.GetString(11);
+                            specialisering = reader.GetString(10);
 
                             //Creates doctor instance and adds it to the list of doctors using the temporary variables.
                             Employee doctorToAdd = new Employee(empId, firstName, lastName, address, postCode, postArea, phoneNr, eMail, persNr, position, avdelning, specialisering);
