@@ -16,6 +16,8 @@ namespace HospitalManagement
         public List<JournalPost> AllergyList { get; set; }
         public List<JournalPost> NotesList { get; set; }
         public List<Booking> BookingList { get; set; }
+        public DateTime LatestSignedIn { get; set; }
+        public DateTime LatestSignedOut { get; set; }
 
         public PatientJournalData(Patient patient, Employee user)
         {
@@ -24,11 +26,11 @@ namespace HospitalManagement
             this.PrescriptionList = db.LoadPatientPrescriptions(this.ThePatient.Personnummer);
             this.JournalPostList = db.LoadPatientNotes(this.ThePatient.Personnummer);
             this.BookingList = db.LoadPatientBookings(this.ThePatient.Personnummer);
-            SetAllergies();
-            SetNotes();
+            SetAllergyList();
+            SetNoteList();
         }
 
-        private void SetAllergies()
+        private void SetAllergyList()
         {
             List<JournalPost> filteredList = (from myPost in JournalPostList
                                where myPost.NoteType.Equals("Allergi")
@@ -37,7 +39,7 @@ namespace HospitalManagement
             AllergyList = filteredList;
         }
 
-        private void SetNotes()
+        private void SetNoteList()
         {
             List<JournalPost> filteredList = (from myPost in JournalPostList
                                               where myPost.NoteType.Equals("Diagnos") || myPost.NoteType.Equals("Standard") || myPost.NoteType.Equals("Utlåtande")
@@ -46,13 +48,44 @@ namespace HospitalManagement
             NotesList = filteredList;
         }
 
+        private void SetLatestSignedIn()
+        {
+            List<JournalPost> workList = (from myPost in JournalPostList
+                                          where myPost.NoteType.Equals("Inskrivning")
+                                          select myPost).ToList();
+            workList.OrderBy(myPost => myPost.TimeCreated);
+            LatestSignedIn = workList.Last().TimeCreated;
+        }
+
+        private void SetLatestSignedOut()
+        {
+            List<JournalPost> workList = (from myPost in JournalPostList
+                                          where myPost.NoteType.Equals("Utskrivning")
+                                          select myPost).ToList();
+
+            workList.OrderBy(myPost => myPost.TimeCreated);
+            LatestSignedOut = workList.Last().TimeCreated;
+        }
+
+        public Boolean SignedIn()
+        {
+            if(LatestSignedIn >= LatestSignedOut)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void Update()
         {
             PrescriptionList = db.LoadPatientPrescriptions(ThePatient.Personnummer);
             JournalPostList = db.LoadPatientNotes(ThePatient.Personnummer);
             BookingList = db.LoadPatientBookings(ThePatient.Personnummer);
-            SetAllergies();
-            SetNotes();
+            SetAllergyList();
+            SetNoteList();
         }
     }
 }

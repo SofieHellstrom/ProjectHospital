@@ -51,7 +51,9 @@ namespace HospitalManagement
             {
                 Room rummet = (roomComboBox.SelectedValue as Room);
                 data.ThePatient.Room = rummet.RoomID;
-                data.ThePatient.UpdateSelf();
+                data.ThePatient.UpdateSelfInDB();
+                db.AddJournalEntry(data.MyUser.EmployeeID, data.ThePatient.Personnummer, "Inskrivning", "", false);
+
                 MessageBox.Show($"Patient inskriven. Registrerad till {rummet.RoomFunction} {rummet.RoomID} ");
                 this.Close();
             }

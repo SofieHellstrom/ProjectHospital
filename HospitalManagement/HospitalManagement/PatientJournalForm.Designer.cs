@@ -29,15 +29,17 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.bokningListbox = new System.Windows.Forms.ListBox();
             this.newNotesBtn = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.journalpostPreviewTxtBox = new System.Windows.Forms.TextBox();
             this.journalPostListBox = new System.Windows.Forms.ListBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.signInBtn = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.signedInRoomTxtBox = new System.Windows.Forms.TextBox();
+            this.signedInDepTxtBox = new System.Windows.Forms.TextBox();
+            this.signInStatusTxtBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.inskrivningsStatusLbl = new System.Windows.Forms.Label();
@@ -68,15 +70,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.bokningListbox = new System.Windows.Forms.ListBox();
             this.mainPanel.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -94,6 +94,24 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(919, 732);
             this.mainPanel.TabIndex = 0;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.bokningListbox);
+            this.groupBox6.Location = new System.Drawing.Point(19, 608);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(540, 76);
+            this.groupBox6.TabIndex = 8;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Bokade tider/Provtagning";
+            // 
+            // bokningListbox
+            // 
+            this.bokningListbox.FormattingEnabled = true;
+            this.bokningListbox.Location = new System.Drawing.Point(6, 15);
+            this.bokningListbox.Name = "bokningListbox";
+            this.bokningListbox.Size = new System.Drawing.Size(528, 56);
+            this.bokningListbox.TabIndex = 0;
             // 
             // newNotesBtn
             // 
@@ -137,9 +155,9 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.signInBtn);
-            this.groupBox4.Controls.Add(this.textBox3);
-            this.groupBox4.Controls.Add(this.textBox2);
-            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.signedInRoomTxtBox);
+            this.groupBox4.Controls.Add(this.signedInDepTxtBox);
+            this.groupBox4.Controls.Add(this.signInStatusTxtBox);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label11);
             this.groupBox4.Controls.Add(this.inskrivningsStatusLbl);
@@ -160,26 +178,26 @@
             this.signInBtn.UseVisualStyleBackColor = true;
             this.signInBtn.Click += new System.EventHandler(this.signInBtn_Click);
             // 
-            // textBox3
+            // signedInRoomTxtBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(90, 80);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 5;
+            this.signedInRoomTxtBox.Location = new System.Drawing.Point(90, 80);
+            this.signedInRoomTxtBox.Name = "signedInRoomTxtBox";
+            this.signedInRoomTxtBox.Size = new System.Drawing.Size(100, 20);
+            this.signedInRoomTxtBox.TabIndex = 5;
             // 
-            // textBox2
+            // signedInDepTxtBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(90, 53);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(143, 20);
-            this.textBox2.TabIndex = 4;
+            this.signedInDepTxtBox.Location = new System.Drawing.Point(90, 53);
+            this.signedInDepTxtBox.Name = "signedInDepTxtBox";
+            this.signedInDepTxtBox.Size = new System.Drawing.Size(143, 20);
+            this.signedInDepTxtBox.TabIndex = 4;
             // 
-            // textBox1
+            // signInStatusTxtBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(90, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(143, 20);
-            this.textBox1.TabIndex = 3;
+            this.signInStatusTxtBox.Location = new System.Drawing.Point(90, 26);
+            this.signInStatusTxtBox.Name = "signInStatusTxtBox";
+            this.signInStatusTxtBox.Size = new System.Drawing.Size(143, 20);
+            this.signInStatusTxtBox.TabIndex = 3;
             // 
             // label10
             // 
@@ -465,24 +483,6 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Personnummer";
             // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.bokningListbox);
-            this.groupBox6.Location = new System.Drawing.Point(19, 608);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(540, 76);
-            this.groupBox6.TabIndex = 8;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Bokade tider/Provtagning";
-            // 
-            // bokningListbox
-            // 
-            this.bokningListbox.FormattingEnabled = true;
-            this.bokningListbox.Location = new System.Drawing.Point(6, 15);
-            this.bokningListbox.Name = "bokningListbox";
-            this.bokningListbox.Size = new System.Drawing.Size(528, 56);
-            this.bokningListbox.TabIndex = 0;
-            // 
             // PatientJournalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -493,6 +493,7 @@
             this.Text = "PatientJournalForm";
             this.Activated += new System.EventHandler(this.PatientJournalForm_Activated);
             this.mainPanel.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -502,7 +503,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -537,9 +537,9 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label inskrivningsStatusLbl;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox signedInRoomTxtBox;
+        private System.Windows.Forms.TextBox signedInDepTxtBox;
+        private System.Windows.Forms.TextBox signInStatusTxtBox;
         private System.Windows.Forms.Button newNotesBtn;
         private System.Windows.Forms.Button signInBtn;
         private System.Windows.Forms.Button savePersonInfoChange;

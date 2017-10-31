@@ -53,7 +53,7 @@ namespace HospitalManagement
             this.Room = room;
         }
 
-        public void UpdateSelf()
+        public void UpdateSelfInDB()
         {
             DatabaseHandler db = new DatabaseHandler();
             db.UpdatePatient(this);

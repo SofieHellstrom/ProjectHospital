@@ -1068,13 +1068,54 @@ namespace HospitalManagement
 
             }
         }
-    
 
+        public Department LoadDepartmentByID(string departmentID)
+        {
+            //Returns a list of all Departments 
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+                Department result = new Department("N/A", "Not in DB", TimeSpan.Zero, TimeSpan.Zero);
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = $"SELECT * FROM department WHERE department_id = '{departmentID}'";
 
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        string depName = "Not in DB";
+                        string depID;
+                        TimeSpan openTime = TimeSpan.Zero;
+                        TimeSpan closeTime = TimeSpan.Zero;
 
+                        //Reads values from the database into temporary variables
+                        while (reader.Read())
+                        {
+                            depID = reader.GetString(0);
+                            depName = reader.GetString(1);
+                            if (!reader.IsDBNull(2))
+                            {
+                                openTime = reader.GetTimeSpan(2);
+                            }
+                            if (!reader.IsDBNull(3))
+                            {
+                                closeTime = reader.GetTimeSpan(3);
+                            }
 
+                            //Creates an instance of Department and returns it.
+                            result = new Department(depID, depName, openTime, closeTime);
+                            
+                        }
+                        return result;
+                    }
+                }
 
+            }
 
+        }
 
 
 
@@ -1116,6 +1157,40 @@ namespace HospitalManagement
         }
 
 
+        public string LoadDepartmentOfRoom (string roomID)
+        {
+            //Returns the departmentID that a specific room belongs to. 
+            string returnDepartmentID = "";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds the connection and SQL-string to the Command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT department FROM room WHERE room_id = :id";
+
+                    cmd.Parameters.Add(new NpgsqlParameter(":id", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = roomID;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Reads the value from the database.
+                        while (reader.Read())
+                        {
+                            returnDepartmentID = reader.GetString(0);
+                        }
+                    }
+                }
+
+            }
+            return returnDepartmentID;
+
+        }
 
         public List<Room> LoadDepartmentRooms(string departmentID)
         {

@@ -49,6 +49,21 @@ namespace HospitalManagement
             {
                 journalpostPreviewTxtBox.Text = (journalPostListBox.SelectedValue as JournalPost).Content;
             }
+
+            if (data.SignedIn())
+            {
+                signInStatusTxtBox.Text = "Inskriven";
+                Department tempDep = db.LoadDepartmentByID(db.LoadDepartmentOfRoom(data.ThePatient.Room));
+                signedInDepTxtBox.Text = tempDep.Name;
+                signedInRoomTxtBox.Text = data.ThePatient.Room;
+            }
+            else
+            {
+                signInStatusTxtBox.Text = "Utskriven";
+                signedInDepTxtBox.Text = "";
+                signedInRoomTxtBox.Text = "";
+            }
+
                 
         }
 
