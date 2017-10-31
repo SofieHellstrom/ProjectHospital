@@ -30,12 +30,32 @@ namespace HospitalManagement
             //startTime.Text = ;
             //endTime.Text = ;
             string staffName = data.MyUser.LastName + ", " + data.MyUser.FirstName;
-            doctorComboBox.Text = staffName;
+            string specialty = data.MyUser.Specialty;
+            doctorComboBox.Text = staffName + " | " + specialty;
             //purposeBox.Text = data.BookingList.
-            
+            UpdateStaffList();
             
         }
 
-        
+        public void UpdateStaffList()
+        {
+            List<Employee> doctorList;
+            if (string.IsNullOrWhiteSpace(doctorComboBox.Text))
+            {
+                doctorList = data.DoctorList;
+            }
+            else
+            {
+                doctorList = (from myDoc in data.DoctorList
+                                   where myDoc.LastName.Contains($"{doctorComboBox.Text}") || myDoc.Specialty.Contains($"{doctorComboBox.Text}")
+                              select myDoc).ToList();
+            }
+            doctorComboBox.DataSource = doctorList;
+        }
+
+        private void bokaBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

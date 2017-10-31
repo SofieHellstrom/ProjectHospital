@@ -42,6 +42,7 @@
             this.startTime = new System.Windows.Forms.TextBox();
             this.endTime = new System.Windows.Forms.TextBox();
             this.purposeBox = new System.Windows.Forms.TextBox();
+            this.bokaBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -59,7 +60,6 @@
             this.bookingPersonNrBox.Name = "bookingPersonNrBox";
             this.bookingPersonNrBox.Size = new System.Drawing.Size(143, 20);
             this.bookingPersonNrBox.TabIndex = 1;
-            
             // 
             // label2
             // 
@@ -158,11 +158,22 @@
             this.purposeBox.Size = new System.Drawing.Size(143, 20);
             this.purposeBox.TabIndex = 13;
             // 
+            // bokaBtn
+            // 
+            this.bokaBtn.Location = new System.Drawing.Point(104, 216);
+            this.bokaBtn.Name = "bokaBtn";
+            this.bokaBtn.Size = new System.Drawing.Size(75, 23);
+            this.bokaBtn.TabIndex = 14;
+            this.bokaBtn.Text = "Boka";
+            this.bokaBtn.UseVisualStyleBackColor = true;
+            this.bokaBtn.Click += new System.EventHandler(this.bokaBtn_Click);
+            // 
             // BookingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(591, 443);
+            this.Controls.Add(this.bokaBtn);
             this.Controls.Add(this.purposeBox);
             this.Controls.Add(this.endTime);
             this.Controls.Add(this.startTime);
@@ -200,5 +211,6 @@
         private System.Windows.Forms.TextBox startTime;
         private System.Windows.Forms.TextBox endTime;
         private System.Windows.Forms.TextBox purposeBox;
+        private System.Windows.Forms.Button bokaBtn;
     }
 }
