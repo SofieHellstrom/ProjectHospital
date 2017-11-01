@@ -22,12 +22,12 @@ namespace HospitalManagement
         {
             data = new PatientJournalData(patient, myUser);
             InitializeComponent();
-            UpdateWindow();
+            UpdatePatientJournal();
         }
 
-        public void UpdateWindow()
+        public void UpdatePatientJournal()
         {
-            data.Update();
+            data.DataUpdate();
 
             string patientName = data.ThePatient.LastName + ", " + data.ThePatient.FirstName;
             string windowTitle = patientName + " " + data.ThePatient.Personnummer;
@@ -56,12 +56,14 @@ namespace HospitalManagement
                 Department tempDep = db.LoadDepartmentByID(db.LoadDepartmentOfRoom(data.ThePatient.Room));
                 signedInDepTxtBox.Text = tempDep.Name;
                 signedInRoomTxtBox.Text = data.ThePatient.Room;
+                signInBtn.Enabled = false;
             }
             else
             {
                 signInStatusTxtBox.Text = "Utskriven";
                 signedInDepTxtBox.Text = "";
                 signedInRoomTxtBox.Text = "";
+                signInBtn.Enabled = true;
             }
 
                 
@@ -75,7 +77,7 @@ namespace HospitalManagement
 
         private void PatientJournalForm_Activated(object sender, EventArgs e)
         {
-            UpdateWindow();
+            UpdatePatientJournal();
         }
 
         private void createReceiptBtn_Click(object sender, EventArgs e)

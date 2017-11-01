@@ -26,8 +26,11 @@ namespace HospitalManagement
             this.PrescriptionList = db.LoadPatientPrescriptions(this.ThePatient.Personnummer);
             this.JournalPostList = db.LoadPatientNotes(this.ThePatient.Personnummer);
             this.BookingList = db.LoadPatientBookings(this.ThePatient.Personnummer);
-            SetAllergyList();
-            SetNoteList();
+            //SetAllergyList();
+            //SetNoteList();
+            //SetLatestSignedIn();
+            //SetLatestSignedOut();
+            this.DataUpdate();
         }
 
         private void SetAllergyList()
@@ -53,8 +56,17 @@ namespace HospitalManagement
             List<JournalPost> workList = (from myPost in JournalPostList
                                           where myPost.NoteType.Equals("Inskrivning")
                                           select myPost).ToList();
-            workList.OrderBy(myPost => myPost.TimeCreated);
-            LatestSignedIn = workList.Last().TimeCreated;
+            if (workList.Count > 0)
+            {
+                workList.OrderByDescending(myPost => myPost.TimeCreated);
+                JournalPost workPost = workList.First();
+                LatestSignedIn = workPost.TimeCreated;
+                DateTime debugLatestSignedIn = LatestSignedIn;
+            }
+            else
+            {
+                LatestSignedIn = default(DateTime);
+            }
         }
 
         private void SetLatestSignedOut()
@@ -62,14 +74,34 @@ namespace HospitalManagement
             List<JournalPost> workList = (from myPost in JournalPostList
                                           where myPost.NoteType.Equals("Utskrivning")
                                           select myPost).ToList();
-
-            workList.OrderBy(myPost => myPost.TimeCreated);
-            LatestSignedOut = workList.Last().TimeCreated;
+            if (workList.Count > 0)
+            {
+                workList.OrderByDescending(myPost => myPost.TimeCreated);
+                LatestSignedOut = workList.First().TimeCreated;
+            }
+            else
+            {
+                LatestSignedOut = default(DateTime);
+            } 
         }
 
         public Boolean SignedIn()
         {
-            if(LatestSignedIn >= LatestSignedOut)
+            //if (LatestSignedIn.Equals(default(DateTime)))
+            //{
+            //    return false;
+            //}
+            //else
+            //{
+            //    if (LatestSignedOut.Equals(default(DateTime)))
+            //    {
+            //        return true;
+            //    }
+            //}
+            DateTime debugLatestSignedIn = LatestSignedIn;
+            DateTime debugLatestSingedOut = LatestSignedOut;
+
+            if(LatestSignedIn > LatestSignedOut)
             {
                 return true;
             }
@@ -79,13 +111,15 @@ namespace HospitalManagement
             }
         }
 
-        public void Update()
+        public void DataUpdate()
         {
             PrescriptionList = db.LoadPatientPrescriptions(ThePatient.Personnummer);
             JournalPostList = db.LoadPatientNotes(ThePatient.Personnummer);
             BookingList = db.LoadPatientBookings(ThePatient.Personnummer);
             SetAllergyList();
             SetNoteList();
+            SetLatestSignedIn();
+            SetLatestSignedOut();
         }
     }
 }

@@ -761,9 +761,7 @@ namespace HospitalManagement
                         returnUserInfo = new UserInfo(identifier, usename, password);
 
                         return returnUserInfo;
-
                     }
-
                 }
 
 
