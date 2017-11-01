@@ -38,7 +38,7 @@ namespace HospitalManagement
             else
             {
                 filteredMedList = (from myMed in data.MedicationList
-                                  where  myMed.Name.Contains($"{filterTxtBox.Text}")
+                                  where  myMed.Name.ToLower().Contains($"{filterTxtBox.Text.ToLower()}")
                                   select myMed).ToList();
             }
             medicationListBox.DataSource = filteredMedList;  
