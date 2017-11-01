@@ -19,20 +19,22 @@ namespace HospitalManagement
             data = new Bookingdata(relevantpatient, currentUser);
             InitializeComponent();
             UpdateWindow();
-        }
 
-        public void UpdateWindow()
-        {
             string patientName = data.ThePatient.LastName + ", " + data.ThePatient.FirstName;
             bookingPersonNrBox.Text = data.ThePatient.Personnummer;
             bookingPatientName.Text = patientName;
             //dateTimePicker1
-            //startTime.Text = ;
-            //endTime.Text = ;
-            string staffName = data.MyUser.LastName + ", " + data.MyUser.FirstName;
-            string specialty = data.MyUser.Specialty;
-            doctorComboBox.Text = staffName + " | " + specialty;
+            //string currentTime = DateTime.Now.ToShortTimeString();
+            startTime2.Text = DateTime.Now.ToShortTimeString();
+           // endTime2.Text = DateTime.Now.AddMinutes.currentTime(15);
+            
+            doctorComboBox.DataSource = data.DoctorList;
             //purposeBox.Text = data.BookingList.
+        }
+
+        public void UpdateWindow()
+        {
+            
             UpdateStaffList();
             
         }
@@ -55,7 +57,78 @@ namespace HospitalManagement
 
         private void bokaBtn_Click(object sender, EventArgs e)
         {
+            bool error = false;
+
+            if (string.IsNullOrEmpty(purposeBox.Text))
+            {
+                errorProvider1.SetError(purposeBox, "Vänligen ange syfte till bokningen.");
+                error = true;
+
+            }
+
+            if (string.IsNullOrWhiteSpace(startTime2.Text))
+            {
+
+                errorProvider1.SetError(startTime2, "Vänligen ange önskad besökstid.");
+                error = true;
+            }
+
+            if (string.IsNullOrWhiteSpace(endTime2.Text))
+            {
+
+                errorProvider1.SetError(endTime2, "Vänligen ange önskad besökstid.");
+                error = true;
+            }
+
+
+
+
+            if (string.IsNullOrWhiteSpace(doctorComboBox.Text))
+            {
+                //TODO doctor error setting
+            }
+
+            if (!error)
+            {
+              /*  
+
+                string personnummer = data.ThePatient.Personnummer;
+                string doctorID = data.MyUser.EmployeeID;
+                string medicationID = (medicationListBox.SelectedItem as Medication).IDcode;
+                string instructions = instructionTxtBox.Text;
+                int uttag = int.Parse(nrOfTimesTxtBox.Text);
+                string medicationName = (medicationListBox.SelectedItem as Medication).Name;
+
+
+                Booking newBooking = new Booking(DateTime.Today, doctorID, personnummer, medicationID, instructions, uttag, medicationName);
+                DatabaseHandler db = new DatabaseHandler();
+                Boolean success = db.AddBooking(newBooking);
+
+                if (success)
+                {
+                    MessageBox.Show("Bokning sparat i databasen.");
+                    this.Close();
+                }
+                */
+            }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void endTime2_ValueChanged(object sender, EventArgs e)
+        {
 
         }
     }
-}
+
+        
+    }
+

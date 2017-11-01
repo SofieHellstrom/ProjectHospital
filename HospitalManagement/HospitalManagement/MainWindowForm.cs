@@ -127,5 +127,10 @@ namespace HospitalManagement
         {
 
         }
+
+        private void userIdentityLbl_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
