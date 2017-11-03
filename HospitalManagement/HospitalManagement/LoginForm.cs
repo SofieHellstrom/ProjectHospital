@@ -71,7 +71,7 @@ namespace HospitalManagement
                     //warningLbl.Text = "Patientinloggning ej implementerad.";
                     //warningLbl.Visible = true;
                     Patient userPatient = db.LoadPatient(username);
-                    Form patView = new PatientViewForm(username);
+                    Form patView = new PatientViewForm(userPatient);
                     patView.Show();
                     this.Hide();
                 }

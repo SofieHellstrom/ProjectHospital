@@ -12,14 +12,44 @@ namespace HospitalManagement
 {
     public partial class PatientViewForm : Form
     {
-        public PatientViewForm(string personnummer)
+        PatientViewData data;
+        public PatientViewForm(Patient user)
         {
+            
             InitializeComponent();
+            data = new PatientViewData(user);
+            this.Text = $"Sjukhussystem PatientVy - {data.Me.ToString()}";
+            this.nameTxtBox.Text = $"{data.Me.LastName}, {data.Me.FirstName}";
+            this.addressTxtBox.Text = data.Me.Address;
+            this.postNrTxtBox.Text = data.Me.PostalCode.ToString();
+            this.postOrtTxtBox.Text = data.Me.PostalArea;
+            this.phoneTxtBox.Text = data.Me.PhoneNr;
+            this.mailTxtBox.Text = data.Me.Email;
+
+            this.prescriptionsListBox.DataSource = data.PrescriptionList;
+            this.journalpostListBox.DataSource = data.NotesList;
+
+            UpdateWindowContent();
         }
 
         private void PatientViewForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.ShutEverythingDown();
+        }
+
+        private void journalpostListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            data.DataUpdate();
+            UpdateWindowContent();
+            
+        }
+
+        private void UpdateWindowContent()
+        {
+            if (journalpostListBox.Items.Count > 0)
+            {
+                this.journalpostContentTxtBox.Text = (journalpostListBox.SelectedValue as JournalPost).Content;
+            }
         }
     }
 }
