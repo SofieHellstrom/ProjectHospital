@@ -87,17 +87,7 @@ namespace HospitalManagement
 
         public Boolean SignedIn()
         {
-            //if (LatestSignedIn.Equals(default(DateTime)))
-            //{
-            //    return false;
-            //}
-            //else
-            //{
-            //    if (LatestSignedOut.Equals(default(DateTime)))
-            //    {
-            //        return true;
-            //    }
-            //}
+
             DateTime debugLatestSignedIn = LatestSignedIn;
             DateTime debugLatestSingedOut = LatestSignedOut;
 

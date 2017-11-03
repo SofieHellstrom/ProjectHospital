@@ -113,5 +113,23 @@ namespace HospitalManagement
             Form signIn = new SignInForm(data);
             signIn.Show();
         }
+
+        private void singOutBtn_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show($"Är du säker på att du vill skriva ut {data.ThePatient.ToString()}?", "Ja Nej", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                if(db.AddJournalEntry(data.MyUser.EmployeeID, data.ThePatient.Personnummer, "Utskrivning", "", false))
+                {
+                    MessageBox.Show("Patient utskriven.");
+                }
+                else
+                {
+                    MessageBox.Show("Utskrivning misslyckad.");
+                }
+
+            }
+            
+        }
     }
 }
