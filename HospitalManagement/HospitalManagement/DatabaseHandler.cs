@@ -271,11 +271,16 @@ namespace HospitalManagement
                 conn.Open();
                 using (var cmd = new NpgsqlCommand())
                 {
+
                     // Adds connection and SQL-string to the command and executes it.
                     cmd.Connection = conn;
                     if (patientToUpdate.Room.Equals("No Change"))
                     {
                         cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}' WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
+                    }
+                    else if (patientToUpdate.Room.Equals(""))
+                    {
+                        cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}', room = null WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
                     }
                     else
                     {
@@ -649,7 +654,6 @@ namespace HospitalManagement
         public Boolean UserExists(string username)
         {
 
-            //Currently not working.
             // Checks if a user with with a specific username exists in the database.
             // Returns True if it does and False if it doesn't.
             using (var conn = new NpgsqlConnection(connectionString))

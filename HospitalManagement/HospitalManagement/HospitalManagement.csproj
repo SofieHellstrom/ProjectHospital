@@ -109,6 +109,13 @@
     <Compile Include="PatientRegistryForm.Designer.cs">
       <DependentUpon>PatientRegistryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PatientViewData.cs" />
+    <Compile Include="PatientViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientViewForm.Designer.cs">
+      <DependentUpon>PatientViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Prescription.cs" />
     <Compile Include="PrescriptionData.cs" />
     <Compile Include="PrescriptionForm.cs">
@@ -148,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PatientRegistryForm.resx">
       <DependentUpon>PatientRegistryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientViewForm.resx">
+      <DependentUpon>PatientViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrescriptionForm.resx">
       <DependentUpon>PrescriptionForm.cs</DependentUpon>

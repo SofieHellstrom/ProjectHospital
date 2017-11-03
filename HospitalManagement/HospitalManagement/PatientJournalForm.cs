@@ -57,6 +57,7 @@ namespace HospitalManagement
                 signedInDepTxtBox.Text = tempDep.Name;
                 signedInRoomTxtBox.Text = data.ThePatient.Room;
                 signInBtn.Enabled = false;
+                signOutBtn.Enabled = true;
             }
             else
             {
@@ -64,6 +65,7 @@ namespace HospitalManagement
                 signedInDepTxtBox.Text = "";
                 signedInRoomTxtBox.Text = "";
                 signInBtn.Enabled = true;
+                signOutBtn.Enabled = false;
             }
 
                 
@@ -114,13 +116,15 @@ namespace HospitalManagement
             signIn.Show();
         }
 
-        private void singOutBtn_Click(object sender, EventArgs e)
+        private void signOutBtn_Click(object sender, EventArgs e)
         {
             var confirmResult = MessageBox.Show($"Är du säker på att du vill skriva ut {data.ThePatient.ToString()}?", "Ja Nej", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
                 if(db.AddJournalEntry(data.MyUser.EmployeeID, data.ThePatient.Personnummer, "Utskrivning", "", false))
                 {
+                    data.ThePatient.Room = "";
+                    data.ThePatient.UpdateSelfInDB();
                     MessageBox.Show("Patient utskriven.");
                 }
                 else
