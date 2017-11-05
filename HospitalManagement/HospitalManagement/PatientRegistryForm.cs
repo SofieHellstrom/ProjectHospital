@@ -62,21 +62,35 @@ namespace HospitalManagement
                 Patient patientToAdd = new Patient(nPersonId, nFirstName, nLastName, nAddress, nPostCode, nPostArea, nPhoneNr, nEmail, nBloodType, "");
 
                 bool success = db.AddPatient(patientToAdd);
+                bool userSuccess = db.AddPatientUser(nPersonId);
+
                 if (success)
                 {
                     db.AddJournalEntry(data.UserID, nPersonId, "System", "Patient skapad i databas", false);
                     MessageBox.Show("Ny patient tillagd i Databasen");
+                    if (userSuccess)
+                    {
+                        db.AddJournalEntry(data.UserID, nPersonId, "System", "Användarkonto med defaultuppgifter skapat i databas", false);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Inget användarkonto skapat. Patienten är registrerad, men kommer inte kunna logga in i patientvyn.");
+                    }
                     this.Close();
                 }
                 else
                 {
                     MessageBox.Show("Patient kunde inte läggas till i databasen. \nVar god kontrollera uppgifterna.");
+                    return;
                 }
             }
             else
             {
                 MessageBox.Show("En patient med detta personnummer finns redan i databasen.");
+                return;
             }
+
+ 
         }
 
         private void personIdTxt_Validating(object sender, CancelEventArgs e)

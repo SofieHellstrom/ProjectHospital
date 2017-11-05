@@ -784,6 +784,44 @@ namespace HospitalManagement
 
         }
 
+        public bool AddPatientUser(string personnummer)
+        {
+            //Adds a new user account to the database for a patient. 
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds relevant data to temporary variables. Mostly for debugging purposes.
+                    string id = personnummer;
+                    string password = "password";
+                    string patient = personnummer;
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    try
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = $"INSERT INTO userinfo (id, password, patient) VALUES ('{id}', '{password}', '{patient}')";
+
+                        int recordsAffected = cmd.ExecuteNonQuery();
+
+                        //Returns a boolean which is True if any rows have been affected. 
+                        return Convert.ToBoolean(recordsAffected);
+                    }
+                    catch (PostgresException e)
+                    {
+                        //Writes Exception error to DebugWindow and returns false, if a
+                        //PostgresException occurs.
+                        System.Diagnostics.Debug.WriteLine(e.ToString());
+                        return false;
+                    }
+
+                }   
+            }
+        }
+
         //Methods related to getting info about medication and prescriptions from the database
 
         public List<Medication> LoadAllMedications()
