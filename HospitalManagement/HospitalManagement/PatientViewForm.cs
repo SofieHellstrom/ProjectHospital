@@ -51,5 +51,11 @@ namespace HospitalManagement
                 this.journalpostContentTxtBox.Text = (journalpostListBox.SelectedValue as JournalPost).Content;
             }
         }
+
+        private void changePwrdBtn_Click(object sender, EventArgs e)
+        {
+            Form changePwrd = new ChangeUserInfoForm(data.Me);
+            changePwrd.ShowDialog();
+        }
     }
 }

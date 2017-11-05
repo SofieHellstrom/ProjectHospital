@@ -822,6 +822,49 @@ namespace HospitalManagement
             }
         }
 
+        public bool UpdateUser(UserInfo userToUpdate, string newPassword, bool isPatient)
+        {
+            //Updates the userinfo in the database. Password is only updated if newPassword is not null or empty.
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    cmd.Connection = conn;
+                    if (isPatient)
+                    {
+                        if (!string.IsNullOrEmpty(newPassword))
+                        {
+                            cmd.CommandText = $"UPDATE userinfo SET id = '{userToUpdate.Username}', password = '{newPassword}' WHERE patient = '{userToUpdate.Identifier}'";
+                        }
+                        else
+                        {
+                            cmd.CommandText = $"UPDATE userinfo SET id = '{userToUpdate.Username}' WHERE patient = '{userToUpdate.Identifier}'";
+                        }  
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(newPassword))
+                        {
+                            cmd.CommandText = $"UPDATE userinfo SET id = '{userToUpdate.Username}', password = '{newPassword}' WHERE staff = '{userToUpdate.Identifier}'";
+                        }
+                        else
+                        {
+                            cmd.CommandText = $"UPDATE userinfo SET id = '{userToUpdate.Username}' WHERE staff = '{userToUpdate.Identifier}'";
+                        }
+                    }
+
+                    int recordsAffected = cmd.ExecuteNonQuery();
+                    return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
+
+                }
+
+            }
+        }
+
         //Methods related to getting info about medication and prescriptions from the database
 
         public List<Medication> LoadAllMedications()
