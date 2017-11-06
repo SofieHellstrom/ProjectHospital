@@ -30,6 +30,11 @@ namespace HospitalManagement
                     createReceiptBtn.Visible = false;
                     tidsbokningBtn.Visible = false;
                     break;
+
+                case "Receptionist":
+                    createReceiptBtn.Visible = false;
+                    newNotesBtn.Visible = false;
+                    break;
             }
             UpdatePatientJournal();
         }
