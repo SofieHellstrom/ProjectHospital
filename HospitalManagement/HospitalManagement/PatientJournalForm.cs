@@ -22,6 +22,15 @@ namespace HospitalManagement
         {
             data = new PatientJournalData(patient, myUser);
             InitializeComponent();
+            switch (data.MyUser.Position)
+            {
+                case "Sjuksköterska":
+                    signInBtn.Visible = false;
+                    signOutBtn.Visible = false;
+                    createReceiptBtn.Visible = false;
+                    tidsbokningBtn.Visible = false;
+                    break;
+            }
             UpdatePatientJournal();
         }
 
