@@ -1441,5 +1441,60 @@ namespace HospitalManagement
                 }
             }
         }
+
+        public List<Room> LoadVisitationRooms(string roomId)
+        {
+            //Returns a list of all the Rooms in a spcific Department 
+            //in the database related to a specific patient.
+            List<Room> resultList = new List<Room>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM room WHERE function = :function";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("function", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = roomId;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        string roomID;
+                        string function;
+                        int capacity;
+                        int maxCapacity;
+                        string depID;
+
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            roomID = reader.GetString(0);
+                            function = reader.GetString(1);
+                            capacity = reader.GetInt16(2);
+                            maxCapacity = reader.GetInt16(3);
+                            depID = reader.GetString(4);
+
+                            //Creates room instance and adds it to the list of rooms using the temporary variables.
+                            Room roomToAdd = new Room(roomID, function, capacity, maxCapacity, depID);
+                            resultList.Add(roomToAdd);
+                        }
+                        return resultList;
+
+                    }
+                }
+
+            }
+        }
+
+
     }
 }

@@ -7,6 +7,7 @@ namespace HospitalManagement
         DatabaseHandler db = new DatabaseHandler();
         public List<Booking> BookingList { get; set; }
         public List<Employee> DoctorList { get; set; }
+        public List<Room> RoomList { get; set; }
         public Patient ThePatient { get; set; }
         public Employee MyUser { get; set; }
 
@@ -16,6 +17,7 @@ namespace HospitalManagement
             this.MyUser = user;
             this.BookingList = db.LoadPatientBookings(ThePatient.Personnummer);
             this.DoctorList = db.LoadDoctors(null);
+          //  this.RoomList = db.LoadVisitationRooms(roomId);
         }
     }
 }

@@ -45,6 +45,8 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.startTime2 = new System.Windows.Forms.DateTimePicker();
             this.endTime2 = new System.Windows.Forms.DateTimePicker();
+            this.roomComboBox = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -185,11 +187,30 @@
             this.endTime2.TabIndex = 16;
             this.endTime2.ValueChanged += new System.EventHandler(this.endTime2_ValueChanged);
             // 
+            // roomComboBox
+            // 
+            this.roomComboBox.FormattingEnabled = true;
+            this.roomComboBox.Location = new System.Drawing.Point(380, 129);
+            this.roomComboBox.Name = "roomComboBox";
+            this.roomComboBox.Size = new System.Drawing.Size(121, 21);
+            this.roomComboBox.TabIndex = 17;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(342, 132);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(32, 13);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Rum:";
+            // 
             // BookingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(591, 443);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.roomComboBox);
             this.Controls.Add(this.endTime2);
             this.Controls.Add(this.startTime2);
             this.Controls.Add(this.bokaBtn);
@@ -231,5 +252,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.DateTimePicker startTime2;
         private System.Windows.Forms.DateTimePicker endTime2;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox roomComboBox;
     }
 }

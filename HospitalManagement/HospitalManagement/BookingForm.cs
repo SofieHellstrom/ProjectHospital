@@ -23,14 +23,15 @@ namespace HospitalManagement
             string patientName = data.ThePatient.LastName + ", " + data.ThePatient.FirstName;
             bookingPersonNrBox.Text = data.ThePatient.Personnummer;
             bookingPatientName.Text = patientName;
-            //dateTimePicker1
-            //string currentTime = DateTime.Now.ToShortTimeString();
+            
+            
             startTime2.Text = DateTime.Now.ToShortTimeString();
             endTime2.Value = DateTime.Now.AddMinutes(15);
+           // roomComboBox.DataSource = data.BookingList.Contains()
            
 
             doctorComboBox.DataSource = data.DoctorList;
-            //purposeBox.Text = data.BookingList.
+           
         }
 
         public void UpdateWindow()
@@ -91,17 +92,18 @@ namespace HospitalManagement
 
             if (!error)
             {
-              /*  
+                int id = Guid.NewGuid().GetHashCode(); 
+                //int id 
+                string personnummer = bookingPersonNrBox.Text;
+                string patientname = bookingPatientName.Text;
+                DateTime bookingdate = dateTimePicker1.Value;
+                DateTime bookingtime = startTime2.Value;
+                DateTime bookingtimeEnd = endTime2.Value;
+                string doctor = (doctorComboBox.SelectedItem as Employee).EmployeeID;
+                string purpose = purposeBox.Text;
 
-                string personnummer = data.ThePatient.Personnummer;
-                string doctorID = data.MyUser.EmployeeID;
-                string medicationID = (medicationListBox.SelectedItem as Medication).IDcode;
-                string instructions = instructionTxtBox.Text;
-                int uttag = int.Parse(nrOfTimesTxtBox.Text);
-                string medicationName = (medicationListBox.SelectedItem as Medication).Name;
 
-
-                Booking newBooking = new Booking(DateTime.Today, doctorID, personnummer, medicationID, instructions, uttag, medicationName);
+                Booking newBooking = new Booking (purpose, bookingtime, bookingtimeEnd, doctor,patientname);
                 DatabaseHandler db = new DatabaseHandler();
                 Boolean success = db.AddBooking(newBooking);
 
@@ -110,7 +112,7 @@ namespace HospitalManagement
                     MessageBox.Show("Bokning sparat i databasen.");
                     this.Close();
                 }
-                */
+                
             }
         }
 
