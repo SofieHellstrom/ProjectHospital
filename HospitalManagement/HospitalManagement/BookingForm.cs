@@ -26,8 +26,9 @@ namespace HospitalManagement
             //dateTimePicker1
             //string currentTime = DateTime.Now.ToShortTimeString();
             startTime2.Text = DateTime.Now.ToShortTimeString();
-           // endTime2.Text = DateTime.Now.AddMinutes.currentTime(15);
-            
+            endTime2.Value = DateTime.Now.AddMinutes(15);
+           
+
             doctorComboBox.DataSource = data.DoctorList;
             //purposeBox.Text = data.BookingList.
         }

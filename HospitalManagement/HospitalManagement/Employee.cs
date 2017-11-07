@@ -45,7 +45,7 @@ namespace HospitalManagement
 
         public override string ToString()
         {
-            return $"{LastName}, {FirstName}.| {Specialty}"; //Will figure how to separate specialty if needed
+            return $"{LastName}, {FirstName}  -  {Specialty}"; //Will figure how to separate specialty if needed
         }
     }
 }
