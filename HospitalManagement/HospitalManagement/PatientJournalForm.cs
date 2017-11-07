@@ -22,6 +22,20 @@ namespace HospitalManagement
         {
             data = new PatientJournalData(patient, myUser);
             InitializeComponent();
+            switch (data.MyUser.Position)
+            {
+                case "Sjuksköterska":
+                    signInBtn.Visible = false;
+                    signOutBtn.Visible = false;
+                    createReceiptBtn.Visible = false;
+                    tidsbokningBtn.Visible = false;
+                    break;
+
+                case "Receptionist":
+                    createReceiptBtn.Visible = false;
+                    newNotesBtn.Visible = false;
+                    break;
+            }
             UpdatePatientJournal();
         }
 
@@ -57,6 +71,7 @@ namespace HospitalManagement
                 signedInDepTxtBox.Text = tempDep.Name;
                 signedInRoomTxtBox.Text = data.ThePatient.Room;
                 signInBtn.Enabled = false;
+                signOutBtn.Enabled = true;
             }
             else
             {
@@ -64,6 +79,7 @@ namespace HospitalManagement
                 signedInDepTxtBox.Text = "";
                 signedInRoomTxtBox.Text = "";
                 signInBtn.Enabled = true;
+                signOutBtn.Enabled = false;
             }
 
                 
@@ -112,6 +128,26 @@ namespace HospitalManagement
         {
             Form signIn = new SignInForm(data);
             signIn.Show();
+        }
+
+        private void signOutBtn_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show($"Är du säker på att du vill skriva ut {data.ThePatient.ToString()}?", "Ja Nej", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                if(db.AddJournalEntry(data.MyUser.EmployeeID, data.ThePatient.Personnummer, "Utskrivning", "", false))
+                {
+                    data.ThePatient.Room = "";
+                    data.ThePatient.UpdateSelfInDB();
+                    MessageBox.Show("Patient utskriven.");
+                }
+                else
+                {
+                    MessageBox.Show("Utskrivning misslyckad.");
+                }
+
+            }
+            
         }
     }
 }

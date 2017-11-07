@@ -52,6 +52,12 @@
     <Compile Include="BookingForm.Designer.cs">
       <DependentUpon>BookingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChangeUserInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeUserInfoForm.Designer.cs">
+      <DependentUpon>ChangeUserInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseHandler.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="HospitalDataSet.cs">
@@ -109,6 +115,13 @@
     <Compile Include="PatientRegistryForm.Designer.cs">
       <DependentUpon>PatientRegistryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PatientViewData.cs" />
+    <Compile Include="PatientViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientViewForm.Designer.cs">
+      <DependentUpon>PatientViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Prescription.cs" />
     <Compile Include="PrescriptionData.cs" />
     <Compile Include="PrescriptionForm.cs">
@@ -131,6 +144,9 @@
     <EmbeddedResource Include="BookingForm.resx">
       <DependentUpon>BookingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChangeUserInfoForm.resx">
+      <DependentUpon>ChangeUserInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PatientRegistryForm.resx">
       <DependentUpon>PatientRegistryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientViewForm.resx">
+      <DependentUpon>PatientViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrescriptionForm.resx">
       <DependentUpon>PrescriptionForm.cs</DependentUpon>

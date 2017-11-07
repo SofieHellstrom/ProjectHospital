@@ -24,7 +24,13 @@ namespace HospitalManagement
             this.AcceptButton = searchPatientBtn;
             data = new MainWindowData(user);
             userIdentityLbl.Text = $"Inloggad som: {data.MyUser.LastName}, {data.MyUser.FirstName} - ({data.MyUser.EmployeeID})";
-
+            switch (data.MyUser.Position)
+            {
+                case "Sjuksköterska":
+                    newPatientBtn.Visible = false;
+                    patientJournalBtn.Location = newPatientBtn.Location;
+                    break;
+            }
         }
 
 

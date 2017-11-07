@@ -18,7 +18,6 @@ namespace HospitalManagement
             this.Identifier = id;
             this.Username = usename;
             this.password = pword;
-
         }
 
         public Boolean PasswordIsCorrect (string passwordAttempt)

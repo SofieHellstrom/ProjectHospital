@@ -59,7 +59,7 @@ namespace HospitalManagement
             if (workList.Count > 0)
             {
                 workList.OrderByDescending(myPost => myPost.TimeCreated);
-                JournalPost workPost = workList.First();
+                JournalPost workPost = workList.Last();
                 LatestSignedIn = workPost.TimeCreated;
                 DateTime debugLatestSignedIn = LatestSignedIn;
             }
@@ -77,7 +77,8 @@ namespace HospitalManagement
             if (workList.Count > 0)
             {
                 workList.OrderByDescending(myPost => myPost.TimeCreated);
-                LatestSignedOut = workList.First().TimeCreated;
+                LatestSignedOut = workList.Last().TimeCreated;
+                DateTime debugLatestSignedOut = LatestSignedOut;
             }
             else
             {
@@ -87,17 +88,7 @@ namespace HospitalManagement
 
         public Boolean SignedIn()
         {
-            //if (LatestSignedIn.Equals(default(DateTime)))
-            //{
-            //    return false;
-            //}
-            //else
-            //{
-            //    if (LatestSignedOut.Equals(default(DateTime)))
-            //    {
-            //        return true;
-            //    }
-            //}
+
             DateTime debugLatestSignedIn = LatestSignedIn;
             DateTime debugLatestSingedOut = LatestSignedOut;
 

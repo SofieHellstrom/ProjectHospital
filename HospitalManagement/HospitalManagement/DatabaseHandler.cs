@@ -271,11 +271,16 @@ namespace HospitalManagement
                 conn.Open();
                 using (var cmd = new NpgsqlCommand())
                 {
+
                     // Adds connection and SQL-string to the command and executes it.
                     cmd.Connection = conn;
                     if (patientToUpdate.Room.Equals("No Change"))
                     {
                         cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}' WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
+                    }
+                    else if (patientToUpdate.Room.Equals(""))
+                    {
+                        cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}', room = null WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
                     }
                     else
                     {
@@ -649,7 +654,6 @@ namespace HospitalManagement
         public Boolean UserExists(string username)
         {
 
-            //Currently not working.
             // Checks if a user with with a specific username exists in the database.
             // Returns True if it does and False if it doesn't.
             using (var conn = new NpgsqlConnection(connectionString))
@@ -778,6 +782,87 @@ namespace HospitalManagement
             return returnUserInfo;
 
 
+        }
+
+        public bool AddPatientUser(string personnummer)
+        {
+            //Adds a new user account to the database for a patient. 
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds relevant data to temporary variables. Mostly for debugging purposes.
+                    string id = personnummer;
+                    string password = "password";
+                    string patient = personnummer;
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    try
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = $"INSERT INTO userinfo (id, password, patient) VALUES ('{id}', '{password}', '{patient}')";
+
+                        int recordsAffected = cmd.ExecuteNonQuery();
+
+                        //Returns a boolean which is True if any rows have been affected. 
+                        return Convert.ToBoolean(recordsAffected);
+                    }
+                    catch (PostgresException e)
+                    {
+                        //Writes Exception error to DebugWindow and returns false, if a
+                        //PostgresException occurs.
+                        System.Diagnostics.Debug.WriteLine(e.ToString());
+                        return false;
+                    }
+
+                }   
+            }
+        }
+
+        public bool UpdateUser(UserInfo userToUpdate, string newPassword, bool isPatient)
+        {
+            //Updates the userinfo in the database. Password is only updated if newPassword is not null or empty.
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    cmd.Connection = conn;
+                    if (isPatient)
+                    {
+                        if (!string.IsNullOrEmpty(newPassword))
+                        {
+                            cmd.CommandText = $"UPDATE userinfo SET id = '{userToUpdate.Username}', password = '{newPassword}' WHERE patient = '{userToUpdate.Identifier}'";
+                        }
+                        else
+                        {
+                            cmd.CommandText = $"UPDATE userinfo SET id = '{userToUpdate.Username}' WHERE patient = '{userToUpdate.Identifier}'";
+                        }  
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(newPassword))
+                        {
+                            cmd.CommandText = $"UPDATE userinfo SET id = '{userToUpdate.Username}', password = '{newPassword}' WHERE staff = '{userToUpdate.Identifier}'";
+                        }
+                        else
+                        {
+                            cmd.CommandText = $"UPDATE userinfo SET id = '{userToUpdate.Username}' WHERE staff = '{userToUpdate.Identifier}'";
+                        }
+                    }
+
+                    int recordsAffected = cmd.ExecuteNonQuery();
+                    return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
+
+                }
+
+            }
         }
 
         //Methods related to getting info about medication and prescriptions from the database

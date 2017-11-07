@@ -15,12 +15,20 @@ namespace HospitalManagement
         Patient ThePatient { get; set; }
         Employee TheUser { get; set; }
         DatabaseHandler db = new DatabaseHandler();
+
         public NoteForm(Patient pat, Employee emp)
         {
             this.ThePatient = pat;
             this.TheUser = emp;
             InitializeComponent();
             this.Text = $"Ny anteckning på {ThePatient.ToString()} - Inloggad användare: {TheUser.ToString()}";
+            switch (this.TheUser.Position)
+            {
+                case "Sjuksköterska":
+                    String[] typeArray = { "Allergi", "Standard" };
+                    typeComboBox.DataSource = typeArray;
+                    break;
+            }
         }
 
         private void saveBtn_Click(object sender, EventArgs e)

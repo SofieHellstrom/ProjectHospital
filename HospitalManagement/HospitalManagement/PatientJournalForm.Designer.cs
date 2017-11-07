@@ -70,6 +70,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.signOutBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -154,6 +155,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.signOutBtn);
             this.groupBox4.Controls.Add(this.signInBtn);
             this.groupBox4.Controls.Add(this.signedInRoomTxtBox);
             this.groupBox4.Controls.Add(this.signedInDepTxtBox);
@@ -172,7 +174,7 @@
             // 
             this.signInBtn.Location = new System.Drawing.Point(12, 115);
             this.signInBtn.Name = "signInBtn";
-            this.signInBtn.Size = new System.Drawing.Size(88, 23);
+            this.signInBtn.Size = new System.Drawing.Size(101, 23);
             this.signInBtn.TabIndex = 8;
             this.signInBtn.Text = "Skriv in";
             this.signInBtn.UseVisualStyleBackColor = true;
@@ -483,6 +485,16 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Personnummer";
             // 
+            // signOutBtn
+            // 
+            this.signOutBtn.Location = new System.Drawing.Point(132, 115);
+            this.signOutBtn.Name = "signOutBtn";
+            this.signOutBtn.Size = new System.Drawing.Size(101, 23);
+            this.signOutBtn.TabIndex = 9;
+            this.signOutBtn.Text = "Skriv ut";
+            this.signOutBtn.UseVisualStyleBackColor = true;
+            this.signOutBtn.Click += new System.EventHandler(this.signOutBtn_Click);
+            // 
             // PatientJournalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -551,5 +563,6 @@
         private System.Windows.Forms.ListBox testResultListBox;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.ListBox bokningListbox;
+        private System.Windows.Forms.Button signOutBtn;
     }
 }
