@@ -12,9 +12,13 @@ namespace HospitalManagement
 {
     public partial class AdminWindowForm : Form
     {
+        AdminWindowData data;
+
         public AdminWindowForm(Employee myUser)
         {
+            data = new AdminWindowData(myUser);
             InitializeComponent();
+            this.currentUserLbl.Text = $"Inloggad som: {data.MyUser.ToString()}";
         }
 
         private void AdminWindowForm_FormClosed(object sender, FormClosedEventArgs e)

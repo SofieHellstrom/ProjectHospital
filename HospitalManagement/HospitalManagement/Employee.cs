@@ -45,7 +45,15 @@ namespace HospitalManagement
 
         public override string ToString()
         {
-            return $"{LastName}, {FirstName}  -  {Specialty}"; //Will figure how to separate specialty if needed
+            if (!Specialty.Equals("N/A"))
+            {
+                return $"{LastName}, {FirstName}  -  {Specialty}";
+            }
+            else
+            {
+                return $"{LastName}, {FirstName}";
+            }
+           
         }
     }
 }

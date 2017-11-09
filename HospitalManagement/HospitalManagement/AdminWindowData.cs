@@ -8,11 +8,11 @@ namespace HospitalManagement
 {
     public class AdminWindowData
     {
-        Employee MyUser;
-        List<Employee> EmployeList;
-        List<Department> DepartmentList;
+        public Employee MyUser { get; set; }
+        List<Employee> EmployeeList { get; set; }
+        List<Department> DepartmentList { get; set; }
 
-        AdminWindowData(Employee user)
+        public AdminWindowData(Employee user)
         {
             this.MyUser = user;
         }
