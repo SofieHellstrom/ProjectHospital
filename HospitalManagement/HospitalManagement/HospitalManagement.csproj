@@ -44,6 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminWindowData.cs" />
+    <Compile Include="AdminWindowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminWindowForm.Designer.cs">
+      <DependentUpon>AdminWindowForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Booking.cs" />
     <Compile Include="Bookingdata.cs" />
     <Compile Include="BookingForm.cs">
@@ -141,6 +148,9 @@
       <DependentUpon>SignInForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInfo.cs" />
+    <EmbeddedResource Include="AdminWindowForm.resx">
+      <DependentUpon>AdminWindowForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BookingForm.resx">
       <DependentUpon>BookingForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -68,8 +68,6 @@ namespace HospitalManagement
                 if (isPatient)
                 {
                     errorProvider.SetError(passwordTxtBox, "");
-                    //warningLbl.Text = "Patientinloggning ej implementerad.";
-                    //warningLbl.Visible = true;
                     Patient userPatient = db.LoadPatient(username);
                     Form patView = new PatientViewForm(userPatient);
                     patView.Show();
@@ -79,7 +77,16 @@ namespace HospitalManagement
                 {
                     errorProvider.SetError(passwordTxtBox, "");
                     Employee userEmployee = db.LoadEmployee(user.Identifier);
-                    Form main = new MainWindow(userEmployee);
+                    Form main;
+                    if (userEmployee.Position == "IT-Admin")
+                    {
+                        main = new AdminWindowForm(userEmployee);
+                    }
+                    else
+                    {
+                        main = new MainWindow(userEmployee);
+                    }
+                    
                     main.Show();
                     this.Hide();
                 }
