@@ -15,8 +15,7 @@ namespace HospitalManagement
         // Form for displaying the Patientjournal of the Patient. 
         PatientJournalData data;
         DatabaseHandler db = new DatabaseHandler();
-
-
+        bool journalpostFilterOn = false;
 
         public PatientJournalForm(Patient patient, Employee myUser)
         {
@@ -57,7 +56,16 @@ namespace HospitalManagement
 
             prescriptionListBox.DataSource = data.PrescriptionList;
             allergyListBox.DataSource = data.AllergyList;
-            journalPostListBox.DataSource = data.NotesList;
+            allergyListBox.ValueMember = "ShortDescription";
+            if (journalpostFilterOn)
+            {
+                journalPostListBox.DataSource = data.ImportantNotesList;
+            }
+            else
+            {
+                journalPostListBox.DataSource = data.NotesList;
+            }
+            
             bokningListbox.DataSource = data.BookingList;
             if(journalPostListBox.Items.Count > 0)
             {
@@ -111,7 +119,7 @@ namespace HospitalManagement
 
         private void journalPostListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            journalpostPreviewTxtBox.Text = (journalPostListBox.SelectedValue as JournalPost).Content;
+            journalpostPreviewTxtBox.Text = ((JournalPost)journalPostListBox.SelectedValue).Content;
         }
 
         private void journalpostPreviewTxtBox_Enter(object sender, EventArgs e)
@@ -148,6 +156,22 @@ namespace HospitalManagement
 
             }
             
+        }
+
+        private void toggleFilterBtn_Click(object sender, EventArgs e)
+        {
+            if (journalpostFilterOn)
+            {
+                journalpostFilterOn = false;
+                journalNotesGroupBox.Text = "Journal-anteckningar";
+                UpdatePatientJournal();
+            }
+            else
+            {
+                journalpostFilterOn = true;
+                journalNotesGroupBox.Text = "Journal-anteckningar - FILTER: ENDAST VIKTIGA";
+                UpdatePatientJournal();
+            }
         }
     }
 }

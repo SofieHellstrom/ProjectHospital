@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.toggleFilterBtn = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.bokningListbox = new System.Windows.Forms.ListBox();
             this.newNotesBtn = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.journalNotesGroupBox = new System.Windows.Forms.GroupBox();
             this.journalpostPreviewTxtBox = new System.Windows.Forms.TextBox();
             this.journalPostListBox = new System.Windows.Forms.ListBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.signOutBtn = new System.Windows.Forms.Button();
             this.signInBtn = new System.Windows.Forms.Button();
             this.signedInRoomTxtBox = new System.Windows.Forms.TextBox();
             this.signedInDepTxtBox = new System.Windows.Forms.TextBox();
@@ -70,10 +72,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.signOutBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.groupBox5.SuspendLayout();
+            this.journalNotesGroupBox.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -82,9 +83,10 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.toggleFilterBtn);
             this.mainPanel.Controls.Add(this.groupBox6);
             this.mainPanel.Controls.Add(this.newNotesBtn);
-            this.mainPanel.Controls.Add(this.groupBox5);
+            this.mainPanel.Controls.Add(this.journalNotesGroupBox);
             this.mainPanel.Controls.Add(this.groupBox4);
             this.mainPanel.Controls.Add(this.groupBox3);
             this.mainPanel.Controls.Add(this.createReceiptBtn);
@@ -93,8 +95,18 @@
             this.mainPanel.Controls.Add(this.groupBox1);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(919, 732);
+            this.mainPanel.Size = new System.Drawing.Size(973, 732);
             this.mainPanel.TabIndex = 0;
+            // 
+            // toggleFilterBtn
+            // 
+            this.toggleFilterBtn.Location = new System.Drawing.Point(584, 579);
+            this.toggleFilterBtn.Name = "toggleFilterBtn";
+            this.toggleFilterBtn.Size = new System.Drawing.Size(164, 23);
+            this.toggleFilterBtn.TabIndex = 9;
+            this.toggleFilterBtn.Text = "Ändra Filtrering";
+            this.toggleFilterBtn.UseVisualStyleBackColor = true;
+            this.toggleFilterBtn.Click += new System.EventHandler(this.toggleFilterBtn_Click);
             // 
             // groupBox6
             // 
@@ -116,7 +128,7 @@
             // 
             // newNotesBtn
             // 
-            this.newNotesBtn.Location = new System.Drawing.Point(652, 579);
+            this.newNotesBtn.Location = new System.Drawing.Point(778, 579);
             this.newNotesBtn.Name = "newNotesBtn";
             this.newNotesBtn.Size = new System.Drawing.Size(169, 23);
             this.newNotesBtn.TabIndex = 7;
@@ -124,23 +136,23 @@
             this.newNotesBtn.UseVisualStyleBackColor = true;
             this.newNotesBtn.Click += new System.EventHandler(this.newNotesBtn_Click);
             // 
-            // groupBox5
+            // journalNotesGroupBox
             // 
-            this.groupBox5.Controls.Add(this.journalpostPreviewTxtBox);
-            this.groupBox5.Controls.Add(this.journalPostListBox);
-            this.groupBox5.Location = new System.Drawing.Point(565, 16);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(343, 552);
-            this.groupBox5.TabIndex = 6;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Journal-anteckningar";
+            this.journalNotesGroupBox.Controls.Add(this.journalpostPreviewTxtBox);
+            this.journalNotesGroupBox.Controls.Add(this.journalPostListBox);
+            this.journalNotesGroupBox.Location = new System.Drawing.Point(565, 16);
+            this.journalNotesGroupBox.Name = "journalNotesGroupBox";
+            this.journalNotesGroupBox.Size = new System.Drawing.Size(397, 552);
+            this.journalNotesGroupBox.TabIndex = 6;
+            this.journalNotesGroupBox.TabStop = false;
+            this.journalNotesGroupBox.Text = "Journal-anteckningar";
             // 
             // journalpostPreviewTxtBox
             // 
             this.journalpostPreviewTxtBox.Location = new System.Drawing.Point(6, 316);
             this.journalpostPreviewTxtBox.Multiline = true;
             this.journalpostPreviewTxtBox.Name = "journalpostPreviewTxtBox";
-            this.journalpostPreviewTxtBox.Size = new System.Drawing.Size(331, 230);
+            this.journalpostPreviewTxtBox.Size = new System.Drawing.Size(385, 230);
             this.journalpostPreviewTxtBox.TabIndex = 1;
             this.journalpostPreviewTxtBox.Enter += new System.EventHandler(this.journalpostPreviewTxtBox_Enter);
             // 
@@ -149,7 +161,7 @@
             this.journalPostListBox.FormattingEnabled = true;
             this.journalPostListBox.Location = new System.Drawing.Point(6, 20);
             this.journalPostListBox.Name = "journalPostListBox";
-            this.journalPostListBox.Size = new System.Drawing.Size(331, 290);
+            this.journalPostListBox.Size = new System.Drawing.Size(385, 290);
             this.journalPostListBox.TabIndex = 0;
             this.journalPostListBox.SelectedIndexChanged += new System.EventHandler(this.journalPostListBox_SelectedIndexChanged);
             // 
@@ -169,6 +181,16 @@
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Inskrivnings-uppgifter";
+            // 
+            // signOutBtn
+            // 
+            this.signOutBtn.Location = new System.Drawing.Point(132, 115);
+            this.signOutBtn.Name = "signOutBtn";
+            this.signOutBtn.Size = new System.Drawing.Size(101, 23);
+            this.signOutBtn.TabIndex = 9;
+            this.signOutBtn.Text = "Skriv ut";
+            this.signOutBtn.UseVisualStyleBackColor = true;
+            this.signOutBtn.Click += new System.EventHandler(this.signOutBtn_Click);
             // 
             // signInBtn
             // 
@@ -485,29 +507,19 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Personnummer";
             // 
-            // signOutBtn
-            // 
-            this.signOutBtn.Location = new System.Drawing.Point(132, 115);
-            this.signOutBtn.Name = "signOutBtn";
-            this.signOutBtn.Size = new System.Drawing.Size(101, 23);
-            this.signOutBtn.TabIndex = 9;
-            this.signOutBtn.Text = "Skriv ut";
-            this.signOutBtn.UseVisualStyleBackColor = true;
-            this.signOutBtn.Click += new System.EventHandler(this.signOutBtn_Click);
-            // 
             // PatientJournalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(920, 725);
+            this.ClientSize = new System.Drawing.Size(974, 725);
             this.Controls.Add(this.mainPanel);
             this.Name = "PatientJournalForm";
             this.Text = "PatientJournalForm";
             this.Activated += new System.EventHandler(this.PatientJournalForm_Activated);
             this.mainPanel.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
+            this.journalNotesGroupBox.ResumeLayout(false);
+            this.journalNotesGroupBox.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -545,7 +557,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label testResultLbl;
-        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox journalNotesGroupBox;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label inskrivningsStatusLbl;
@@ -564,5 +576,6 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.ListBox bokningListbox;
         private System.Windows.Forms.Button signOutBtn;
+        private System.Windows.Forms.Button toggleFilterBtn;
     }
 }

@@ -103,15 +103,15 @@ namespace HospitalManagement
                 string purpose = purposeBox.Text;
 
 
-                Booking newBooking = new Booking (purpose, bookingtime, bookingtimeEnd, doctor,patientname);
-                DatabaseHandler db = new DatabaseHandler();
-                Boolean success = db.AddBooking(newBooking);
+                //Booking newBooking = new Booking (purpose, bookingtime, bookingtimeEnd, doctor,patientname);
+                //DatabaseHandler db = new DatabaseHandler();
+                //Boolean success = db.AddBooking(newBooking);
 
-                if (success)
-                {
-                    MessageBox.Show("Bokning sparat i databasen.");
-                    this.Close();
-                }
+                //if (success)
+                //{
+                //    MessageBox.Show("Bokning sparat i databasen.");
+                //    this.Close();
+                //}
                 
             }
         }
