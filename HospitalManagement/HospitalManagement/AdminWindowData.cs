@@ -8,13 +8,15 @@ namespace HospitalManagement
 {
     public class AdminWindowData
     {
+        DatabaseHandler db = new DatabaseHandler();
         public Employee MyUser { get; set; }
-        List<Employee> EmployeeList { get; set; }
-        List<Department> DepartmentList { get; set; }
+        public List<Employee> EmployeeList { get; set; }
+        public List<Department> DepartmentList { get; set; }
 
         public AdminWindowData(Employee user)
         {
             this.MyUser = user;
+            this.EmployeeList = db.LoadAllEmployees();
         }
     }
 }

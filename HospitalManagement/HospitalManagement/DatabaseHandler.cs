@@ -214,26 +214,6 @@ namespace HospitalManagement
                             cmd.Connection = conn;
                             cmd.CommandText = $"INSERT INTO patient (person_id_nr, first_name, last_name, address, postal_code, phone, email, bloodtype) VALUES ('{patientToAdd.Personnummer}', '{patientToAdd.FirstName}', '{patientToAdd.LastName}', '{patientToAdd.Address}', {patientToAdd.PostalCode},'{patientToAdd.PhoneNr}', '{patientToAdd.Email}', '{patientToAdd.BloodType}')";
 
-                            //cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
-                            //cmd.Parameters.Add(new NpgsqlParameter("firstname", NpgsqlDbType.Varchar));
-                            //cmd.Parameters.Add(new NpgsqlParameter("lastname", NpgsqlDbType.Varchar));
-                            //cmd.Parameters.Add(new NpgsqlParameter("address", NpgsqlDbType.Varchar));
-                            //cmd.Parameters.Add(new NpgsqlParameter("postcode", NpgsqlDbType.Integer));
-                            //cmd.Parameters.Add(new NpgsqlParameter("phone", NpgsqlDbType.Varchar));
-                            //cmd.Parameters.Add(new NpgsqlParameter("email", NpgsqlDbType.Varchar));
-                            //cmd.Parameters.Add(new NpgsqlParameter("blood", NpgsqlDbType.Varchar));
-
-                            //cmd.Prepare();
-
-                            //cmd.Parameters[0].Value = patientToAdd.Personnummer;
-                            //cmd.Parameters[1].Value = patientToAdd.FirstName;
-                            //cmd.Parameters[2].Value = patientToAdd.LastName;
-                            //cmd.Parameters[3].Value = patientToAdd.Address;
-                            //cmd.Parameters[4].Value = patientToAdd.PostalCode;
-                            //cmd.Parameters[5].Value = patientToAdd.PhoneNr;
-                            //cmd.Parameters[5].Value = patientToAdd.Email;
-                            //cmd.Parameters[6].Value = patientToAdd.BloodType;
-
                             int recordsAffected = cmd.ExecuteNonQuery();
 
                             //Returns a boolean which is True if any rows have been affected. 
@@ -258,9 +238,6 @@ namespace HospitalManagement
             }
 
         }
-
-
-
 
         public bool UpdatePatient(Patient patientToUpdate)
         {
@@ -357,7 +334,7 @@ namespace HospitalManagement
             return returnPostOrt;
         }
 
-        //Methods related to Employees and interacting with the staff table
+        //Methods related to Employees and interacting with the staff table.
         public Employee LoadEmployee(string EmployeeID)
         {
             //Returns a new instance of a specific person based on the value of employee_id 
@@ -442,6 +419,80 @@ namespace HospitalManagement
             returnEmployee = new Employee(anstNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, personnummer, position, department, specialty);
             return returnEmployee;
 
+        }
+
+        public List<Employee> LoadAllEmployees()
+        {
+            //Returns a list of instance of the Patient class based on the values 
+            //in the patient table of the database.
+            List<Employee> resultList = new List<Employee>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM staff";
+
+                    cmd.Prepare();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        
+                        while (reader.Read())
+                        {
+                            //Defines temporary variables and their default values.
+                            string anstNr = "Test";
+                            string firstName = "";
+                            string lastName = "";
+                            string adress = "";
+                            int postNr = 0;
+                            string telefonNr = "";
+                            string eMail = "";
+                            string personnummer = "";
+                            string departmentNr = "";
+                            string position = "";
+                            string specialtyNr = "";
+                            string postOrt = "";
+                            string department = "";
+                            string specialty = "N/A";
+
+                            //Reads values from the database into the temporary variables.
+                            anstNr = reader.GetString(0);
+                            firstName = reader.GetString(1);
+                            lastName = reader.GetString(2);
+                            adress = reader.GetString(3);
+                            postNr = reader.GetInt32(4);
+                            telefonNr = reader.GetString(5);
+                            eMail = reader.GetString(6);
+                            personnummer = reader.GetString(7);
+                            departmentNr = reader.GetString(8);
+                            position = reader.GetString(9);
+                            if (!reader.IsDBNull(10))
+                            {
+                                specialtyNr = reader.GetString(10);
+                            }
+
+                            postOrt = LoadPostort(postNr); // Gets the Postort corresponding to the Postnr from the database
+                            department = LoadDepartment(departmentNr);
+                            if (!specialtyNr.Equals(""))
+                            {
+                                specialty = LoadSpecialty(specialtyNr);
+                            }
+                            //Creates patient and adds it to the list of patients using the temporary variables.
+                            Employee employeeToAdd = new Employee(anstNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, personnummer, position, department, specialty);
+                            resultList.Add(employeeToAdd);
+                        }
+                        return resultList;
+
+                    }
+                }
+
+            }
         }
 
         public void AddEmployee()

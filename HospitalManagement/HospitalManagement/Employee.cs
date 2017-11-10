@@ -35,7 +35,8 @@ namespace HospitalManagement
             this.LastName = lastName;
             this.Address = address;
             this.PostalCode = postCode;
-            this.PostalArea = postArea; 
+            this.PostalArea = postArea;
+            this.PhoneNr = phoneNr;
             this.Email = eMail;
             this.PersonNummer = persNr;
             this.Position = position;
