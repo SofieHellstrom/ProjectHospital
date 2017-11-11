@@ -38,6 +38,7 @@
             this.skipLoginCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.snabbloginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.snabbloginAdminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.skipLoginCMS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -105,14 +106,15 @@
             // skipLoginCMS
             // 
             this.skipLoginCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.snabbloginToolStripMenuItem});
+            this.snabbloginToolStripMenuItem,
+            this.snabbloginAdminToolStripMenuItem});
             this.skipLoginCMS.Name = "skipLoginCMS";
-            this.skipLoginCMS.Size = new System.Drawing.Size(135, 26);
+            this.skipLoginCMS.Size = new System.Drawing.Size(182, 70);
             // 
             // snabbloginToolStripMenuItem
             // 
             this.snabbloginToolStripMenuItem.Name = "snabbloginToolStripMenuItem";
-            this.snabbloginToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.snabbloginToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.snabbloginToolStripMenuItem.Text = "Snabblogin";
             this.snabbloginToolStripMenuItem.Click += new System.EventHandler(this.snabbloginToolStripMenuItem_Click);
             // 
@@ -120,6 +122,13 @@
             // 
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
+            // 
+            // snabbloginAdminToolStripMenuItem
+            // 
+            this.snabbloginAdminToolStripMenuItem.Name = "snabbloginAdminToolStripMenuItem";
+            this.snabbloginAdminToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.snabbloginAdminToolStripMenuItem.Text = "Snabblogin - Admin";
+            this.snabbloginAdminToolStripMenuItem.Click += new System.EventHandler(this.snabbloginAdminToolStripMenuItem_Click);
             // 
             // LoginForm
             // 
@@ -153,5 +162,6 @@
         private System.Windows.Forms.ContextMenuStrip skipLoginCMS;
         private System.Windows.Forms.ToolStripMenuItem snabbloginToolStripMenuItem;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ToolStripMenuItem snabbloginAdminToolStripMenuItem;
     }
 }

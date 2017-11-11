@@ -20,11 +20,7 @@ namespace HospitalManagement
             InitializeComponent();
             this.currentUserLbl.Text = $"Inloggad som: {data.MyUser.ToString()}";
             this.employeesDataGridView.DataSource = data.EmployeeList;
-            if (data.EmployeeList.Any())
-            {
-                this.employeesDataGridView.Rows[0].Selected = true;
-            }
-            UpdateSelectedEmployeeInfo();
+            this.departmentComboBox.DataSource = data.DepartmentList.OrderBy(o=>o.Name).ToList();
         }
 
         private void UpdateSelectedEmployeeInfo()
@@ -72,6 +68,27 @@ namespace HospitalManagement
 
         private void employeesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            UpdateSelectedEmployeeInfo();
+        }
+
+        private void employeeTabPage_Enter(object sender, EventArgs e)
+        {
+            addBtn.Text = "Ny Anställd";
+            updateBtn.Text = "Uppdatera Anställd";
+        }
+
+        private void departmentTabPage_Enter(object sender, EventArgs e)
+        {
+            addBtn.Text = "Ny Avdelning";
+            updateBtn.Text = "Uppdatera Avdelning";
+        }
+
+        private void employeesDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            if (data.EmployeeList.Any())
+            {
+                this.employeesDataGridView.Rows[0].Selected = true;
+            }
             UpdateSelectedEmployeeInfo();
         }
     }

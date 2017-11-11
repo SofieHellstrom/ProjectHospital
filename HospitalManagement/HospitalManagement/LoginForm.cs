@@ -102,6 +102,15 @@ namespace HospitalManagement
             main.Show();
             this.Hide();
         }
+
+        private void snabbloginAdminToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DatabaseHandler db = new DatabaseHandler();
+            Employee defaultAdmin = db.LoadEmployee("ADM10001");
+            Form main = new AdminWindowForm(defaultAdmin);
+            main.Show();
+            this.Hide();
+        }
     }
 }
    

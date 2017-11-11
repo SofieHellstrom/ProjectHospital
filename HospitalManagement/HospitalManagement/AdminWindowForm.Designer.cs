@@ -32,7 +32,7 @@
             this.cornerPanel = new System.Windows.Forms.Panel();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.updateBtn = new System.Windows.Forms.Button();
             this.addBtn = new System.Windows.Forms.Button();
             this.topPanel = new System.Windows.Forms.Panel();
             this.currentUserLbl = new System.Windows.Forms.Label();
@@ -63,6 +63,7 @@
             this.employeesDataGridView = new System.Windows.Forms.DataGridView();
             this.departmentTabPage = new System.Windows.Forms.TabPage();
             this.roomTabPage = new System.Windows.Forms.TabPage();
+            this.employeeInfoGroupBox = new System.Windows.Forms.GroupBox();
             this.mainTableLayoutPanel.SuspendLayout();
             this.leftPanel.SuspendLayout();
             this.topPanel.SuspendLayout();
@@ -70,13 +71,14 @@
             this.tabControl.SuspendLayout();
             this.employeeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeesDataGridView)).BeginInit();
+            this.employeeInfoGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainTableLayoutPanel
             // 
             this.mainTableLayoutPanel.ColumnCount = 2;
-            this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.51567F));
-            this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89.48433F));
+            this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.4368F));
+            this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 87.56319F));
             this.mainTableLayoutPanel.Controls.Add(this.cornerPanel, 0, 0);
             this.mainTableLayoutPanel.Controls.Add(this.leftPanel, 0, 1);
             this.mainTableLayoutPanel.Controls.Add(this.topPanel, 1, 0);
@@ -85,9 +87,9 @@
             this.mainTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.mainTableLayoutPanel.Name = "mainTableLayoutPanel";
             this.mainTableLayoutPanel.RowCount = 2;
-            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.98701F));
-            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.01299F));
-            this.mainTableLayoutPanel.Size = new System.Drawing.Size(989, 626);
+            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.549521F));
+            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.45048F));
+            this.mainTableLayoutPanel.Size = new System.Drawing.Size(1017, 626);
             this.mainTableLayoutPanel.TabIndex = 0;
             // 
             // cornerPanel
@@ -95,61 +97,61 @@
             this.cornerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cornerPanel.Location = new System.Drawing.Point(3, 3);
             this.cornerPanel.Name = "cornerPanel";
-            this.cornerPanel.Size = new System.Drawing.Size(97, 75);
+            this.cornerPanel.Size = new System.Drawing.Size(120, 35);
             this.cornerPanel.TabIndex = 0;
             // 
             // leftPanel
             // 
             this.leftPanel.Controls.Add(this.button3);
-            this.leftPanel.Controls.Add(this.button2);
+            this.leftPanel.Controls.Add(this.updateBtn);
             this.leftPanel.Controls.Add(this.addBtn);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.leftPanel.Location = new System.Drawing.Point(3, 84);
+            this.leftPanel.Location = new System.Drawing.Point(3, 44);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(97, 539);
+            this.leftPanel.Size = new System.Drawing.Size(120, 579);
             this.leftPanel.TabIndex = 1;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(9, 61);
+            this.button3.Location = new System.Drawing.Point(3, 60);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(108, 23);
             this.button3.TabIndex = 2;
             this.button3.Text = "Ta bort?";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // updateBtn
             // 
-            this.button2.Location = new System.Drawing.Point(9, 32);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Uppdatera X";
-            this.button2.UseVisualStyleBackColor = true;
+            this.updateBtn.Location = new System.Drawing.Point(3, 31);
+            this.updateBtn.Name = "updateBtn";
+            this.updateBtn.Size = new System.Drawing.Size(108, 23);
+            this.updateBtn.TabIndex = 1;
+            this.updateBtn.Text = "Uppdatera Anställd";
+            this.updateBtn.UseVisualStyleBackColor = true;
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(9, 3);
+            this.addBtn.Location = new System.Drawing.Point(3, 3);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(75, 23);
+            this.addBtn.Size = new System.Drawing.Size(108, 23);
             this.addBtn.TabIndex = 0;
-            this.addBtn.Text = "Ny X";
+            this.addBtn.Text = "Ny Anställd";
             this.addBtn.UseVisualStyleBackColor = true;
             // 
             // topPanel
             // 
             this.topPanel.Controls.Add(this.currentUserLbl);
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.topPanel.Location = new System.Drawing.Point(106, 3);
+            this.topPanel.Location = new System.Drawing.Point(129, 3);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(880, 75);
+            this.topPanel.Size = new System.Drawing.Size(885, 35);
             this.topPanel.TabIndex = 2;
             // 
             // currentUserLbl
             // 
             this.currentUserLbl.AutoSize = true;
             this.currentUserLbl.Dock = System.Windows.Forms.DockStyle.Right;
-            this.currentUserLbl.Location = new System.Drawing.Point(851, 0);
+            this.currentUserLbl.Location = new System.Drawing.Point(856, 0);
             this.currentUserLbl.Name = "currentUserLbl";
             this.currentUserLbl.Size = new System.Drawing.Size(29, 13);
             this.currentUserLbl.TabIndex = 0;
@@ -159,9 +161,9 @@
             // 
             this.bigPanel.Controls.Add(this.tabControl);
             this.bigPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bigPanel.Location = new System.Drawing.Point(106, 84);
+            this.bigPanel.Location = new System.Drawing.Point(129, 44);
             this.bigPanel.Name = "bigPanel";
-            this.bigPanel.Size = new System.Drawing.Size(880, 539);
+            this.bigPanel.Size = new System.Drawing.Size(885, 579);
             this.bigPanel.TabIndex = 3;
             // 
             // tabControl
@@ -173,45 +175,26 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(880, 539);
+            this.tabControl.Size = new System.Drawing.Size(885, 579);
             this.tabControl.TabIndex = 0;
             // 
             // employeeTabPage
             // 
-            this.employeeTabPage.Controls.Add(this.specialtyComboBox);
-            this.employeeTabPage.Controls.Add(this.positionComboBox);
-            this.employeeTabPage.Controls.Add(this.departmentComboBox);
-            this.employeeTabPage.Controls.Add(this.emailTxtBox);
-            this.employeeTabPage.Controls.Add(this.specialtyLbl);
-            this.employeeTabPage.Controls.Add(this.departmentLbl);
-            this.employeeTabPage.Controls.Add(this.positionLbl);
-            this.employeeTabPage.Controls.Add(this.phoneNrTxtBox);
-            this.employeeTabPage.Controls.Add(this.postalAreaTxtBox);
-            this.employeeTabPage.Controls.Add(this.postalCodeTxtBox);
-            this.employeeTabPage.Controls.Add(this.addressTxtBox);
-            this.employeeTabPage.Controls.Add(this.lastNameTxtBox);
-            this.employeeTabPage.Controls.Add(this.firstNameTxtBox);
-            this.employeeTabPage.Controls.Add(this.employeeIdTxtBox);
-            this.employeeTabPage.Controls.Add(this.label8);
-            this.employeeTabPage.Controls.Add(this.label7);
-            this.employeeTabPage.Controls.Add(this.label6);
-            this.employeeTabPage.Controls.Add(this.addressLbl);
-            this.employeeTabPage.Controls.Add(this.lastNameLbl);
-            this.employeeTabPage.Controls.Add(this.firstNameLbl);
-            this.employeeTabPage.Controls.Add(this.anstIdLbl);
+            this.employeeTabPage.Controls.Add(this.employeeInfoGroupBox);
             this.employeeTabPage.Controls.Add(this.employeesDataGridView);
             this.employeeTabPage.Location = new System.Drawing.Point(4, 22);
             this.employeeTabPage.Name = "employeeTabPage";
             this.employeeTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.employeeTabPage.Size = new System.Drawing.Size(872, 513);
+            this.employeeTabPage.Size = new System.Drawing.Size(877, 553);
             this.employeeTabPage.TabIndex = 0;
             this.employeeTabPage.Text = "Anställda";
             this.employeeTabPage.UseVisualStyleBackColor = true;
+            this.employeeTabPage.Enter += new System.EventHandler(this.employeeTabPage_Enter);
             // 
             // specialtyComboBox
             // 
             this.specialtyComboBox.FormattingEnabled = true;
-            this.specialtyComboBox.Location = new System.Drawing.Point(288, 12);
+            this.specialtyComboBox.Location = new System.Drawing.Point(279, 13);
             this.specialtyComboBox.Name = "specialtyComboBox";
             this.specialtyComboBox.Size = new System.Drawing.Size(190, 21);
             this.specialtyComboBox.TabIndex = 22;
@@ -219,7 +202,7 @@
             // positionComboBox
             // 
             this.positionComboBox.FormattingEnabled = true;
-            this.positionComboBox.Location = new System.Drawing.Point(303, 38);
+            this.positionComboBox.Location = new System.Drawing.Point(294, 39);
             this.positionComboBox.Name = "positionComboBox";
             this.positionComboBox.Size = new System.Drawing.Size(175, 21);
             this.positionComboBox.TabIndex = 21;
@@ -227,14 +210,14 @@
             // departmentComboBox
             // 
             this.departmentComboBox.FormattingEnabled = true;
-            this.departmentComboBox.Location = new System.Drawing.Point(101, 38);
+            this.departmentComboBox.Location = new System.Drawing.Point(92, 39);
             this.departmentComboBox.Name = "departmentComboBox";
             this.departmentComboBox.Size = new System.Drawing.Size(121, 21);
             this.departmentComboBox.TabIndex = 20;
             // 
             // emailTxtBox
             // 
-            this.emailTxtBox.Location = new System.Drawing.Point(101, 217);
+            this.emailTxtBox.Location = new System.Drawing.Point(92, 208);
             this.emailTxtBox.Name = "emailTxtBox";
             this.emailTxtBox.Size = new System.Drawing.Size(270, 20);
             this.emailTxtBox.TabIndex = 19;
@@ -242,7 +225,7 @@
             // specialtyLbl
             // 
             this.specialtyLbl.AutoSize = true;
-            this.specialtyLbl.Location = new System.Drawing.Point(207, 15);
+            this.specialtyLbl.Location = new System.Drawing.Point(198, 16);
             this.specialtyLbl.Name = "specialtyLbl";
             this.specialtyLbl.Size = new System.Drawing.Size(75, 13);
             this.specialtyLbl.TabIndex = 18;
@@ -251,7 +234,7 @@
             // departmentLbl
             // 
             this.departmentLbl.AutoSize = true;
-            this.departmentLbl.Location = new System.Drawing.Point(16, 41);
+            this.departmentLbl.Location = new System.Drawing.Point(7, 42);
             this.departmentLbl.Name = "departmentLbl";
             this.departmentLbl.Size = new System.Drawing.Size(57, 13);
             this.departmentLbl.TabIndex = 17;
@@ -260,7 +243,7 @@
             // positionLbl
             // 
             this.positionLbl.AutoSize = true;
-            this.positionLbl.Location = new System.Drawing.Point(228, 41);
+            this.positionLbl.Location = new System.Drawing.Point(219, 42);
             this.positionLbl.Name = "positionLbl";
             this.positionLbl.Size = new System.Drawing.Size(69, 13);
             this.positionLbl.TabIndex = 16;
@@ -268,49 +251,49 @@
             // 
             // phoneNrTxtBox
             // 
-            this.phoneNrTxtBox.Location = new System.Drawing.Point(101, 191);
+            this.phoneNrTxtBox.Location = new System.Drawing.Point(92, 182);
             this.phoneNrTxtBox.Name = "phoneNrTxtBox";
             this.phoneNrTxtBox.Size = new System.Drawing.Size(270, 20);
             this.phoneNrTxtBox.TabIndex = 15;
             // 
             // postalAreaTxtBox
             // 
-            this.postalAreaTxtBox.Location = new System.Drawing.Point(217, 165);
+            this.postalAreaTxtBox.Location = new System.Drawing.Point(208, 156);
             this.postalAreaTxtBox.Name = "postalAreaTxtBox";
             this.postalAreaTxtBox.Size = new System.Drawing.Size(154, 20);
             this.postalAreaTxtBox.TabIndex = 14;
             // 
             // postalCodeTxtBox
             // 
-            this.postalCodeTxtBox.Location = new System.Drawing.Point(101, 165);
+            this.postalCodeTxtBox.Location = new System.Drawing.Point(92, 156);
             this.postalCodeTxtBox.Name = "postalCodeTxtBox";
             this.postalCodeTxtBox.Size = new System.Drawing.Size(100, 20);
             this.postalCodeTxtBox.TabIndex = 13;
             // 
             // addressTxtBox
             // 
-            this.addressTxtBox.Location = new System.Drawing.Point(101, 138);
+            this.addressTxtBox.Location = new System.Drawing.Point(92, 129);
             this.addressTxtBox.Name = "addressTxtBox";
             this.addressTxtBox.Size = new System.Drawing.Size(270, 20);
             this.addressTxtBox.TabIndex = 12;
             // 
             // lastNameTxtBox
             // 
-            this.lastNameTxtBox.Location = new System.Drawing.Point(101, 108);
+            this.lastNameTxtBox.Location = new System.Drawing.Point(92, 100);
             this.lastNameTxtBox.Name = "lastNameTxtBox";
             this.lastNameTxtBox.Size = new System.Drawing.Size(171, 20);
             this.lastNameTxtBox.TabIndex = 11;
             // 
             // firstNameTxtBox
             // 
-            this.firstNameTxtBox.Location = new System.Drawing.Point(101, 79);
+            this.firstNameTxtBox.Location = new System.Drawing.Point(92, 71);
             this.firstNameTxtBox.Name = "firstNameTxtBox";
             this.firstNameTxtBox.Size = new System.Drawing.Size(171, 20);
             this.firstNameTxtBox.TabIndex = 10;
             // 
             // employeeIdTxtBox
             // 
-            this.employeeIdTxtBox.Location = new System.Drawing.Point(101, 12);
+            this.employeeIdTxtBox.Location = new System.Drawing.Point(92, 13);
             this.employeeIdTxtBox.Name = "employeeIdTxtBox";
             this.employeeIdTxtBox.Size = new System.Drawing.Size(100, 20);
             this.employeeIdTxtBox.TabIndex = 9;
@@ -318,7 +301,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 220);
+            this.label8.Location = new System.Drawing.Point(6, 211);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(38, 13);
             this.label8.TabIndex = 8;
@@ -327,7 +310,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 194);
+            this.label7.Location = new System.Drawing.Point(3, 185);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 13);
             this.label7.TabIndex = 7;
@@ -336,7 +319,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 168);
+            this.label6.Location = new System.Drawing.Point(6, 159);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(78, 13);
             this.label6.TabIndex = 6;
@@ -345,7 +328,7 @@
             // addressLbl
             // 
             this.addressLbl.AutoSize = true;
-            this.addressLbl.Location = new System.Drawing.Point(15, 141);
+            this.addressLbl.Location = new System.Drawing.Point(6, 132);
             this.addressLbl.Name = "addressLbl";
             this.addressLbl.Size = new System.Drawing.Size(42, 13);
             this.addressLbl.TabIndex = 4;
@@ -354,7 +337,7 @@
             // lastNameLbl
             // 
             this.lastNameLbl.AutoSize = true;
-            this.lastNameLbl.Location = new System.Drawing.Point(15, 111);
+            this.lastNameLbl.Location = new System.Drawing.Point(6, 103);
             this.lastNameLbl.Name = "lastNameLbl";
             this.lastNameLbl.Size = new System.Drawing.Size(58, 13);
             this.lastNameLbl.TabIndex = 3;
@@ -363,7 +346,7 @@
             // firstNameLbl
             // 
             this.firstNameLbl.AutoSize = true;
-            this.firstNameLbl.Location = new System.Drawing.Point(15, 83);
+            this.firstNameLbl.Location = new System.Drawing.Point(6, 75);
             this.firstNameLbl.Name = "firstNameLbl";
             this.firstNameLbl.Size = new System.Drawing.Size(51, 13);
             this.firstNameLbl.TabIndex = 2;
@@ -372,7 +355,7 @@
             // anstIdLbl
             // 
             this.anstIdLbl.AutoSize = true;
-            this.anstIdLbl.Location = new System.Drawing.Point(15, 15);
+            this.anstIdLbl.Location = new System.Drawing.Point(6, 16);
             this.anstIdLbl.Name = "anstIdLbl";
             this.anstIdLbl.Size = new System.Drawing.Size(80, 13);
             this.anstIdLbl.TabIndex = 1;
@@ -386,32 +369,64 @@
             this.employeesDataGridView.Size = new System.Drawing.Size(859, 229);
             this.employeesDataGridView.TabIndex = 0;
             this.employeesDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.employeesDataGridView_CellClick);
+            this.employeesDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.employeesDataGridView_DataBindingComplete);
             // 
             // departmentTabPage
             // 
             this.departmentTabPage.Location = new System.Drawing.Point(4, 22);
             this.departmentTabPage.Name = "departmentTabPage";
             this.departmentTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.departmentTabPage.Size = new System.Drawing.Size(871, 513);
+            this.departmentTabPage.Size = new System.Drawing.Size(877, 553);
             this.departmentTabPage.TabIndex = 1;
             this.departmentTabPage.Text = "Avdelningar";
             this.departmentTabPage.UseVisualStyleBackColor = true;
+            this.departmentTabPage.Enter += new System.EventHandler(this.departmentTabPage_Enter);
             // 
             // roomTabPage
             // 
             this.roomTabPage.Location = new System.Drawing.Point(4, 22);
             this.roomTabPage.Name = "roomTabPage";
             this.roomTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.roomTabPage.Size = new System.Drawing.Size(871, 513);
+            this.roomTabPage.Size = new System.Drawing.Size(872, 513);
             this.roomTabPage.TabIndex = 2;
             this.roomTabPage.Text = "Rum";
             this.roomTabPage.UseVisualStyleBackColor = true;
+            // 
+            // employeeInfoGroupBox
+            // 
+            this.employeeInfoGroupBox.Controls.Add(this.anstIdLbl);
+            this.employeeInfoGroupBox.Controls.Add(this.emailTxtBox);
+            this.employeeInfoGroupBox.Controls.Add(this.specialtyComboBox);
+            this.employeeInfoGroupBox.Controls.Add(this.phoneNrTxtBox);
+            this.employeeInfoGroupBox.Controls.Add(this.employeeIdTxtBox);
+            this.employeeInfoGroupBox.Controls.Add(this.postalAreaTxtBox);
+            this.employeeInfoGroupBox.Controls.Add(this.positionComboBox);
+            this.employeeInfoGroupBox.Controls.Add(this.postalCodeTxtBox);
+            this.employeeInfoGroupBox.Controls.Add(this.addressTxtBox);
+            this.employeeInfoGroupBox.Controls.Add(this.positionLbl);
+            this.employeeInfoGroupBox.Controls.Add(this.label8);
+            this.employeeInfoGroupBox.Controls.Add(this.departmentComboBox);
+            this.employeeInfoGroupBox.Controls.Add(this.label7);
+            this.employeeInfoGroupBox.Controls.Add(this.lastNameTxtBox);
+            this.employeeInfoGroupBox.Controls.Add(this.label6);
+            this.employeeInfoGroupBox.Controls.Add(this.departmentLbl);
+            this.employeeInfoGroupBox.Controls.Add(this.addressLbl);
+            this.employeeInfoGroupBox.Controls.Add(this.firstNameTxtBox);
+            this.employeeInfoGroupBox.Controls.Add(this.specialtyLbl);
+            this.employeeInfoGroupBox.Controls.Add(this.firstNameLbl);
+            this.employeeInfoGroupBox.Controls.Add(this.lastNameLbl);
+            this.employeeInfoGroupBox.Location = new System.Drawing.Point(6, 9);
+            this.employeeInfoGroupBox.Name = "employeeInfoGroupBox";
+            this.employeeInfoGroupBox.Size = new System.Drawing.Size(480, 266);
+            this.employeeInfoGroupBox.TabIndex = 23;
+            this.employeeInfoGroupBox.TabStop = false;
+            this.employeeInfoGroupBox.Text = "Vald Anställd";
             // 
             // AdminWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(989, 626);
+            this.ClientSize = new System.Drawing.Size(1017, 626);
             this.Controls.Add(this.mainTableLayoutPanel);
             this.Name = "AdminWindowForm";
             this.Text = "Systemadministration";
@@ -423,8 +438,9 @@
             this.bigPanel.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.employeeTabPage.ResumeLayout(false);
-            this.employeeTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeesDataGridView)).EndInit();
+            this.employeeInfoGroupBox.ResumeLayout(false);
+            this.employeeInfoGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -442,7 +458,7 @@
         private System.Windows.Forms.TabPage departmentTabPage;
         private System.Windows.Forms.TabPage roomTabPage;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button updateBtn;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.DataGridView employeesDataGridView;
         private System.Windows.Forms.Label label8;
@@ -466,5 +482,6 @@
         private System.Windows.Forms.ComboBox positionComboBox;
         private System.Windows.Forms.ComboBox departmentComboBox;
         private System.Windows.Forms.TextBox emailTxtBox;
+        private System.Windows.Forms.GroupBox employeeInfoGroupBox;
     }
 }

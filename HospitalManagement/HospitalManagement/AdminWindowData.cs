@@ -17,6 +17,7 @@ namespace HospitalManagement
         {
             this.MyUser = user;
             this.EmployeeList = db.LoadAllEmployees();
+            this.DepartmentList = db.LoadAllDepartments();
         }
     }
 }

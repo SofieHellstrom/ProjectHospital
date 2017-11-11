@@ -44,6 +44,12 @@ namespace HospitalManagement
             this.Specialty = specialisering;
         }
 
+        public void UpdateSelfInDB()
+        {
+            DatabaseHandler db = new DatabaseHandler();
+            db.UpdateEmployee(this);
+        }
+
         public override string ToString()
         {
             if (!Specialty.Equals("N/A"))

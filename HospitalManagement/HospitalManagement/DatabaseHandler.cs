@@ -495,12 +495,12 @@ namespace HospitalManagement
             }
         }
 
-        public void AddEmployee()
+        public void AddEmployee(Employee employeeToAdd)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateEmployee()
+        public void UpdateEmployee(Employee employeeToUpdate)
         {
             throw new NotImplementedException();
         }
