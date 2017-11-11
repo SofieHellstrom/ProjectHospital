@@ -12,12 +12,15 @@ namespace HospitalManagement
         public Employee MyUser { get; set; }
         public List<Employee> EmployeeList { get; set; }
         public List<Department> DepartmentList { get; set; }
+        public Dictionary<string, string> SpecialtyDictionary { get; set; }
 
         public AdminWindowData(Employee user)
         {
             this.MyUser = user;
             this.EmployeeList = db.LoadAllEmployees();
             this.DepartmentList = db.LoadAllDepartments();
+            this.SpecialtyDictionary = db.LoadSpecialtyDictionary();
+
         }
     }
 }

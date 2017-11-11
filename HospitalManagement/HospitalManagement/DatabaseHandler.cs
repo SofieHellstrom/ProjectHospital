@@ -510,6 +510,41 @@ namespace HospitalManagement
             throw new NotImplementedException();
         }
 
+        public string LoadHighestUsedEmployeeId(string position)
+        {
+            //Gets the Postal Area corresponding to a Postal Code from the database. 
+            string returnId = "Not in DB";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds the connection and SQL-string to the Command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT MAX(employee_id) FROM staff WHERE position = :pos";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("pos", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = position;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Reads the value from the database.
+                        while (reader.Read())
+                        {
+                            returnId = reader.GetString(0);
+                        }
+                    }
+                }
+
+            }
+            return returnId;
+
+        }
+
         //Methods concerned with loading or changing data related to JournalNotes in the Database
 
         public List<JournalPost> LoadPatientNotes(string personnummer)
@@ -698,6 +733,41 @@ namespace HospitalManagement
 
             }
             return returnSpecialty;
+        }
+
+        public Dictionary<string, string> LoadSpecialtyDictionary()
+        {
+            //Loads all specialties from the database and puts them in a dictionary with the name as Key and the ID as value
+            Dictionary<string, string> resultDictionary = new Dictionary<string, string>();
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM specialty";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {   
+                        while (reader.Read())
+                        {
+                            //Reads values from the database into temporary variables
+                            string id = reader.GetString(0);
+                            string name = reader.GetString(1);
+                            
+                            //Ads the values of the temporary variables to the Dictionary.
+                            resultDictionary.Add(name, id);
+                        }
+                        return resultDictionary;
+
+                    }
+                }
+
+            }
+
         }
 
         //Methods related to usernames and passwords from the user table.

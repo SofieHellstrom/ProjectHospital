@@ -67,6 +67,12 @@
     </Compile>
     <Compile Include="DatabaseHandler.cs" />
     <Compile Include="Department.cs" />
+    <Compile Include="EmployeeRegistryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeeRegistryForm.Designer.cs">
+      <DependentUpon>EmployeeRegistryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="HospitalDataSet.cs">
       <DependentUpon>HospitalDataSet.xsd</DependentUpon>
     </Compile>
@@ -156,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChangeUserInfoForm.resx">
       <DependentUpon>ChangeUserInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmployeeRegistryForm.resx">
+      <DependentUpon>EmployeeRegistryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

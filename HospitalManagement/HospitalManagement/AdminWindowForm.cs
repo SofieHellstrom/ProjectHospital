@@ -91,5 +91,22 @@ namespace HospitalManagement
             }
             UpdateSelectedEmployeeInfo();
         }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            switch (tabControl.SelectedIndex)
+            {
+                case 0:
+                    Form addForm = new EmployeeRegistryForm(data);
+                    addForm.ShowDialog();
+                    break;
+
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+            }
+        }
     }
 }

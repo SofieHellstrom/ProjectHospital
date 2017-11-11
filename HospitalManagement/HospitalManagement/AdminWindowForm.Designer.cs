@@ -64,6 +64,8 @@
             this.departmentTabPage = new System.Windows.Forms.TabPage();
             this.roomTabPage = new System.Windows.Forms.TabPage();
             this.employeeInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.personIdLbl = new System.Windows.Forms.Label();
+            this.personIDTxtBox = new System.Windows.Forms.TextBox();
             this.mainTableLayoutPanel.SuspendLayout();
             this.leftPanel.SuspendLayout();
             this.topPanel.SuspendLayout();
@@ -137,6 +139,7 @@
             this.addBtn.TabIndex = 0;
             this.addBtn.Text = "Ny Anställd";
             this.addBtn.UseVisualStyleBackColor = true;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // topPanel
             // 
@@ -194,47 +197,49 @@
             // specialtyComboBox
             // 
             this.specialtyComboBox.FormattingEnabled = true;
-            this.specialtyComboBox.Location = new System.Drawing.Point(279, 13);
+            this.specialtyComboBox.Location = new System.Drawing.Point(319, 39);
             this.specialtyComboBox.Name = "specialtyComboBox";
-            this.specialtyComboBox.Size = new System.Drawing.Size(190, 21);
+            this.specialtyComboBox.Size = new System.Drawing.Size(171, 21);
             this.specialtyComboBox.TabIndex = 22;
             // 
             // positionComboBox
             // 
             this.positionComboBox.FormattingEnabled = true;
-            this.positionComboBox.Location = new System.Drawing.Point(294, 39);
+            this.positionComboBox.Location = new System.Drawing.Point(78, 39);
             this.positionComboBox.Name = "positionComboBox";
-            this.positionComboBox.Size = new System.Drawing.Size(175, 21);
+            this.positionComboBox.Size = new System.Drawing.Size(171, 21);
             this.positionComboBox.TabIndex = 21;
             // 
             // departmentComboBox
             // 
+            this.departmentComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.departmentComboBox.FormattingEnabled = true;
-            this.departmentComboBox.Location = new System.Drawing.Point(92, 39);
+            this.departmentComboBox.Location = new System.Drawing.Point(78, 66);
             this.departmentComboBox.Name = "departmentComboBox";
-            this.departmentComboBox.Size = new System.Drawing.Size(121, 21);
+            this.departmentComboBox.Size = new System.Drawing.Size(171, 21);
+            this.departmentComboBox.Sorted = true;
             this.departmentComboBox.TabIndex = 20;
             // 
             // emailTxtBox
             // 
-            this.emailTxtBox.Location = new System.Drawing.Point(92, 208);
+            this.emailTxtBox.Location = new System.Drawing.Point(78, 198);
             this.emailTxtBox.Name = "emailTxtBox";
-            this.emailTxtBox.Size = new System.Drawing.Size(270, 20);
+            this.emailTxtBox.Size = new System.Drawing.Size(285, 20);
             this.emailTxtBox.TabIndex = 19;
             // 
             // specialtyLbl
             // 
             this.specialtyLbl.AutoSize = true;
-            this.specialtyLbl.Location = new System.Drawing.Point(198, 16);
+            this.specialtyLbl.Location = new System.Drawing.Point(255, 42);
             this.specialtyLbl.Name = "specialtyLbl";
-            this.specialtyLbl.Size = new System.Drawing.Size(75, 13);
+            this.specialtyLbl.Size = new System.Drawing.Size(60, 13);
             this.specialtyLbl.TabIndex = 18;
-            this.specialtyLbl.Text = "Specialisering:";
+            this.specialtyLbl.Text = "Läkarspec:";
             // 
             // departmentLbl
             // 
             this.departmentLbl.AutoSize = true;
-            this.departmentLbl.Location = new System.Drawing.Point(7, 42);
+            this.departmentLbl.Location = new System.Drawing.Point(6, 69);
             this.departmentLbl.Name = "departmentLbl";
             this.departmentLbl.Size = new System.Drawing.Size(57, 13);
             this.departmentLbl.TabIndex = 17;
@@ -243,7 +248,7 @@
             // positionLbl
             // 
             this.positionLbl.AutoSize = true;
-            this.positionLbl.Location = new System.Drawing.Point(219, 42);
+            this.positionLbl.Location = new System.Drawing.Point(6, 42);
             this.positionLbl.Name = "positionLbl";
             this.positionLbl.Size = new System.Drawing.Size(69, 13);
             this.positionLbl.TabIndex = 16;
@@ -251,49 +256,49 @@
             // 
             // phoneNrTxtBox
             // 
-            this.phoneNrTxtBox.Location = new System.Drawing.Point(92, 182);
+            this.phoneNrTxtBox.Location = new System.Drawing.Point(78, 172);
             this.phoneNrTxtBox.Name = "phoneNrTxtBox";
-            this.phoneNrTxtBox.Size = new System.Drawing.Size(270, 20);
+            this.phoneNrTxtBox.Size = new System.Drawing.Size(285, 20);
             this.phoneNrTxtBox.TabIndex = 15;
             // 
             // postalAreaTxtBox
             // 
-            this.postalAreaTxtBox.Location = new System.Drawing.Point(208, 156);
+            this.postalAreaTxtBox.Location = new System.Drawing.Point(184, 146);
             this.postalAreaTxtBox.Name = "postalAreaTxtBox";
-            this.postalAreaTxtBox.Size = new System.Drawing.Size(154, 20);
+            this.postalAreaTxtBox.Size = new System.Drawing.Size(179, 20);
             this.postalAreaTxtBox.TabIndex = 14;
             // 
             // postalCodeTxtBox
             // 
-            this.postalCodeTxtBox.Location = new System.Drawing.Point(92, 156);
+            this.postalCodeTxtBox.Location = new System.Drawing.Point(78, 146);
             this.postalCodeTxtBox.Name = "postalCodeTxtBox";
             this.postalCodeTxtBox.Size = new System.Drawing.Size(100, 20);
             this.postalCodeTxtBox.TabIndex = 13;
             // 
             // addressTxtBox
             // 
-            this.addressTxtBox.Location = new System.Drawing.Point(92, 129);
+            this.addressTxtBox.Location = new System.Drawing.Point(78, 119);
             this.addressTxtBox.Name = "addressTxtBox";
-            this.addressTxtBox.Size = new System.Drawing.Size(270, 20);
+            this.addressTxtBox.Size = new System.Drawing.Size(285, 20);
             this.addressTxtBox.TabIndex = 12;
             // 
             // lastNameTxtBox
             // 
-            this.lastNameTxtBox.Location = new System.Drawing.Point(92, 100);
+            this.lastNameTxtBox.Location = new System.Drawing.Point(319, 93);
             this.lastNameTxtBox.Name = "lastNameTxtBox";
             this.lastNameTxtBox.Size = new System.Drawing.Size(171, 20);
             this.lastNameTxtBox.TabIndex = 11;
             // 
             // firstNameTxtBox
             // 
-            this.firstNameTxtBox.Location = new System.Drawing.Point(92, 71);
+            this.firstNameTxtBox.Location = new System.Drawing.Point(78, 93);
             this.firstNameTxtBox.Name = "firstNameTxtBox";
             this.firstNameTxtBox.Size = new System.Drawing.Size(171, 20);
             this.firstNameTxtBox.TabIndex = 10;
             // 
             // employeeIdTxtBox
             // 
-            this.employeeIdTxtBox.Location = new System.Drawing.Point(92, 13);
+            this.employeeIdTxtBox.Location = new System.Drawing.Point(78, 13);
             this.employeeIdTxtBox.Name = "employeeIdTxtBox";
             this.employeeIdTxtBox.Size = new System.Drawing.Size(100, 20);
             this.employeeIdTxtBox.TabIndex = 9;
@@ -301,7 +306,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 211);
+            this.label8.Location = new System.Drawing.Point(7, 201);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(38, 13);
             this.label8.TabIndex = 8;
@@ -310,25 +315,25 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 185);
+            this.label7.Location = new System.Drawing.Point(4, 175);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 13);
+            this.label7.Size = new System.Drawing.Size(46, 13);
             this.label7.TabIndex = 7;
-            this.label7.Text = "Telefonnummer:";
+            this.label7.Text = "Telefon:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 159);
+            this.label6.Location = new System.Drawing.Point(7, 149);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 13);
+            this.label6.Size = new System.Drawing.Size(62, 13);
             this.label6.TabIndex = 6;
-            this.label6.Text = "Postnr och Ort:";
+            this.label6.Text = "Postadress:";
             // 
             // addressLbl
             // 
             this.addressLbl.AutoSize = true;
-            this.addressLbl.Location = new System.Drawing.Point(6, 132);
+            this.addressLbl.Location = new System.Drawing.Point(7, 122);
             this.addressLbl.Name = "addressLbl";
             this.addressLbl.Size = new System.Drawing.Size(42, 13);
             this.addressLbl.TabIndex = 4;
@@ -337,7 +342,7 @@
             // lastNameLbl
             // 
             this.lastNameLbl.AutoSize = true;
-            this.lastNameLbl.Location = new System.Drawing.Point(6, 103);
+            this.lastNameLbl.Location = new System.Drawing.Point(255, 96);
             this.lastNameLbl.Name = "lastNameLbl";
             this.lastNameLbl.Size = new System.Drawing.Size(58, 13);
             this.lastNameLbl.TabIndex = 3;
@@ -346,7 +351,7 @@
             // firstNameLbl
             // 
             this.firstNameLbl.AutoSize = true;
-            this.firstNameLbl.Location = new System.Drawing.Point(6, 75);
+            this.firstNameLbl.Location = new System.Drawing.Point(6, 96);
             this.firstNameLbl.Name = "firstNameLbl";
             this.firstNameLbl.Size = new System.Drawing.Size(51, 13);
             this.firstNameLbl.TabIndex = 2;
@@ -357,16 +362,16 @@
             this.anstIdLbl.AutoSize = true;
             this.anstIdLbl.Location = new System.Drawing.Point(6, 16);
             this.anstIdLbl.Name = "anstIdLbl";
-            this.anstIdLbl.Size = new System.Drawing.Size(80, 13);
+            this.anstIdLbl.Size = new System.Drawing.Size(45, 13);
             this.anstIdLbl.TabIndex = 1;
-            this.anstIdLbl.Text = "Anställnings-ID:";
+            this.anstIdLbl.Text = "Anst-ID:";
             // 
             // employeesDataGridView
             // 
             this.employeesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.employeesDataGridView.Location = new System.Drawing.Point(3, 281);
+            this.employeesDataGridView.Location = new System.Drawing.Point(3, 250);
             this.employeesDataGridView.Name = "employeesDataGridView";
-            this.employeesDataGridView.Size = new System.Drawing.Size(859, 229);
+            this.employeesDataGridView.Size = new System.Drawing.Size(859, 260);
             this.employeesDataGridView.TabIndex = 0;
             this.employeesDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.employeesDataGridView_CellClick);
             this.employeesDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.employeesDataGridView_DataBindingComplete);
@@ -394,6 +399,8 @@
             // 
             // employeeInfoGroupBox
             // 
+            this.employeeInfoGroupBox.Controls.Add(this.personIDTxtBox);
+            this.employeeInfoGroupBox.Controls.Add(this.personIdLbl);
             this.employeeInfoGroupBox.Controls.Add(this.anstIdLbl);
             this.employeeInfoGroupBox.Controls.Add(this.emailTxtBox);
             this.employeeInfoGroupBox.Controls.Add(this.specialtyComboBox);
@@ -417,10 +424,26 @@
             this.employeeInfoGroupBox.Controls.Add(this.lastNameLbl);
             this.employeeInfoGroupBox.Location = new System.Drawing.Point(6, 9);
             this.employeeInfoGroupBox.Name = "employeeInfoGroupBox";
-            this.employeeInfoGroupBox.Size = new System.Drawing.Size(480, 266);
+            this.employeeInfoGroupBox.Size = new System.Drawing.Size(509, 235);
             this.employeeInfoGroupBox.TabIndex = 23;
             this.employeeInfoGroupBox.TabStop = false;
             this.employeeInfoGroupBox.Text = "Vald Anställd";
+            // 
+            // personIdLbl
+            // 
+            this.personIdLbl.AutoSize = true;
+            this.personIdLbl.Location = new System.Drawing.Point(184, 16);
+            this.personIdLbl.Name = "personIdLbl";
+            this.personIdLbl.Size = new System.Drawing.Size(80, 13);
+            this.personIdLbl.TabIndex = 23;
+            this.personIdLbl.Text = "Personnummer:";
+            // 
+            // personIDTxtBox
+            // 
+            this.personIDTxtBox.Location = new System.Drawing.Point(270, 13);
+            this.personIDTxtBox.Name = "personIDTxtBox";
+            this.personIDTxtBox.Size = new System.Drawing.Size(191, 20);
+            this.personIDTxtBox.TabIndex = 24;
             // 
             // AdminWindowForm
             // 
@@ -483,5 +506,7 @@
         private System.Windows.Forms.ComboBox departmentComboBox;
         private System.Windows.Forms.TextBox emailTxtBox;
         private System.Windows.Forms.GroupBox employeeInfoGroupBox;
+        private System.Windows.Forms.TextBox personIDTxtBox;
+        private System.Windows.Forms.Label personIdLbl;
     }
 }
