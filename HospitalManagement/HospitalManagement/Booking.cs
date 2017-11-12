@@ -15,13 +15,7 @@ namespace HospitalManagement
         public string StaffName { get; set; }
         public string PatientName { get; set; }
         public string RoomNr { get; set; }
-
         
-
-
-
-
-
 
         public Booking(int id, string purpose, DateTime whenstart, DateTime whenend, string staff, string patient, string room)
         {
@@ -37,12 +31,5 @@ namespace HospitalManagement
             Employee tempEmp = db.LoadEmployee(staff);
             this.StaffName = $"{tempEmp.FirstName} {tempEmp.LastName}";
         }
-
-      /*  public override string ToString()
-        {
-            DateTime date = this.BookingStart.Date;
-            return $"{this.Medication}. Antal uttag: {this.NrOfTimes}. Utfärdat av: {this.PrescribedByName} {this.PrescribedAt.ToString("yyyy-MM-dd")}.";
-        }*/
-
     }
 }

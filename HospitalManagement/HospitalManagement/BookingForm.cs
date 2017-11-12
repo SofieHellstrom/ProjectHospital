@@ -16,7 +16,8 @@ namespace HospitalManagement
 
         public BookingForm(Patient relevantpatient, Employee currentUser)
         {
-            data = new Bookingdata(relevantpatient, currentUser);
+            string roomfunction = "Besokmottagning";
+            data = new Bookingdata(relevantpatient, currentUser, roomfunction);
             InitializeComponent();
             UpdateWindow();
 
@@ -27,11 +28,8 @@ namespace HospitalManagement
             
             startTime2.Text = DateTime.Now.ToShortTimeString();
             endTime2.Value = DateTime.Now.AddMinutes(15);
-           // roomComboBox.DataSource = data.BookingList.Contains()
-           
-
-            doctorComboBox.DataSource = data.DoctorList;
-           
+            roomComboBox.DataSource = data.RoomList;
+            doctorComboBox.DataSource = data.DoctorList;  
         }
 
         public void UpdateWindow()

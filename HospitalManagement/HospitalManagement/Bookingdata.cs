@@ -11,13 +11,13 @@ namespace HospitalManagement
         public Patient ThePatient { get; set; }
         public Employee MyUser { get; set; }
 
-        public Bookingdata(Patient patient, Employee user)
+        public Bookingdata(Patient patient, Employee user, string roomfunction)
         {
             this.ThePatient = patient;
             this.MyUser = user;
             this.BookingList = db.LoadPatientBookings(ThePatient.Personnummer);
             this.DoctorList = db.LoadDoctors(null);
-          //  this.RoomList = db.LoadVisitationRooms(roomId);
+            this.RoomList = db.LoadVisitationRooms(roomfunction);
         }
     }
 }

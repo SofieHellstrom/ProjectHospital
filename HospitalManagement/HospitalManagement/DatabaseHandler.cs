@@ -1563,12 +1563,12 @@ namespace HospitalManagement
             }
         }
 
-        public List<Room> LoadVisitationRooms(string roomId)
+        public List<Room> LoadVisitationRooms(string roomfunction)
         {
             //Returns a list of all the Rooms in a spcific Department 
             //in the database related to a specific patient.
             List<Room> resultList = new List<Room>();
-
+            
             using (var conn = new NpgsqlConnection(connectionString))
             {
                 //Opens the connection to the database
@@ -1578,13 +1578,13 @@ namespace HospitalManagement
                 {
                     //Configures the connection and SQL-query for the command and prepares it.
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT * FROM room WHERE function = :function";
-
-                    cmd.Parameters.Add(new NpgsqlParameter("function", NpgsqlDbType.Varchar));
+                    cmd.CommandText = "SELECT * FROM room WHERE function = :roomfunction";
+                    
+                    cmd.Parameters.Add(new NpgsqlParameter("roomfunction", NpgsqlDbType.Varchar));
 
                     cmd.Prepare();
 
-                    cmd.Parameters[0].Value = roomId;
+                    cmd.Parameters[0].Value = roomfunction;
 
                     using (var reader = cmd.ExecuteReader())
                     {

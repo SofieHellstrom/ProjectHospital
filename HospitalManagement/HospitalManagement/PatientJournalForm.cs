@@ -57,6 +57,8 @@ namespace HospitalManagement
             prescriptionListBox.DataSource = data.PrescriptionList;
             allergyListBox.DataSource = data.AllergyList;
             allergyListBox.ValueMember = "ShortDescription";
+            bokningListbox.DataSource = data.BookingList;
+
             if (journalpostFilterOn)
             {
                 journalPostListBox.DataSource = data.ImportantNotesList;
@@ -65,8 +67,7 @@ namespace HospitalManagement
             {
                 journalPostListBox.DataSource = data.NotesList;
             }
-            
-            bokningListbox.DataSource = data.BookingList;
+
             if(journalPostListBox.Items.Count > 0)
             {
                 journalpostPreviewTxtBox.Text = (journalPostListBox.SelectedValue as JournalPost).Content;
