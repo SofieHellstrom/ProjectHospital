@@ -20,5 +20,10 @@ namespace HospitalManagement
             this.Opens = open;
             this.Closes = close;
         }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
     }
 }

@@ -44,6 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminWindowData.cs" />
+    <Compile Include="AdminWindowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminWindowForm.Designer.cs">
+      <DependentUpon>AdminWindowForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Booking.cs" />
     <Compile Include="Bookingdata.cs" />
     <Compile Include="BookingForm.cs">
@@ -60,6 +67,12 @@
     </Compile>
     <Compile Include="DatabaseHandler.cs" />
     <Compile Include="Department.cs" />
+    <Compile Include="EmployeeRegistryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeeRegistryForm.Designer.cs">
+      <DependentUpon>EmployeeRegistryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="HospitalDataSet.cs">
       <DependentUpon>HospitalDataSet.xsd</DependentUpon>
     </Compile>
@@ -141,11 +154,17 @@
       <DependentUpon>SignInForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInfo.cs" />
+    <EmbeddedResource Include="AdminWindowForm.resx">
+      <DependentUpon>AdminWindowForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BookingForm.resx">
       <DependentUpon>BookingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChangeUserInfoForm.resx">
       <DependentUpon>ChangeUserInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmployeeRegistryForm.resx">
+      <DependentUpon>EmployeeRegistryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

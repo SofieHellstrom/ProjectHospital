@@ -103,6 +103,7 @@ namespace HospitalManagement
                 string room = (roomComboBox.SelectedItem as Room).RoomID;
 
 
+
                 Booking newBooking = new Booking (id, purpose, bookingtime, bookingtimeEnd, doctor,patientname, room);
                 DatabaseHandler db = new DatabaseHandler();
                 Boolean success = db.AddBooking(newBooking);
@@ -112,6 +113,7 @@ namespace HospitalManagement
                     MessageBox.Show("Bokning har sparats.");
                     this.Close();
                 }
+
                 
             }
         }

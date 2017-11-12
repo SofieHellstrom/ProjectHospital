@@ -15,6 +15,7 @@ namespace HospitalManagement
         public List<JournalPost> JournalPostList { get; set; }
         public List<JournalPost> AllergyList { get; set; }
         public List<JournalPost> NotesList { get; set; }
+        public List<JournalPost> ImportantNotesList { get; set; }
         public List<Booking> BookingList { get; set; }
         public DateTime LatestSignedIn { get; set; }
         public DateTime LatestSignedOut { get; set; }
@@ -46,9 +47,18 @@ namespace HospitalManagement
         {
             List<JournalPost> filteredList = (from myPost in JournalPostList
                                               where myPost.NoteType.Equals("Diagnos") || myPost.NoteType.Equals("Standard") || myPost.NoteType.Equals("Utlåtande")
-                                              select myPost).ToList();
+                                              select myPost).OrderByDescending(myPost => myPost.TimeCreated).ToList();
 
             NotesList = filteredList;
+        }
+
+        private void SetImportantNotesList()
+        {
+            List<JournalPost> filteredList = (from myPost in NotesList
+                                              where myPost.Important == true
+                                              select myPost).OrderByDescending(myPost => myPost.TimeCreated).ToList();
+
+            ImportantNotesList = filteredList;
         }
 
         private void SetLatestSignedIn()
@@ -109,6 +119,7 @@ namespace HospitalManagement
             BookingList = db.LoadPatientBookings(ThePatient.Personnummer);
             SetAllergyList();
             SetNoteList();
+            SetImportantNotesList();
             SetLatestSignedIn();
             SetLatestSignedOut();
         }
