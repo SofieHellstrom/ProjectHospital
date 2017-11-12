@@ -93,7 +93,6 @@ namespace HospitalManagement
             if (!error)
             {
                 int id = Guid.NewGuid().GetHashCode(); 
-                //int id 
                 string personnummer = bookingPersonNrBox.Text;
                 string patientname = bookingPatientName.Text;
                 DateTime bookingdate = dateTimePicker1.Value;
@@ -101,15 +100,16 @@ namespace HospitalManagement
                 DateTime bookingtimeEnd = endTime2.Value;
                 string doctor = (doctorComboBox.SelectedItem as Employee).EmployeeID;
                 string purpose = purposeBox.Text;
+                string room = (roomComboBox.SelectedItem as Room).RoomID;
 
 
-                Booking newBooking = new Booking (purpose, bookingtime, bookingtimeEnd, doctor,patientname);
+                Booking newBooking = new Booking (id, purpose, bookingtime, bookingtimeEnd, doctor,patientname, room);
                 DatabaseHandler db = new DatabaseHandler();
                 Boolean success = db.AddBooking(newBooking);
 
                 if (success)
                 {
-                    MessageBox.Show("Bokning sparat i databasen.");
+                    MessageBox.Show("Bokning har sparats.");
                     this.Close();
                 }
                 
