@@ -19,26 +19,42 @@ namespace HospitalManagement
             data = new AdminWindowData(myUser);
             InitializeComponent();
             this.currentUserLbl.Text = $"Inloggad som: {data.MyUser.ToString()}";
-            this.employeesDataGridView.DataSource = data.EmployeeList;
+            //BindingSource employeeBindingSource = new BindingSource();
+            //employeeBindingSource.DataSource = data.EmployeeList;
+            this.employeesDataGridView.DataSource = data.EmployeeBindingList;
             this.departmentComboBox.DataSource = data.DepartmentList.OrderBy(o=>o.Name).ToList();
         }
+
+        private void UpdateWindow()
+        {
+            data.UpdateData();
+            employeesDataGridView.DataSource = null;
+            employeesDataGridView.Update();
+            employeesDataGridView.DataSource = data.EmployeeBindingList;
+            employeesDataGridView.Update();
+            //employeesDataGridView.DataSource = data.EmployeeList;
+            //employeesDataGridView.Refresh();
+            UpdateSelectedEmployeeInfo();
+        }
+
 
         private void UpdateSelectedEmployeeInfo()
         {
             if (employeesDataGridView.CurrentRow != null)
             {
                 Employee selectedEmployee = employeesDataGridView.CurrentRow.DataBoundItem as Employee;
-                this.employeeIdTxtBox.Text = selectedEmployee.EmployeeID;
-                this.firstNameTxtBox.Text = selectedEmployee.FirstName;
-                this.lastNameTxtBox.Text = selectedEmployee.LastName;
-                this.addressTxtBox.Text = selectedEmployee.Address;
-                this.postalCodeTxtBox.Text = selectedEmployee.PostalCode.ToString();
-                this.postalAreaTxtBox.Text = selectedEmployee.PostalArea;
-                this.phoneNrTxtBox.Text = selectedEmployee.PhoneNr;
-                this.emailTxtBox.Text = selectedEmployee.Email;
-                this.departmentComboBox.Text = selectedEmployee.Department;
-                this.positionComboBox.Text = selectedEmployee.Position;
-                this.specialtyComboBox.Text = selectedEmployee.Specialty;
+                employeeIdTxtBox.Text = selectedEmployee.EmployeeID;
+                firstNameTxtBox.Text = selectedEmployee.FirstName;
+                lastNameTxtBox.Text = selectedEmployee.LastName;
+                addressTxtBox.Text = selectedEmployee.Address;
+                postalCodeTxtBox.Text = selectedEmployee.PostalCode.ToString();
+                postalAreaTxtBox.Text = selectedEmployee.PostalArea;
+                phoneNrTxtBox.Text = selectedEmployee.PhoneNr;
+                emailTxtBox.Text = selectedEmployee.Email;
+                personIDTxtBox.Text = selectedEmployee.PersonNummer;
+                departmentComboBox.Text = selectedEmployee.Department;
+                positionComboBox.Text = selectedEmployee.Position;
+                specialtyComboBox.Text = selectedEmployee.Specialty;
             }
             else
             {
@@ -85,7 +101,7 @@ namespace HospitalManagement
 
         private void employeesDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            if (data.EmployeeList.Any())
+            if (data.EmployeeBindingList.Any())
             {
                 this.employeesDataGridView.Rows[0].Selected = true;
             }
@@ -107,6 +123,11 @@ namespace HospitalManagement
                 case 2:
                     break;
             }
+        }
+
+        private void AdminWindowForm_Enter(object sender, EventArgs e)
+        {
+            UpdateWindow();
         }
     }
 }
