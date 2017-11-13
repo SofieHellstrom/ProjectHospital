@@ -1602,7 +1602,7 @@ namespace HospitalManagement
                     try
                     {
                         cmd.Connection = conn;
-                        cmd.CommandText = $"INSERT INTO booking (id, purpose, start, end, staff, patient, room) VALUES ('{bookingToAdd.BookingID}', '{bookingToAdd.BookingPurpose}', '{bookingToAdd.BookingStart}', '{bookingToAdd.BookingEnd}', '{bookingToAdd.StaffName}','{bookingToAdd.PatientName}','{bookingToAdd.RoomNr}')";
+                        cmd.CommandText = $"INSERT INTO booking (booking_id, purpose, start_time, end_time, staff, patient, room) VALUES ('{bookingToAdd.BookingID}', '{bookingToAdd.BookingPurpose}', '{bookingToAdd.BookingStart}', '{bookingToAdd.BookingEnd}', '{bookingToAdd.StaffName}','{bookingToAdd.PatientName}','{bookingToAdd.RoomNr}')";
 
                         int recordsAffected = cmd.ExecuteNonQuery();
 

@@ -219,7 +219,6 @@
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(81, 17);
             this.radioButton1.TabIndex = 19;
-            this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Läkarbesök";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 

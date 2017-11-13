@@ -16,7 +16,7 @@ namespace HospitalManagement
 
         public BookingForm(Patient relevantpatient, Employee currentUser)
         {
-            string roomfunction = "Besokmottagning";
+            string roomfunction = "Mottagning";
             data = new Bookingdata(relevantpatient, currentUser, roomfunction);
             InitializeComponent();
             UpdateWindow();
@@ -113,6 +113,7 @@ namespace HospitalManagement
                 
             }
         }
+
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
