@@ -24,8 +24,6 @@ namespace HospitalManagement
             string patientName = data.ThePatient.LastName + ", " + data.ThePatient.FirstName;
             bookingPersonNrBox.Text = data.ThePatient.Personnummer;
             bookingPatientName.Text = patientName;
-            
-            
             startTime2.Text = DateTime.Now.ToShortTimeString();
             endTime2.Value = DateTime.Now.AddMinutes(15);
             roomComboBox.DataSource = data.RoomList;
@@ -94,15 +92,15 @@ namespace HospitalManagement
                 string personnummer = bookingPersonNrBox.Text;
                 string patientname = bookingPatientName.Text;
                 DateTime bookingdate = dateTimePicker1.Value;
-                DateTime bookingtime = startTime2.Value;
-                DateTime bookingtimeEnd = endTime2.Value;
+                DateTime bookingtimeStart = dateTimePicker1.Value.Add(startTime2.Value.TimeOfDay.Duration());
+                DateTime bookingtimeEnd = dateTimePicker1.Value.Add(endTime2.Value.TimeOfDay.Duration());
                 string doctor = (doctorComboBox.SelectedItem as Employee).EmployeeID;
                 string purpose = purposeBox.Text;
                 string room = (roomComboBox.SelectedItem as Room).RoomID;
 
 
 
-                Booking newBooking = new Booking (id, purpose, bookingtime, bookingtimeEnd, doctor,patientname, room);
+                Booking newBooking = new Booking (id, purpose, bookingtimeStart, bookingtimeEnd, doctor, patientname, room);
                 DatabaseHandler db = new DatabaseHandler();
                 Boolean success = db.AddBooking(newBooking);
 
