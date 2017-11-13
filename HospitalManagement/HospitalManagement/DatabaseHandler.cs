@@ -12,6 +12,8 @@ namespace HospitalManagement
     {
         private string connectionString = "Host=localhost;Username=postgres;Password=projekt;Database=Hospital";
 
+        #region PatientMethods
+
         //Methods relating to Patients and the patient table. 
         public bool PatientExists(string patientToSearchFor)
         {
@@ -299,6 +301,7 @@ namespace HospitalManagement
 
             }
         }
+        #endregion  
 
         public string LoadPostort(int postkod)
         {
@@ -334,7 +337,46 @@ namespace HospitalManagement
             return returnPostOrt;
         }
 
+        #region EmployeeMethods
         //Methods related to Employees and interacting with the staff table.
+
+        public bool EmployeeExists(string employeeIdToSearchFor)
+        {
+            // Checks if an employee with a specific employee_id exists in the database.
+            // Returns True if it does and False if it doesn't.
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Adds the connection and SQL-query to the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT COUNT(employee_id) FROM staff WHERE employee_id = :id";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = employeeIdToSearchFor;
+
+                    // Gets and stores the result of the query (the number of times the employee_id
+                    // appears in the database, which should be zero or none, since it has unique
+                    // constraint.
+                    // That value is then converted to a boolean and returned.
+                    int result = 0;
+        NpgsqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        result = reader.GetInt32(0);
+                    }
+                    return Convert.ToBoolean(result);
+                }
+
+            }
+
+        }
+
         public Employee LoadEmployee(string EmployeeID)
         {
             //Returns a new instance of a specific person based on the value of employee_id 
@@ -495,9 +537,54 @@ namespace HospitalManagement
             }
         }
 
-        public void AddEmployee(Employee employeeToAdd)
+        public bool AddEmployee(Employee employeeToAdd)
         {
-            throw new NotImplementedException();
+            //Adds a new employee to the database. 
+
+            if (!EmployeeExists(employeeToAdd.EmployeeID))
+            {
+                //Checks if the employee_id of the Patient to be added already exists.
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    //Opens connection.
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        // Adds connection and SQL-string to the command and executes it.
+                        try
+                        {
+                            cmd.Connection = conn;
+                            if (!employeeToAdd.Specialty.Equals("N/A"))
+                            {
+                                cmd.CommandText = $"INSERT INTO staff (employee_id, first_name, last_name, address, postal_code, phone, email, person_id_nr, department, position, specialty) VALUES ('{employeeToAdd.EmployeeID}', '{employeeToAdd.FirstName}', '{employeeToAdd.LastName}', '{employeeToAdd.Address}', {employeeToAdd.PostalCode},'{employeeToAdd.PhoneNr}', '{employeeToAdd.Email}', '{employeeToAdd.PersonNummer}', '{employeeToAdd.Department}', '{employeeToAdd.Position}', '{employeeToAdd.Specialty}' )";
+                            }
+                            else
+                            {
+                                cmd.CommandText = $"INSERT INTO staff (employee_id, first_name, last_name, address, postal_code, phone, email, person_id_nr, department, position) VALUES ('{employeeToAdd.EmployeeID}', '{employeeToAdd.FirstName}', '{employeeToAdd.LastName}', '{employeeToAdd.Address}', {employeeToAdd.PostalCode},'{employeeToAdd.PhoneNr}', '{employeeToAdd.Email}', '{employeeToAdd.PersonNummer}', '{employeeToAdd.Department}', '{employeeToAdd.Position}')";
+                            }
+
+                            int recordsAffected = cmd.ExecuteNonQuery();
+
+                            //Returns a boolean which is True if any rows have been affected. 
+                            return Convert.ToBoolean(recordsAffected);
+                        }
+                        catch (PostgresException e)
+                        {
+                            //Writes Exception error to Console and returns false, if a
+                            //PostgresException occurs.
+                            Console.WriteLine(e.ToString());
+                            return false;
+                        }
+
+                    }
+                }
+
+            }
+            else
+            {
+                // Returns false if the employee_id already exists
+                return false;
+            }
         }
 
         public void UpdateEmployee(Employee employeeToUpdate)
@@ -544,7 +631,9 @@ namespace HospitalManagement
             return returnId;
 
         }
+        #endregion
 
+        #region JournalMethods
         //Methods concerned with loading or changing data related to JournalNotes in the Database
 
         public List<JournalPost> LoadPatientNotes(string personnummer)
@@ -666,6 +755,7 @@ namespace HospitalManagement
             //Placeholder for method to delete journalentries should we need it. Only admins should be allowed to do this.
             throw new NotImplementedException();
         }
+        #endregion 
 
         public string LoadDepartment(string departmentID)
         {
@@ -686,6 +776,40 @@ namespace HospitalManagement
                     cmd.Prepare();
 
                     cmd.Parameters[0].Value = departmentID;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Reads the value from the database.
+                        while (reader.Read())
+                        {
+                            returnDepartment = reader.GetString(0);
+                        }
+                    }
+                }
+            }
+            return returnDepartment;
+
+        }
+
+        public string LoadDepartmentIDByName(string name)
+        {
+            //Gets the DepartmentID corresponding to a departmentname from the database. 
+            string returnDepartment = "Finns ej i databasen.";
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds the connection and SQL-string to the Command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT department_id FROM department WHERE name = :code";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("code", NpgsqlDbType.Varchar));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = name;
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -771,6 +895,7 @@ namespace HospitalManagement
         }
 
         //Methods related to usernames and passwords from the user table.
+        #region userinfoMethods
 
         public Boolean UserExists(string username)
         {
@@ -985,9 +1110,10 @@ namespace HospitalManagement
 
             }
         }
+        #endregion
 
         //Methods related to getting info about medication and prescriptions from the database
-
+        #region Medication and Prescription Methods
         public List<Medication> LoadAllMedications()
         {
             //Returns a list of instance of the Medication class based on the values 
@@ -1168,6 +1294,8 @@ namespace HospitalManagement
                 }
             }
         }
+
+        #endregion
 
         public List<Booking> LoadPatientBookings(string personnummer)
         {

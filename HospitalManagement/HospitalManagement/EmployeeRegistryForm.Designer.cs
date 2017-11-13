@@ -68,6 +68,7 @@
             this.saveMoreEmployeesBtn.TabIndex = 11;
             this.saveMoreEmployeesBtn.Text = "Registrera och Rensa";
             this.saveMoreEmployeesBtn.UseVisualStyleBackColor = true;
+            this.saveMoreEmployeesBtn.Click += new System.EventHandler(this.saveMoreEmployeesBtn_Click);
             // 
             // saveOneAndCloseBtn
             // 
@@ -78,6 +79,7 @@
             this.saveOneAndCloseBtn.TabIndex = 12;
             this.saveOneAndCloseBtn.Text = "Registrera och Stäng";
             this.saveOneAndCloseBtn.UseVisualStyleBackColor = true;
+            this.saveOneAndCloseBtn.Click += new System.EventHandler(this.saveOneAndCloseBtn_Click);
             // 
             // personIdTxtBox
             // 

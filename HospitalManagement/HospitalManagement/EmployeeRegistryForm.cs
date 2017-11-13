@@ -14,6 +14,8 @@ namespace HospitalManagement
     public partial class EmployeeRegistryForm : Form
     {
         AdminWindowData data;
+        DatabaseHandler db = new DatabaseHandler();
+
         public EmployeeRegistryForm(AdminWindowData d)
         {
             data = d;
@@ -25,6 +27,24 @@ namespace HospitalManagement
             specialtyComboBox.DisplayMember = "Key";
             specialtyComboBox.ValueMember = "Value";
             specialtyComboBox.SelectedIndex = -1;
+        }
+
+        private void Reset()
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is TextBox)
+                {
+                    TextBox textbox = control as TextBox;
+                    textbox.Text = "";
+                }
+                else if (control is ComboBox)
+                {
+                    ComboBox combobox = control as ComboBox;
+                    combobox.SelectedIndex = -1;
+                    combobox.Text = "";
+                }
+            }
         }
 
         private void DataValidityCheck()
@@ -106,9 +126,9 @@ namespace HospitalManagement
         {
             if (!String.IsNullOrWhiteSpace(employeeIdTxtBox.Text))
             {
-                if (!Regex.IsMatch(employeeIdTxtBox.Text, @"^[^\W\d_]{3}\d{4}$"))
+                if (!Regex.IsMatch(employeeIdTxtBox.Text, @"^[^\W\d_]{3}\d{5}$"))
                 {
-                    errorProvider.SetError(employeeIdTxtBox, "Anställnings-Id måste skrivas: AAA####");
+                    errorProvider.SetError(employeeIdTxtBox, "Anställnings-Id måste skrivas: AAA#####");
                     employeeIdTxtBox.Focus();
                 }
                 else
@@ -185,6 +205,50 @@ namespace HospitalManagement
         private void postalAreaTxtBox_Enter(object sender, EventArgs e)
         {
             postalCodeTxtBox.Focus();
+        }
+
+        private void saveOneAndCloseBtn_Click(object sender, EventArgs e)
+        {
+            Employee employeeToSave = makeEmployeeFromFields();
+            Boolean success = db.AddEmployee(employeeToSave);
+
+            if (!success)
+            {
+                MessageBox.Show("Anställd kunde inte sparas till databasen. Kontrollera att alla värden är korrekt angivna.");
+            }
+            else
+            {
+                MessageBox.Show("Ny anställd sparad till databasen.");
+                this.Close();
+            }
+
+        }
+
+        private Employee makeEmployeeFromFields()
+        {
+            string depID = db.LoadDepartmentIDByName(departmentComboBox.Text);
+            string specialty = "N/A";
+            if (positionComboBox.Text.Equals("Läkare"))
+            {
+                specialty = data.SpecialtyDictionary[specialtyComboBox.Text];
+            }
+            return new Employee(employeeIdTxtBox.Text, firstNameTxtBox.Text, lastNameTxtBox.Text, addressTxtBox.Text, Convert.ToInt32(postalCodeTxtBox.Text), postalAreaTxtBox.Text, phoneNrTxtBox.Text, emailTxtBox.Text, personIdTxtBox.Text, positionComboBox.Text, depID, specialty);
+        }
+
+        private void saveMoreEmployeesBtn_Click(object sender, EventArgs e)
+        {
+            Employee employeeToSave = makeEmployeeFromFields();
+            Boolean success = db.AddEmployee(employeeToSave);
+
+            if (!success)
+            {
+                MessageBox.Show("Anställd kunde inte sparas till databasen. Kontrollera att alla värden är korrekt angivna.");
+            }
+            else
+            {
+                MessageBox.Show("Ny anställd sparad till databasen.");
+                this.Reset();
+            }
         }
     }
 }
