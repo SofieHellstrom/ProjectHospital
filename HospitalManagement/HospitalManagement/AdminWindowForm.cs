@@ -21,18 +21,15 @@ namespace HospitalManagement
             this.currentUserLbl.Text = $"Inloggad som: {data.MyUser.ToString()}";
             //BindingSource employeeBindingSource = new BindingSource();
             //employeeBindingSource.DataSource = data.EmployeeList;
-            this.employeesDataGridView.DataSource = data.EmployeeBindingList;
+            this.employeesDataGridView.DataSource = data.EmployeeList;
             this.departmentComboBox.DataSource = data.DepartmentList.OrderBy(o=>o.Name).ToList();
         }
 
         private void UpdateWindow()
         {
             data.UpdateData();
-            employeesDataGridView.DataSource = null;
-            employeesDataGridView.Update();
-            employeesDataGridView.DataSource = data.EmployeeBindingList;
-            employeesDataGridView.Update();
-            //employeesDataGridView.DataSource = data.EmployeeList;
+
+            employeesDataGridView.DataSource = data.EmployeeList;
             //employeesDataGridView.Refresh();
             UpdateSelectedEmployeeInfo();
         }
@@ -101,7 +98,7 @@ namespace HospitalManagement
 
         private void employeesDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            if (data.EmployeeBindingList.Any())
+            if (data.EmployeeList.Any())
             {
                 this.employeesDataGridView.Rows[0].Selected = true;
             }
@@ -126,6 +123,11 @@ namespace HospitalManagement
         }
 
         private void AdminWindowForm_Enter(object sender, EventArgs e)
+        {
+            UpdateWindow();
+        }
+
+        private void AdminWindowForm_Activated(object sender, EventArgs e)
         {
             UpdateWindow();
         }

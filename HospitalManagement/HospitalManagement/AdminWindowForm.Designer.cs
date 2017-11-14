@@ -453,8 +453,8 @@
             this.Controls.Add(this.mainTableLayoutPanel);
             this.Name = "AdminWindowForm";
             this.Text = "Systemadministration";
+            this.Activated += new System.EventHandler(this.AdminWindowForm_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdminWindowForm_FormClosed);
-            this.Enter += new System.EventHandler(this.AdminWindowForm_Enter);
             this.mainTableLayoutPanel.ResumeLayout(false);
             this.leftPanel.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
