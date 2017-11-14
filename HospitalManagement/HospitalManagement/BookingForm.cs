@@ -100,7 +100,7 @@ namespace HospitalManagement
 
 
 
-                Booking newBooking = new Booking (id, purpose, bookingtimeStart, bookingtimeEnd, doctor, patientname, room);
+                Booking newBooking = new Booking (id, purpose, bookingtimeStart, bookingtimeEnd, doctor, personnummer, room);
                 DatabaseHandler db = new DatabaseHandler();
                 Boolean success = db.AddBooking(newBooking);
 

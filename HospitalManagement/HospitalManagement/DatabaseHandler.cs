@@ -1594,15 +1594,15 @@ namespace HospitalManagement
                     string purpose = bookingToAdd.BookingPurpose;
                     DateTime start = bookingToAdd.BookingStart;
                     DateTime end = bookingToAdd.BookingEnd;
-                    string staff = bookingToAdd.StaffName;
-                    string patient = bookingToAdd.PatientName;
+                    string staff = bookingToAdd.Staff_ID;
+                    string patient = bookingToAdd.Patient_ID;
                     string room = bookingToAdd.RoomNr;
 
                     // Adds connection and SQL-string to the command and executes it.
                     try
                     {
                         cmd.Connection = conn;
-                        cmd.CommandText = $"INSERT INTO booking (booking_id, purpose, start_time, end_time, staff, patient, room) VALUES ('{bookingToAdd.BookingID}', '{bookingToAdd.BookingPurpose}', '{bookingToAdd.BookingStart}', '{bookingToAdd.BookingEnd}', '{bookingToAdd.StaffName}','{bookingToAdd.PatientName}','{bookingToAdd.RoomNr}')";
+                        cmd.CommandText = $"INSERT INTO booking (booking_id, purpose, start_time, end_time, staff, patient, room) VALUES ('{bookingToAdd.BookingID}', '{bookingToAdd.BookingPurpose}', '{bookingToAdd.BookingStart}', '{bookingToAdd.BookingEnd}', '{bookingToAdd.Staff_ID}','{bookingToAdd.Patient_ID}','{bookingToAdd.RoomNr}')";
 
                         int recordsAffected = cmd.ExecuteNonQuery();
 

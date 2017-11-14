@@ -12,8 +12,8 @@ namespace HospitalManagement
         public string BookingPurpose { get; set; }
         public DateTime BookingStart { get; set; }
         public DateTime BookingEnd { get; set; }
-        public string StaffName { get; set; }
-        public string PatientName { get; set; }
+        public string Staff_ID { get; set; }
+        public string Patient_ID { get; set; }
         public string RoomNr { get; set; }
         
 
@@ -23,13 +23,13 @@ namespace HospitalManagement
             this.BookingPurpose = purpose;
             this.BookingStart = whenstart;
             this.BookingEnd = whenend;
-            this.StaffName = staff;
-            this.PatientName = patient;
+            this.Staff_ID = staff;
+            this.Patient_ID = patient;
             this.RoomNr = room;
             
             DatabaseHandler db = new DatabaseHandler();
             Employee tempEmp = db.LoadEmployee(staff);
-            this.StaffName = $"{tempEmp.FirstName} {tempEmp.LastName}";
+           // this.Staff_ID = $"{tempEmp.FirstName} {tempEmp.LastName}";
         }
     }
 }
