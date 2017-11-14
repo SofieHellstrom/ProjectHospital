@@ -88,10 +88,13 @@
             // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(104, 122);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(143, 20);
             this.dateTimePicker1.TabIndex = 4;
+            this.dateTimePicker1.Value = new System.DateTime(2017, 11, 13, 0, 0, 0, 0);
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label3
@@ -189,6 +192,7 @@
             this.endTime2.ShowUpDown = true;
             this.endTime2.Size = new System.Drawing.Size(51, 20);
             this.endTime2.TabIndex = 16;
+            this.endTime2.Value = new System.DateTime(2017, 11, 13, 20, 24, 0, 0);
             this.endTime2.ValueChanged += new System.EventHandler(this.endTime2_ValueChanged);
             // 
             // roomComboBox
@@ -215,7 +219,6 @@
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(81, 17);
             this.radioButton1.TabIndex = 19;
-            this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Läkarbesök";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
