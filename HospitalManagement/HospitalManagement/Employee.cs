@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,10 +45,10 @@ namespace HospitalManagement
             this.Specialty = specialisering;
         }
 
-        public void UpdateSelfInDB()
+        public Boolean UpdateSelfInDB()
         {
             DatabaseHandler db = new DatabaseHandler();
-            db.UpdateEmployee(this);
+            return db.UpdateEmployee(this);
         }
 
         public override string ToString()
@@ -61,6 +62,36 @@ namespace HospitalManagement
                 return $"{LastName}, {FirstName}";
             }
            
+        }
+
+        public override bool Equals(object obj)
+        {
+            //Compare method for Employees.
+            if (!(obj is Employee)||obj==null)
+            {
+                //return false if comparing object is null or not an Employee object
+                return false;
+            }
+            Employee e = obj as Employee;
+
+            if (!e.EmployeeID.Equals(this.EmployeeID)) return false;
+            if (!e.FirstName.Equals(this.FirstName)) return false;
+            if (!e.LastName.Equals(this.LastName)) return false;
+            if (!e.Address.Equals(this.Address)) return false;
+            if (e.PostalCode != this.PostalCode) return false;
+            if (!e.PhoneNr.Equals(this.PhoneNr)) return false;
+            if (!e.Email.Equals(this.Email)) return false;
+            if (!e.PersonNummer.Equals(this.PersonNummer)) return false;
+            if (!e.Position.Equals(this.Position)) return false;
+            if (!e.Specialty.Equals(this.Specialty)) return false;
+            if (!e.Specialty.Equals(this.Specialty)) return false;
+
+            return true; 
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

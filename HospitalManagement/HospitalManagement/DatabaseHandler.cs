@@ -554,9 +554,14 @@ namespace HospitalManagement
                         try
                         {
                             cmd.Connection = conn;
+                            string depID = LoadDepartmentIDByName(employeeToAdd.Department);
+                            
+
                             if (!employeeToAdd.Specialty.Equals("N/A"))
                             {
-                                cmd.CommandText = $"INSERT INTO staff (employee_id, first_name, last_name, address, postal_code, phone, email, person_id_nr, department, position, specialty) VALUES ('{employeeToAdd.EmployeeID}', '{employeeToAdd.FirstName}', '{employeeToAdd.LastName}', '{employeeToAdd.Address}', {employeeToAdd.PostalCode},'{employeeToAdd.PhoneNr}', '{employeeToAdd.Email}', '{employeeToAdd.PersonNummer}', '{employeeToAdd.Department}', '{employeeToAdd.Position}', '{employeeToAdd.Specialty}' )";
+                                Dictionary<string, string> specialtyDictionary = LoadSpecialtyDictionary();
+                                string specID = specialtyDictionary[employeeToAdd.Specialty];
+                                cmd.CommandText = $"INSERT INTO staff (employee_id, first_name, last_name, address, postal_code, phone, email, person_id_nr, department, position, specialty) VALUES ('{employeeToAdd.EmployeeID}', '{employeeToAdd.FirstName}', '{employeeToAdd.LastName}', '{employeeToAdd.Address}', {employeeToAdd.PostalCode},'{employeeToAdd.PhoneNr}', '{employeeToAdd.Email}', '{employeeToAdd.PersonNummer}', '{depID}', '{employeeToAdd.Position}', '{specID}' )";
                             }
                             else
                             {
@@ -587,9 +592,39 @@ namespace HospitalManagement
             }
         }
 
-        public void UpdateEmployee(Employee employeeToUpdate)
+        public Boolean UpdateEmployee(Employee employeeToUpdate)
         {
-            throw new NotImplementedException();
+            //Updates the patient in the database. 
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    cmd.Connection = conn;
+                    
+                    string dep = LoadDepartmentIDByName(employeeToUpdate.Department);
+
+                    if (employeeToUpdate.Position.Equals("Läkare"))
+                    {
+                        Dictionary<string, string> SpecialtyDictionary = LoadSpecialtyDictionary();
+                        string specialty = SpecialtyDictionary[employeeToUpdate.Specialty];
+                        cmd.CommandText = $"UPDATE staff SET first_name = '{employeeToUpdate.FirstName}', last_name ='{employeeToUpdate.LastName}', address = '{employeeToUpdate.Address}', postal_code = '{employeeToUpdate.PostalCode}', phone = '{employeeToUpdate.PhoneNr}', email = '{employeeToUpdate.Email}', person_id_nr = '{employeeToUpdate.PersonNummer}', department = '{dep}', position = '{employeeToUpdate.Position}' , speciality = '{specialty}' WHERE employee_id = '{employeeToUpdate.EmployeeID}'";
+                    }
+                    else
+                    {
+                        cmd.CommandText = $"UPDATE staff SET first_name = '{employeeToUpdate.FirstName}', last_name ='{employeeToUpdate.LastName}', address = '{employeeToUpdate.Address}', postal_code = '{employeeToUpdate.PostalCode}', phone = '{employeeToUpdate.PhoneNr}', email = '{employeeToUpdate.Email}', person_id_nr = '{employeeToUpdate.PersonNummer}', department = '{dep}', position = '{employeeToUpdate.Position}' WHERE employee_id = '{employeeToUpdate.EmployeeID}'";
+                    }
+
+                    int recordsAffected = cmd.ExecuteNonQuery();
+                    return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
+
+                }
+
+            }
+
         }
 
         public void DeleteEmployee()

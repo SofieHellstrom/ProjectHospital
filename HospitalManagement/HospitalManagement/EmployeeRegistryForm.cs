@@ -15,6 +15,8 @@ namespace HospitalManagement
     {
         AdminWindowData data;
         DatabaseHandler db = new DatabaseHandler();
+        Employee employeeToEdit = null;
+        Boolean editMode = false;
 
         public EmployeeRegistryForm(AdminWindowData d)
         {
@@ -27,6 +29,43 @@ namespace HospitalManagement
             specialtyComboBox.DisplayMember = "Key";
             specialtyComboBox.ValueMember = "Value";
             specialtyComboBox.SelectedIndex = -1;
+        }
+
+        public EmployeeRegistryForm(AdminWindowData d, Employee emp)
+        {
+            data = d;
+            employeeToEdit = emp;
+            InitializeComponent();
+            departmentComboBox.DataSource = data.DepartmentList;//.OrderBy(o => o.Name).ToList();
+            //departmentComboBox.SelectedIndex = -1;
+            //positionComboBox.SelectedIndex = -1;
+            specialtyComboBox.DataSource = new BindingSource(data.SpecialtyDictionary, null);
+            specialtyComboBox.DisplayMember = "Key";
+            specialtyComboBox.ValueMember = "Value";
+            FillFieldsWithEmployee();
+            saveMoreEmployeesBtn.Visible = false;
+            saveOneAndCloseBtn.Text = "Uppdatera och Stäng";
+            editMode = true;
+        }
+
+        private void FillFieldsWithEmployee()
+        {
+            DatabaseHandler db = new DatabaseHandler();
+            personIdTxtBox.Text = employeeToEdit.PersonNummer;
+            positionComboBox.Text = employeeToEdit.Position;
+            if (employeeToEdit.Position.Equals("Läkare"))
+            {
+                specialtyComboBox.Text = employeeToEdit.Specialty;
+            }
+            employeeIdTxtBox.Text = employeeToEdit.EmployeeID;
+            departmentComboBox.Text = employeeToEdit.Department;
+            firstNameTxtBox.Text = employeeToEdit.FirstName;
+            lastNameTxtBox.Text = employeeToEdit.LastName;
+            addressTxtBox.Text = employeeToEdit.Address;
+            postalCodeTxtBox.Text = employeeToEdit.PostalCode.ToString();
+            postalAreaTxtBox.Text = db.LoadPostort(Convert.ToInt32(postalCodeTxtBox.Text));
+            phoneNrTxtBox.Text = employeeToEdit.PhoneNr;
+            emailTxtBox.Text = employeeToEdit.Email;
         }
 
         private void Reset()
@@ -63,7 +102,16 @@ namespace HospitalManagement
             {
                 dataValid = false;
             }
-            saveMoreEmployeesBtn.Enabled = dataValid;
+
+            if (!editMode)
+            {
+                saveMoreEmployeesBtn.Enabled = dataValid;
+            }
+            else
+            {
+                dataValid = (!makeEmployeeFromFields().Equals(employeeToEdit));
+            }
+            
             saveOneAndCloseBtn.Enabled = dataValid;
         }
 
@@ -210,7 +258,16 @@ namespace HospitalManagement
         private void saveOneAndCloseBtn_Click(object sender, EventArgs e)
         {
             Employee employeeToSave = makeEmployeeFromFields();
-            Boolean success = db.AddEmployee(employeeToSave);
+            Boolean success;
+            if (editMode)
+            {
+                success = employeeToSave.UpdateSelfInDB();
+            }
+            else
+            {
+                success = db.AddEmployee(employeeToSave);
+            }
+            
 
             if (!success)
             {
@@ -218,7 +275,7 @@ namespace HospitalManagement
             }
             else
             {
-                MessageBox.Show("Ny anställd sparad till databasen.");
+                MessageBox.Show("Anställd sparad till databasen.");
                 this.Close();
             }
 
@@ -226,18 +283,18 @@ namespace HospitalManagement
 
         private Employee makeEmployeeFromFields()
         {
-            string depID = db.LoadDepartmentIDByName(departmentComboBox.Text);
             string specialty = "N/A";
             if (positionComboBox.Text.Equals("Läkare"))
             {
-                specialty = data.SpecialtyDictionary[specialtyComboBox.Text];
+                specialty = specialtyComboBox.Text;
             }
-            return new Employee(employeeIdTxtBox.Text, firstNameTxtBox.Text, lastNameTxtBox.Text, addressTxtBox.Text, Convert.ToInt32(postalCodeTxtBox.Text), postalAreaTxtBox.Text, phoneNrTxtBox.Text, emailTxtBox.Text, personIdTxtBox.Text, positionComboBox.Text, depID, specialty);
+            return new Employee(employeeIdTxtBox.Text, firstNameTxtBox.Text, lastNameTxtBox.Text, addressTxtBox.Text, Convert.ToInt32(postalCodeTxtBox.Text), postalAreaTxtBox.Text, phoneNrTxtBox.Text, emailTxtBox.Text, personIdTxtBox.Text, positionComboBox.Text, departmentComboBox.Text, specialty);
         }
 
         private void saveMoreEmployeesBtn_Click(object sender, EventArgs e)
         {
             Employee employeeToSave = makeEmployeeFromFields();
+
             Boolean success = db.AddEmployee(employeeToSave);
 
             if (!success)

@@ -128,8 +128,9 @@
             this.updateBtn.Name = "updateBtn";
             this.updateBtn.Size = new System.Drawing.Size(108, 23);
             this.updateBtn.TabIndex = 1;
-            this.updateBtn.Text = "Uppdatera Anställd";
+            this.updateBtn.Text = "Redigera Anställd";
             this.updateBtn.UseVisualStyleBackColor = true;
+            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
             // 
             // addBtn
             // 
@@ -416,7 +417,10 @@
             // 
             // employeesDataGridView
             // 
+            this.employeesDataGridView.AllowUserToAddRows = false;
+            this.employeesDataGridView.AllowUserToDeleteRows = false;
             this.employeesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.employeesDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.employeesDataGridView.Location = new System.Drawing.Point(3, 250);
             this.employeesDataGridView.Name = "employeesDataGridView";
             this.employeesDataGridView.Size = new System.Drawing.Size(859, 260);

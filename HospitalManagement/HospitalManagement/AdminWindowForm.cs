@@ -74,11 +74,6 @@ namespace HospitalManagement
             this.specialtyComboBox.Text = "";
         }
 
-        private void AdminWindowForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Program.ShutEverythingDown();
-        }
-
         private void employeesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             UpdateSelectedEmployeeInfo();
@@ -122,14 +117,34 @@ namespace HospitalManagement
             }
         }
 
-        private void AdminWindowForm_Enter(object sender, EventArgs e)
+        private void updateBtn_Click(object sender, EventArgs e)
         {
-            UpdateWindow();
+            switch (tabControl.SelectedIndex)
+            {
+                case 0:
+                    Employee selectedEmployee = employeesDataGridView.CurrentRow.DataBoundItem as Employee;
+                    Form addForm = new EmployeeRegistryForm(data, selectedEmployee);
+                    addForm.ShowDialog();
+                    break;
+
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+            }
         }
 
         private void AdminWindowForm_Activated(object sender, EventArgs e)
         {
             UpdateWindow();
         }
+
+        private void AdminWindowForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.ShutEverythingDown();
+        }
+
+
     }
 }
