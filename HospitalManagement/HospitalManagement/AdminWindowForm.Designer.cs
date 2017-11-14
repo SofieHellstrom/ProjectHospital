@@ -128,8 +128,9 @@
             this.updateBtn.Name = "updateBtn";
             this.updateBtn.Size = new System.Drawing.Size(108, 23);
             this.updateBtn.TabIndex = 1;
-            this.updateBtn.Text = "Uppdatera Anställd";
+            this.updateBtn.Text = "Redigera Anställd";
             this.updateBtn.UseVisualStyleBackColor = true;
+            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
             // 
             // addBtn
             // 
@@ -416,7 +417,10 @@
             // 
             // employeesDataGridView
             // 
+            this.employeesDataGridView.AllowUserToAddRows = false;
+            this.employeesDataGridView.AllowUserToDeleteRows = false;
             this.employeesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.employeesDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.employeesDataGridView.Location = new System.Drawing.Point(3, 250);
             this.employeesDataGridView.Name = "employeesDataGridView";
             this.employeesDataGridView.Size = new System.Drawing.Size(859, 260);
@@ -453,8 +457,8 @@
             this.Controls.Add(this.mainTableLayoutPanel);
             this.Name = "AdminWindowForm";
             this.Text = "Systemadministration";
+            this.Activated += new System.EventHandler(this.AdminWindowForm_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdminWindowForm_FormClosed);
-            this.Enter += new System.EventHandler(this.AdminWindowForm_Enter);
             this.mainTableLayoutPanel.ResumeLayout(false);
             this.leftPanel.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);

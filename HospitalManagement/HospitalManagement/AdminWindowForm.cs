@@ -21,18 +21,15 @@ namespace HospitalManagement
             this.currentUserLbl.Text = $"Inloggad som: {data.MyUser.ToString()}";
             //BindingSource employeeBindingSource = new BindingSource();
             //employeeBindingSource.DataSource = data.EmployeeList;
-            this.employeesDataGridView.DataSource = data.EmployeeBindingList;
+            this.employeesDataGridView.DataSource = data.EmployeeList;
             this.departmentComboBox.DataSource = data.DepartmentList.OrderBy(o=>o.Name).ToList();
         }
 
         private void UpdateWindow()
         {
             data.UpdateData();
-            employeesDataGridView.DataSource = null;
-            employeesDataGridView.Update();
-            employeesDataGridView.DataSource = data.EmployeeBindingList;
-            employeesDataGridView.Update();
-            //employeesDataGridView.DataSource = data.EmployeeList;
+
+            employeesDataGridView.DataSource = data.EmployeeList;
             //employeesDataGridView.Refresh();
             UpdateSelectedEmployeeInfo();
         }
@@ -77,11 +74,6 @@ namespace HospitalManagement
             this.specialtyComboBox.Text = "";
         }
 
-        private void AdminWindowForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Program.ShutEverythingDown();
-        }
-
         private void employeesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             UpdateSelectedEmployeeInfo();
@@ -101,7 +93,7 @@ namespace HospitalManagement
 
         private void employeesDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            if (data.EmployeeBindingList.Any())
+            if (data.EmployeeList.Any())
             {
                 this.employeesDataGridView.Rows[0].Selected = true;
             }
@@ -125,9 +117,34 @@ namespace HospitalManagement
             }
         }
 
-        private void AdminWindowForm_Enter(object sender, EventArgs e)
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+            switch (tabControl.SelectedIndex)
+            {
+                case 0:
+                    Employee selectedEmployee = employeesDataGridView.CurrentRow.DataBoundItem as Employee;
+                    Form addForm = new EmployeeRegistryForm(data, selectedEmployee);
+                    addForm.ShowDialog();
+                    break;
+
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+            }
+        }
+
+        private void AdminWindowForm_Activated(object sender, EventArgs e)
         {
             UpdateWindow();
         }
+
+        private void AdminWindowForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.ShutEverythingDown();
+        }
+
+
     }
 }

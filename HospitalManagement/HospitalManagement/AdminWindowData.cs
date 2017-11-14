@@ -12,7 +12,7 @@ namespace HospitalManagement
     {
         DatabaseHandler db = new DatabaseHandler();
         public Employee MyUser { get; set; }
-        public BindingList<Employee> EmployeeBindingList { get; set; }
+        public List<Employee> EmployeeList { get; set; }
         public List<Department> DepartmentList { get; set; }
         public Dictionary<string, string> SpecialtyDictionary { get; set; }
 
@@ -24,7 +24,7 @@ namespace HospitalManagement
 
         public void UpdateData()
         {
-            this.EmployeeBindingList = new BindingList<Employee>(db.LoadAllEmployees());
+            EmployeeList = db.LoadAllEmployees();
             DepartmentList = db.LoadAllDepartments();
             SpecialtyDictionary = db.LoadSpecialtyDictionary();
         }
