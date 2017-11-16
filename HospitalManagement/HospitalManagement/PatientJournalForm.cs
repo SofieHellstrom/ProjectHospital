@@ -130,7 +130,7 @@ namespace HospitalManagement
 
         private void tidsbokningBtn_Click(object sender, EventArgs e)
         {
-            Form booking = new BookingForm(data.ThePatient, data.MyUser);
+            Form booking = new BookingForm (data.ThePatient, data.MyUser);
             booking.Show();
         }
         private void signInBtn_Click(object sender, EventArgs e)
