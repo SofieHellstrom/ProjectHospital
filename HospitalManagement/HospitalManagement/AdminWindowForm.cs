@@ -20,16 +20,65 @@ namespace HospitalManagement
             InitializeComponent();
             this.currentUserLbl.Text = $"Inloggad som: {data.MyUser.ToString()}";
             //BindingSource employeeBindingSource = new BindingSource();
-            //employeeBindingSource.DataSource = data.EmployeeList;
-            this.employeesDataGridView.DataSource = data.EmployeeList;
+            //employeeBindingSource.DataSource = data.EmployeeList;        
+            this.employeesDataGridView.DataSource = GetSortedEmployeeDataGridBindingList(data.EmployeeList, "EmployeeID");
             this.departmentComboBox.DataSource = data.DepartmentList.OrderBy(o=>o.Name).ToList();
+        }
+
+        private BindingList<Employee> GetSortedEmployeeDataGridBindingList(List<Employee> listToProcess, string propertyToSortBy)
+        {
+            BindingList<Employee> returnList;
+            switch (propertyToSortBy)
+            {
+                case "EmployeeID":
+                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.EmployeeID).ToList());
+                    break;
+                case "FirstName":
+                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.FirstName).ToList());
+                    break;
+                case "LastName":
+                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.LastName).ToList());
+                    break;
+                case "Address":
+                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.Address).ToList());
+                    break;
+                case "PostalCode":
+                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.PostalCode).ToList());
+                    break;
+                case "PostalArea":
+                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.PostalArea).ToList());
+                    break;
+                case "PhoneNr":
+                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.PhoneNr).ToList());
+                    break;
+                case "Email":
+                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.Email).ToList());
+                    break;
+                case "PersonNummer":
+                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.PersonNummer).ToList());
+                    break;
+                case "Department":
+                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.Department).ToList());
+                    break;
+                case "Specialty":
+                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.Specialty).ToList());
+                    break;
+                default:
+                    returnList = new BindingList<Employee>(listToProcess);
+                    break;
+            }
+            return returnList;
         }
 
         private void UpdateWindow()
         {
             data.UpdateData();
-
-            employeesDataGridView.DataSource = data.EmployeeList;
+            var employeeRowSelected = employeesDataGridView.Rows.IndexOf(employeesDataGridView.SelectedRows[0]);
+            employeesDataGridView.DataSource = GetSortedEmployeeDataGridBindingList(data.EmployeeList, "EmployeeID");
+            //Trying to keep rowselection when you get back to window.
+            employeesDataGridView.CurrentCell = employeesDataGridView.Rows[employeeRowSelected].Cells[0];
+            employeesDataGridView.Rows[employeeRowSelected].Selected = true;
+            
             //employeesDataGridView.Refresh();
             UpdateSelectedEmployeeInfo();
         }

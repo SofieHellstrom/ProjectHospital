@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adminEditLoginInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="adminEditLoginInfoForm.Designer.cs">
+      <DependentUpon>adminEditLoginInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminWindowData.cs" />
     <Compile Include="AdminWindowForm.cs">
       <SubType>Form</SubType>
@@ -154,6 +160,9 @@
       <DependentUpon>SignInForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInfo.cs" />
+    <EmbeddedResource Include="adminEditLoginInfoForm.resx">
+      <DependentUpon>adminEditLoginInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminWindowForm.resx">
       <DependentUpon>AdminWindowForm.cs</DependentUpon>
     </EmbeddedResource>
