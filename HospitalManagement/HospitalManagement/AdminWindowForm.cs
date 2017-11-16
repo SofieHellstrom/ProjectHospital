@@ -194,6 +194,11 @@ namespace HospitalManagement
             Program.ShutEverythingDown();
         }
 
-
+        private void editLoginInfoBtn_Click(object sender, EventArgs e)
+        {
+            Employee selectedEmployee = employeesDataGridView.CurrentRow.DataBoundItem as Employee;
+            Form userEditForm = new adminEditLoginInfoForm(selectedEmployee);
+            userEditForm.ShowDialog();
+        }
     }
 }

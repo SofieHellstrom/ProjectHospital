@@ -119,8 +119,9 @@
             this.editLoginInfoBtn.Name = "editLoginInfoBtn";
             this.editLoginInfoBtn.Size = new System.Drawing.Size(108, 23);
             this.editLoginInfoBtn.TabIndex = 2;
-            this.editLoginInfoBtn.Text = "Användarkonto";
+            this.editLoginInfoBtn.Text = "Användaruppgifter";
             this.editLoginInfoBtn.UseVisualStyleBackColor = true;
+            this.editLoginInfoBtn.Click += new System.EventHandler(this.editLoginInfoBtn_Click);
             // 
             // updateBtn
             // 

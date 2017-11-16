@@ -1107,6 +1107,94 @@ namespace HospitalManagement
 
         }
 
+        public UserInfo LoadUserByID (string userID, bool isPatient)
+        {
+            //This method gets the info from the user table and creates a userinfo object 
+            //based on UserID. 
+            UserInfo returnUserInfo;
+
+            //Prepares variables used in creating the Userinfo instance.
+            string identifier = "None";
+            string usename = "";
+            string password = "";
+            string patientid = "";
+            string staffid = "";
+
+            try
+            {
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    //Opens the connection.
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        //Configures the connection and SQL-query for the command and prepares it.
+                        cmd.Connection = conn;
+                        //cmd.CommandText = $"SELECT * FROM user WHERE 'user_id' = '{username}'";
+                        if (isPatient)
+                        {
+                            cmd.CommandText = "SELECT * FROM userinfo WHERE patient = :id";
+                        }
+                        else
+                        {
+                            cmd.CommandText = "SELECT * FROM userinfo WHERE staff = :id";
+                        }
+
+                        cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+
+                        cmd.Prepare();
+
+                        cmd.Parameters[0].Value = userID;
+
+                        using (var reader = cmd.ExecuteReader())
+                            //Reads values from the database into the temporary variables.
+                            while (reader.Read())
+                            {
+                                {
+                                    usename = reader.GetString(0);
+                                    password = reader.GetString(1);
+                                    if (!reader.IsDBNull(2))
+                                    {
+                                        patientid = reader.GetString(2);
+                                    }
+                                    if (!reader.IsDBNull(3))
+                                    {
+                                        staffid = reader.GetString(3);
+                                    }
+
+                                }
+                            }
+
+                        if (isPatient)
+                        {
+                            identifier = patientid;
+                        }
+                        else
+                        {
+                            identifier = staffid;
+                        }
+                        //Creates and returns the UserInfo instance.
+                        returnUserInfo = new UserInfo(identifier, usename, password);
+
+                        return returnUserInfo;
+                    }
+                }
+
+
+            }
+            catch (PostgresException e)
+            {
+
+                Console.WriteLine(e.ToString());
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
+
+            //Creates and returns the UserInfo instance.
+            returnUserInfo = new UserInfo(identifier, usename, password);
+            return returnUserInfo;
+
+        }
+
         public bool AddPatientUser(string personnummer)
         {
             //Adds a new user account to the database for a patient. 
