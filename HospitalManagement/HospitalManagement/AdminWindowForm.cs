@@ -19,53 +19,85 @@ namespace HospitalManagement
             data = new AdminWindowData(myUser);
             InitializeComponent();
             this.currentUserLbl.Text = $"Inloggad som: {data.MyUser.ToString()}";
-            //BindingSource employeeBindingSource = new BindingSource();
-            //employeeBindingSource.DataSource = data.EmployeeList;        
-            this.employeesDataGridView.DataSource = GetSortedEmployeeDataGridBindingList(data.EmployeeList, "EmployeeID");
+            
+            //Initializing the content of the Employee Tab 
+            this.employeesDataGridView.DataSource = GetSortedEmployeeDataGridList(data.EmployeeList, "EmployeeID");
             this.departmentComboBox.DataSource = data.DepartmentList.OrderBy(o=>o.Name).ToList();
+            //Following line does not work for some reason. Check again if I have extra time.
+            //this.employeesDataGridView.Columns[(this.employeesDataGridView.Columns["EmployeeID"].Index)].HeaderCell.SortGlyphDirection = SortOrder.Descending;
+
+            //Initializing the content of the Department Tab
+            this.departmentsDataGridView.DataSource = GetSortedDepartmentDataGridList(data.DepartmentList, "DepartmentID");
+
+            
         }
 
-        private BindingList<Employee> GetSortedEmployeeDataGridBindingList(List<Employee> listToProcess, string propertyToSortBy)
+        private List<Employee> GetSortedEmployeeDataGridList(List<Employee> listToProcess, string propertyToSortBy)
         {
-            BindingList<Employee> returnList;
+            List<Employee> returnList;
             switch (propertyToSortBy)
             {
                 case "EmployeeID":
-                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.EmployeeID).ToList());
+                    returnList = new List<Employee>(data.EmployeeList.OrderBy(o => o.EmployeeID).ToList());
                     break;
                 case "FirstName":
-                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.FirstName).ToList());
+                    returnList = new List<Employee>(data.EmployeeList.OrderBy(o => o.FirstName).ToList());
                     break;
                 case "LastName":
-                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.LastName).ToList());
+                    returnList = new List<Employee>(data.EmployeeList.OrderBy(o => o.LastName).ToList());
                     break;
                 case "Address":
-                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.Address).ToList());
+                    returnList = new List<Employee>(data.EmployeeList.OrderBy(o => o.Address).ToList());
                     break;
                 case "PostalCode":
-                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.PostalCode).ToList());
+                    returnList = new List<Employee>(data.EmployeeList.OrderBy(o => o.PostalCode).ToList());
                     break;
                 case "PostalArea":
-                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.PostalArea).ToList());
+                    returnList = new List<Employee>(data.EmployeeList.OrderBy(o => o.PostalArea).ToList());
                     break;
                 case "PhoneNr":
-                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.PhoneNr).ToList());
+                    returnList = new List<Employee>(data.EmployeeList.OrderBy(o => o.PhoneNr).ToList());
                     break;
                 case "Email":
-                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.Email).ToList());
+                    returnList = new List<Employee>(data.EmployeeList.OrderBy(o => o.Email).ToList());
                     break;
                 case "PersonNummer":
-                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.PersonNummer).ToList());
+                    returnList = new List<Employee>(data.EmployeeList.OrderBy(o => o.PersonNummer).ToList());
                     break;
                 case "Department":
-                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.Department).ToList());
+                    returnList = new List<Employee>(data.EmployeeList.OrderBy(o => o.Department).ToList());
                     break;
                 case "Specialty":
-                    returnList = new BindingList<Employee>(data.EmployeeList.OrderBy(o => o.Specialty).ToList());
+                    returnList = new List<Employee>(data.EmployeeList.OrderBy(o => o.Specialty).ToList());
                     break;
                 default:
-                    returnList = new BindingList<Employee>(listToProcess);
+                    returnList = new List<Employee>(listToProcess);
                     break;
+            }
+            return returnList;
+        }
+
+        private List<Department> GetSortedDepartmentDataGridList(List<Department> listToProcess, string propertyToSortBy)
+        {
+            List<Department> returnList;
+            switch (propertyToSortBy)
+            {
+                case "DepartmentID":
+                    returnList = new List<Department>(data.DepartmentList.OrderBy(o => o.DepartmentID).ToList());
+                    break;
+                case "Name":
+                    returnList = new List<Department>(data.DepartmentList.OrderBy(o => o.Name).ToList());
+                    break;
+                case "Opens":
+                    returnList = new List<Department>(data.DepartmentList.OrderBy(o => o.Opens).ToList());
+                    break;
+                case "Closes":
+                    returnList = new List<Department>(data.DepartmentList.OrderBy(o => o.Closes).ToList());
+                    break;
+                default:
+                    returnList = new List<Department>(listToProcess);
+                    break;
+
             }
             return returnList;
         }
@@ -74,12 +106,16 @@ namespace HospitalManagement
         {
             data.UpdateData();
             var employeeRowSelected = employeesDataGridView.Rows.IndexOf(employeesDataGridView.SelectedRows[0]);
-            employeesDataGridView.DataSource = GetSortedEmployeeDataGridBindingList(data.EmployeeList, "EmployeeID");
+            var departmentsRowSelected = departmentsDataGridView.Rows.IndexOf(departmentsDataGridView.SelectedRows[0]);
+
+            employeesDataGridView.DataSource = GetSortedEmployeeDataGridList(data.EmployeeList, "EmployeeID");
+            departmentsDataGridView.DataSource = GetSortedDepartmentDataGridList(data.DepartmentList, "DepartmentID");
             //Trying to keep rowselection when you get back to window.
             employeesDataGridView.CurrentCell = employeesDataGridView.Rows[employeeRowSelected].Cells[0];
             employeesDataGridView.Rows[employeeRowSelected].Selected = true;
+            departmentsDataGridView.CurrentCell = departmentsDataGridView.Rows[departmentsRowSelected].Cells[0];
+            departmentsDataGridView.Rows[departmentsRowSelected].Selected = true;
             
-            //employeesDataGridView.Refresh();
             UpdateSelectedEmployeeInfo();
         }
 
@@ -108,6 +144,22 @@ namespace HospitalManagement
             }
         }
 
+        private void UpdateSelectedDepartmentInfo()
+        {
+            if (departmentsDataGridView.CurrentRow != null)
+            {
+                Department selectedDepartment = departmentsDataGridView.CurrentRow.DataBoundItem as Department;
+                depIDTxtBox.Text = selectedDepartment.DepartmentID;
+                depNameTxtBox.Text = selectedDepartment.Name;
+                depOpensTimePicker.Value = DateTime.Today + selectedDepartment.Opens;
+                depClosesTimePicker.Value = DateTime.Today + selectedDepartment.Closes;
+            }
+            else
+            {
+
+            }
+        }
+
         private void ClearSelectedEmployeeInfo()
         {
             this.employeeIdTxtBox.Text = "";
@@ -128,10 +180,16 @@ namespace HospitalManagement
             UpdateSelectedEmployeeInfo();
         }
 
+        private void departmentsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            UpdateSelectedDepartmentInfo();
+        }
+
         private void employeeTabPage_Enter(object sender, EventArgs e)
         {
             addBtn.Text = "Ny Anställd";
             updateBtn.Text = "Uppdatera Anställd";
+            editLoginInfoBtn.Text = "Användaruppgifter";
         }
 
         private void departmentTabPage_Enter(object sender, EventArgs e)
@@ -147,6 +205,16 @@ namespace HospitalManagement
                 this.employeesDataGridView.Rows[0].Selected = true;
             }
             UpdateSelectedEmployeeInfo();
+        }
+
+        private void departmentsDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            if (data.DepartmentList.Any())
+            {
+                departmentsDataGridView.Rows[0].Selected = true;
+            }
+            UpdateSelectedDepartmentInfo();
+
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -200,5 +268,7 @@ namespace HospitalManagement
             Form userEditForm = new adminEditLoginInfoForm(selectedEmployee);
             userEditForm.ShowDialog();
         }
+
+        
     }
 }
