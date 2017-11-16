@@ -31,7 +31,7 @@
             this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.cornerPanel = new System.Windows.Forms.Panel();
             this.leftPanel = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.editLoginInfoBtn = new System.Windows.Forms.Button();
             this.updateBtn = new System.Windows.Forms.Button();
             this.addBtn = new System.Windows.Forms.Button();
             this.topPanel = new System.Windows.Forms.Panel();
@@ -104,7 +104,7 @@
             // 
             // leftPanel
             // 
-            this.leftPanel.Controls.Add(this.button3);
+            this.leftPanel.Controls.Add(this.editLoginInfoBtn);
             this.leftPanel.Controls.Add(this.updateBtn);
             this.leftPanel.Controls.Add(this.addBtn);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -113,14 +113,15 @@
             this.leftPanel.Size = new System.Drawing.Size(120, 579);
             this.leftPanel.TabIndex = 1;
             // 
-            // button3
+            // editLoginInfoBtn
             // 
-            this.button3.Location = new System.Drawing.Point(3, 60);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(108, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Ta bort?";
-            this.button3.UseVisualStyleBackColor = true;
+            this.editLoginInfoBtn.Location = new System.Drawing.Point(3, 60);
+            this.editLoginInfoBtn.Name = "editLoginInfoBtn";
+            this.editLoginInfoBtn.Size = new System.Drawing.Size(108, 23);
+            this.editLoginInfoBtn.TabIndex = 2;
+            this.editLoginInfoBtn.Text = "Användaruppgifter";
+            this.editLoginInfoBtn.UseVisualStyleBackColor = true;
+            this.editLoginInfoBtn.Click += new System.EventHandler(this.editLoginInfoBtn_Click);
             // 
             // updateBtn
             // 
@@ -422,6 +423,7 @@
             this.employeesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.employeesDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.employeesDataGridView.Location = new System.Drawing.Point(3, 250);
+            this.employeesDataGridView.MultiSelect = false;
             this.employeesDataGridView.Name = "employeesDataGridView";
             this.employeesDataGridView.Size = new System.Drawing.Size(859, 260);
             this.employeesDataGridView.TabIndex = 0;
@@ -485,7 +487,7 @@
         private System.Windows.Forms.TabPage employeeTabPage;
         private System.Windows.Forms.TabPage departmentTabPage;
         private System.Windows.Forms.TabPage roomTabPage;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button editLoginInfoBtn;
         private System.Windows.Forms.Button updateBtn;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.DataGridView employeesDataGridView;

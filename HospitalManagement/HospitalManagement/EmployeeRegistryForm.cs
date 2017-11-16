@@ -16,7 +16,7 @@ namespace HospitalManagement
         AdminWindowData data;
         DatabaseHandler db = new DatabaseHandler();
         Employee employeeToEdit = null;
-        Boolean editMode = false;
+        Boolean editMode;
 
         public EmployeeRegistryForm(AdminWindowData d)
         {
@@ -29,12 +29,14 @@ namespace HospitalManagement
             specialtyComboBox.DisplayMember = "Key";
             specialtyComboBox.ValueMember = "Value";
             specialtyComboBox.SelectedIndex = -1;
+            editMode = false;
         }
 
         public EmployeeRegistryForm(AdminWindowData d, Employee emp)
         {
             data = d;
             employeeToEdit = emp;
+            this.Text = "Redigera Anställd";
             InitializeComponent();
             departmentComboBox.DataSource = data.DepartmentList;//.OrderBy(o => o.Name).ToList();
             //departmentComboBox.SelectedIndex = -1;
@@ -258,14 +260,44 @@ namespace HospitalManagement
         private void saveOneAndCloseBtn_Click(object sender, EventArgs e)
         {
             Employee employeeToSave = makeEmployeeFromFields();
-            Boolean success;
+            string newUserName = employeeToSave.FirstName.ToLower() + employeeToSave.LastName.ToLower();
+            string successMessage;
+            bool success;
+            bool userCreated;
             if (editMode)
             {
                 success = employeeToSave.UpdateSelfInDB();
+                successMessage = "Anställd Uppdaterad.";
+                if (success)
+                {
+                    if (!db.EmployeeHasAccount(employeeToSave.EmployeeID))
+                    {
+                        userCreated = db.AddEmployeeUser(newUserName, employeeToSave.EmployeeID);
+                        if (userCreated)
+                        {
+                            successMessage += "\nInget användarkonto. Nytt konto skapat med defaultvärden.";
+                        }
+                        else
+                        {
+                            successMessage += "\nAnvändaren har inga inloggningsuppgifter, åtgärd misslyckats. Kontakta Support.";
+                        }
+                    }
+                } 
+                
             }
             else
             {
                 success = db.AddEmployee(employeeToSave);
+                successMessage = "Ny Användare sparad.";
+                if (success)
+                {
+                    userCreated = db.AddEmployeeUser(newUserName, employeeToSave.EmployeeID);
+                    if (!userCreated)
+                    {
+                        successMessage += "\nNya inloggningsuppgifter kunde inte skapas. Kontakta support.";
+                    }
+                }
+                
             }
             
 
@@ -275,7 +307,7 @@ namespace HospitalManagement
             }
             else
             {
-                MessageBox.Show("Anställd sparad till databasen.");
+                MessageBox.Show(successMessage);
                 this.Close();
             }
 
@@ -294,16 +326,24 @@ namespace HospitalManagement
         private void saveMoreEmployeesBtn_Click(object sender, EventArgs e)
         {
             Employee employeeToSave = makeEmployeeFromFields();
-
+            string newUserName = employeeToSave.FirstName.ToLower() + employeeToSave.LastName.ToLower();
+            string successMessage;
             Boolean success = db.AddEmployee(employeeToSave);
-
+            
             if (!success)
             {
                 MessageBox.Show("Anställd kunde inte sparas till databasen. Kontrollera att alla värden är korrekt angivna.");
             }
             else
             {
-                MessageBox.Show("Ny anställd sparad till databasen.");
+                successMessage = "Ny anställd sparad till databasen";
+                bool userCreated = db.AddEmployeeUser(newUserName, employeeToSave.EmployeeID);
+
+                if (!userCreated)
+                {
+                    successMessage += "\nNya inloggningsuppgifter kunde inte skapas. Kontakta support.";
+                }
+                MessageBox.Show(successMessage);
                 this.Reset();
             }
         }

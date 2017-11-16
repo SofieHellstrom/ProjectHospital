@@ -611,7 +611,7 @@ namespace HospitalManagement
                     {
                         Dictionary<string, string> SpecialtyDictionary = LoadSpecialtyDictionary();
                         string specialty = SpecialtyDictionary[employeeToUpdate.Specialty];
-                        cmd.CommandText = $"UPDATE staff SET first_name = '{employeeToUpdate.FirstName}', last_name ='{employeeToUpdate.LastName}', address = '{employeeToUpdate.Address}', postal_code = '{employeeToUpdate.PostalCode}', phone = '{employeeToUpdate.PhoneNr}', email = '{employeeToUpdate.Email}', person_id_nr = '{employeeToUpdate.PersonNummer}', department = '{dep}', position = '{employeeToUpdate.Position}' , speciality = '{specialty}' WHERE employee_id = '{employeeToUpdate.EmployeeID}'";
+                        cmd.CommandText = $"UPDATE staff SET first_name = '{employeeToUpdate.FirstName}', last_name ='{employeeToUpdate.LastName}', address = '{employeeToUpdate.Address}', postal_code = '{employeeToUpdate.PostalCode}', phone = '{employeeToUpdate.PhoneNr}', email = '{employeeToUpdate.Email}', person_id_nr = '{employeeToUpdate.PersonNummer}', department = '{dep}', position = '{employeeToUpdate.Position}' , specialty = '{specialty}' WHERE employee_id = '{employeeToUpdate.EmployeeID}'";
                     }
                     else
                     {
@@ -984,6 +984,48 @@ namespace HospitalManagement
 
         }
 
+        public Boolean EmployeeHasAccount(string employeeID)
+        {
+            // Checks if a user with with a specific username exists in the database.
+            // Returns True if it does and False if it doesn't.
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Adds the connection and SQL-query to the command and prepares it.
+                    string commandString = "";
+
+                    cmd.Connection = conn;
+
+                    commandString = $"SELECT COUNT (*) FROM userinfo WHERE staff = '{employeeID}'";
+
+                    cmd.CommandText = commandString;
+
+                    // Gets and stores the result of the query (the number of times the employee_id
+                    // appears in the database, which should be one or zero, since it has a unique
+                    // constraint.
+                    // Then if the value is 0, false is returned. if it is 1, true is returned.
+                    int result = 0;
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        result = reader.GetInt16(0);
+                    }
+                    //return Convert.ToBoolean(result);
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
         public UserInfo LoadUser(string username, Boolean isPatient)
         {
             //This method gets the info from the user table and creates a userinfo object 
@@ -1065,6 +1107,94 @@ namespace HospitalManagement
 
         }
 
+        public UserInfo LoadUserByID (string userID, bool isPatient)
+        {
+            //This method gets the info from the user table and creates a userinfo object 
+            //based on UserID. 
+            UserInfo returnUserInfo;
+
+            //Prepares variables used in creating the Userinfo instance.
+            string identifier = "None";
+            string usename = "";
+            string password = "";
+            string patientid = "";
+            string staffid = "";
+
+            try
+            {
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    //Opens the connection.
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        //Configures the connection and SQL-query for the command and prepares it.
+                        cmd.Connection = conn;
+                        //cmd.CommandText = $"SELECT * FROM user WHERE 'user_id' = '{username}'";
+                        if (isPatient)
+                        {
+                            cmd.CommandText = "SELECT * FROM userinfo WHERE patient = :id";
+                        }
+                        else
+                        {
+                            cmd.CommandText = "SELECT * FROM userinfo WHERE staff = :id";
+                        }
+
+                        cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Varchar));
+
+                        cmd.Prepare();
+
+                        cmd.Parameters[0].Value = userID;
+
+                        using (var reader = cmd.ExecuteReader())
+                            //Reads values from the database into the temporary variables.
+                            while (reader.Read())
+                            {
+                                {
+                                    usename = reader.GetString(0);
+                                    password = reader.GetString(1);
+                                    if (!reader.IsDBNull(2))
+                                    {
+                                        patientid = reader.GetString(2);
+                                    }
+                                    if (!reader.IsDBNull(3))
+                                    {
+                                        staffid = reader.GetString(3);
+                                    }
+
+                                }
+                            }
+
+                        if (isPatient)
+                        {
+                            identifier = patientid;
+                        }
+                        else
+                        {
+                            identifier = staffid;
+                        }
+                        //Creates and returns the UserInfo instance.
+                        returnUserInfo = new UserInfo(identifier, usename, password);
+
+                        return returnUserInfo;
+                    }
+                }
+
+
+            }
+            catch (PostgresException e)
+            {
+
+                Console.WriteLine(e.ToString());
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
+
+            //Creates and returns the UserInfo instance.
+            returnUserInfo = new UserInfo(identifier, usename, password);
+            return returnUserInfo;
+
+        }
+
         public bool AddPatientUser(string personnummer)
         {
             //Adds a new user account to the database for a patient. 
@@ -1100,6 +1230,44 @@ namespace HospitalManagement
                     }
 
                 }   
+            }
+        }
+
+        public bool AddEmployeeUser(string userName, string employeeID)
+        {
+            //Adds a new user account to the database for a patient. 
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds relevant data to temporary variables. Mostly for debugging purposes.
+                    string user = userName;
+                    string password = "password";
+                    string employee = employeeID;
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    try
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = $"INSERT INTO userinfo (id, password, staff) VALUES ('{user}', '{password}', '{employee}')";
+
+                        int recordsAffected = cmd.ExecuteNonQuery();
+
+                        //Returns a boolean which is True if any rows have been affected. 
+                        return Convert.ToBoolean(recordsAffected);
+                    }
+                    catch (PostgresException e)
+                    {
+                        //Writes Exception error to DebugWindow and returns false, if a
+                        //PostgresException occurs.
+                        System.Diagnostics.Debug.WriteLine(e.ToString());
+                        return false;
+                    }
+
+                }
             }
         }
 
