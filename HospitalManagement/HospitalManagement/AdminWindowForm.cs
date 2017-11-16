@@ -269,6 +269,9 @@ namespace HospitalManagement
             userEditForm.ShowDialog();
         }
 
-        
+        private void departmentsDataGridView_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            UpdateSelectedDepartmentInfo();
+        }
     }
 }

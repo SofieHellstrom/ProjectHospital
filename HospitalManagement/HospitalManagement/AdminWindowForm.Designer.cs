@@ -556,8 +556,8 @@
             this.departmentsDataGridView.ReadOnly = true;
             this.departmentsDataGridView.Size = new System.Drawing.Size(496, 405);
             this.departmentsDataGridView.TabIndex = 3;
-            this.departmentsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.departmentsDataGridView_CellContentClick);
             this.departmentsDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.departmentsDataGridView_DataBindingComplete);
+            this.departmentsDataGridView.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.departmentsDataGridView_RowEnter);
             // 
             // roomTabPage
             // 
