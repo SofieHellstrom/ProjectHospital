@@ -28,6 +28,7 @@ namespace HospitalManagement
 
             this.prescriptionsListBox.DataSource = data.PrescriptionList;
             this.journalpostListBox.DataSource = data.NotesList;
+            this.bookingListBox.DataSource = data.BookingList;
 
             UpdateWindowContent();
         }
@@ -56,6 +57,11 @@ namespace HospitalManagement
         {
             Form changePwrd = new ChangeUserInfoForm(data.Me);
             changePwrd.ShowDialog();
+        }
+
+        private void bookingListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
