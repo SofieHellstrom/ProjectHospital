@@ -106,6 +106,7 @@ namespace HospitalManagement
         {
             data.UpdateData();
             var employeeRowSelected = employeesDataGridView.Rows.IndexOf(employeesDataGridView.SelectedRows[0]);
+            //Problem here? Why out of range?
             var departmentsRowSelected = departmentsDataGridView.Rows.IndexOf(departmentsDataGridView.SelectedRows[0]);
 
             employeesDataGridView.DataSource = GetSortedEmployeeDataGridList(data.EmployeeList, "EmployeeID");
@@ -270,6 +271,11 @@ namespace HospitalManagement
         }
 
         private void departmentsDataGridView_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            //UpdateSelectedDepartmentInfo();
+        }
+
+        private void departmentsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             UpdateSelectedDepartmentInfo();
         }

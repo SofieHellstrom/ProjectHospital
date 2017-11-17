@@ -549,6 +549,7 @@
             this.departmentsDataGridView.AllowUserToDeleteRows = false;
             this.departmentsDataGridView.AllowUserToOrderColumns = true;
             this.departmentsDataGridView.AllowUserToResizeColumns = false;
+            this.departmentsDataGridView.CausesValidation = false;
             this.departmentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.departmentsDataGridView.Location = new System.Drawing.Point(6, 142);
             this.departmentsDataGridView.MultiSelect = false;
@@ -556,6 +557,7 @@
             this.departmentsDataGridView.ReadOnly = true;
             this.departmentsDataGridView.Size = new System.Drawing.Size(496, 405);
             this.departmentsDataGridView.TabIndex = 3;
+            this.departmentsDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.departmentsDataGridView_CellClick);
             this.departmentsDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.departmentsDataGridView_DataBindingComplete);
             this.departmentsDataGridView.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.departmentsDataGridView_RowEnter);
             // 
