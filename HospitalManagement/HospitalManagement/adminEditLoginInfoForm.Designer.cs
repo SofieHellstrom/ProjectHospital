@@ -42,7 +42,7 @@
             // userNameLbl
             // 
             this.userNameLbl.AutoSize = true;
-            this.userNameLbl.Location = new System.Drawing.Point(39, 30);
+            this.userNameLbl.Location = new System.Drawing.Point(30, 32);
             this.userNameLbl.Name = "userNameLbl";
             this.userNameLbl.Size = new System.Drawing.Size(82, 13);
             this.userNameLbl.TabIndex = 0;
@@ -51,7 +51,7 @@
             // passwordLbl
             // 
             this.passwordLbl.AutoSize = true;
-            this.passwordLbl.Location = new System.Drawing.Point(39, 69);
+            this.passwordLbl.Location = new System.Drawing.Point(30, 71);
             this.passwordLbl.Name = "passwordLbl";
             this.passwordLbl.Size = new System.Drawing.Size(76, 13);
             this.passwordLbl.TabIndex = 1;
@@ -59,7 +59,7 @@
             // 
             // userNameTxtBox
             // 
-            this.userNameTxtBox.Location = new System.Drawing.Point(127, 27);
+            this.userNameTxtBox.Location = new System.Drawing.Point(118, 29);
             this.userNameTxtBox.Name = "userNameTxtBox";
             this.userNameTxtBox.Size = new System.Drawing.Size(184, 20);
             this.userNameTxtBox.TabIndex = 2;
@@ -67,7 +67,7 @@
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(127, 66);
+            this.passwordTextBox.Location = new System.Drawing.Point(118, 68);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(184, 20);
             this.passwordTextBox.TabIndex = 3;
@@ -76,7 +76,7 @@
             // doItBtn
             // 
             this.doItBtn.Enabled = false;
-            this.doItBtn.Location = new System.Drawing.Point(134, 113);
+            this.doItBtn.Location = new System.Drawing.Point(125, 115);
             this.doItBtn.Name = "doItBtn";
             this.doItBtn.Size = new System.Drawing.Size(75, 23);
             this.doItBtn.TabIndex = 4;
@@ -93,7 +93,7 @@
             // 
             this.passwordWarningLbl.AutoSize = true;
             this.passwordWarningLbl.ForeColor = System.Drawing.Color.Blue;
-            this.passwordWarningLbl.Location = new System.Drawing.Point(99, 97);
+            this.passwordWarningLbl.Location = new System.Drawing.Point(90, 99);
             this.passwordWarningLbl.Name = "passwordWarningLbl";
             this.passwordWarningLbl.Size = new System.Drawing.Size(157, 13);
             this.passwordWarningLbl.TabIndex = 5;
@@ -104,7 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(349, 157);
+            this.ClientSize = new System.Drawing.Size(332, 157);
             this.Controls.Add(this.passwordWarningLbl);
             this.Controls.Add(this.doItBtn);
             this.Controls.Add(this.passwordTextBox);

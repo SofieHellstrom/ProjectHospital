@@ -65,6 +65,16 @@
             this.lastNameLbl = new System.Windows.Forms.Label();
             this.employeesDataGridView = new System.Windows.Forms.DataGridView();
             this.departmentTabPage = new System.Windows.Forms.TabPage();
+            this.depInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.depIDLbl = new System.Windows.Forms.Label();
+            this.depNameTxtBox = new System.Windows.Forms.TextBox();
+            this.depNameLbl = new System.Windows.Forms.Label();
+            this.depIDTxtBox = new System.Windows.Forms.TextBox();
+            this.depOpensLbl = new System.Windows.Forms.Label();
+            this.depClosesTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.depClosesLbl = new System.Windows.Forms.Label();
+            this.depOpensTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.departmentsDataGridView = new System.Windows.Forms.DataGridView();
             this.roomTabPage = new System.Windows.Forms.TabPage();
             this.mainTableLayoutPanel.SuspendLayout();
             this.leftPanel.SuspendLayout();
@@ -74,6 +84,9 @@
             this.employeeTabPage.SuspendLayout();
             this.employeeInfoGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeesDataGridView)).BeginInit();
+            this.departmentTabPage.SuspendLayout();
+            this.depInfoGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.departmentsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // mainTableLayoutPanel
@@ -432,6 +445,8 @@
             // 
             // departmentTabPage
             // 
+            this.departmentTabPage.Controls.Add(this.depInfoGroupBox);
+            this.departmentTabPage.Controls.Add(this.departmentsDataGridView);
             this.departmentTabPage.Location = new System.Drawing.Point(4, 22);
             this.departmentTabPage.Name = "departmentTabPage";
             this.departmentTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -440,6 +455,111 @@
             this.departmentTabPage.Text = "Avdelningar";
             this.departmentTabPage.UseVisualStyleBackColor = true;
             this.departmentTabPage.Enter += new System.EventHandler(this.departmentTabPage_Enter);
+            // 
+            // depInfoGroupBox
+            // 
+            this.depInfoGroupBox.Controls.Add(this.depIDLbl);
+            this.depInfoGroupBox.Controls.Add(this.depNameTxtBox);
+            this.depInfoGroupBox.Controls.Add(this.depNameLbl);
+            this.depInfoGroupBox.Controls.Add(this.depIDTxtBox);
+            this.depInfoGroupBox.Controls.Add(this.depOpensLbl);
+            this.depInfoGroupBox.Controls.Add(this.depClosesTimePicker);
+            this.depInfoGroupBox.Controls.Add(this.depClosesLbl);
+            this.depInfoGroupBox.Controls.Add(this.depOpensTimePicker);
+            this.depInfoGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.depInfoGroupBox.Name = "depInfoGroupBox";
+            this.depInfoGroupBox.Size = new System.Drawing.Size(318, 130);
+            this.depInfoGroupBox.TabIndex = 9;
+            this.depInfoGroupBox.TabStop = false;
+            this.depInfoGroupBox.Text = "Vald Avdelning";
+            // 
+            // depIDLbl
+            // 
+            this.depIDLbl.AutoSize = true;
+            this.depIDLbl.Location = new System.Drawing.Point(6, 16);
+            this.depIDLbl.Name = "depIDLbl";
+            this.depIDLbl.Size = new System.Drawing.Size(76, 13);
+            this.depIDLbl.TabIndex = 1;
+            this.depIDLbl.Text = "Avdelnings ID:";
+            // 
+            // depNameTxtBox
+            // 
+            this.depNameTxtBox.Location = new System.Drawing.Point(88, 42);
+            this.depNameTxtBox.Name = "depNameTxtBox";
+            this.depNameTxtBox.Size = new System.Drawing.Size(184, 20);
+            this.depNameTxtBox.TabIndex = 8;
+            // 
+            // depNameLbl
+            // 
+            this.depNameLbl.AutoSize = true;
+            this.depNameLbl.Location = new System.Drawing.Point(6, 45);
+            this.depNameLbl.Name = "depNameLbl";
+            this.depNameLbl.Size = new System.Drawing.Size(38, 13);
+            this.depNameLbl.TabIndex = 2;
+            this.depNameLbl.Text = "Namn:";
+            // 
+            // depIDTxtBox
+            // 
+            this.depIDTxtBox.Location = new System.Drawing.Point(88, 13);
+            this.depIDTxtBox.Name = "depIDTxtBox";
+            this.depIDTxtBox.Size = new System.Drawing.Size(100, 20);
+            this.depIDTxtBox.TabIndex = 7;
+            // 
+            // depOpensLbl
+            // 
+            this.depOpensLbl.AutoSize = true;
+            this.depOpensLbl.Location = new System.Drawing.Point(6, 76);
+            this.depOpensLbl.Name = "depOpensLbl";
+            this.depOpensLbl.Size = new System.Drawing.Size(45, 13);
+            this.depOpensLbl.TabIndex = 3;
+            this.depOpensLbl.Text = "Öppnar:";
+            // 
+            // depClosesTimePicker
+            // 
+            this.depClosesTimePicker.CustomFormat = "HH:mm";
+            this.depClosesTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.depClosesTimePicker.Location = new System.Drawing.Point(88, 96);
+            this.depClosesTimePicker.Name = "depClosesTimePicker";
+            this.depClosesTimePicker.ShowUpDown = true;
+            this.depClosesTimePicker.Size = new System.Drawing.Size(77, 20);
+            this.depClosesTimePicker.TabIndex = 6;
+            // 
+            // depClosesLbl
+            // 
+            this.depClosesLbl.AutoSize = true;
+            this.depClosesLbl.Location = new System.Drawing.Point(6, 102);
+            this.depClosesLbl.Name = "depClosesLbl";
+            this.depClosesLbl.Size = new System.Drawing.Size(47, 13);
+            this.depClosesLbl.TabIndex = 4;
+            this.depClosesLbl.Text = "Stänger:";
+            // 
+            // depOpensTimePicker
+            // 
+            this.depOpensTimePicker.CustomFormat = "HH:mm";
+            this.depOpensTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.depOpensTimePicker.Location = new System.Drawing.Point(88, 70);
+            this.depOpensTimePicker.Name = "depOpensTimePicker";
+            this.depOpensTimePicker.ShowUpDown = true;
+            this.depOpensTimePicker.Size = new System.Drawing.Size(77, 20);
+            this.depOpensTimePicker.TabIndex = 5;
+            // 
+            // departmentsDataGridView
+            // 
+            this.departmentsDataGridView.AllowUserToAddRows = false;
+            this.departmentsDataGridView.AllowUserToDeleteRows = false;
+            this.departmentsDataGridView.AllowUserToOrderColumns = true;
+            this.departmentsDataGridView.AllowUserToResizeColumns = false;
+            this.departmentsDataGridView.CausesValidation = false;
+            this.departmentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.departmentsDataGridView.Location = new System.Drawing.Point(6, 142);
+            this.departmentsDataGridView.MultiSelect = false;
+            this.departmentsDataGridView.Name = "departmentsDataGridView";
+            this.departmentsDataGridView.ReadOnly = true;
+            this.departmentsDataGridView.Size = new System.Drawing.Size(496, 405);
+            this.departmentsDataGridView.TabIndex = 3;
+            this.departmentsDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.departmentsDataGridView_CellClick);
+            this.departmentsDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.departmentsDataGridView_DataBindingComplete);
+            this.departmentsDataGridView.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.departmentsDataGridView_RowEnter);
             // 
             // roomTabPage
             // 
@@ -471,6 +591,10 @@
             this.employeeInfoGroupBox.ResumeLayout(false);
             this.employeeInfoGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeesDataGridView)).EndInit();
+            this.departmentTabPage.ResumeLayout(false);
+            this.depInfoGroupBox.ResumeLayout(false);
+            this.depInfoGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.departmentsDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -515,5 +639,15 @@
         private System.Windows.Forms.GroupBox employeeInfoGroupBox;
         private System.Windows.Forms.TextBox personIDTxtBox;
         private System.Windows.Forms.Label personIdLbl;
+        private System.Windows.Forms.DataGridView departmentsDataGridView;
+        private System.Windows.Forms.Label depClosesLbl;
+        private System.Windows.Forms.Label depOpensLbl;
+        private System.Windows.Forms.Label depNameLbl;
+        private System.Windows.Forms.Label depIDLbl;
+        private System.Windows.Forms.DateTimePicker depOpensTimePicker;
+        private System.Windows.Forms.TextBox depNameTxtBox;
+        private System.Windows.Forms.TextBox depIDTxtBox;
+        private System.Windows.Forms.DateTimePicker depClosesTimePicker;
+        private System.Windows.Forms.GroupBox depInfoGroupBox;
     }
 }
