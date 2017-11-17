@@ -559,7 +559,6 @@
             this.departmentsDataGridView.TabIndex = 3;
             this.departmentsDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.departmentsDataGridView_CellClick);
             this.departmentsDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.departmentsDataGridView_DataBindingComplete);
-            this.departmentsDataGridView.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.departmentsDataGridView_RowEnter);
             // 
             // roomTabPage
             // 

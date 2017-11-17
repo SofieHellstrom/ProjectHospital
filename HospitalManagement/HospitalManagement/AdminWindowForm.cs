@@ -223,11 +223,13 @@ namespace HospitalManagement
             switch (tabControl.SelectedIndex)
             {
                 case 0:
-                    Form addForm = new EmployeeRegistryForm(data);
-                    addForm.ShowDialog();
+                    Form addEmpForm = new EmployeeRegistryForm(data);
+                    addEmpForm.ShowDialog();
                     break;
 
                 case 1:
+                    Form addDepForm = new DepartmentRegistryForm(data);
+                    addDepForm.ShowDialog();
                     break;
 
                 case 2:
@@ -268,11 +270,6 @@ namespace HospitalManagement
             Employee selectedEmployee = employeesDataGridView.CurrentRow.DataBoundItem as Employee;
             Form userEditForm = new adminEditLoginInfoForm(selectedEmployee);
             userEditForm.ShowDialog();
-        }
-
-        private void departmentsDataGridView_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            //UpdateSelectedDepartmentInfo();
         }
 
         private void departmentsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
