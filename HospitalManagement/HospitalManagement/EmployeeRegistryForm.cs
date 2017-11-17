@@ -227,34 +227,14 @@ namespace HospitalManagement
             DataValidityCheck();
         }
 
-        private void firstNameTxtBox_Validating(object sender, CancelEventArgs e)
-        {
-            DataValidityCheck();
-        }
-
-        private void lastNameTxtBox_Validating(object sender, CancelEventArgs e)
-        {
-            DataValidityCheck();
-        }
-
-        private void addressTxtBox_Validating(object sender, CancelEventArgs e)
-        {
-            DataValidityCheck();
-        }
-
-        private void phoneNrTxtBox_Validating(object sender, CancelEventArgs e)
-        {
-            DataValidityCheck();
-        }
-
-        private void emailTxtBox_Validated(object sender, EventArgs e)
-        {
-            DataValidityCheck();
-        }
-
         private void postalAreaTxtBox_Enter(object sender, EventArgs e)
         {
             postalCodeTxtBox.Focus();
+        }
+
+        private void TextBoxTextChanged(object sender, EventArgs e)
+        {
+            DataValidityCheck();   
         }
 
         private void saveOneAndCloseBtn_Click(object sender, EventArgs e)
@@ -347,5 +327,7 @@ namespace HospitalManagement
                 this.Reset();
             }
         }
+
+        
     }
 }

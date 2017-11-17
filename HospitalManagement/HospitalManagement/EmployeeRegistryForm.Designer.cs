@@ -113,7 +113,7 @@
             this.emailTxtBox.Name = "emailTxtBox";
             this.emailTxtBox.Size = new System.Drawing.Size(298, 20);
             this.emailTxtBox.TabIndex = 10;
-            this.emailTxtBox.Validated += new System.EventHandler(this.emailTxtBox_Validated);
+            this.emailTxtBox.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
             // 
             // specialtyComboBox
             // 
@@ -132,7 +132,7 @@
             this.phoneNrTxtBox.Name = "phoneNrTxtBox";
             this.phoneNrTxtBox.Size = new System.Drawing.Size(298, 20);
             this.phoneNrTxtBox.TabIndex = 9;
-            this.phoneNrTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.phoneNrTxtBox_Validating);
+            this.phoneNrTxtBox.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
             // 
             // employeeIdTxtBox
             // 
@@ -183,7 +183,7 @@
             this.addressTxtBox.Name = "addressTxtBox";
             this.addressTxtBox.Size = new System.Drawing.Size(297, 20);
             this.addressTxtBox.TabIndex = 7;
-            this.addressTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.addressTxtBox_Validating);
+            this.addressTxtBox.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
             // 
             // positionLbl
             // 
@@ -229,7 +229,7 @@
             this.lastNameTxtBox.Name = "lastNameTxtBox";
             this.lastNameTxtBox.Size = new System.Drawing.Size(171, 20);
             this.lastNameTxtBox.TabIndex = 6;
-            this.lastNameTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.lastNameTxtBox_Validating);
+            this.lastNameTxtBox.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
             // 
             // label6
             // 
@@ -264,7 +264,7 @@
             this.firstNameTxtBox.Name = "firstNameTxtBox";
             this.firstNameTxtBox.Size = new System.Drawing.Size(171, 20);
             this.firstNameTxtBox.TabIndex = 5;
-            this.firstNameTxtBox.Validating += new System.ComponentModel.CancelEventHandler(this.firstNameTxtBox_Validating);
+            this.firstNameTxtBox.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
             // 
             // specialtyLbl
             // 
@@ -295,6 +295,7 @@
             // 
             // errorProvider
             // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
             // suggestNewIdLbl

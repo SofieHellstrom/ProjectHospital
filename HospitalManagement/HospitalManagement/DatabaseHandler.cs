@@ -1553,7 +1553,7 @@ namespace HospitalManagement
         }
 
 
-        //Methods for loading info about departments
+        //Methods for handling info about departments
 
         public List<Department> LoadAllDepartments()
         {
@@ -1651,6 +1651,47 @@ namespace HospitalManagement
 
             }
 
+        }
+
+        public Boolean AddDepartment(Department newDepartment)
+        {
+            //Adds a new prescription to the database. 
+            Department departmentToAdd = newDepartment;
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds relevant data to temporary variables. Mostly for debugging purposes.
+
+                    string departmentID = departmentToAdd.DepartmentID;
+                    string departmentName = departmentToAdd.Name;
+                    TimeSpan departmentOpens = departmentToAdd.Opens;
+                    TimeSpan departmentCloses = departmentToAdd.Closes;
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    try
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = $"INSERT INTO department (department_id, name, open_from, open_until) VALUES ('{departmentID}', '{departmentName}', '{departmentOpens}', '{departmentCloses}')";
+
+                        int recordsAffected = cmd.ExecuteNonQuery();
+
+                        //Returns a boolean which is True if any rows have been affected. 
+                        return Convert.ToBoolean(recordsAffected);
+                    }
+                    catch (PostgresException e)
+                    {
+                        //Writes Exception error to DebugWindow and returns false, if a
+                        //PostgresException occurs.
+                        System.Diagnostics.Debug.WriteLine(e.ToString());
+                        return false;
+                    }
+
+                }
+            }
         }
 
 

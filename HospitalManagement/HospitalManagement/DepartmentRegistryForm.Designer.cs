@@ -28,16 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.depIDLbl = new System.Windows.Forms.Label();
             this.depNameLbl = new System.Windows.Forms.Label();
             this.depOpenTimeLbl = new System.Windows.Forms.Label();
             this.depCloseTimeLbl = new System.Windows.Forms.Label();
             this.depIDTxtBox = new System.Windows.Forms.TextBox();
             this.depNameTxtBox = new System.Windows.Forms.TextBox();
-            this.openingTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.depOpenTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.depCloseTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.saveMoreDepartmentsBtn = new System.Windows.Forms.Button();
+            this.saveOneAndCloseBtn = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // depIDLbl
@@ -82,6 +85,7 @@
             this.depIDTxtBox.Name = "depIDTxtBox";
             this.depIDTxtBox.Size = new System.Drawing.Size(135, 20);
             this.depIDTxtBox.TabIndex = 4;
+            this.depIDTxtBox.Validated += new System.EventHandler(this.depIDTxtBox_Validated);
             // 
             // depNameTxtBox
             // 
@@ -89,54 +93,63 @@
             this.depNameTxtBox.Name = "depNameTxtBox";
             this.depNameTxtBox.Size = new System.Drawing.Size(187, 20);
             this.depNameTxtBox.TabIndex = 5;
+            this.depNameTxtBox.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
             // 
-            // openingTimePicker
+            // depOpenTimePicker
             // 
-            this.openingTimePicker.CustomFormat = "HH:mm";
-            this.openingTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.openingTimePicker.Location = new System.Drawing.Point(124, 86);
-            this.openingTimePicker.Name = "openingTimePicker";
-            this.openingTimePicker.ShowUpDown = true;
-            this.openingTimePicker.Size = new System.Drawing.Size(56, 20);
-            this.openingTimePicker.TabIndex = 6;
+            this.depOpenTimePicker.CustomFormat = "HH:mm";
+            this.depOpenTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.depOpenTimePicker.Location = new System.Drawing.Point(124, 86);
+            this.depOpenTimePicker.Name = "depOpenTimePicker";
+            this.depOpenTimePicker.ShowUpDown = true;
+            this.depOpenTimePicker.Size = new System.Drawing.Size(56, 20);
+            this.depOpenTimePicker.TabIndex = 6;
             // 
-            // dateTimePicker2
+            // depCloseTimePicker
             // 
-            this.dateTimePicker2.CustomFormat = "HH:mm";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(124, 112);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.ShowUpDown = true;
-            this.dateTimePicker2.Size = new System.Drawing.Size(56, 20);
-            this.dateTimePicker2.TabIndex = 7;
+            this.depCloseTimePicker.CustomFormat = "HH:mm";
+            this.depCloseTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.depCloseTimePicker.Location = new System.Drawing.Point(124, 112);
+            this.depCloseTimePicker.Name = "depCloseTimePicker";
+            this.depCloseTimePicker.ShowUpDown = true;
+            this.depCloseTimePicker.Size = new System.Drawing.Size(56, 20);
+            this.depCloseTimePicker.TabIndex = 7;
             // 
-            // button1
+            // saveMoreDepartmentsBtn
             // 
-            this.button1.Location = new System.Drawing.Point(35, 170);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(127, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Registrera och Rensa";
-            this.button1.UseVisualStyleBackColor = true;
+            this.saveMoreDepartmentsBtn.Enabled = false;
+            this.saveMoreDepartmentsBtn.Location = new System.Drawing.Point(35, 170);
+            this.saveMoreDepartmentsBtn.Name = "saveMoreDepartmentsBtn";
+            this.saveMoreDepartmentsBtn.Size = new System.Drawing.Size(127, 23);
+            this.saveMoreDepartmentsBtn.TabIndex = 8;
+            this.saveMoreDepartmentsBtn.Text = "Registrera och Rensa";
+            this.saveMoreDepartmentsBtn.UseVisualStyleBackColor = true;
+            this.saveMoreDepartmentsBtn.Click += new System.EventHandler(this.saveMoreDepartmentsBtn_Click);
             // 
-            // button2
+            // saveOneAndCloseBtn
             // 
-            this.button2.Location = new System.Drawing.Point(191, 170);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(132, 23);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Registrera och Stäng";
-            this.button2.UseVisualStyleBackColor = true;
+            this.saveOneAndCloseBtn.Enabled = false;
+            this.saveOneAndCloseBtn.Location = new System.Drawing.Point(191, 170);
+            this.saveOneAndCloseBtn.Name = "saveOneAndCloseBtn";
+            this.saveOneAndCloseBtn.Size = new System.Drawing.Size(132, 23);
+            this.saveOneAndCloseBtn.TabIndex = 9;
+            this.saveOneAndCloseBtn.Text = "Registrera och Stäng";
+            this.saveOneAndCloseBtn.UseVisualStyleBackColor = true;
+            this.saveOneAndCloseBtn.Click += new System.EventHandler(this.saveOneAndCloseBtn_Click);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // DepartmentRegistryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(347, 211);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.openingTimePicker);
+            this.Controls.Add(this.saveOneAndCloseBtn);
+            this.Controls.Add(this.saveMoreDepartmentsBtn);
+            this.Controls.Add(this.depCloseTimePicker);
+            this.Controls.Add(this.depOpenTimePicker);
             this.Controls.Add(this.depNameTxtBox);
             this.Controls.Add(this.depIDTxtBox);
             this.Controls.Add(this.depCloseTimeLbl);
@@ -145,6 +158,7 @@
             this.Controls.Add(this.depIDLbl);
             this.Name = "DepartmentRegistryForm";
             this.Text = "DepartmentRegistryForm";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,9 +172,10 @@
         private System.Windows.Forms.Label depCloseTimeLbl;
         private System.Windows.Forms.TextBox depIDTxtBox;
         private System.Windows.Forms.TextBox depNameTxtBox;
-        private System.Windows.Forms.DateTimePicker openingTimePicker;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DateTimePicker depOpenTimePicker;
+        private System.Windows.Forms.DateTimePicker depCloseTimePicker;
+        private System.Windows.Forms.Button saveMoreDepartmentsBtn;
+        private System.Windows.Forms.Button saveOneAndCloseBtn;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
