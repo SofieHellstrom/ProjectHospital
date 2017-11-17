@@ -48,9 +48,11 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.changePwrdBtn = new System.Windows.Forms.Button();
+            this.bookingListBox = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -222,6 +224,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.bookingListBox);
             this.groupBox4.Location = new System.Drawing.Point(346, 118);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(238, 218);
@@ -248,6 +251,15 @@
             this.changePwrdBtn.UseVisualStyleBackColor = true;
             this.changePwrdBtn.Click += new System.EventHandler(this.changePwrdBtn_Click);
             // 
+            // bookingListBox
+            // 
+            this.bookingListBox.FormattingEnabled = true;
+            this.bookingListBox.Location = new System.Drawing.Point(14, 19);
+            this.bookingListBox.Name = "bookingListBox";
+            this.bookingListBox.Size = new System.Drawing.Size(218, 186);
+            this.bookingListBox.TabIndex = 0;
+            this.bookingListBox.SelectedIndexChanged += new System.EventHandler(this.bookingListBox_SelectedIndexChanged);
+            // 
             // PatientViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -267,6 +279,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -293,5 +306,6 @@
         private System.Windows.Forms.ListBox journalpostListBox;
         private System.Windows.Forms.TextBox journalpostContentTxtBox;
         private System.Windows.Forms.Button changePwrdBtn;
+        private System.Windows.Forms.ListBox bookingListBox;
     }
 }
