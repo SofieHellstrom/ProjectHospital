@@ -7,9 +7,14 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement
 {
+    /// <summary>
+    /// Employee Class. Keeps track of a single Employee and its properties.
+    /// </summary>
     public class Employee
     {
-        //Properties that correspond to information about employee in the staff table
+        /// <summary>
+        /// Properties that correspond to information about employee in the database.
+        /// </summary>
         public string EmployeeID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -27,6 +32,21 @@ namespace HospitalManagement
         //that has a property linking to a specialty, since only doctors have that, or if we
         //should just let all staff have a link to a specialty, but keep it null if there isn't one.
 
+        /// <summary>
+        /// Constructs a new instance of Employee.
+        /// </summary>
+        /// <param name="empId">The Employee ID</param>
+        /// <param name="firstName">First name</param>
+        /// <param name="lastName">Last Name</param>
+        /// <param name="address">Street Address</param>
+        /// <param name="postCode">Swedish style postal code</param>
+        /// <param name="postArea">The area corresponding to the postal code</param>
+        /// <param name="phoneNr">Telephone number</param>
+        /// <param name="eMail">E-mail adress</param>
+        /// <param name="persNr">Swedish Personal id-number</param>
+        /// <param name="position">Job-title.</param>
+        /// <param name="avdelning">Department the employee is hired to work in.</param>
+        /// <param name="specialisering">Specialty. Only relevant if position is "Läkare"</param>
         public Employee(string empId, string firstName, string lastName, string address, int postCode, string postArea, string phoneNr, string eMail, string persNr, string position, string avdelning, string specialisering)
         {
             //Constructor with all the basic information about the employee. Will be called from a class/method
@@ -45,12 +65,21 @@ namespace HospitalManagement
             this.Specialty = specialisering;
         }
 
+        /// <summary>
+        /// Tells the Employee instance to update itself in the database. Calls the UpdateEmployee Method.
+        /// </summary>
+        /// <returns>Boolean value. Is true if update is successful.</returns>
         public Boolean UpdateSelfInDB()
         {
+    
             DatabaseHandler db = new DatabaseHandler();
             return db.UpdateEmployee(this);
         }
 
+        /// <summary>
+        /// Override of ToString method.
+        /// </summary>
+        /// <returns>A string contaning last name, first name and specialty if applicable.</returns>
         public override string ToString()
         {
             if (!Specialty.Equals("N/A"))
@@ -64,6 +93,11 @@ namespace HospitalManagement
            
         }
 
+        /// <summary>
+        /// Equals method for Employees.
+        /// </summary>
+        /// <param name="obj">An object to compare the Employee to.</param>
+        /// <returns>Returns a boolean value. True if the object is an employee instance and all Properties of the two instances are the same.</returns>
         public override bool Equals(object obj)
         {
             //Compare method for Employees.

@@ -1553,7 +1553,7 @@ namespace HospitalManagement
         }
 
 
-        //Methods for loading info about departments
+        //Methods for handling info about departments
 
         public List<Department> LoadAllDepartments()
         {
@@ -1653,9 +1653,136 @@ namespace HospitalManagement
 
         }
 
+        public Boolean AddDepartment(Department newDepartment)
+        {
+            //Adds a new prescription to the database. 
+            Department departmentToAdd = newDepartment;
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds relevant data to temporary variables. Mostly for debugging purposes.
+
+                    string departmentID = departmentToAdd.DepartmentID;
+                    string departmentName = departmentToAdd.Name;
+                    TimeSpan departmentOpens = departmentToAdd.Opens;
+                    TimeSpan departmentCloses = departmentToAdd.Closes;
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    try
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = $"INSERT INTO department (department_id, name, open_from, open_until) VALUES ('{departmentID}', '{departmentName}', '{departmentOpens}', '{departmentCloses}')";
+
+                        int recordsAffected = cmd.ExecuteNonQuery();
+
+                        //Returns a boolean which is True if any rows have been affected. 
+                        return Convert.ToBoolean(recordsAffected);
+                    }
+                    catch (PostgresException e)
+                    {
+                        //Writes Exception error to DebugWindow and returns false, if a
+                        //PostgresException occurs.
+                        System.Diagnostics.Debug.WriteLine(e.ToString());
+                        return false;
+                    }
+
+                }
+            }
+        }
+
+
+
+        public Boolean UpdateDepartment(Department departmentToUpdate)
+        {
+            //Updates a Department in the Database.
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    cmd.Connection = conn;
+
+                    cmd.CommandText = $"UPDATE department SET name = '{departmentToUpdate.Name}', open_from = '{departmentToUpdate.Opens}', open_until = '{departmentToUpdate.Closes}' WHERE department_id = '{departmentToUpdate.DepartmentID}'";
+                    
+                    /*
+                     * This code is only needed if we decide to allow the changing of department IDs.
+                     * and if we do there are more changes needed.
+                    if (!string.IsNullOrEmpty(oldID))
+                    {
+                        cmd.CommandText = $"UPDATE userinfo SET department_id = '{departmentToUpdate.DepartmentID}' name = '{departmentToUpdate.Name}', open_from = '{departmentToUpdate.Opens}', open_until = '{departmentToUpdate.Closes}' WHERE department_id = '{oldID}'";
+                    }
+                    else
+                    {
+                        cmd.CommandText = $"UPDATE userinfo SET name = '{departmentToUpdate.Name}', open_from = '{departmentToUpdate.Opens}', open_until = '{departmentToUpdate.Closes}' WHERE department_id = '{departmentToUpdate.DepartmentID}'";
+                    }
+                    */
+
+                    int recordsAffected = cmd.ExecuteNonQuery();
+                    return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
+
+                }
+
+            }
+
+        }
 
 
         //Methods for loading info about Rooms or related to Rooms
+
+        public List<Room> LoadAllRooms()
+        {
+            //Returns a list of all Rooms.
+            List<Room> resultList = new List<Room>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    
+                    cmd.CommandText = "SELECT * FROM room";
+                    
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        string roomID;
+                        string function;
+                        int capacity;
+                        int maxCapacity;
+                        string depID;
+
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            roomID = reader.GetString(0);
+                            function = reader.GetString(1);
+                            capacity = reader.GetInt16(2);
+                            maxCapacity = reader.GetInt16(3);
+                            depID = reader.GetString(4);
+
+                            //Creates room instance and adds it to the list of rooms using the temporary variables.
+                            Room roomToAdd = new Room(roomID, function, capacity, maxCapacity, depID);
+                            resultList.Add(roomToAdd);
+                        }
+                        return resultList;
+
+                    }
+                }
+
+            }
+
+        }
 
         public int LoadRoomNrOfOccupants(string roomID)
         {
@@ -1743,7 +1870,11 @@ namespace HospitalManagement
                 {
                     //Configures the connection and SQL-query for the command and prepares it.
                     cmd.Connection = conn;
+
+                    
                     cmd.CommandText = "SELECT * FROM room WHERE department = :dep";
+                    
+                    
 
                     cmd.Parameters.Add(new NpgsqlParameter("dep", NpgsqlDbType.Varchar));
 
