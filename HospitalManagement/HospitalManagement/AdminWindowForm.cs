@@ -191,12 +191,14 @@ namespace HospitalManagement
             addBtn.Text = "Ny Anställd";
             updateBtn.Text = "Uppdatera Anställd";
             editLoginInfoBtn.Text = "Användaruppgifter";
+            editLoginInfoBtn.Visible = true;
         }
 
         private void departmentTabPage_Enter(object sender, EventArgs e)
         {
             addBtn.Text = "Ny Avdelning";
             updateBtn.Text = "Uppdatera Avdelning";
+            editLoginInfoBtn.Visible = false;
         }
 
         private void employeesDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -243,11 +245,14 @@ namespace HospitalManagement
             {
                 case 0:
                     Employee selectedEmployee = employeesDataGridView.CurrentRow.DataBoundItem as Employee;
-                    Form addForm = new EmployeeRegistryForm(data, selectedEmployee);
-                    addForm.ShowDialog();
+                    Form empEditForm = new EmployeeRegistryForm(data, selectedEmployee);
+                    empEditForm.ShowDialog();
                     break;
 
                 case 1:
+                    Department selectedDepartment = departmentsDataGridView.CurrentRow.DataBoundItem as Department;
+                    Form depEditForm = new DepartmentRegistryForm(data, selectedDepartment);
+                    depEditForm.ShowDialog();
                     break;
 
                 case 2:

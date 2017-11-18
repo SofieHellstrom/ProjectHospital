@@ -1696,6 +1696,44 @@ namespace HospitalManagement
 
 
 
+        public Boolean UpdateDepartment(Department departmentToUpdate)
+        {
+            //Updates a Department in the Database.
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    cmd.Connection = conn;
+
+                    cmd.CommandText = $"UPDATE department SET name = '{departmentToUpdate.Name}', open_from = '{departmentToUpdate.Opens}', open_until = '{departmentToUpdate.Closes}' WHERE department_id = '{departmentToUpdate.DepartmentID}'";
+                    
+                    /*
+                     * This code is only needed if we decide to allow the changing of department IDs.
+                     * and if we do there are more changes needed.
+                    if (!string.IsNullOrEmpty(oldID))
+                    {
+                        cmd.CommandText = $"UPDATE userinfo SET department_id = '{departmentToUpdate.DepartmentID}' name = '{departmentToUpdate.Name}', open_from = '{departmentToUpdate.Opens}', open_until = '{departmentToUpdate.Closes}' WHERE department_id = '{oldID}'";
+                    }
+                    else
+                    {
+                        cmd.CommandText = $"UPDATE userinfo SET name = '{departmentToUpdate.Name}', open_from = '{departmentToUpdate.Opens}', open_until = '{departmentToUpdate.Closes}' WHERE department_id = '{departmentToUpdate.DepartmentID}'";
+                    }
+                    */
+
+                    int recordsAffected = cmd.ExecuteNonQuery();
+                    return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
+
+                }
+
+            }
+
+        }
+
+
         //Methods for loading info about Rooms or related to Rooms
 
         public int LoadRoomNrOfOccupants(string roomID)

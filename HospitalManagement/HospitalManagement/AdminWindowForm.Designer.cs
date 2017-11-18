@@ -92,8 +92,8 @@
             // mainTableLayoutPanel
             // 
             this.mainTableLayoutPanel.ColumnCount = 2;
-            this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.4368F));
-            this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 87.56319F));
+            this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.17601F));
+            this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 86.82399F));
             this.mainTableLayoutPanel.Controls.Add(this.cornerPanel, 0, 0);
             this.mainTableLayoutPanel.Controls.Add(this.leftPanel, 0, 1);
             this.mainTableLayoutPanel.Controls.Add(this.topPanel, 1, 0);
@@ -112,7 +112,7 @@
             this.cornerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cornerPanel.Location = new System.Drawing.Point(3, 3);
             this.cornerPanel.Name = "cornerPanel";
-            this.cornerPanel.Size = new System.Drawing.Size(120, 35);
+            this.cornerPanel.Size = new System.Drawing.Size(128, 35);
             this.cornerPanel.TabIndex = 0;
             // 
             // leftPanel
@@ -123,14 +123,14 @@
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.leftPanel.Location = new System.Drawing.Point(3, 44);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(120, 579);
+            this.leftPanel.Size = new System.Drawing.Size(128, 579);
             this.leftPanel.TabIndex = 1;
             // 
             // editLoginInfoBtn
             // 
             this.editLoginInfoBtn.Location = new System.Drawing.Point(3, 60);
             this.editLoginInfoBtn.Name = "editLoginInfoBtn";
-            this.editLoginInfoBtn.Size = new System.Drawing.Size(108, 23);
+            this.editLoginInfoBtn.Size = new System.Drawing.Size(122, 23);
             this.editLoginInfoBtn.TabIndex = 2;
             this.editLoginInfoBtn.Text = "Användaruppgifter";
             this.editLoginInfoBtn.UseVisualStyleBackColor = true;
@@ -140,7 +140,7 @@
             // 
             this.updateBtn.Location = new System.Drawing.Point(3, 31);
             this.updateBtn.Name = "updateBtn";
-            this.updateBtn.Size = new System.Drawing.Size(108, 23);
+            this.updateBtn.Size = new System.Drawing.Size(122, 23);
             this.updateBtn.TabIndex = 1;
             this.updateBtn.Text = "Redigera Anställd";
             this.updateBtn.UseVisualStyleBackColor = true;
@@ -150,7 +150,7 @@
             // 
             this.addBtn.Location = new System.Drawing.Point(3, 3);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(108, 23);
+            this.addBtn.Size = new System.Drawing.Size(122, 23);
             this.addBtn.TabIndex = 0;
             this.addBtn.Text = "Ny Anställd";
             this.addBtn.UseVisualStyleBackColor = true;
@@ -160,16 +160,16 @@
             // 
             this.topPanel.Controls.Add(this.currentUserLbl);
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.topPanel.Location = new System.Drawing.Point(129, 3);
+            this.topPanel.Location = new System.Drawing.Point(137, 3);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(885, 35);
+            this.topPanel.Size = new System.Drawing.Size(877, 35);
             this.topPanel.TabIndex = 2;
             // 
             // currentUserLbl
             // 
             this.currentUserLbl.AutoSize = true;
             this.currentUserLbl.Dock = System.Windows.Forms.DockStyle.Right;
-            this.currentUserLbl.Location = new System.Drawing.Point(856, 0);
+            this.currentUserLbl.Location = new System.Drawing.Point(848, 0);
             this.currentUserLbl.Name = "currentUserLbl";
             this.currentUserLbl.Size = new System.Drawing.Size(29, 13);
             this.currentUserLbl.TabIndex = 0;
@@ -179,9 +179,9 @@
             // 
             this.bigPanel.Controls.Add(this.tabControl);
             this.bigPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bigPanel.Location = new System.Drawing.Point(129, 44);
+            this.bigPanel.Location = new System.Drawing.Point(137, 44);
             this.bigPanel.Name = "bigPanel";
-            this.bigPanel.Size = new System.Drawing.Size(885, 579);
+            this.bigPanel.Size = new System.Drawing.Size(877, 579);
             this.bigPanel.TabIndex = 3;
             // 
             // tabControl
@@ -193,7 +193,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(885, 579);
+            this.tabControl.Size = new System.Drawing.Size(877, 579);
             this.tabControl.TabIndex = 0;
             // 
             // employeeTabPage
@@ -203,7 +203,7 @@
             this.employeeTabPage.Location = new System.Drawing.Point(4, 22);
             this.employeeTabPage.Name = "employeeTabPage";
             this.employeeTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.employeeTabPage.Size = new System.Drawing.Size(877, 553);
+            this.employeeTabPage.Size = new System.Drawing.Size(869, 553);
             this.employeeTabPage.TabIndex = 0;
             this.employeeTabPage.Text = "Anställda";
             this.employeeTabPage.UseVisualStyleBackColor = true;
@@ -450,7 +450,7 @@
             this.departmentTabPage.Location = new System.Drawing.Point(4, 22);
             this.departmentTabPage.Name = "departmentTabPage";
             this.departmentTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.departmentTabPage.Size = new System.Drawing.Size(877, 553);
+            this.departmentTabPage.Size = new System.Drawing.Size(869, 553);
             this.departmentTabPage.TabIndex = 1;
             this.departmentTabPage.Text = "Avdelningar";
             this.departmentTabPage.UseVisualStyleBackColor = true;
@@ -555,7 +555,7 @@
             this.departmentsDataGridView.MultiSelect = false;
             this.departmentsDataGridView.Name = "departmentsDataGridView";
             this.departmentsDataGridView.ReadOnly = true;
-            this.departmentsDataGridView.Size = new System.Drawing.Size(496, 405);
+            this.departmentsDataGridView.Size = new System.Drawing.Size(443, 405);
             this.departmentsDataGridView.TabIndex = 3;
             this.departmentsDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.departmentsDataGridView_CellClick);
             this.departmentsDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.departmentsDataGridView_DataBindingComplete);
@@ -565,7 +565,7 @@
             this.roomTabPage.Location = new System.Drawing.Point(4, 22);
             this.roomTabPage.Name = "roomTabPage";
             this.roomTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.roomTabPage.Size = new System.Drawing.Size(877, 553);
+            this.roomTabPage.Size = new System.Drawing.Size(869, 553);
             this.roomTabPage.TabIndex = 2;
             this.roomTabPage.Text = "Rum";
             this.roomTabPage.UseVisualStyleBackColor = true;

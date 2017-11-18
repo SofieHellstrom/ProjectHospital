@@ -25,10 +25,32 @@ namespace HospitalManagement
   
             InitializeComponent();
 
-            depOpenTimePicker.Value = DateTime.Today + new TimeSpan(8, 0, 0);
-            depCloseTimePicker.Value = DateTime.Today + new TimeSpan(16, 0, 0);
+            //Sets TimePickers to default values.
+            depOpenTimePicker.Value = DateTimePicker.MinimumDateTime + new TimeSpan(8, 0, 0);
+            depCloseTimePicker.Value = DateTimePicker.MinimumDateTime + new TimeSpan(16, 0, 0);
         }
 
+        public DepartmentRegistryForm(AdminWindowData d, Department department)
+        {
+            data = d;
+            editMode = true;
+            departmentToEdit = department;
+
+            InitializeComponent();
+
+            //Customizes GUI to editmode
+            depIDTxtBox.Enabled = false;
+            saveMoreDepartmentsBtn.Visible = false;
+            saveOneAndCloseBtn.Text = "Uppdatera och Stäng";
+            
+            //Loads the values of the passed Department to the controls.
+            depIDTxtBox.Text = departmentToEdit.DepartmentID;
+            depNameTxtBox.Text = departmentToEdit.Name;
+            depOpenTimePicker.Value = DateTimePicker.MinimumDateTime + departmentToEdit.Opens;
+            depCloseTimePicker.Value = DateTimePicker.MinimumDateTime + departmentToEdit.Closes;
+        }
+
+        //Creates a department instance from the content of the controls.
         public Department MakeDepartmentFromFields()
         {
             Department depToReturn;
@@ -53,7 +75,8 @@ namespace HospitalManagement
                     dataValid &= !string.IsNullOrWhiteSpace(textbox.Text);
                 }
             }
-            
+
+            //Sets the buttons as enabled or disabled depending on if the fields are empty or not.
             if (!editMode)
             {
                 saveMoreDepartmentsBtn.Enabled = dataValid;
@@ -134,10 +157,8 @@ namespace HospitalManagement
 
             if (editMode)
             {
-                /*success = departmentToSave.UpdateSelfInDB();
-                if (success) successMessage = "Anställd Uppdaterad.";*/
-                success = false;
-                successMessage = "Used non-implemented part of method. Implement method you lazy sod!";
+                success = departmentToSave.UpdateSelfInDB();
+                successMessage = "Avdelning Uppdaterad.";
             }
             else
             {
