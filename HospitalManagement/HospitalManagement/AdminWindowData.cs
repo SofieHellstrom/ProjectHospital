@@ -14,6 +14,7 @@ namespace HospitalManagement
         public Employee MyUser { get; set; }
         public List<Employee> EmployeeList { get; set; }
         public List<Department> DepartmentList { get; set; }
+        public List<Room> RoomList { get; set; }
         public Dictionary<string, string> SpecialtyDictionary { get; set; }
 
         public AdminWindowData(Employee user)
@@ -26,6 +27,7 @@ namespace HospitalManagement
         {
             EmployeeList = db.LoadAllEmployees();
             DepartmentList = db.LoadAllDepartments();
+            RoomList = db.LoadAllRooms();
             SpecialtyDictionary = db.LoadSpecialtyDictionary();
         }
     }

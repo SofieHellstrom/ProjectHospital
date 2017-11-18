@@ -29,7 +29,7 @@ namespace HospitalManagement
             //Initializing the content of the Department Tab
             this.departmentsDataGridView.DataSource = GetSortedDepartmentDataGridList(data.DepartmentList, "DepartmentID");
 
-            
+            this.roomsDataGridView.DataSource = data.RoomList;
         }
 
         private List<Employee> GetSortedEmployeeDataGridList(List<Employee> listToProcess, string propertyToSortBy)
@@ -201,6 +201,13 @@ namespace HospitalManagement
             editLoginInfoBtn.Visible = false;
         }
 
+        private void roomTabPage_Enter(object sender, EventArgs e)
+        {
+            addBtn.Text = "Nytt Rum";
+            updateBtn.Text = "Uppdatera Rum";
+            editLoginInfoBtn.Visible = false;
+        }
+
         private void employeesDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             if (data.EmployeeList.Any())
@@ -281,5 +288,7 @@ namespace HospitalManagement
         {
             UpdateSelectedDepartmentInfo();
         }
+
+        
     }
 }

@@ -76,6 +76,18 @@
             this.depOpensTimePicker = new System.Windows.Forms.DateTimePicker();
             this.departmentsDataGridView = new System.Windows.Forms.DataGridView();
             this.roomTabPage = new System.Windows.Forms.TabPage();
+            this.roomGroupBox = new System.Windows.Forms.GroupBox();
+            this.roomMaxCapacityTxtBox = new System.Windows.Forms.TextBox();
+            this.roomCapacityTxtBox = new System.Windows.Forms.TextBox();
+            this.roomFunctionTxtBox = new System.Windows.Forms.TextBox();
+            this.roomIdTxtBox = new System.Windows.Forms.TextBox();
+            this.roomCapLbl = new System.Windows.Forms.Label();
+            this.roomCapacityLbl = new System.Windows.Forms.Label();
+            this.roomFunctionLbl = new System.Windows.Forms.Label();
+            this.roomIdLbl = new System.Windows.Forms.Label();
+            this.roomsDataGridView = new System.Windows.Forms.DataGridView();
+            this.roomDepFilterLbl = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.mainTableLayoutPanel.SuspendLayout();
             this.leftPanel.SuspendLayout();
             this.topPanel.SuspendLayout();
@@ -87,6 +99,9 @@
             this.departmentTabPage.SuspendLayout();
             this.depInfoGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.departmentsDataGridView)).BeginInit();
+            this.roomTabPage.SuspendLayout();
+            this.roomGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.roomsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // mainTableLayoutPanel
@@ -562,6 +577,10 @@
             // 
             // roomTabPage
             // 
+            this.roomTabPage.Controls.Add(this.roomGroupBox);
+            this.roomTabPage.Controls.Add(this.roomsDataGridView);
+            this.roomTabPage.Controls.Add(this.roomDepFilterLbl);
+            this.roomTabPage.Controls.Add(this.comboBox1);
             this.roomTabPage.Location = new System.Drawing.Point(4, 22);
             this.roomTabPage.Name = "roomTabPage";
             this.roomTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -569,6 +588,116 @@
             this.roomTabPage.TabIndex = 2;
             this.roomTabPage.Text = "Rum";
             this.roomTabPage.UseVisualStyleBackColor = true;
+            this.roomTabPage.Enter += new System.EventHandler(this.roomTabPage_Enter);
+            // 
+            // roomGroupBox
+            // 
+            this.roomGroupBox.Controls.Add(this.roomMaxCapacityTxtBox);
+            this.roomGroupBox.Controls.Add(this.roomCapacityTxtBox);
+            this.roomGroupBox.Controls.Add(this.roomFunctionTxtBox);
+            this.roomGroupBox.Controls.Add(this.roomIdTxtBox);
+            this.roomGroupBox.Controls.Add(this.roomCapLbl);
+            this.roomGroupBox.Controls.Add(this.roomCapacityLbl);
+            this.roomGroupBox.Controls.Add(this.roomFunctionLbl);
+            this.roomGroupBox.Controls.Add(this.roomIdLbl);
+            this.roomGroupBox.Location = new System.Drawing.Point(7, 7);
+            this.roomGroupBox.Name = "roomGroupBox";
+            this.roomGroupBox.Size = new System.Drawing.Size(301, 121);
+            this.roomGroupBox.TabIndex = 3;
+            this.roomGroupBox.TabStop = false;
+            this.roomGroupBox.Text = "Valt Rum";
+            // 
+            // roomMaxCapacityTxtBox
+            // 
+            this.roomMaxCapacityTxtBox.Location = new System.Drawing.Point(100, 94);
+            this.roomMaxCapacityTxtBox.Name = "roomMaxCapacityTxtBox";
+            this.roomMaxCapacityTxtBox.Size = new System.Drawing.Size(100, 20);
+            this.roomMaxCapacityTxtBox.TabIndex = 7;
+            // 
+            // roomCapacityTxtBox
+            // 
+            this.roomCapacityTxtBox.Location = new System.Drawing.Point(100, 68);
+            this.roomCapacityTxtBox.Name = "roomCapacityTxtBox";
+            this.roomCapacityTxtBox.Size = new System.Drawing.Size(100, 20);
+            this.roomCapacityTxtBox.TabIndex = 6;
+            // 
+            // roomFunctionTxtBox
+            // 
+            this.roomFunctionTxtBox.Location = new System.Drawing.Point(100, 42);
+            this.roomFunctionTxtBox.Name = "roomFunctionTxtBox";
+            this.roomFunctionTxtBox.Size = new System.Drawing.Size(100, 20);
+            this.roomFunctionTxtBox.TabIndex = 5;
+            // 
+            // roomIdTxtBox
+            // 
+            this.roomIdTxtBox.Location = new System.Drawing.Point(99, 16);
+            this.roomIdTxtBox.Name = "roomIdTxtBox";
+            this.roomIdTxtBox.Size = new System.Drawing.Size(100, 20);
+            this.roomIdTxtBox.TabIndex = 4;
+            // 
+            // roomCapLbl
+            // 
+            this.roomCapLbl.AutoSize = true;
+            this.roomCapLbl.Location = new System.Drawing.Point(16, 97);
+            this.roomCapLbl.Name = "roomCapLbl";
+            this.roomCapLbl.Size = new System.Drawing.Size(78, 13);
+            this.roomCapLbl.TabIndex = 3;
+            this.roomCapLbl.Text = "Max Kapacitet:";
+            // 
+            // roomCapacityLbl
+            // 
+            this.roomCapacityLbl.AutoSize = true;
+            this.roomCapacityLbl.Location = new System.Drawing.Point(16, 71);
+            this.roomCapacityLbl.Name = "roomCapacityLbl";
+            this.roomCapacityLbl.Size = new System.Drawing.Size(69, 13);
+            this.roomCapacityLbl.TabIndex = 2;
+            this.roomCapacityLbl.Text = "Antal Platser:";
+            // 
+            // roomFunctionLbl
+            // 
+            this.roomFunctionLbl.AutoSize = true;
+            this.roomFunctionLbl.Location = new System.Drawing.Point(16, 45);
+            this.roomFunctionLbl.Name = "roomFunctionLbl";
+            this.roomFunctionLbl.Size = new System.Drawing.Size(51, 13);
+            this.roomFunctionLbl.TabIndex = 1;
+            this.roomFunctionLbl.Text = "Funktion:";
+            // 
+            // roomIdLbl
+            // 
+            this.roomIdLbl.AutoSize = true;
+            this.roomIdLbl.Location = new System.Drawing.Point(16, 19);
+            this.roomIdLbl.Name = "roomIdLbl";
+            this.roomIdLbl.Size = new System.Drawing.Size(74, 13);
+            this.roomIdLbl.TabIndex = 0;
+            this.roomIdLbl.Text = "Rumsnummer:";
+            // 
+            // roomsDataGridView
+            // 
+            this.roomsDataGridView.AllowUserToAddRows = false;
+            this.roomsDataGridView.AllowUserToDeleteRows = false;
+            this.roomsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.roomsDataGridView.Location = new System.Drawing.Point(6, 251);
+            this.roomsDataGridView.Name = "roomsDataGridView";
+            this.roomsDataGridView.ReadOnly = true;
+            this.roomsDataGridView.Size = new System.Drawing.Size(592, 296);
+            this.roomsDataGridView.TabIndex = 2;
+            // 
+            // roomDepFilterLbl
+            // 
+            this.roomDepFilterLbl.AutoSize = true;
+            this.roomDepFilterLbl.Location = new System.Drawing.Point(23, 152);
+            this.roomDepFilterLbl.Name = "roomDepFilterLbl";
+            this.roomDepFilterLbl.Size = new System.Drawing.Size(57, 13);
+            this.roomDepFilterLbl.TabIndex = 1;
+            this.roomDepFilterLbl.Text = "Avdelning:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(86, 149);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 0;
             // 
             // AdminWindowForm
             // 
@@ -594,6 +723,11 @@
             this.depInfoGroupBox.ResumeLayout(false);
             this.depInfoGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.departmentsDataGridView)).EndInit();
+            this.roomTabPage.ResumeLayout(false);
+            this.roomTabPage.PerformLayout();
+            this.roomGroupBox.ResumeLayout(false);
+            this.roomGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.roomsDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -648,5 +782,17 @@
         private System.Windows.Forms.TextBox depIDTxtBox;
         private System.Windows.Forms.DateTimePicker depClosesTimePicker;
         private System.Windows.Forms.GroupBox depInfoGroupBox;
+        private System.Windows.Forms.GroupBox roomGroupBox;
+        private System.Windows.Forms.Label roomCapLbl;
+        private System.Windows.Forms.Label roomCapacityLbl;
+        private System.Windows.Forms.Label roomFunctionLbl;
+        private System.Windows.Forms.Label roomIdLbl;
+        private System.Windows.Forms.DataGridView roomsDataGridView;
+        private System.Windows.Forms.Label roomDepFilterLbl;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox roomMaxCapacityTxtBox;
+        private System.Windows.Forms.TextBox roomCapacityTxtBox;
+        private System.Windows.Forms.TextBox roomFunctionTxtBox;
+        private System.Windows.Forms.TextBox roomIdTxtBox;
     }
 }
