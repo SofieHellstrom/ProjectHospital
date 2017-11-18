@@ -34,7 +34,7 @@ namespace HospitalManagement
 
         public override string ToString()
         {
-            return $"Besökstid bokat {BookingStart.ToString("g")} hos {Staff_ID} i rum {RoomNr}";
+            return $"Besökstid bokat {BookingStart.ToString("g")} hos {Staff_ID} i rum {RoomNr}. Anledning: {BookingPurpose}";
         }
 
 
