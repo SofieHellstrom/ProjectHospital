@@ -57,6 +57,7 @@ namespace HospitalManagement
 
         private void bokaBtn_Click(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             bool error = false;
 
             if (string.IsNullOrEmpty(purposeBox.Text))
@@ -65,6 +66,7 @@ namespace HospitalManagement
                 error = true;
 
             }
+           
 
             if (string.IsNullOrWhiteSpace(startTime2.Text))
             {
@@ -85,7 +87,8 @@ namespace HospitalManagement
 
             if (string.IsNullOrWhiteSpace(doctorComboBox.Text))
             {
-                //TODO doctor error setting
+                errorProvider1.SetError(doctorComboBox, "Vänligen ange önskad läkare.");
+                error = true;
             }
 
             if (!error)
@@ -99,41 +102,45 @@ namespace HospitalManagement
                 string doctor = (doctorComboBox.SelectedItem as Employee).EmployeeID;
                 string purpose = purposeBox.Text;
                 string room = (roomComboBox.SelectedItem as Room).RoomID;
-                //TimeSpan bookedTime = bookingtimeEnd - bookingtimeStart;
-                int bookedTime = DateTime.Compare(bookingtimeStart, bookingtimeEnd);
+                
 
-                //if doctor - time, time - room already exist etc && bookingPersonNrBox.Text == personnummer
-                //check for: doctor and starttime-endtime, room and time(duration), patient and starttime-endtime
-                if (bookedTime == 0) 
-                {
-                    if (doctorComboBox.SelectedItem.ToString().Equals(doctor))
-                    {
-                        errorProvider1.SetError(doctorComboBox, "Läkaren har redan ett besök inbokat. Vänligen ange annan tid.");
-                        error = true;
-                    }
-                    if (bookingPersonNrBox.Text.Equals(personnummer))
-                    {
-                        errorProvider1.SetError(bookingPatientName, "Patienten har redan ett besök inbokat. Vänligen ange annan tid.");
-                        error = true;
-                    }
-                    if (roomComboBox.SelectedItem.ToString().Equals(room))
-                    {
-                        errorProvider1.SetError(roomComboBox, "Rummet är redan upptagen vid angiven tid. Vänligen välj annat rum.");
-                        error = true;
-                    }
-                }
-
-
-                Booking newBooking = new Booking(id, purpose, bookingtimeStart, bookingtimeEnd, doctor, personnummer, room);
                 DatabaseHandler db = new DatabaseHandler();
-                Boolean success = db.AddBooking(newBooking);
 
-                if (success)
+                List<Booking> overlapCheck = db.TimeOverlapCheckBooking(bookingtimeStart,  bookingtimeEnd);
+                if (overlapCheck.Any()) 
                 {
-                    MessageBox.Show("Bokning har sparats.");
-                    this.Close();
+                    foreach (Booking booking in overlapCheck)
+                    {
+                        if (doctor.Equals(booking.Staff_ID))
+                        {
+                            errorProvider1.SetError(doctorComboBox, "Läkaren har redan ett besök inbokat. Vänligen ange annan tid.");
+                            error = true;
+                        }
+                        if (personnummer.Equals(booking.Patient_ID))
+                        {
+                            errorProvider1.SetError(bookingPatientName, "Patienten har redan ett besök inbokat. Vänligen ange annan tid.");
+                            error = true;
+                        }
+                        if (room.Equals(booking.RoomNr))
+                        {
+                            errorProvider1.SetError(roomComboBox, "Rummet är redan upptagen vid angiven tid. Vänligen välj annat rum.");
+                            error = true;
+                        }
+                    }
                 }
 
+                if (!error)
+                {
+                    Booking newBooking = new Booking(id, purpose, bookingtimeStart, bookingtimeEnd, doctor, personnummer, room);
+                
+                    Boolean success = db.AddBooking(newBooking);
+
+                    if (success)
+                    {
+                        MessageBox.Show("Bokning har sparats.");
+                        this.Close();
+                    }
+                }
 
             }
         }

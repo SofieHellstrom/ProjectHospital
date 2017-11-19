@@ -27,9 +27,9 @@ namespace HospitalManagement
             this.Patient_ID = patient;
             this.RoomNr = room;
 
-            DatabaseHandler db = new DatabaseHandler();
-            Employee tempEmp = db.LoadEmployee(staff);
-            this.Staff_ID = $"{tempEmp.FirstName} {tempEmp.LastName}";
+          //  DatabaseHandler db = new DatabaseHandler();
+        //    Employee tempEmp = db.LoadEmployee(staff);
+            //this.Staff_ID = $"{tempEmp.FirstName} {tempEmp.LastName}";
         }
 
         public override string ToString()

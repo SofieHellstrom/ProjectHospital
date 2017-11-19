@@ -365,7 +365,7 @@ namespace HospitalManagement
                     // constraint.
                     // That value is then converted to a boolean and returned.
                     int result = 0;
-        NpgsqlDataReader reader = cmd.ExecuteReader();
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
                         result = reader.GetInt32(0);
@@ -484,7 +484,7 @@ namespace HospitalManagement
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        
+
                         while (reader.Read())
                         {
                             //Defines temporary variables and their default values.
@@ -555,7 +555,7 @@ namespace HospitalManagement
                         {
                             cmd.Connection = conn;
                             string depID = LoadDepartmentIDByName(employeeToAdd.Department);
-                            
+
 
                             if (!employeeToAdd.Specialty.Equals("N/A"))
                             {
@@ -604,7 +604,7 @@ namespace HospitalManagement
 
                     // Adds connection and SQL-string to the command and executes it.
                     cmd.Connection = conn;
-                    
+
                     string dep = LoadDepartmentIDByName(employeeToUpdate.Department);
 
                     if (employeeToUpdate.Position.Equals("Läkare"))
@@ -910,13 +910,13 @@ namespace HospitalManagement
                     cmd.CommandText = "SELECT * FROM specialty";
 
                     using (var reader = cmd.ExecuteReader())
-                    {   
+                    {
                         while (reader.Read())
                         {
                             //Reads values from the database into temporary variables
                             string id = reader.GetString(0);
                             string name = reader.GetString(1);
-                            
+
                             //Ads the values of the temporary variables to the Dictionary.
                             resultDictionary.Add(name, id);
                         }
@@ -1107,7 +1107,7 @@ namespace HospitalManagement
 
         }
 
-        public UserInfo LoadUserByID (string userID, bool isPatient)
+        public UserInfo LoadUserByID(string userID, bool isPatient)
         {
             //This method gets the info from the user table and creates a userinfo object 
             //based on UserID. 
@@ -1229,7 +1229,7 @@ namespace HospitalManagement
                         return false;
                     }
 
-                }   
+                }
             }
         }
 
@@ -1292,7 +1292,7 @@ namespace HospitalManagement
                         else
                         {
                             cmd.CommandText = $"UPDATE userinfo SET id = '{userToUpdate.Username}' WHERE patient = '{userToUpdate.Identifier}'";
-                        }  
+                        }
                     }
                     else
                     {
@@ -1643,7 +1643,7 @@ namespace HospitalManagement
 
                             //Creates an instance of Department and returns it.
                             result = new Department(depID, depName, openTime, closeTime);
-                            
+
                         }
                         return result;
                     }
@@ -1710,7 +1710,7 @@ namespace HospitalManagement
                     cmd.Connection = conn;
 
                     cmd.CommandText = $"UPDATE department SET name = '{departmentToUpdate.Name}', open_from = '{departmentToUpdate.Opens}', open_until = '{departmentToUpdate.Closes}' WHERE department_id = '{departmentToUpdate.DepartmentID}'";
-                    
+
                     /*
                      * This code is only needed if we decide to allow the changing of department IDs.
                      * and if we do there are more changes needed.
@@ -1750,9 +1750,9 @@ namespace HospitalManagement
                 {
                     //Configures the connection and SQL-query for the command and prepares it.
                     cmd.Connection = conn;
-                    
+
                     cmd.CommandText = "SELECT * FROM room";
-                    
+
                     using (var reader = cmd.ExecuteReader())
                     {
                         //Defines temporary variables.
@@ -1820,7 +1820,7 @@ namespace HospitalManagement
         }
 
 
-        public string LoadDepartmentOfRoom (string roomID)
+        public string LoadDepartmentOfRoom(string roomID)
         {
             //Returns the departmentID that a specific room belongs to. 
             string returnDepartmentID = "";
@@ -1871,10 +1871,10 @@ namespace HospitalManagement
                     //Configures the connection and SQL-query for the command and prepares it.
                     cmd.Connection = conn;
 
-                    
+
                     cmd.CommandText = "SELECT * FROM room WHERE department = :dep";
-                    
-                    
+
+
 
                     cmd.Parameters.Add(new NpgsqlParameter("dep", NpgsqlDbType.Varchar));
 
@@ -1969,7 +1969,7 @@ namespace HospitalManagement
                 {
                     //Configures the connection and SQL-query for the command and prepares it.
                     cmd.Connection = conn;
-                   if (specialty == null)
+                    if (specialty == null)
                     {
                         specialty = "";
                         cmd.CommandText = "SELECT * FROM staff WHERE specialty IS NOT NULL";
@@ -2030,7 +2030,7 @@ namespace HospitalManagement
             //Returns a list of all the Rooms in a spcific Department 
             //in the database related to a specific patient.
             List<Room> resultList = new List<Room>();
-            
+
             using (var conn = new NpgsqlConnection(connectionString))
             {
                 //Opens the connection to the database
@@ -2041,7 +2041,7 @@ namespace HospitalManagement
                     //Configures the connection and SQL-query for the command and prepares it.
                     cmd.Connection = conn;
                     cmd.CommandText = "SELECT * FROM room WHERE function = :roomfunction";
-                    
+
                     cmd.Parameters.Add(new NpgsqlParameter("roomfunction", NpgsqlDbType.Varchar));
 
                     cmd.Prepare();
@@ -2078,6 +2078,63 @@ namespace HospitalManagement
             }
         }
 
+        public List<Booking> TimeOverlapCheckBooking(DateTime startTime, DateTime endTime)
+        {//Returns a list of all the Rooms in a spcific Department 
+            //in the database related to a specific patient.
+            List<Booking> resultList = new List<Booking>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM booking where :startTime < end_time AND start_time < :endTime";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("startTime", NpgsqlDbType.Timestamp));
+                    cmd.Parameters.Add(new NpgsqlParameter("endTime", NpgsqlDbType.Timestamp));
+
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = startTime;
+                    cmd.Parameters[1].Value = endTime;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        int id;
+                        string purpose;
+                        DateTime start;
+                        DateTime end;
+                        string staff;
+                        string patient;
+                        string room;
+
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            id = reader.GetInt32(0);
+                            purpose = reader.GetString(1);
+                            start = reader.GetDateTime(2);
+                            end = reader.GetDateTime(3);
+                            staff = reader.GetString(4);
+                            patient = reader.GetString(5);
+                            room = reader.GetString(6);
+
+                            //Creates room instance and adds it to the list of rooms using the temporary variables.
+                            Booking bookingToCheck = new Booking(id, purpose, start, end, staff, patient, room);
+                            resultList.Add(bookingToCheck);
+                        }
+                        return resultList;
+
+                    }
+                }
+
+            }
+        }
 
     }
 }
