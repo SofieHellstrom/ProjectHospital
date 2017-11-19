@@ -1955,6 +1955,67 @@ namespace HospitalManagement
             }
         }
 
+        public bool UpdateBooking(Booking bookingToUpdate)
+        {
+            //Updates the booking in the database. 
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    cmd.Connection = conn;
+                   /* if (bookingToUpdate.RoomNr.Equals("No Change"))
+                    {
+                        cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}' WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
+                    }
+                    else if (patientToUpdate.Room.Equals(""))
+                    {
+                        cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}', room = null WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
+                    }
+                    else
+                    {
+                        cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}', room = '{patientToUpdate.Room}' WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
+                    }*/
+
+                    int recordsAffected = cmd.ExecuteNonQuery();
+                    return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
+
+                }
+
+            }
+        }
+
+        public bool DeleteBooking(Booking bookingToDelete)
+        {
+            // Deletes a booking from the database, by booking id
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Adds connection and SQL-string to the command and prepares it.
+                    cmd.Connection = conn;
+                    cmd.CommandText = "DELETE FROM booking WHERE booking_id = :id";
+
+                    cmd.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Integer));
+
+                    cmd.Prepare();
+                   
+                    cmd.Parameters[0].Value = bookingToDelete.BookingID;
+
+                    //Executes the command. 
+                    int recordsAffected = cmd.ExecuteNonQuery();
+                    return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
+
+                }
+
+            }
+        }
+
         public List<Employee> LoadDoctors(string specialty)
         {
             //Returns a list of instance of the employee class based on the values 

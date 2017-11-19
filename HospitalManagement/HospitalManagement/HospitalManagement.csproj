@@ -58,6 +58,12 @@
       <DependentUpon>AdminWindowForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Booking.cs" />
+    <Compile Include="BookingChangeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BookingChangeForm.Designer.cs">
+      <DependentUpon>BookingChangeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Bookingdata.cs" />
     <Compile Include="BookingForm.cs">
       <SubType>Form</SubType>
@@ -171,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminWindowForm.resx">
       <DependentUpon>AdminWindowForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookingChangeForm.resx">
+      <DependentUpon>BookingChangeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BookingForm.resx">
       <DependentUpon>BookingForm.cs</DependentUpon>

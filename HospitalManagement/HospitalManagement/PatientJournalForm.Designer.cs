@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.bookingChangebtn = new System.Windows.Forms.Button();
             this.toggleFilterBtn = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.bokningListbox = new System.Windows.Forms.ListBox();
@@ -72,6 +73,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.deleteBokningBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.journalNotesGroupBox.SuspendLayout();
@@ -83,6 +85,8 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.deleteBokningBtn);
+            this.mainPanel.Controls.Add(this.bookingChangebtn);
             this.mainPanel.Controls.Add(this.toggleFilterBtn);
             this.mainPanel.Controls.Add(this.groupBox6);
             this.mainPanel.Controls.Add(this.newNotesBtn);
@@ -97,6 +101,16 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(973, 732);
             this.mainPanel.TabIndex = 0;
+            // 
+            // bookingChangebtn
+            // 
+            this.bookingChangebtn.Location = new System.Drawing.Point(223, 690);
+            this.bookingChangebtn.Name = "bookingChangebtn";
+            this.bookingChangebtn.Size = new System.Drawing.Size(151, 23);
+            this.bookingChangebtn.TabIndex = 10;
+            this.bookingChangebtn.Text = "Ändra Bokning";
+            this.bookingChangebtn.UseVisualStyleBackColor = true;
+            this.bookingChangebtn.Click += new System.EventHandler(this.bookingChangebtn_Click);
             // 
             // toggleFilterBtn
             // 
@@ -125,6 +139,7 @@
             this.bokningListbox.Name = "bokningListbox";
             this.bokningListbox.Size = new System.Drawing.Size(528, 56);
             this.bokningListbox.TabIndex = 0;
+            this.bokningListbox.SelectedIndexChanged += new System.EventHandler(this.bokningListbox_SelectedIndexChanged);
             // 
             // newNotesBtn
             // 
@@ -507,6 +522,16 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Personnummer";
             // 
+            // deleteBokningBtn
+            // 
+            this.deleteBokningBtn.Location = new System.Drawing.Point(478, 690);
+            this.deleteBokningBtn.Name = "deleteBokningBtn";
+            this.deleteBokningBtn.Size = new System.Drawing.Size(75, 23);
+            this.deleteBokningBtn.TabIndex = 11;
+            this.deleteBokningBtn.Text = "Ta Bort";
+            this.deleteBokningBtn.UseVisualStyleBackColor = true;
+            this.deleteBokningBtn.Click += new System.EventHandler(this.deleteBokningBtn_Click);
+            // 
             // PatientJournalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -577,5 +602,7 @@
         private System.Windows.Forms.ListBox bokningListbox;
         private System.Windows.Forms.Button signOutBtn;
         private System.Windows.Forms.Button toggleFilterBtn;
+        private System.Windows.Forms.Button bookingChangebtn;
+        private System.Windows.Forms.Button deleteBokningBtn;
     }
 }

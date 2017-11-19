@@ -174,5 +174,41 @@ namespace HospitalManagement
                 UpdatePatientJournal();
             }
         }
+
+        private void bookingChangebtn_Click(object sender, EventArgs e)
+        {
+            Booking booking = bokningListbox.SelectedItem as Booking;
+            Form changeBooking = new BookingChangeForm(booking);
+            changeBooking.Show();
+            
+            
+        }
+
+        private void bokningListbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteBokningBtn_Click(object sender, EventArgs e)
+        {
+            Booking booking = bokningListbox.SelectedItem as Booking;
+            var confirmResult = MessageBox.Show($"Är du säker på att du vill ta bort {booking}?", "Ja Nej", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                // if (db.AddJournalEntry(data.MyUser.EmployeeID, data.ThePatient.Personnummer, "Utskrivning", "", false))
+                // {
+                db.DeleteBooking(booking);
+
+                   // data.ThePatient.UpdateSelfInDB();
+                    MessageBox.Show("Bokning Borttagen.");
+                }
+                else
+                {
+                    MessageBox.Show("Borttagning misslyckad.");
+                }
+
+            }
+
+        }
     }
-}
+//}
