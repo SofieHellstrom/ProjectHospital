@@ -29,7 +29,7 @@ namespace HospitalManagement
             //Initializing the content of the Department Tab
             this.departmentsDataGridView.DataSource = GetSortedDepartmentDataGridList(data.DepartmentList, "DepartmentID");
 
-            this.roomsDataGridView.DataSource = data.RoomList;
+            this.roomsDataGridView.DataSource = GetSortedRoomDataGridList(data.RoomList, "RoomID");
         }
 
         private List<Employee> GetSortedEmployeeDataGridList(List<Employee> listToProcess, string propertyToSortBy)
@@ -102,6 +102,30 @@ namespace HospitalManagement
             return returnList;
         }
 
+        private List<Room> GetSortedRoomDataGridList(List<Room> listToProcess, string propertyToSortBy)
+        {
+            List<Room> returnList;
+            switch (propertyToSortBy)
+            {
+                case "RoomID":
+                    returnList = new List<Room>(data.RoomList.OrderBy(o => o.RoomID).ToList());
+                    break;
+                case "RoomFunction":
+                    returnList = new List<Room>(data.RoomList.OrderBy(o => o.RoomFunction).ToList());
+                    break;
+                case "RoomCapacity":
+                    returnList = new List<Room>(data.RoomList.OrderBy(o => o.RoomCapacity).ToList());
+                    break;
+                case "RoomMaxCapacity":
+                    returnList = new List<Room>(data.RoomList.OrderBy(o => o.RoomMaxCapacity).ToList());
+                    break;
+                default:
+                    returnList = new List<Room>(listToProcess);
+                    break;
+            }
+            return returnList;
+        }
+
         private void UpdateWindow()
         {
             data.UpdateData();
@@ -154,6 +178,22 @@ namespace HospitalManagement
                 depNameTxtBox.Text = selectedDepartment.Name;
                 depOpensTimePicker.Value = DateTime.Today + selectedDepartment.Opens;
                 depClosesTimePicker.Value = DateTime.Today + selectedDepartment.Closes;
+            }
+            else
+            {
+
+            }
+        }
+
+        private void UpdateSelectedRoomInfo()
+        {
+            if (roomsDataGridView.CurrentRow != null)
+            {
+                Room selectedRoom = roomsDataGridView.CurrentRow.DataBoundItem as Room;
+                roomIdTxtBox.Text = selectedRoom.RoomID;
+                roomFunctionTxtBox.Text = selectedRoom.RoomFunction;
+                roomCapacityTxtBox.Text = selectedRoom.RoomCapacity.ToString();
+                roomMaxCapacityTxtBox.Text = selectedRoom.RoomMaxCapacity.ToString();
             }
             else
             {
@@ -227,6 +267,15 @@ namespace HospitalManagement
 
         }
 
+        private void roomsDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            if (data.RoomList.Any())
+            {
+                roomsDataGridView.Rows[0].Selected = true;
+            }
+            UpdateSelectedRoomInfo();
+        }
+
         private void addBtn_Click(object sender, EventArgs e)
         {
             switch (tabControl.SelectedIndex)
@@ -242,6 +291,8 @@ namespace HospitalManagement
                     break;
 
                 case 2:
+                    Form addRoomForm = new RoomRegistryForm(data);
+                    addRoomForm.ShowDialog();
                     break;
             }
         }
@@ -263,6 +314,9 @@ namespace HospitalManagement
                     break;
 
                 case 2:
+                    Room selectedRoom = roomsDataGridView.CurrentRow.DataBoundItem as Room;
+                    Form roomEditForm = new RoomRegistryForm(data, selectedRoom);
+                    roomEditForm.ShowDialog();
                     break;
             }
         }
@@ -284,11 +338,16 @@ namespace HospitalManagement
             userEditForm.ShowDialog();
         }
 
+
+
         private void departmentsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             UpdateSelectedDepartmentInfo();
         }
 
-        
+        private void roomsDataGridView_Click(object sender, EventArgs e)
+        {
+            UpdateSelectedRoomInfo();
+        }
     }
 }

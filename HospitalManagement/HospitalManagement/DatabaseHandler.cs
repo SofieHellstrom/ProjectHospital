@@ -1912,6 +1912,86 @@ namespace HospitalManagement
             }
         }
 
+        public Boolean AddRoom(Room newRoom)
+        {
+            //Adds a new room to the database. 
+            Room roomToAdd = newRoom;
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection.
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    // Adds relevant data to temporary variables. Mostly for debugging purposes.
+
+                    string roomID = roomToAdd.RoomID;
+                    string roomFunction = roomToAdd.RoomFunction;
+                    int roomCapacity = roomToAdd.RoomCapacity;
+                    int roomMax = roomToAdd.RoomMaxCapacity;
+                    string roomDepartment = roomToAdd.DepartmentID;
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    try
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = $"INSERT INTO room (room_id, function, capacity, max_capacity, department) VALUES ('{roomID}', '{roomFunction}', {roomCapacity}, {roomMax}, '{roomDepartment}')";
+
+                        int recordsAffected = cmd.ExecuteNonQuery();
+
+                        //Returns a boolean which is True if any rows have been affected. 
+                        return Convert.ToBoolean(recordsAffected);
+                    }
+                    catch (PostgresException e)
+                    {
+                        //Writes Exception error to DebugWindow and returns false, if a
+                        //PostgresException occurs.
+                        System.Diagnostics.Debug.WriteLine(e.ToString());
+                        return false;
+                    }
+
+                }
+            }
+        }
+
+        public Boolean UpdateRoom (Room roomToUpdate)
+        {
+            //Updates a room in the Database.
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens connection
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+
+                    // Adds connection and SQL-string to the command and executes it.
+                    cmd.Connection = conn;
+
+                    cmd.CommandText = $"UPDATE room SET function = '{roomToUpdate.RoomFunction}', capacity = {roomToUpdate.RoomCapacity}, max_capacity = {roomToUpdate.RoomMaxCapacity}, department = '{roomToUpdate.DepartmentID}' WHERE room_id = '{roomToUpdate.RoomID}'";
+
+                    /*
+                     * This code is only needed if we decide to allow the changing of room IDs.
+                     * and if we do there are more changes needed.
+                    if (!string.IsNullOrEmpty(oldID))
+                    {
+                        cmd.CommandText = $"UPDATE userinfo SET department_id = '{departmentToUpdate.DepartmentID}' name = '{departmentToUpdate.Name}', open_from = '{departmentToUpdate.Opens}', open_until = '{departmentToUpdate.Closes}' WHERE department_id = '{oldID}'";
+                    }
+                    else
+                    {
+                        cmd.CommandText = $"UPDATE userinfo SET name = '{departmentToUpdate.Name}', open_from = '{departmentToUpdate.Opens}', open_until = '{departmentToUpdate.Closes}' WHERE department_id = '{departmentToUpdate.DepartmentID}'";
+                    }
+                    */
+
+                    int recordsAffected = cmd.ExecuteNonQuery();
+                    return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
+
+                }
+
+            }
+
+        }
+
+
         public Boolean AddBooking(Booking booking)
         {
             //Adds a new booking to the database. 

@@ -679,8 +679,10 @@
             this.roomsDataGridView.Location = new System.Drawing.Point(6, 251);
             this.roomsDataGridView.Name = "roomsDataGridView";
             this.roomsDataGridView.ReadOnly = true;
-            this.roomsDataGridView.Size = new System.Drawing.Size(592, 296);
+            this.roomsDataGridView.Size = new System.Drawing.Size(775, 296);
             this.roomsDataGridView.TabIndex = 2;
+            this.roomsDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.roomsDataGridView_DataBindingComplete);
+            this.roomsDataGridView.Click += new System.EventHandler(this.roomsDataGridView_Click);
             // 
             // roomDepFilterLbl
             // 
