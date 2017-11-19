@@ -28,15 +28,13 @@ namespace HospitalManagement
             endTime2.Value = DateTime.Now.AddMinutes(15);
             roomComboBox.DataSource = data.RoomList;
             doctorComboBox.DataSource = data.DoctorList;
-            TimeSpan startingHours = new TimeSpan(8, 0, 0);
-            TimeSpan finalAppointmentTime = new TimeSpan(16, 45, 0);
+            TimeSpan depStartingHours = new TimeSpan(8, 0, 0);
+            TimeSpan depFinalAppointmentTime = new TimeSpan(16, 45, 0);
         }
 
         public void UpdateWindow()
         {
-
             UpdateStaffList();
-
         }
 
         public void UpdateStaffList()
@@ -64,26 +62,19 @@ namespace HospitalManagement
             {
                 errorProvider1.SetError(purposeBox, "Vänligen ange syfte till bokningen.");
                 error = true;
-
             }
-           
 
             if (string.IsNullOrWhiteSpace(startTime2.Text))
             {
-
                 errorProvider1.SetError(startTime2, "Vänligen ange önskad besökstid.");
                 error = true;
             }
 
             if (string.IsNullOrWhiteSpace(endTime2.Text))
             {
-
                 errorProvider1.SetError(endTime2, "Vänligen ange önskad besökstid.");
                 error = true;
             }
-
-
-
 
             if (string.IsNullOrWhiteSpace(doctorComboBox.Text))
             {
@@ -102,7 +93,13 @@ namespace HospitalManagement
                 string doctor = (doctorComboBox.SelectedItem as Employee).EmployeeID;
                 string purpose = purposeBox.Text;
                 string room = (roomComboBox.SelectedItem as Room).RoomID;
-                
+                int compareTimeValues = bookingtimeStart.CompareTo(bookingtimeEnd);
+
+                if (compareTimeValues >= 0)
+                {
+                    errorProvider1.SetError(startTime2, "Vänligen ange giltig besökstid.");
+                    error = true;
+                }
 
                 DatabaseHandler db = new DatabaseHandler();
 
@@ -125,14 +122,13 @@ namespace HospitalManagement
                         {
                             errorProvider1.SetError(roomComboBox, "Rummet är redan upptagen vid angiven tid. Vänligen välj annat rum.");
                             error = true;
-                        }
+                        } 
                     }
                 }
 
                 if (!error)
                 {
                     Booking newBooking = new Booking(id, purpose, bookingtimeStart, bookingtimeEnd, doctor, personnummer, room);
-                
                     Boolean success = db.AddBooking(newBooking);
 
                     if (success)
@@ -141,7 +137,6 @@ namespace HospitalManagement
                         this.Close();
                     }
                 }
-
             }
         }
 
