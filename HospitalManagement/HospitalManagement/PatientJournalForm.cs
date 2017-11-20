@@ -178,7 +178,7 @@ namespace HospitalManagement
         private void bookingChangebtn_Click(object sender, EventArgs e)
         {
             Booking booking = bokningListbox.SelectedItem as Booking;
-            Form changeBooking = new BookingChangeForm(booking);
+            Form changeBooking = new BookingForm(booking);
             changeBooking.Show();
 
 

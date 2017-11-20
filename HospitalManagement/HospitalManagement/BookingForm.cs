@@ -13,10 +13,35 @@ namespace HospitalManagement
     public partial class BookingForm : Form
     {
         Bookingdata data;
+        string roomfunction = "Mottagning";
 
-        public BookingForm(Patient relevantpatient, Employee currentUser)
+        public BookingForm(Booking booking)
         {
-            string roomfunction = "Mottagning";
+            DatabaseHandler db = new DatabaseHandler();
+            Employee selectedDr = db.LoadEmployee(booking.Staff_ID);
+            Patient relevantpatient = db.LoadPatient(booking.Patient_ID);
+            data = new Bookingdata(relevantpatient, selectedDr , roomfunction);
+            InitializeComponent();
+            UpdateWindow();
+
+            this.bookingPersonNrBox.Text = booking.Patient_ID;
+            this.bookingPatientName.Text = relevantpatient.LastName + ", " + relevantpatient.FirstName;
+            this.dateTimePicker1.Value = booking.BookingStart.Date;
+            this.startTime2.Value = booking.BookingStart;
+            this.endTime2.Value = booking.BookingEnd;
+            this.purposeBox.Text = booking.BookingPurpose;
+            this.roomComboBox.DataSource = data.RoomList;
+            //roomComboBox.SelectedIndex = data.RoomList.IndexOf(data.RoomList.FirstOrDefault(x => x.RoomID == booking.RoomNr));
+            roomComboBox.SelectedItem = data.RoomList.FirstOrDefault(x=>x.RoomID == booking.RoomNr);
+            this.doctorComboBox.DataSource = data.DoctorList;
+            doctorComboBox.SelectedItem = data.DoctorList.FirstOrDefault(x => x.EmployeeID == booking.Staff_ID);
+
+        }
+
+
+            public BookingForm(Patient relevantpatient, Employee currentUser)
+        {
+            
             data = new Bookingdata(relevantpatient, currentUser, roomfunction);
             InitializeComponent();
             UpdateWindow();
