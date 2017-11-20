@@ -32,7 +32,8 @@ namespace HospitalManagement
             //Initializing the content of the Room Tab
             this.roomDepartmentComboBox.DataSource = data.DepartmentList;
             this.roomDepartmentComboBox.DisplayMember = Name;
-            this.roomDepartmentComboBox.Text = "Kardiolog";
+            this.roomDepartmentComboBox.Text = "Akutmottagning";
+            this.roomDepartmentComboBox.SelectedIndex = 0;
             this.roomsDataGridView.DataSource = GetSortedRoomDataGridList(data.RoomList, "RoomID");
             
         }
@@ -169,8 +170,6 @@ namespace HospitalManagement
                 roomsDataGridView.CurrentCell = roomsDataGridView.Rows[roomsRowSelected].Cells[0];
                 roomsDataGridView.Rows[roomsRowSelected].Selected = true;
             }
-            
-
 
             UpdateSelectedEmployeeInfo();
         }
@@ -218,7 +217,7 @@ namespace HospitalManagement
 
         private void UpdateSelectedRoomInfo()
         {
-            if (roomsDataGridView.CurrentRow != null)
+            if (roomsDataGridView.CurrentRow != null && roomsDataGridView.Rows.Count != 0)
             {
                 Room selectedRoom = roomsDataGridView.CurrentRow.DataBoundItem as Room;
                 roomIdTxtBox.Text = selectedRoom.RoomID;
@@ -228,6 +227,10 @@ namespace HospitalManagement
             }
             else
             {
+                roomIdTxtBox.Text = "";
+                roomFunctionTxtBox.Text = "";
+                roomCapacityTxtBox.Text = "";
+                roomMaxCapacityTxtBox.Text = "";
 
             }
         }
