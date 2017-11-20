@@ -145,6 +145,7 @@
             this.roomCapUpDown.Name = "roomCapUpDown";
             this.roomCapUpDown.Size = new System.Drawing.Size(48, 20);
             this.roomCapUpDown.TabIndex = 12;
+            this.roomCapUpDown.ValueChanged += new System.EventHandler(this.TextBoxTextChanged);
             // 
             // roomMaxUpDown
             // 
@@ -152,6 +153,7 @@
             this.roomMaxUpDown.Name = "roomMaxUpDown";
             this.roomMaxUpDown.Size = new System.Drawing.Size(49, 20);
             this.roomMaxUpDown.TabIndex = 13;
+            this.roomMaxUpDown.ValueChanged += new System.EventHandler(this.TextBoxTextChanged);
             // 
             // errorProvider
             // 

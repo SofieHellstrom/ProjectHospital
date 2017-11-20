@@ -39,11 +39,11 @@ namespace HospitalManagement
             departmentComboBox.DataSource = departmentList;
             departmentComboBox.DisplayMember = Name;
             departmentComboBox.Text = db.LoadDepartmentByID(roomToEdit.DepartmentID).Name;
-            departmentComboBox.Enabled = false;
             roomIdTxtBox.Text = roomToEdit.RoomID;
             roomFunctionTxtBox.Text = roomToEdit.RoomFunction;
             roomCapUpDown.Value = roomToEdit.RoomCapacity;
             roomMaxUpDown.Value = roomToEdit.RoomMaxCapacity;
+            roomIdTxtBox.Enabled = false;
             saveMoreRoomsBtn.Visible = false;
             saveOneAndCloseBtn.Text = "Uppdatera och Stäng";
         }

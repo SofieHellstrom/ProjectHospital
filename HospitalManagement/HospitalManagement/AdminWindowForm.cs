@@ -29,7 +29,10 @@ namespace HospitalManagement
             //Initializing the content of the Department Tab
             this.departmentsDataGridView.DataSource = GetSortedDepartmentDataGridList(data.DepartmentList, "DepartmentID");
 
+            //Initializing the content of the Room Tab
             this.roomsDataGridView.DataSource = GetSortedRoomDataGridList(data.RoomList, "RoomID");
+            this.roomDepartmentComboBox.DataSource = data.DepartmentList;
+            this.roomDepartmentComboBox.DisplayMember = Name;
         }
 
         private List<Employee> GetSortedEmployeeDataGridList(List<Employee> listToProcess, string propertyToSortBy)
@@ -130,16 +133,20 @@ namespace HospitalManagement
         {
             data.UpdateData();
             var employeeRowSelected = employeesDataGridView.Rows.IndexOf(employeesDataGridView.SelectedRows[0]);
-            //Problem here? Why out of range?
             var departmentsRowSelected = departmentsDataGridView.Rows.IndexOf(departmentsDataGridView.SelectedRows[0]);
+            var roomsRowSelected = roomsDataGridView.Rows.IndexOf(roomsDataGridView.SelectedRows[0]);
 
             employeesDataGridView.DataSource = GetSortedEmployeeDataGridList(data.EmployeeList, "EmployeeID");
             departmentsDataGridView.DataSource = GetSortedDepartmentDataGridList(data.DepartmentList, "DepartmentID");
+            roomsDataGridView.DataSource = GetSortedRoomDataGridList(data.RoomList, "RoomID");
+
             //Trying to keep rowselection when you get back to window.
             employeesDataGridView.CurrentCell = employeesDataGridView.Rows[employeeRowSelected].Cells[0];
             employeesDataGridView.Rows[employeeRowSelected].Selected = true;
             departmentsDataGridView.CurrentCell = departmentsDataGridView.Rows[departmentsRowSelected].Cells[0];
             departmentsDataGridView.Rows[departmentsRowSelected].Selected = true;
+            roomsDataGridView.CurrentCell = roomsDataGridView.Rows[roomsRowSelected].Cells[0];
+            departmentsDataGridView.Rows[roomsRowSelected].Selected = true;
             
             UpdateSelectedEmployeeInfo();
         }
