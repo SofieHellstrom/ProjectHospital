@@ -68,7 +68,7 @@ namespace HospitalManagement
                 journalPostListBox.DataSource = data.NotesList;
             }
 
-            if(journalPostListBox.Items.Count > 0)
+            if (journalPostListBox.Items.Count > 0)
             {
                 journalpostPreviewTxtBox.Text = (journalPostListBox.SelectedValue as JournalPost).Content;
             }
@@ -91,7 +91,7 @@ namespace HospitalManagement
                 signOutBtn.Enabled = false;
             }
 
-                
+
         }
 
         private void savePersonInfoChange_Click(object sender, EventArgs e)
@@ -130,7 +130,7 @@ namespace HospitalManagement
 
         private void tidsbokningBtn_Click(object sender, EventArgs e)
         {
-            Form booking = new BookingForm (data.ThePatient, data.MyUser);
+            Form booking = new BookingForm(data.ThePatient, data.MyUser);
             booking.Show();
         }
         private void signInBtn_Click(object sender, EventArgs e)
@@ -144,7 +144,7 @@ namespace HospitalManagement
             var confirmResult = MessageBox.Show($"Är du säker på att du vill skriva ut {data.ThePatient.ToString()}?", "Ja Nej", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
-                if(db.AddJournalEntry(data.MyUser.EmployeeID, data.ThePatient.Personnummer, "Utskrivning", "", false))
+                if (db.AddJournalEntry(data.MyUser.EmployeeID, data.ThePatient.Personnummer, "Utskrivning", "", false))
                 {
                     data.ThePatient.Room = "";
                     data.ThePatient.UpdateSelfInDB();
@@ -156,7 +156,7 @@ namespace HospitalManagement
                 }
 
             }
-            
+
         }
 
         private void toggleFilterBtn_Click(object sender, EventArgs e)
@@ -174,5 +174,38 @@ namespace HospitalManagement
                 UpdatePatientJournal();
             }
         }
+
+        private void bookingChangebtn_Click(object sender, EventArgs e)
+        {
+            Booking booking = bokningListbox.SelectedItem as Booking;
+            Form changeBooking = new BookingChangeForm(booking);
+            changeBooking.Show();
+
+
+        }
+
+        private void bokningListbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteBokningBtn_Click(object sender, EventArgs e)
+        {
+            Booking booking = bokningListbox.SelectedItem as Booking;
+            var confirmResult = MessageBox.Show($"Är du säker på att du vill ta bort {booking}?", "Ja Nej", MessageBoxButtons.YesNo);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                db.DeleteBooking(booking);
+                MessageBox.Show("Bokning Borttagen.");
+            }
+            else
+            {
+                MessageBox.Show("Borttagning misslyckad.");
+            }
+
+        }
+
     }
 }
+

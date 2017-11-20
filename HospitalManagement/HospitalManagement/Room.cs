@@ -13,7 +13,7 @@ namespace HospitalManagement
         public int RoomCapacity { get; set; }
         public int RoomMaxCapacity { get; set; }
         public string DepartmentID { get; set; }
-        public int CapacityUsed { get; set;  }
+        public int CapacityUsed { get; set; }
         public int AvailableCapacity { get; set; }
 
         public Room(string id, string function, int cap, int maxCap, string department)
@@ -56,8 +56,16 @@ namespace HospitalManagement
 
         public override string ToString()
         {
-            return $"{RoomFunction} {RoomID}. Lediga platser: {AvailableCapacity}";
+            if (RoomFunction.Equals("Mottagning") || RoomFunction.Equals("Lab"))
+            {
+                return $"{RoomID} {DepartmentID}";
+            }
+            else
+            {
+                return $"{RoomFunction} {RoomID}. Lediga platser: {AvailableCapacity}";
+            }
         }
 
     }
 }
+
