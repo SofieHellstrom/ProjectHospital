@@ -87,7 +87,7 @@
             this.roomIdLbl = new System.Windows.Forms.Label();
             this.roomsDataGridView = new System.Windows.Forms.DataGridView();
             this.roomDepFilterLbl = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.roomDepartmentComboBox = new System.Windows.Forms.ComboBox();
             this.mainTableLayoutPanel.SuspendLayout();
             this.leftPanel.SuspendLayout();
             this.topPanel.SuspendLayout();
@@ -580,7 +580,7 @@
             this.roomTabPage.Controls.Add(this.roomGroupBox);
             this.roomTabPage.Controls.Add(this.roomsDataGridView);
             this.roomTabPage.Controls.Add(this.roomDepFilterLbl);
-            this.roomTabPage.Controls.Add(this.comboBox1);
+            this.roomTabPage.Controls.Add(this.roomDepartmentComboBox);
             this.roomTabPage.Location = new System.Drawing.Point(4, 22);
             this.roomTabPage.Name = "roomTabPage";
             this.roomTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -679,8 +679,10 @@
             this.roomsDataGridView.Location = new System.Drawing.Point(6, 251);
             this.roomsDataGridView.Name = "roomsDataGridView";
             this.roomsDataGridView.ReadOnly = true;
-            this.roomsDataGridView.Size = new System.Drawing.Size(592, 296);
+            this.roomsDataGridView.Size = new System.Drawing.Size(775, 296);
             this.roomsDataGridView.TabIndex = 2;
+            this.roomsDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.roomsDataGridView_DataBindingComplete);
+            this.roomsDataGridView.Click += new System.EventHandler(this.roomsDataGridView_Click);
             // 
             // roomDepFilterLbl
             // 
@@ -691,13 +693,14 @@
             this.roomDepFilterLbl.TabIndex = 1;
             this.roomDepFilterLbl.Text = "Avdelning:";
             // 
-            // comboBox1
+            // roomDepartmentComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(86, 149);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 0;
+            this.roomDepartmentComboBox.FormattingEnabled = true;
+            this.roomDepartmentComboBox.Location = new System.Drawing.Point(86, 149);
+            this.roomDepartmentComboBox.Name = "roomDepartmentComboBox";
+            this.roomDepartmentComboBox.Size = new System.Drawing.Size(121, 21);
+            this.roomDepartmentComboBox.TabIndex = 0;
+            this.roomDepartmentComboBox.SelectedIndexChanged += new System.EventHandler(this.roomDepartmentComboBox_SelectedIndexChanged);
             // 
             // AdminWindowForm
             // 
@@ -789,7 +792,7 @@
         private System.Windows.Forms.Label roomIdLbl;
         private System.Windows.Forms.DataGridView roomsDataGridView;
         private System.Windows.Forms.Label roomDepFilterLbl;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox roomDepartmentComboBox;
         private System.Windows.Forms.TextBox roomMaxCapacityTxtBox;
         private System.Windows.Forms.TextBox roomCapacityTxtBox;
         private System.Windows.Forms.TextBox roomFunctionTxtBox;

@@ -28,6 +28,32 @@ namespace HospitalManagement
             this.AvailableCapacity = RoomCapacity - CapacityUsed;
         }
 
+        public Boolean UpdateSelfInDB()
+        {
+            DatabaseHandler db = new DatabaseHandler();
+            return db.UpdateRoom(this);
+        }
+
+        public override bool Equals(object obj)
+        {
+            //Compare method for Rooms.
+            //Returns false if the object passed is null or not a Room
+            if (!(obj is Room) || obj == null) return false;
+
+            Room r = obj as Room;
+            if (!r.RoomID.Equals(this.RoomID)) return false;
+            if (!r.RoomFunction.Equals(this.RoomFunction)) return false;
+            if (r.RoomCapacity != this.RoomCapacity) return false;
+            if (r.RoomMaxCapacity != this.RoomMaxCapacity) return false;
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public override string ToString()
         {
             if (RoomFunction.Equals("Mottagning") || RoomFunction.Equals("Lab"))
