@@ -30,9 +30,11 @@ namespace HospitalManagement
             this.departmentsDataGridView.DataSource = GetSortedDepartmentDataGridList(data.DepartmentList, "DepartmentID");
 
             //Initializing the content of the Room Tab
-            this.roomsDataGridView.DataSource = GetSortedRoomDataGridList(data.RoomList, "RoomID");
             this.roomDepartmentComboBox.DataSource = data.DepartmentList;
             this.roomDepartmentComboBox.DisplayMember = Name;
+            this.roomDepartmentComboBox.Text = "Kardiolog";
+            this.roomsDataGridView.DataSource = GetSortedRoomDataGridList(data.RoomList, "RoomID");
+            
         }
 
         private List<Employee> GetSortedEmployeeDataGridList(List<Employee> listToProcess, string propertyToSortBy)
@@ -107,11 +109,14 @@ namespace HospitalManagement
 
         private List<Room> GetSortedRoomDataGridList(List<Room> listToProcess, string propertyToSortBy)
         {
+            DatabaseHandler db = new DatabaseHandler();
             List<Room> returnList;
+
+            List<Room> filteredList = new List<Room>(data.RoomList.Where(o => o.DepartmentID.Equals(db.LoadDepartmentIDByName(roomDepartmentComboBox.Text))));
             switch (propertyToSortBy)
             {
                 case "RoomID":
-                    returnList = new List<Room>(data.RoomList.OrderBy(o => o.RoomID).ToList());
+                    returnList = new List<Room>(filteredList.OrderBy(o => o.RoomID).ToList());
                     break;
                 case "RoomFunction":
                     returnList = new List<Room>(data.RoomList.OrderBy(o => o.RoomFunction).ToList());
@@ -131,23 +136,42 @@ namespace HospitalManagement
 
         private void UpdateWindow()
         {
+            int roomsRowSelected;
             data.UpdateData();
             var employeeRowSelected = employeesDataGridView.Rows.IndexOf(employeesDataGridView.SelectedRows[0]);
             var departmentsRowSelected = departmentsDataGridView.Rows.IndexOf(departmentsDataGridView.SelectedRows[0]);
-            var roomsRowSelected = roomsDataGridView.Rows.IndexOf(roomsDataGridView.SelectedRows[0]);
+            if(roomsDataGridView.Rows.Count != 0)
+            {
+                roomsRowSelected = roomsDataGridView.Rows.IndexOf(roomsDataGridView.SelectedRows[0]);
+            }
+            else
+            {
+                roomsRowSelected = -1;
+            }
+            
 
             employeesDataGridView.DataSource = GetSortedEmployeeDataGridList(data.EmployeeList, "EmployeeID");
             departmentsDataGridView.DataSource = GetSortedDepartmentDataGridList(data.DepartmentList, "DepartmentID");
             roomsDataGridView.DataSource = GetSortedRoomDataGridList(data.RoomList, "RoomID");
+            if((roomsDataGridView.Rows.Count != 0) && (roomsRowSelected == -1))
+            {
+                roomsRowSelected = 0;
+            }
 
             //Trying to keep rowselection when you get back to window.
             employeesDataGridView.CurrentCell = employeesDataGridView.Rows[employeeRowSelected].Cells[0];
             employeesDataGridView.Rows[employeeRowSelected].Selected = true;
             departmentsDataGridView.CurrentCell = departmentsDataGridView.Rows[departmentsRowSelected].Cells[0];
             departmentsDataGridView.Rows[departmentsRowSelected].Selected = true;
-            roomsDataGridView.CurrentCell = roomsDataGridView.Rows[roomsRowSelected].Cells[0];
-            roomsDataGridView.Rows[roomsRowSelected].Selected = true;
+            if(roomsDataGridView.Rows.Count != 0)
+            {
+                if (roomsRowSelected < 0) roomsRowSelected = 0;
+                roomsDataGridView.CurrentCell = roomsDataGridView.Rows[roomsRowSelected].Cells[0];
+                roomsDataGridView.Rows[roomsRowSelected].Selected = true;
+            }
             
+
+
             UpdateSelectedEmployeeInfo();
         }
 
@@ -276,7 +300,7 @@ namespace HospitalManagement
 
         private void roomsDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            if (data.RoomList.Any())
+            if (roomsDataGridView.Rows.Count != 0)
             {
                 roomsDataGridView.Rows[0].Selected = true;
             }
@@ -355,6 +379,11 @@ namespace HospitalManagement
         private void roomsDataGridView_Click(object sender, EventArgs e)
         {
             UpdateSelectedRoomInfo();
+        }
+
+        private void roomDepartmentComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateWindow();
         }
     }
 }

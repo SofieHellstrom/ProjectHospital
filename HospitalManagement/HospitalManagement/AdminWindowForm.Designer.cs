@@ -700,6 +700,7 @@
             this.roomDepartmentComboBox.Name = "roomDepartmentComboBox";
             this.roomDepartmentComboBox.Size = new System.Drawing.Size(121, 21);
             this.roomDepartmentComboBox.TabIndex = 0;
+            this.roomDepartmentComboBox.SelectedIndexChanged += new System.EventHandler(this.roomDepartmentComboBox_SelectedIndexChanged);
             // 
             // AdminWindowForm
             // 
