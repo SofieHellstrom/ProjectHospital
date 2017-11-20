@@ -146,7 +146,7 @@ namespace HospitalManagement
             departmentsDataGridView.CurrentCell = departmentsDataGridView.Rows[departmentsRowSelected].Cells[0];
             departmentsDataGridView.Rows[departmentsRowSelected].Selected = true;
             roomsDataGridView.CurrentCell = roomsDataGridView.Rows[roomsRowSelected].Cells[0];
-            departmentsDataGridView.Rows[roomsRowSelected].Selected = true;
+            roomsDataGridView.Rows[roomsRowSelected].Selected = true;
             
             UpdateSelectedEmployeeInfo();
         }
