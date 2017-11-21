@@ -45,6 +45,7 @@ namespace HospitalManagement
             specialtyComboBox.DisplayMember = "Key";
             specialtyComboBox.ValueMember = "Value";
             FillFieldsWithEmployee();
+            employeeIdTxtBox.Enabled = false;
             saveMoreEmployeesBtn.Visible = false;
             saveOneAndCloseBtn.Text = "Uppdatera och Stäng";
             editMode = true;

@@ -45,6 +45,7 @@ namespace HospitalManagement
             
             //Loads the values of the passed Department to the controls.
             depIDTxtBox.Text = departmentToEdit.DepartmentID;
+            depIDTxtBox.Enabled = false;
             depNameTxtBox.Text = departmentToEdit.Name;
             depOpenTimePicker.Value = DateTimePicker.MinimumDateTime + departmentToEdit.Opens;
             depCloseTimePicker.Value = DateTimePicker.MinimumDateTime + departmentToEdit.Closes;
