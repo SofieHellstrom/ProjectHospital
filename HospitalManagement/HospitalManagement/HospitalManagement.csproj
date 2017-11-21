@@ -58,12 +58,6 @@
       <DependentUpon>AdminWindowForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Booking.cs" />
-    <Compile Include="BookingChangeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BookingChangeForm.Designer.cs">
-      <DependentUpon>BookingChangeForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Bookingdata.cs" />
     <Compile Include="BookingForm.cs">
       <SubType>Form</SubType>
@@ -165,12 +159,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Room.cs" />
-    <Compile Include="RoomRegistryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RoomRegistryForm.Designer.cs">
-      <DependentUpon>RoomRegistryForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="SignInForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,9 +171,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminWindowForm.resx">
       <DependentUpon>AdminWindowForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="BookingChangeForm.resx">
-      <DependentUpon>BookingChangeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BookingForm.resx">
       <DependentUpon>BookingForm.cs</DependentUpon>
@@ -232,9 +217,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RoomRegistryForm.resx">
-      <DependentUpon>RoomRegistryForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SignInForm.resx">
       <DependentUpon>SignInForm.cs</DependentUpon>
     </EmbeddedResource>
