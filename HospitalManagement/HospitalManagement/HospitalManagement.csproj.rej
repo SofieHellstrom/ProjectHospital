@@ -1,9 +1,11 @@
 diff a/HospitalManagement/HospitalManagement/HospitalManagement.csproj b/HospitalManagement/HospitalManagement/HospitalManagement.csproj	(rejected hunks)
-@@ -53,6 +53,7 @@
-        <DesignTime>True</DesignTime>
-        <DependentUpon>HospitalDataSet.xsd</DependentUpon>
-      </Compile>
-++<<<<<<< HEAD
- +    <Compile Include="HospitalDataSet1.Designer.cs">
- +      <AutoGen>True</AutoGen>
- +      <DesignTime>True</DesignTime>
+@@ -217,9 +217,6 @@
+       <AutoGen>True</AutoGen>
+       <DependentUpon>Resources.resx</DependentUpon>
+     </Compile>
+-    <EmbeddedResource Include="RoomRegistryForm.resx">
+-      <DependentUpon>RoomRegistryForm.cs</DependentUpon>
+-    </EmbeddedResource>
+     <EmbeddedResource Include="SignInForm.resx">
+       <DependentUpon>SignInForm.cs</DependentUpon>
+     </EmbeddedResource>
