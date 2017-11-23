@@ -22,7 +22,7 @@ namespace HospitalManagement
             
             //Initializing the content of the Employee Tab 
             this.employeesDataGridView.DataSource = GetSortedEmployeeDataGridList(data.EmployeeList, "EmployeeID");
-            this.departmentComboBox.DataSource = data.DepartmentList.OrderBy(o=>o.Name).ToList();
+            
             //Following line does not work for some reason. Check again if I have extra time.
             //this.employeesDataGridView.Columns[(this.employeesDataGridView.Columns["EmployeeID"].Index)].HeaderCell.SortGlyphDirection = SortOrder.Descending;
 
@@ -189,9 +189,9 @@ namespace HospitalManagement
                 phoneNrTxtBox.Text = selectedEmployee.PhoneNr;
                 emailTxtBox.Text = selectedEmployee.Email;
                 personIDTxtBox.Text = selectedEmployee.PersonNummer;
-                departmentComboBox.Text = selectedEmployee.Department;
-                positionComboBox.Text = selectedEmployee.Position;
-                specialtyComboBox.Text = selectedEmployee.Specialty;
+                departmentTxtBox.Text = selectedEmployee.Department;
+                positionTxtBox.Text = selectedEmployee.Position;
+                specialtyTxtBox.Text = selectedEmployee.Specialty;
             }
             else
             {
@@ -245,9 +245,9 @@ namespace HospitalManagement
             this.postalAreaTxtBox.Text = "";
             this.phoneNrTxtBox.Text = "";
             this.emailTxtBox.Text = "";
-            this.departmentComboBox.Text = "";
-            this.positionComboBox.Text = "";
-            this.specialtyComboBox.Text = "";
+            this.departmentTxtBox.Text = "";
+            this.positionTxtBox.Text = "";
+            this.specialtyTxtBox.Text = "";
         }
 
         private void employeesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)

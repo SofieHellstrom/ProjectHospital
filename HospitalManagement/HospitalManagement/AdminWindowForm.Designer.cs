@@ -44,16 +44,13 @@
             this.personIdLbl = new System.Windows.Forms.Label();
             this.anstIdLbl = new System.Windows.Forms.Label();
             this.emailTxtBox = new System.Windows.Forms.TextBox();
-            this.specialtyComboBox = new System.Windows.Forms.ComboBox();
             this.phoneNrTxtBox = new System.Windows.Forms.TextBox();
             this.employeeIdTxtBox = new System.Windows.Forms.TextBox();
             this.postalAreaTxtBox = new System.Windows.Forms.TextBox();
-            this.positionComboBox = new System.Windows.Forms.ComboBox();
             this.postalCodeTxtBox = new System.Windows.Forms.TextBox();
             this.addressTxtBox = new System.Windows.Forms.TextBox();
             this.positionLbl = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.departmentComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.lastNameTxtBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -88,6 +85,9 @@
             this.roomsDataGridView = new System.Windows.Forms.DataGridView();
             this.roomDepFilterLbl = new System.Windows.Forms.Label();
             this.roomDepartmentComboBox = new System.Windows.Forms.ComboBox();
+            this.positionTxtBox = new System.Windows.Forms.TextBox();
+            this.departmentTxtBox = new System.Windows.Forms.TextBox();
+            this.specialtyTxtBox = new System.Windows.Forms.TextBox();
             this.mainTableLayoutPanel.SuspendLayout();
             this.leftPanel.SuspendLayout();
             this.topPanel.SuspendLayout();
@@ -226,20 +226,20 @@
             // 
             // employeeInfoGroupBox
             // 
+            this.employeeInfoGroupBox.Controls.Add(this.specialtyTxtBox);
+            this.employeeInfoGroupBox.Controls.Add(this.departmentTxtBox);
+            this.employeeInfoGroupBox.Controls.Add(this.positionTxtBox);
             this.employeeInfoGroupBox.Controls.Add(this.personIDTxtBox);
             this.employeeInfoGroupBox.Controls.Add(this.personIdLbl);
             this.employeeInfoGroupBox.Controls.Add(this.anstIdLbl);
             this.employeeInfoGroupBox.Controls.Add(this.emailTxtBox);
-            this.employeeInfoGroupBox.Controls.Add(this.specialtyComboBox);
             this.employeeInfoGroupBox.Controls.Add(this.phoneNrTxtBox);
             this.employeeInfoGroupBox.Controls.Add(this.employeeIdTxtBox);
             this.employeeInfoGroupBox.Controls.Add(this.postalAreaTxtBox);
-            this.employeeInfoGroupBox.Controls.Add(this.positionComboBox);
             this.employeeInfoGroupBox.Controls.Add(this.postalCodeTxtBox);
             this.employeeInfoGroupBox.Controls.Add(this.addressTxtBox);
             this.employeeInfoGroupBox.Controls.Add(this.positionLbl);
             this.employeeInfoGroupBox.Controls.Add(this.label8);
-            this.employeeInfoGroupBox.Controls.Add(this.departmentComboBox);
             this.employeeInfoGroupBox.Controls.Add(this.label7);
             this.employeeInfoGroupBox.Controls.Add(this.lastNameTxtBox);
             this.employeeInfoGroupBox.Controls.Add(this.label6);
@@ -258,6 +258,7 @@
             // 
             // personIDTxtBox
             // 
+            this.personIDTxtBox.Enabled = false;
             this.personIDTxtBox.Location = new System.Drawing.Point(270, 13);
             this.personIDTxtBox.Name = "personIDTxtBox";
             this.personIDTxtBox.Size = new System.Drawing.Size(191, 20);
@@ -283,21 +284,15 @@
             // 
             // emailTxtBox
             // 
+            this.emailTxtBox.Enabled = false;
             this.emailTxtBox.Location = new System.Drawing.Point(78, 198);
             this.emailTxtBox.Name = "emailTxtBox";
             this.emailTxtBox.Size = new System.Drawing.Size(285, 20);
             this.emailTxtBox.TabIndex = 19;
             // 
-            // specialtyComboBox
-            // 
-            this.specialtyComboBox.FormattingEnabled = true;
-            this.specialtyComboBox.Location = new System.Drawing.Point(319, 39);
-            this.specialtyComboBox.Name = "specialtyComboBox";
-            this.specialtyComboBox.Size = new System.Drawing.Size(171, 21);
-            this.specialtyComboBox.TabIndex = 22;
-            // 
             // phoneNrTxtBox
             // 
+            this.phoneNrTxtBox.Enabled = false;
             this.phoneNrTxtBox.Location = new System.Drawing.Point(78, 172);
             this.phoneNrTxtBox.Name = "phoneNrTxtBox";
             this.phoneNrTxtBox.Size = new System.Drawing.Size(285, 20);
@@ -305,6 +300,7 @@
             // 
             // employeeIdTxtBox
             // 
+            this.employeeIdTxtBox.Enabled = false;
             this.employeeIdTxtBox.Location = new System.Drawing.Point(78, 13);
             this.employeeIdTxtBox.Name = "employeeIdTxtBox";
             this.employeeIdTxtBox.Size = new System.Drawing.Size(100, 20);
@@ -312,21 +308,15 @@
             // 
             // postalAreaTxtBox
             // 
+            this.postalAreaTxtBox.Enabled = false;
             this.postalAreaTxtBox.Location = new System.Drawing.Point(184, 146);
             this.postalAreaTxtBox.Name = "postalAreaTxtBox";
             this.postalAreaTxtBox.Size = new System.Drawing.Size(179, 20);
             this.postalAreaTxtBox.TabIndex = 14;
             // 
-            // positionComboBox
-            // 
-            this.positionComboBox.FormattingEnabled = true;
-            this.positionComboBox.Location = new System.Drawing.Point(78, 39);
-            this.positionComboBox.Name = "positionComboBox";
-            this.positionComboBox.Size = new System.Drawing.Size(171, 21);
-            this.positionComboBox.TabIndex = 21;
-            // 
             // postalCodeTxtBox
             // 
+            this.postalCodeTxtBox.Enabled = false;
             this.postalCodeTxtBox.Location = new System.Drawing.Point(78, 146);
             this.postalCodeTxtBox.Name = "postalCodeTxtBox";
             this.postalCodeTxtBox.Size = new System.Drawing.Size(100, 20);
@@ -334,6 +324,7 @@
             // 
             // addressTxtBox
             // 
+            this.addressTxtBox.Enabled = false;
             this.addressTxtBox.Location = new System.Drawing.Point(78, 119);
             this.addressTxtBox.Name = "addressTxtBox";
             this.addressTxtBox.Size = new System.Drawing.Size(285, 20);
@@ -357,16 +348,6 @@
             this.label8.TabIndex = 8;
             this.label8.Text = "E-mail:";
             // 
-            // departmentComboBox
-            // 
-            this.departmentComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.departmentComboBox.FormattingEnabled = true;
-            this.departmentComboBox.Location = new System.Drawing.Point(78, 66);
-            this.departmentComboBox.Name = "departmentComboBox";
-            this.departmentComboBox.Size = new System.Drawing.Size(171, 21);
-            this.departmentComboBox.Sorted = true;
-            this.departmentComboBox.TabIndex = 20;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -378,6 +359,7 @@
             // 
             // lastNameTxtBox
             // 
+            this.lastNameTxtBox.Enabled = false;
             this.lastNameTxtBox.Location = new System.Drawing.Point(319, 93);
             this.lastNameTxtBox.Name = "lastNameTxtBox";
             this.lastNameTxtBox.Size = new System.Drawing.Size(171, 20);
@@ -412,6 +394,7 @@
             // 
             // firstNameTxtBox
             // 
+            this.firstNameTxtBox.Enabled = false;
             this.firstNameTxtBox.Location = new System.Drawing.Point(78, 93);
             this.firstNameTxtBox.Name = "firstNameTxtBox";
             this.firstNameTxtBox.Size = new System.Drawing.Size(171, 20);
@@ -499,6 +482,7 @@
             // 
             // depNameTxtBox
             // 
+            this.depNameTxtBox.Enabled = false;
             this.depNameTxtBox.Location = new System.Drawing.Point(88, 42);
             this.depNameTxtBox.Name = "depNameTxtBox";
             this.depNameTxtBox.Size = new System.Drawing.Size(184, 20);
@@ -515,6 +499,7 @@
             // 
             // depIDTxtBox
             // 
+            this.depIDTxtBox.Enabled = false;
             this.depIDTxtBox.Location = new System.Drawing.Point(88, 13);
             this.depIDTxtBox.Name = "depIDTxtBox";
             this.depIDTxtBox.Size = new System.Drawing.Size(100, 20);
@@ -532,6 +517,7 @@
             // depClosesTimePicker
             // 
             this.depClosesTimePicker.CustomFormat = "HH:mm";
+            this.depClosesTimePicker.Enabled = false;
             this.depClosesTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.depClosesTimePicker.Location = new System.Drawing.Point(88, 96);
             this.depClosesTimePicker.Name = "depClosesTimePicker";
@@ -551,6 +537,7 @@
             // depOpensTimePicker
             // 
             this.depOpensTimePicker.CustomFormat = "HH:mm";
+            this.depOpensTimePicker.Enabled = false;
             this.depOpensTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.depOpensTimePicker.Location = new System.Drawing.Point(88, 70);
             this.depOpensTimePicker.Name = "depOpensTimePicker";
@@ -609,27 +596,31 @@
             // 
             // roomMaxCapacityTxtBox
             // 
-            this.roomMaxCapacityTxtBox.Location = new System.Drawing.Point(100, 94);
+            this.roomMaxCapacityTxtBox.Enabled = false;
+            this.roomMaxCapacityTxtBox.Location = new System.Drawing.Point(99, 94);
             this.roomMaxCapacityTxtBox.Name = "roomMaxCapacityTxtBox";
-            this.roomMaxCapacityTxtBox.Size = new System.Drawing.Size(100, 20);
+            this.roomMaxCapacityTxtBox.Size = new System.Drawing.Size(101, 20);
             this.roomMaxCapacityTxtBox.TabIndex = 7;
             // 
             // roomCapacityTxtBox
             // 
-            this.roomCapacityTxtBox.Location = new System.Drawing.Point(100, 68);
+            this.roomCapacityTxtBox.Enabled = false;
+            this.roomCapacityTxtBox.Location = new System.Drawing.Point(99, 68);
             this.roomCapacityTxtBox.Name = "roomCapacityTxtBox";
-            this.roomCapacityTxtBox.Size = new System.Drawing.Size(100, 20);
+            this.roomCapacityTxtBox.Size = new System.Drawing.Size(101, 20);
             this.roomCapacityTxtBox.TabIndex = 6;
             // 
             // roomFunctionTxtBox
             // 
-            this.roomFunctionTxtBox.Location = new System.Drawing.Point(100, 42);
+            this.roomFunctionTxtBox.Enabled = false;
+            this.roomFunctionTxtBox.Location = new System.Drawing.Point(99, 42);
             this.roomFunctionTxtBox.Name = "roomFunctionTxtBox";
-            this.roomFunctionTxtBox.Size = new System.Drawing.Size(100, 20);
+            this.roomFunctionTxtBox.Size = new System.Drawing.Size(101, 20);
             this.roomFunctionTxtBox.TabIndex = 5;
             // 
             // roomIdTxtBox
             // 
+            this.roomIdTxtBox.Enabled = false;
             this.roomIdTxtBox.Location = new System.Drawing.Point(99, 16);
             this.roomIdTxtBox.Name = "roomIdTxtBox";
             this.roomIdTxtBox.Size = new System.Drawing.Size(100, 20);
@@ -676,10 +667,10 @@
             this.roomsDataGridView.AllowUserToAddRows = false;
             this.roomsDataGridView.AllowUserToDeleteRows = false;
             this.roomsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.roomsDataGridView.Location = new System.Drawing.Point(6, 251);
+            this.roomsDataGridView.Location = new System.Drawing.Point(6, 201);
             this.roomsDataGridView.Name = "roomsDataGridView";
             this.roomsDataGridView.ReadOnly = true;
-            this.roomsDataGridView.Size = new System.Drawing.Size(775, 296);
+            this.roomsDataGridView.Size = new System.Drawing.Size(775, 346);
             this.roomsDataGridView.TabIndex = 2;
             this.roomsDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.roomsDataGridView_DataBindingComplete);
             this.roomsDataGridView.Click += new System.EventHandler(this.roomsDataGridView_Click);
@@ -701,6 +692,30 @@
             this.roomDepartmentComboBox.Size = new System.Drawing.Size(121, 21);
             this.roomDepartmentComboBox.TabIndex = 0;
             this.roomDepartmentComboBox.SelectedIndexChanged += new System.EventHandler(this.roomDepartmentComboBox_SelectedIndexChanged);
+            // 
+            // positionTxtBox
+            // 
+            this.positionTxtBox.Enabled = false;
+            this.positionTxtBox.Location = new System.Drawing.Point(78, 39);
+            this.positionTxtBox.Name = "positionTxtBox";
+            this.positionTxtBox.Size = new System.Drawing.Size(171, 20);
+            this.positionTxtBox.TabIndex = 25;
+            // 
+            // departmentTxtBox
+            // 
+            this.departmentTxtBox.Enabled = false;
+            this.departmentTxtBox.Location = new System.Drawing.Point(78, 66);
+            this.departmentTxtBox.Name = "departmentTxtBox";
+            this.departmentTxtBox.Size = new System.Drawing.Size(171, 20);
+            this.departmentTxtBox.TabIndex = 26;
+            // 
+            // specialtyTxtBox
+            // 
+            this.specialtyTxtBox.Enabled = false;
+            this.specialtyTxtBox.Location = new System.Drawing.Point(319, 39);
+            this.specialtyTxtBox.Name = "specialtyTxtBox";
+            this.specialtyTxtBox.Size = new System.Drawing.Size(171, 20);
+            this.specialtyTxtBox.TabIndex = 27;
             // 
             // AdminWindowForm
             // 
@@ -768,9 +783,6 @@
         private System.Windows.Forms.Label specialtyLbl;
         private System.Windows.Forms.Label departmentLbl;
         private System.Windows.Forms.Label positionLbl;
-        private System.Windows.Forms.ComboBox specialtyComboBox;
-        private System.Windows.Forms.ComboBox positionComboBox;
-        private System.Windows.Forms.ComboBox departmentComboBox;
         private System.Windows.Forms.TextBox emailTxtBox;
         private System.Windows.Forms.GroupBox employeeInfoGroupBox;
         private System.Windows.Forms.TextBox personIDTxtBox;
@@ -797,5 +809,8 @@
         private System.Windows.Forms.TextBox roomCapacityTxtBox;
         private System.Windows.Forms.TextBox roomFunctionTxtBox;
         private System.Windows.Forms.TextBox roomIdTxtBox;
+        private System.Windows.Forms.TextBox positionTxtBox;
+        private System.Windows.Forms.TextBox specialtyTxtBox;
+        private System.Windows.Forms.TextBox departmentTxtBox;
     }
 }

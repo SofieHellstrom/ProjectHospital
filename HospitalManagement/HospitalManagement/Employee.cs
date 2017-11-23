@@ -28,9 +28,6 @@ namespace HospitalManagement
         public string Department { get; set; }
         public string Specialty { get; set; }
 
-        //Not sure right now if we should have a doctor class that inherits from this class
-        //that has a property linking to a specialty, since only doctors have that, or if we
-        //should just let all staff have a link to a specialty, but keep it null if there isn't one.
 
         /// <summary>
         /// Constructs a new instance of Employee.
@@ -71,7 +68,6 @@ namespace HospitalManagement
         /// <returns>Boolean value. Is true if update is successful.</returns>
         public Boolean UpdateSelfInDB()
         {
-    
             DatabaseHandler db = new DatabaseHandler();
             return db.UpdateEmployee(this);
         }
@@ -90,7 +86,6 @@ namespace HospitalManagement
             {
                 return $"{LastName}, {FirstName}";
             }
-           
         }
 
         /// <summary>

@@ -16,6 +16,7 @@ namespace HospitalManagement
         PatientJournalData data;
         DatabaseHandler db = new DatabaseHandler();
         bool journalpostFilterOn = false;
+        bool registerAllowed = true;
 
         public PatientJournalForm(Patient patient, Employee myUser)
         {
@@ -24,15 +25,21 @@ namespace HospitalManagement
             switch (data.MyUser.Position)
             {
                 case "Sjuksköterska":
-                    signInBtn.Visible = false;
-                    signOutBtn.Visible = false;
-                    createReceiptBtn.Visible = false;
-                    tidsbokningBtn.Visible = false;
+                    signInBtn.Enabled = false;
+                    signOutBtn.Enabled = false;
+                    createReceiptBtn.Enabled = false;
+                    tidsbokningBtn.Enabled = false;
+                    bookingChangebtn.Enabled = false;
+                    deleteBokningBtn.Enabled = false;
+                    registerAllowed = false;
                     break;
 
                 case "Receptionist":
-                    createReceiptBtn.Visible = false;
-                    newNotesBtn.Visible = false;
+                    signInBtn.Enabled = false;
+                    signOutBtn.Enabled = false;
+                    createReceiptBtn.Enabled = false;
+                    newNotesBtn.Enabled = false;
+                    registerAllowed = false;
                     break;
             }
             UpdatePatientJournal();
@@ -79,16 +86,24 @@ namespace HospitalManagement
                 Department tempDep = db.LoadDepartmentByID(db.LoadDepartmentOfRoom(data.ThePatient.Room));
                 signedInDepTxtBox.Text = tempDep.Name;
                 signedInRoomTxtBox.Text = data.ThePatient.Room;
-                signInBtn.Enabled = false;
-                signOutBtn.Enabled = true;
+                if (registerAllowed)
+                {
+                    signInBtn.Enabled = false;
+                    signOutBtn.Enabled = true;
+                }
+                
             }
             else
             {
                 signInStatusTxtBox.Text = "Utskriven";
                 signedInDepTxtBox.Text = "";
                 signedInRoomTxtBox.Text = "";
-                signInBtn.Enabled = true;
-                signOutBtn.Enabled = false;
+                if (registerAllowed)
+                {
+                    signInBtn.Enabled = true;
+                    signOutBtn.Enabled = false;
+                }
+                
             }
 
 
