@@ -15,6 +15,7 @@ namespace HospitalManagement
         Bookingdata data;
         string roomfunction = "Mottagning";
 
+
         public BookingForm(Booking booking)
         {
             DatabaseHandler db = new DatabaseHandler();
@@ -55,6 +56,7 @@ namespace HospitalManagement
             doctorComboBox.DataSource = data.DoctorList;
             TimeSpan depStartingHours = new TimeSpan(8, 0, 0);
             TimeSpan depFinalAppointmentTime = new TimeSpan(16, 45, 0);
+            labTestCheckBox.Enabled = false;
         }
 
         public void UpdateWindow()

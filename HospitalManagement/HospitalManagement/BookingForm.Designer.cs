@@ -47,10 +47,9 @@
             this.endTime2 = new System.Windows.Forms.DateTimePicker();
             this.roomComboBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.labTestCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,7 +89,7 @@
             // 
             this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(104, 122);
+            this.dateTimePicker1.Location = new System.Drawing.Point(104, 131);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(143, 20);
             this.dateTimePicker1.TabIndex = 4;
@@ -100,7 +99,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 128);
+            this.label3.Location = new System.Drawing.Point(18, 137);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 13);
             this.label3.TabIndex = 5;
@@ -109,7 +108,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 168);
+            this.label4.Location = new System.Drawing.Point(18, 177);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 6;
@@ -118,7 +117,7 @@
             // doctorComboBox
             // 
             this.doctorComboBox.FormattingEnabled = true;
-            this.doctorComboBox.Location = new System.Drawing.Point(104, 165);
+            this.doctorComboBox.Location = new System.Drawing.Point(104, 174);
             this.doctorComboBox.Name = "doctorComboBox";
             this.doctorComboBox.Size = new System.Drawing.Size(143, 21);
             this.doctorComboBox.TabIndex = 7;
@@ -126,7 +125,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 265);
+            this.label5.Location = new System.Drawing.Point(18, 229);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 13);
             this.label5.TabIndex = 8;
@@ -135,7 +134,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(343, 128);
+            this.label6.Location = new System.Drawing.Point(321, 137);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 9;
@@ -144,7 +143,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(447, 128);
+            this.label7.Location = new System.Drawing.Point(425, 137);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(23, 13);
             this.label7.TabIndex = 10;
@@ -152,14 +151,14 @@
             // 
             // purposeBox
             // 
-            this.purposeBox.Location = new System.Drawing.Point(104, 258);
+            this.purposeBox.Location = new System.Drawing.Point(104, 222);
             this.purposeBox.Name = "purposeBox";
             this.purposeBox.Size = new System.Drawing.Size(143, 20);
             this.purposeBox.TabIndex = 13;
             // 
             // bokaBtn
             // 
-            this.bokaBtn.Location = new System.Drawing.Point(104, 304);
+            this.bokaBtn.Location = new System.Drawing.Point(104, 268);
             this.bokaBtn.Name = "bokaBtn";
             this.bokaBtn.Size = new System.Drawing.Size(75, 23);
             this.bokaBtn.TabIndex = 14;
@@ -176,7 +175,7 @@
             // 
             this.startTime2.CustomFormat = "HH:mm";
             this.startTime2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startTime2.Location = new System.Drawing.Point(380, 122);
+            this.startTime2.Location = new System.Drawing.Point(358, 131);
             this.startTime2.Name = "startTime2";
             this.startTime2.ShowUpDown = true;
             this.startTime2.Size = new System.Drawing.Size(51, 20);
@@ -187,7 +186,7 @@
             // 
             this.endTime2.CustomFormat = "HH:mm";
             this.endTime2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.endTime2.Location = new System.Drawing.Point(476, 122);
+            this.endTime2.Location = new System.Drawing.Point(454, 131);
             this.endTime2.Name = "endTime2";
             this.endTime2.ShowUpDown = true;
             this.endTime2.Size = new System.Drawing.Size(51, 20);
@@ -198,7 +197,7 @@
             // roomComboBox
             // 
             this.roomComboBox.FormattingEnabled = true;
-            this.roomComboBox.Location = new System.Drawing.Point(380, 165);
+            this.roomComboBox.Location = new System.Drawing.Point(358, 174);
             this.roomComboBox.Name = "roomComboBox";
             this.roomComboBox.Size = new System.Drawing.Size(121, 21);
             this.roomComboBox.TabIndex = 17;
@@ -206,37 +205,16 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(342, 168);
+            this.label8.Location = new System.Drawing.Point(320, 177);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(32, 13);
             this.label8.TabIndex = 18;
             this.label8.Text = "Rum:";
             // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(104, 89);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(81, 17);
-            this.radioButton1.TabIndex = 19;
-            this.radioButton1.Text = "Läkarbesök";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(248, 89);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(82, 17);
-            this.radioButton2.TabIndex = 20;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Provtagning";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(18, 216);
+            this.label9.Location = new System.Drawing.Point(308, 92);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(46, 13);
             this.label9.TabIndex = 21;
@@ -245,20 +223,29 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(104, 208);
+            this.comboBox1.Location = new System.Drawing.Point(358, 89);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(143, 21);
             this.comboBox1.TabIndex = 22;
+            // 
+            // labTestCheckBox
+            // 
+            this.labTestCheckBox.AutoSize = true;
+            this.labTestCheckBox.Location = new System.Drawing.Point(104, 93);
+            this.labTestCheckBox.Name = "labTestCheckBox";
+            this.labTestCheckBox.Size = new System.Drawing.Size(89, 17);
+            this.labTestCheckBox.TabIndex = 23;
+            this.labTestCheckBox.Text = "Boka Labtest";
+            this.labTestCheckBox.UseVisualStyleBackColor = true;
             // 
             // BookingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(591, 443);
+            this.Controls.Add(this.labTestCheckBox);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.roomComboBox);
             this.Controls.Add(this.endTime2);
@@ -304,9 +291,8 @@
         private System.Windows.Forms.DateTimePicker endTime2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox roomComboBox;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox labTestCheckBox;
     }
 }
