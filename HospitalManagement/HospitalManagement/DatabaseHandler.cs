@@ -460,7 +460,6 @@ namespace HospitalManagement
             //Creates and returns the Employee instance.
             returnEmployee = new Employee(anstNr, firstName, lastName, adress, postNr, postOrt, telefonNr, eMail, personnummer, position, department, specialty);
             return returnEmployee;
-
         }
 
         public List<Employee> LoadAllEmployees()
