@@ -48,7 +48,7 @@
             this.roomComboBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.testTypeComboBox = new System.Windows.Forms.ComboBox();
             this.labTestCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -220,13 +220,13 @@
             this.label9.TabIndex = 21;
             this.label9.Text = "Provtyp:";
             // 
-            // comboBox1
+            // testTypeComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(358, 89);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(143, 21);
-            this.comboBox1.TabIndex = 22;
+            this.testTypeComboBox.FormattingEnabled = true;
+            this.testTypeComboBox.Location = new System.Drawing.Point(358, 89);
+            this.testTypeComboBox.Name = "testTypeComboBox";
+            this.testTypeComboBox.Size = new System.Drawing.Size(143, 21);
+            this.testTypeComboBox.TabIndex = 22;
             // 
             // labTestCheckBox
             // 
@@ -245,7 +245,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(591, 443);
             this.Controls.Add(this.labTestCheckBox);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.testTypeComboBox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.roomComboBox);
@@ -292,7 +292,7 @@
         private System.Windows.Forms.DateTimePicker endTime2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox roomComboBox;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox testTypeComboBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox labTestCheckBox;
     }

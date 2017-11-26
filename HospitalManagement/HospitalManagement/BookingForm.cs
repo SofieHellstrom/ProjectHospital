@@ -56,6 +56,7 @@ namespace HospitalManagement
             endTime2.Value = DateTime.Now.AddMinutes(15);
             roomComboBox.DataSource = data.RoomList.Where(x => x.RoomFunction == ROOMFUNCTION_MOTTAGNING).ToList();
             doctorComboBox.DataSource = data.DoctorList;
+            testTypeComboBox.DataSource = data.TestTypeList;
             TimeSpan depStartingHours = new TimeSpan(8, 0, 0);
             TimeSpan depFinalAppointmentTime = new TimeSpan(16, 45, 0);
 

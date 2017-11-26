@@ -171,6 +171,7 @@
     <Compile Include="SignInForm.Designer.cs">
       <DependentUpon>SignInForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestType.cs" />
     <Compile Include="UserInfo.cs" />
     <EmbeddedResource Include="adminEditLoginInfoForm.resx">
       <DependentUpon>adminEditLoginInfoForm.cs</DependentUpon>

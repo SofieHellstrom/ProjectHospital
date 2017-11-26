@@ -10,6 +10,7 @@ namespace HospitalManagement
         public List<Room> RoomList { get; set; }
         public Patient ThePatient { get; set; }
         public Employee MyUser { get; set; }
+        public List<TestType> TestTypeList { get; set; }
 
         public Bookingdata(Patient patient, Employee user, string roomfunction)
         {
@@ -18,6 +19,7 @@ namespace HospitalManagement
             this.BookingList = db.LoadPatientBookings(ThePatient.Personnummer);
             this.DoctorList = db.LoadDoctors(null);
             this.RoomList = db.LoadAllRooms();
+            this.TestTypeList = db.LoadAllTestTypes();
         }
     }
 }

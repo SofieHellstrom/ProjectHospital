@@ -2165,7 +2165,7 @@ namespace HospitalManagement
             }
         }
 
-        public List<Room> LoadVisitationRooms(string roomfunction)
+     /*   public List<Room> LoadVisitationRooms(string roomfunction)
         {
             //Returns a list of all the Rooms in a spcific Department 
             //in the database related to a specific patient.
@@ -2216,11 +2216,11 @@ namespace HospitalManagement
                 }
 
             }
-        }
+        }*/
 
         public List<Booking> TimeOverlapCheckBooking(DateTime startTime, DateTime endTime)
-        {//Returns a list of all the Rooms in a spcific Department 
-            //in the database related to a specific patient.
+        {//Returns a list of all the Bookings 
+            //in the database related to a specific patient and runs a check for clashing appointments via start- and endtimes.
             List<Booking> resultList = new List<Booking>();
 
             using (var conn = new NpgsqlConnection(connectionString))
@@ -2276,5 +2276,47 @@ namespace HospitalManagement
             }
         }
 
+        public List<TestType> LoadAllTestTypes()
+        {
+            //Returns a list of all Tests.
+            List<TestType> resultList = new List<TestType>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                //Opens the connection to the database
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    //Configures the connection and SQL-query for the command and prepares it.
+                    cmd.Connection = conn;
+
+                    cmd.CommandText = "SELECT * FROM test_type";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //Defines temporary variables.
+                        string typeID;
+                        string typeName;
+
+                        //Reads values from the database into the temporary variables.
+                        while (reader.Read())
+                        {
+                            typeID = reader.GetString(0);
+                            typeName = reader.GetString(1);
+                            
+
+                            //Creates room instance and adds it to the list of rooms using the temporary variables.
+                            TestType TypeToAdd = new TestType(typeID, typeName);
+                            resultList.Add(TypeToAdd);
+                        }
+                        return resultList;
+
+                    }
+                }
+
+            }
+
+        }
     }
 }
