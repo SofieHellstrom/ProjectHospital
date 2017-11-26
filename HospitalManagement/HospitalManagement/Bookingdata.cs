@@ -17,7 +17,7 @@ namespace HospitalManagement
             this.MyUser = user;
             this.BookingList = db.LoadPatientBookings(ThePatient.Personnummer);
             this.DoctorList = db.LoadDoctors(null);
-            this.RoomList = db.LoadVisitationRooms(roomfunction);
+            this.RoomList = db.LoadAllRooms();
         }
     }
 }

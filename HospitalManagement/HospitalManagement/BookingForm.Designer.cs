@@ -237,6 +237,7 @@
             this.labTestCheckBox.TabIndex = 23;
             this.labTestCheckBox.Text = "Boka Labtest";
             this.labTestCheckBox.UseVisualStyleBackColor = true;
+            this.labTestCheckBox.CheckedChanged += new System.EventHandler(this.labTestCheckBox_CheckedChanged);
             // 
             // BookingForm
             // 

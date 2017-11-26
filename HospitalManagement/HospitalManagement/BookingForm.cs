@@ -13,7 +13,9 @@ namespace HospitalManagement
     public partial class BookingForm : Form
     {
         Bookingdata data;
-        string roomfunction = "Mottagning";
+
+        static string ROOMFUNCTION_MOTTAGNING = "Mottagning";
+        static string ROOMFUNCTION_LAB = "Lab";
 
 
         public BookingForm(Booking booking)
@@ -21,7 +23,7 @@ namespace HospitalManagement
             DatabaseHandler db = new DatabaseHandler();
             Employee selectedDr = db.LoadEmployee(booking.Staff_ID);
             Patient relevantpatient = db.LoadPatient(booking.Patient_ID);
-            data = new Bookingdata(relevantpatient, selectedDr , roomfunction);
+            data = new Bookingdata(relevantpatient, selectedDr, ROOMFUNCTION_MOTTAGNING);
             InitializeComponent();
             UpdateWindow();
 
@@ -33,17 +35,17 @@ namespace HospitalManagement
             this.purposeBox.Text = booking.BookingPurpose;
             this.roomComboBox.DataSource = data.RoomList;
             //roomComboBox.SelectedIndex = data.RoomList.IndexOf(data.RoomList.FirstOrDefault(x => x.RoomID == booking.RoomNr));
-            roomComboBox.SelectedItem = data.RoomList.FirstOrDefault(x=>x.RoomID == booking.RoomNr);
+            roomComboBox.SelectedItem = data.RoomList.FirstOrDefault(x => x.RoomID == booking.RoomNr);
             this.doctorComboBox.DataSource = data.DoctorList;
             doctorComboBox.SelectedItem = data.DoctorList.FirstOrDefault(x => x.EmployeeID == booking.Staff_ID);
 
         }
 
 
-            public BookingForm(Patient relevantpatient, Employee currentUser)
+        public BookingForm(Patient relevantpatient, Employee currentUser)
         {
-            
-            data = new Bookingdata(relevantpatient, currentUser, roomfunction);
+
+            data = new Bookingdata(relevantpatient, currentUser, ROOMFUNCTION_MOTTAGNING);
             InitializeComponent();
             UpdateWindow();
 
@@ -52,16 +54,19 @@ namespace HospitalManagement
             bookingPatientName.Text = patientName;
             startTime2.Text = DateTime.Now.ToShortTimeString();
             endTime2.Value = DateTime.Now.AddMinutes(15);
-            roomComboBox.DataSource = data.RoomList;
+            roomComboBox.DataSource = data.RoomList.Where(x => x.RoomFunction == ROOMFUNCTION_MOTTAGNING).ToList();
             doctorComboBox.DataSource = data.DoctorList;
             TimeSpan depStartingHours = new TimeSpan(8, 0, 0);
             TimeSpan depFinalAppointmentTime = new TimeSpan(16, 45, 0);
-            labTestCheckBox.Enabled = false;
+
+
+
         }
 
         public void UpdateWindow()
         {
             UpdateStaffList();
+            // UpdateLabCheck();
         }
 
         public void UpdateStaffList()
@@ -79,6 +84,8 @@ namespace HospitalManagement
             }
             doctorComboBox.DataSource = doctorList;
         }
+
+
 
         private void bokaBtn_Click(object sender, EventArgs e)
         {
@@ -130,8 +137,8 @@ namespace HospitalManagement
 
                 DatabaseHandler db = new DatabaseHandler();
 
-                List<Booking> overlapCheck = db.TimeOverlapCheckBooking(bookingtimeStart,  bookingtimeEnd);
-                if (overlapCheck.Any()) 
+                List<Booking> overlapCheck = db.TimeOverlapCheckBooking(bookingtimeStart, bookingtimeEnd);
+                if (overlapCheck.Any())
                 {
                     foreach (Booking booking in overlapCheck)
                     {
@@ -149,7 +156,7 @@ namespace HospitalManagement
                         {
                             errorProvider1.SetError(roomComboBox, "Rummet är redan upptagen vid angiven tid. Vänligen välj annat rum.");
                             error = true;
-                        } 
+                        }
                     }
                 }
 
@@ -181,6 +188,18 @@ namespace HospitalManagement
         private void endTime2_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void labTestCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (labTestCheckBox.Checked == true)
+            {
+                roomComboBox.DataSource = data.RoomList.Where(x => x.RoomFunction == ROOMFUNCTION_LAB).ToList();
+            }
+            else
+            {
+                roomComboBox.DataSource = data.RoomList.Where(x => x.RoomFunction == ROOMFUNCTION_MOTTAGNING).ToList();
+            }
         }
     }
 
