@@ -13,11 +13,11 @@ namespace HospitalManagement
     public partial class BookingForm : Form
     {
         Bookingdata data;
-
+        int booking_id;
         static string ROOMFUNCTION_MOTTAGNING = "Mottagning";
         static string ROOMFUNCTION_LAB = "Lab";
 
-
+        //Update booking
         public BookingForm(Booking booking)
         {
             DatabaseHandler db = new DatabaseHandler();
@@ -27,6 +27,7 @@ namespace HospitalManagement
             InitializeComponent();
             UpdateWindow();
 
+            booking_id = booking.BookingID;
             this.bookingPersonNrBox.Text = booking.Patient_ID;
             this.bookingPatientName.Text = relevantpatient.LastName + ", " + relevantpatient.FirstName;
             this.dateTimePicker1.Value = booking.BookingStart.Date;
@@ -41,7 +42,7 @@ namespace HospitalManagement
 
         }
 
-
+        //New booking
         public BookingForm(Patient relevantpatient, Employee currentUser)
         {
 
@@ -57,6 +58,7 @@ namespace HospitalManagement
             roomComboBox.DataSource = data.RoomList.Where(x => x.RoomFunction == ROOMFUNCTION_MOTTAGNING).ToList();
             doctorComboBox.DataSource = data.DoctorList;
             testTypeComboBox.DataSource = data.TestTypeList;
+            testTypeComboBox.Enabled = false;
             TimeSpan depStartingHours = new TimeSpan(8, 0, 0);
             TimeSpan depFinalAppointmentTime = new TimeSpan(16, 45, 0);
 
@@ -119,7 +121,10 @@ namespace HospitalManagement
 
             if (!error)
             {
-                int id = Guid.NewGuid().GetHashCode();
+
+                int id;
+                //booking_id = 0 means it's a new booking
+                if (booking_id == 0) { id = Guid.NewGuid().GetHashCode(); } else { id = booking_id; }
                 string personnummer = bookingPersonNrBox.Text;
                 string patientname = bookingPatientName.Text;
                 DateTime bookingdate = dateTimePicker1.Value;
@@ -143,20 +148,23 @@ namespace HospitalManagement
                 {
                     foreach (Booking booking in overlapCheck)
                     {
-                        if (doctor.Equals(booking.Staff_ID))
+                        if (booking.BookingID != id)
                         {
-                            errorProvider1.SetError(doctorComboBox, "Läkaren har redan ett besök inbokat. Vänligen ange annan tid.");
-                            error = true;
-                        }
-                        if (personnummer.Equals(booking.Patient_ID))
-                        {
-                            errorProvider1.SetError(bookingPatientName, "Patienten har redan ett besök inbokat. Vänligen ange annan tid.");
-                            error = true;
-                        }
-                        if (room.Equals(booking.RoomNr))
-                        {
-                            errorProvider1.SetError(roomComboBox, "Rummet är redan upptagen vid angiven tid. Vänligen välj annat rum.");
-                            error = true;
+                            if (doctor.Equals(booking.Staff_ID))
+                            {
+                                errorProvider1.SetError(doctorComboBox, "Läkaren har redan ett besök inbokat. Vänligen ange annan tid.");
+                                error = true;
+                            }
+                            if (personnummer.Equals(booking.Patient_ID))
+                            {
+                                errorProvider1.SetError(bookingPatientName, "Patienten har redan ett besök inbokat. Vänligen ange annan tid.");
+                                error = true;
+                            }
+                            if (room.Equals(booking.RoomNr))
+                            {
+                                errorProvider1.SetError(roomComboBox, "Rummet är redan upptagen vid angiven tid. Vänligen välj annat rum.");
+                                error = true;
+                            }
                         }
                     }
                 }
@@ -196,10 +204,12 @@ namespace HospitalManagement
             if (labTestCheckBox.Checked == true)
             {
                 roomComboBox.DataSource = data.RoomList.Where(x => x.RoomFunction == ROOMFUNCTION_LAB).ToList();
+                testTypeComboBox.Enabled = true;
             }
             else
             {
                 roomComboBox.DataSource = data.RoomList.Where(x => x.RoomFunction == ROOMFUNCTION_MOTTAGNING).ToList();
+                testTypeComboBox.Enabled = false;
             }
         }
     }

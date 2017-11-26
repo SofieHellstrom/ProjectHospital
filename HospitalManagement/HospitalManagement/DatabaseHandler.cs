@@ -2015,7 +2015,15 @@ namespace HospitalManagement
                     try
                     {
                         cmd.Connection = conn;
-                        cmd.CommandText = $"INSERT INTO booking (booking_id, purpose, start_time, end_time, staff, patient, room) VALUES ('{bookingToAdd.BookingID}', '{bookingToAdd.BookingPurpose}', '{bookingToAdd.BookingStart}', '{bookingToAdd.BookingEnd}', '{bookingToAdd.Staff_ID}','{bookingToAdd.Patient_ID}','{bookingToAdd.RoomNr}')";
+                        cmd.CommandText = $"INSERT INTO booking (booking_id, purpose, start_time, end_time, staff, patient, room) " +
+                            $"VALUES ('{bookingToAdd.BookingID}', '{bookingToAdd.BookingPurpose}', '{bookingToAdd.BookingStart}', '{bookingToAdd.BookingEnd}', '{bookingToAdd.Staff_ID}','{bookingToAdd.Patient_ID}','{bookingToAdd.RoomNr}') " +
+                            $"ON CONFLICT (booking_id) DO UPDATE SET " +
+                            $"purpose = '{bookingToAdd.BookingPurpose}', " +
+                            $"start_time = '{bookingToAdd.BookingStart}', " +
+                            $"end_time = '{bookingToAdd.BookingEnd}', " +
+                            $"staff = '{bookingToAdd.Staff_ID}', " +
+                            $"patient = '{bookingToAdd.Patient_ID}', " +
+                            $"room = '{bookingToAdd.RoomNr}' ";
 
                         int recordsAffected = cmd.ExecuteNonQuery();
 
@@ -2034,7 +2042,7 @@ namespace HospitalManagement
             }
         }
 
-        public bool UpdateBooking(Booking bookingToUpdate)
+      /*  public bool UpdateBooking(Booking bookingToUpdate)
         {
             //Updates the booking in the database. 
             using (var conn = new NpgsqlConnection(connectionString))
@@ -2046,18 +2054,18 @@ namespace HospitalManagement
 
                     // Adds connection and SQL-string to the command and executes it.
                     cmd.Connection = conn;
-                   /* if (bookingToUpdate.RoomNr.Equals("No Change"))
+                    if (bookingToUpdate.Equals("No Change"))
                     {
-                        cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}' WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
+                        cmd.CommandText = $"UPDATE booking SET booking_id = '{bookingToUpdate.BookingID}', purpose = '{bookingToUpdate.BookingPurpose}', start_time = '{bookingToUpdate.BookingStart}', end_time = {bookingToUpdate.BookingEnd}, staff = '{bookingToUpdate.Staff_ID}' WHERE person_id_nr = '{bookingToUpdate.Patient_ID}'";
                     }
-                    else if (patientToUpdate.Room.Equals(""))
+                    else if (bookingToUpdate.RoomNr.Equals(""))
                     {
-                        cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}', room = null WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
+                        cmd.CommandText = $"UPDATE booking SET booking_id = '{bookingToUpdate.BookingID}', purpose = '{bookingToUpdate.BookingPurpose}', start_time = '{bookingToUpdate.BookingStart}', end_time = {bookingToUpdate.BookingEnd}, staff = '{bookingToUpdate.Staff_ID}', room = null WHERE person_id_nr = '{bookingToUpdate.Patient_ID}'";
                     }
                     else
                     {
-                        cmd.CommandText = $"UPDATE patient SET first_name = '{patientToUpdate.FirstName}', last_name = '{patientToUpdate.LastName}', address = '{patientToUpdate.Address}', postal_code = {patientToUpdate.PostalCode}, phone = '{patientToUpdate.PhoneNr}', email = '{patientToUpdate.Email}', bloodtype = '{patientToUpdate.BloodType}', room = '{patientToUpdate.Room}' WHERE person_id_nr = '{patientToUpdate.Personnummer}'";
-                    }*/
+                        cmd.CommandText = $"UPDATE booking SET booking_id = '{bookingToUpdate.BookingID}', purpose = '{bookingToUpdate.BookingPurpose}', start_time = '{bookingToUpdate.BookingStart}', end_time = {bookingToUpdate.BookingEnd}, staff = '{bookingToUpdate.Staff_ID}', room = '{bookingToUpdate.RoomNr}' WHERE person_id_nr = '{bookingToUpdate.Patient_ID}'";
+                    }
 
                     int recordsAffected = cmd.ExecuteNonQuery();
                     return Convert.ToBoolean(recordsAffected); //returns 1 if there were any columns affected and 0 if there wasn't. 
@@ -2065,7 +2073,7 @@ namespace HospitalManagement
                 }
 
             }
-        }
+        }*/
 
         public bool DeleteBooking(Booking bookingToDelete)
         {
